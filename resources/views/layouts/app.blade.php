@@ -44,7 +44,7 @@
                     @endrole
 
                     @can('activate shop')
-                        <x-link-button class="h-8" :href="route('shops.activate')">
+                        <x-link-button class="h-8" :href="route('shops.activate-form')">
                             Ativar Loja
                         </x-link-button>
                     @elsecan('create shop')

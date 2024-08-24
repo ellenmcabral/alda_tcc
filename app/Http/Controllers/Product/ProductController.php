@@ -52,7 +52,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'image' => ['required'],
-            'name' => ['required', 'string', 'max:150'],
+            'name' => ['required', 'string', 'min:3', 'max:150'],
             'sale_price' => ['required'],
             'category_id' => ['required'],
         ]);
@@ -67,6 +67,8 @@ class ProductController extends Controller
                     . strtotime("now")) . "." . $extension;
 
             $requestImage->move(public_path('img/products'), $imageName);
+        } else {
+            $imageName = 'product-image.jpg';
         }
 
         $product = Product::create([
@@ -95,7 +97,7 @@ class ProductController extends Controller
     public function update(Product $product, Request $request): RedirectResponse
     {
         $product->fill($request->validate([
-            'name' => ['required', 'string', 'max:150'],
+            'name' => ['required', 'string', 'min:3', 'max:150'],
             'sale_price' => ['required'],
             'category_id' => ['required'],
         ]));

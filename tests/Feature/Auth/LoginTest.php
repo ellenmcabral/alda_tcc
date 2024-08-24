@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
+class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -17,7 +17,7 @@ class AuthenticationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_users_can_authenticate_using_the_login_screen(): void
+    public function test_users_can_login(): void
     {
         $user = User::factory()->create();
 
@@ -30,13 +30,23 @@ class AuthenticationTest extends TestCase
         $response->assertRedirect(route('home', absolute: false));
     }
 
-    public function test_users_can_not_authenticate_with_invalid_password(): void
+    public function test_users_can_not_login_with_invalid_password(): void
     {
         $user = User::factory()->create();
 
         $this->post('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
+        ]);
+
+        $this->assertGuest();
+    }
+
+    public function test_users_can_not_login_with_empty_field(): void
+    {
+        $this->post('/login', [
+            'email' => '',
+            'password' => '',
         ]);
 
         $this->assertGuest();
@@ -49,6 +59,6 @@ class AuthenticationTest extends TestCase
         $response = $this->actingAs($user)->post('/logout');
 
         $this->assertGuest();
-        $response->assertRedirect('/alda');
+        $response->assertRedirect('/login');
     }
 }

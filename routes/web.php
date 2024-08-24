@@ -37,7 +37,7 @@ Route::middleware(['auth', 'permission:create shop'])->group(function () {
 
 Route::middleware(['auth', 'permission:activate shop'])->group(function () {
     // ATIVAR LOJA
-    Route::get('/shop/activate', [ShopActivateController::class, 'form'])->name('shops.activate');
+    Route::get('/shop/activate', [ShopActivateController::class, 'form'])->name('shops.activate-form');
     Route::patch('/shop/activate', [ShopActivateController::class, 'activate'])->name('shops.activate');
 });
 
@@ -147,6 +147,8 @@ Route::middleware(['auth', 'role:artisan'])
     // GERENCIAR PRODUTOS
     Route::resource('/products', ProductController::class)
         ->except(['show']);
+
+
 });
 
 require __DIR__.'/auth.php';

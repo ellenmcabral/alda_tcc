@@ -17,11 +17,11 @@ class RoleSeeder extends Seeder
         $userRole = Role::create(['name' => 'user']);
         $artisanRole = Role::create(['name' => 'artisan']);
 
-        $adminRole->givePermissionTo([
-            'view users',
-            'create users',
-            'edit users',
-            'delete users',
-        ]);
+//        $adminRole->givePermissionTo([
+//            'view users',
+//            'create users',
+//            'edit users',
+//            'delete users',
+//        ]);
     }
 }

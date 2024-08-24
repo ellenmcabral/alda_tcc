@@ -10,7 +10,7 @@ class ShopActivateController extends Controller
 {
     public function form(Request $request)
     {
-        return view('shops.activate', [
+        return view('shops.activate-form', [
             'shop' => $request->user()->shop,
         ]);
     }
