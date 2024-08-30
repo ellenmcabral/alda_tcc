@@ -22,12 +22,12 @@
                     Início
                 </x-dropdown-link>
 
-                <x-dropdown-link :href="route('shops.show', Auth::user()->shop->url)">
+                <x-dropdown-link :href="route('shop.show', Auth::user()->shop->url)">
                     <i class="fa-solid fa-store mr-2"></i>
                     Minha Loja
                 </x-dropdown-link>
 
-                <x-dropdown-link :href="route('artisan.shops.edit')">
+                <x-dropdown-link :href="route('artisan.shop.settings')">
                     <i class="fa-solid fa-gear mr-2"></i>
                     Configurações
                 </x-dropdown-link>

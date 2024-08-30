@@ -8,7 +8,7 @@
     <p class="text-sm text-gray-600">
         Encomenda para a loja
         <a class="underline hover:text-gray-400 transition ease-in-out duration-150"
-           href="{{ route('shops.show', $commission->shop->url) }}">
+           href="{{ route('shop.show', $commission->shop->url) }}">
             {{ $commission->shop->name }}
         </a>
     </p>

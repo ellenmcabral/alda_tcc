@@ -62,7 +62,7 @@ class ShopCreateTest extends TestCase
 
         // colocar para ver se a mensagem de ativação da loja aparece na página inicial
 
-        $this->assertDatabaseHas('shops', $shop);
+        $this->assertDatabaseHas('shop', $shop);
     }
 
     /**

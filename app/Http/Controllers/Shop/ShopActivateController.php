@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 
 class ShopActivateController extends Controller
 {
-    public function form(Request $request)
+    public function activate(Request $request)
     {
-        return view('shops.activate-form', [
+        return view('shop.activate-form', [
             'shop' => $request->user()->shop,
         ]);
     }
 
-    public function activate(Request $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $shop = $request->user()->shop;
 
@@ -43,6 +43,6 @@ class ShopActivateController extends Controller
 
         $request->user()->syncRoles('artisan');
 
-        return redirect(route('artisan.shops.dashboard'));
+        return redirect(route('artisan.index'));
     }
 }

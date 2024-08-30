@@ -5,7 +5,7 @@
             <p>O lugar ideal para a venda e exposição de artes e artesanato de todos os tipos</p>
             <div class="flex flex-col">
                 <a class="font-bold bg-primary-700 p-3 rounded-xl"
-                   href="{{ route('shops.create') }}">
+                   href="{{ route('shop.create') }}">
                     Criar minha loja
                 </a>
                 <a class="mt-4 font-bold border-solid border-2 border-primary-700 p-3 rounded-xl"

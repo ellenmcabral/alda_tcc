@@ -23,7 +23,7 @@
 
         <section class="grid grid-cols-2 gap-4">
             <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('shops.show', Auth::user()->shop->url) }}">
+               href="{{ route('shop.show', Auth::user()->shop->url) }}">
                 <i class="fa-solid fa-store text-primary-700 text-4xl"></i>
                 <h3 class="mt-2 font-bold text-xl">
                     Minha Loja
@@ -33,7 +33,7 @@
                 </p>
             </a>
             <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('artisan.shops.edit') }}">
+               href="{{ route('artisan.shop.settings') }}">
                 <i class="fa-solid fa-gear text-primary-700 text-4xl"></i>
                 <h3 class="mt-2 font-bold text-xl">
                     Configurações

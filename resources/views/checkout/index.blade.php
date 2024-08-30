@@ -8,7 +8,7 @@
     <form class="grid gap-10" method="post" action="{{ route('commissions.store') }}">
         @csrf
 
-        @include('checkout.partials.cart')
+        @include('checkout.partials.items')
 
         @include('checkout.partials.payment')
 

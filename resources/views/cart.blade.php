@@ -23,7 +23,7 @@
                 da loja
 
                 <a class="underline font-semibold hover:text-gray-400 transition ease-in-out duration-150"
-                   href="{{ route('shops.show', $shop->url) }}">
+                   href="{{ route('shop.show', $shop->url) }}">
                     {{ $shop->name }}
                 </a>
             </p>

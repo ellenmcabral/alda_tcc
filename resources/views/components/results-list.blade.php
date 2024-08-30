@@ -37,7 +37,7 @@
                         </li>
                     @elseif($searchType == 'Lojas')
                         <li class="flex justify-end">
-                            <x-link-button class="w-full" href="{{ route('shops.show', $result->url) }}">
+                            <x-link-button class="w-full" href="{{ route('shop.show', $result->url) }}">
                                 Ver Detalhes
                             </x-link-button>
                         </li>

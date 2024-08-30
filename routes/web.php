@@ -1,25 +1,23 @@
 <?php
 
-use App\Http\Controllers\Admin\IndexController;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Commission\CartController;
-use App\Http\Controllers\Commission\CheckoutController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Commission\CommissionController;
-use App\Http\Controllers\Product\CategoryProductController;
-use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Commission\CommissionDeleteController;
+use App\Http\Controllers\Commission\CommissionDetailsController;
+use App\Http\Controllers\Commission\CommissionListController;
+use App\Http\Controllers\Commission\CommissionStoreController;
+use App\Http\Controllers\Product\CategoryProductListController;
+use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Shop\ShopActivateController;
-use App\Http\Controllers\Shop\ShopAddressController;
-use App\Http\Controllers\Shop\ShopCommissionController;
-use App\Http\Controllers\Shop\ShopController;
-use App\Http\Controllers\Shop\ShopCustomizationController;
-use App\Http\Controllers\Shop\ShopInformationController;
+use App\Http\Controllers\Shop\ShopCreateController;
+use App\Http\Controllers\Shop\ShopDetailsController;
+use App\Http\Controllers\Shop\ShopListController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ProfileInformationController;
 use App\Http\Controllers\User\ShippingAddressController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,21 +25,21 @@ Route::get('/', function () {
 })->name('alda');
 
 
-// USUARIO COMUM
+// CRIAR LOJA
 
 Route::middleware(['auth', 'permission:create shop'])->group(function () {
-    // CRIAR LOJA
-    Route::get('/shop/create', [ShopController::class, 'create'])->name('shops.create');
-    Route::post('/shop/create', [ShopController::class, 'store'])->name('shops.store');
+    Route::get('/shop/create', [ShopCreateController::class, 'create'])->name('shop.create');
+    Route::post('/shop/create', [ShopCreateController::class, 'store'])->name('shop.store');
 });
+
+// ATIVAR LOJA
 
 Route::middleware(['auth', 'permission:activate shop'])->group(function () {
-    // ATIVAR LOJA
-    Route::get('/shop/activate', [ShopActivateController::class, 'form'])->name('shops.activate-form');
-    Route::patch('/shop/activate', [ShopActivateController::class, 'activate'])->name('shops.activate');
+    Route::get('/shop/activate', [ShopActivateController::class, 'activate'])->name('shop.activate');
+    Route::patch('/shop/activate', [ShopActivateController::class, 'update'])->name('shop.activate.update');
 });
 
-// DESLOGADO
+// CARRINHO
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
@@ -49,22 +47,13 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'delete'])->name('car
 Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.destroy');
 
-Route::get('/shop/{url}', [ShopController::class, 'show'])->name('shops.show');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+// PAGINAS DE LOJA / PRODUTO
 
-// ADMIN
+Route::get('/shop/{url}', [ShopDetailsController::class, 'show'])->name('shop.show');
+Route::get('/products/{url}', [ProductDetailsController::class, 'show'])->name('products.show');
 
-Route::middleware(['auth', 'role:admin'])
-    ->name('admin.') //admin.users.edit
-    ->prefix('admin')
-    ->group(function () {
-    Route::get('/', [IndexController::class, 'index'])->name('index');
-    Route::resource('/users', UserController::class);
-    Route::resource('/roles', RoleController::class);
-    Route::resource('/permissions', PermissionController::class);
-});
+// USUARIOS LOGADOS
 
-// TODOS
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', function () {
         $categories = \App\Models\Category::all()->take(10);
@@ -85,8 +74,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // PESQUISAR PRODUTOS/LOJAS
     Route::get('/search', [SearchController::class, 'search'])->name('search-results');
 
-    Route::get('/categories/{category}/products', [CategoryProductController::class, 'index'])->name('categories.products.index');
-    Route::get('/shops', [ShopController::class, 'index'])->name('shops.index');
+    Route::get('/categories/{category}/products', [CategoryProductListController::class, 'index'])->name('categories.products.index');
+    Route::get('/shops', [ShopListController::class, 'index'])->name('shops-index');
 
     // EDITAR PERFIL DO USUARIO
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -109,8 +98,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
     // ENCOMENDAS REALIZADAS
-    Route::resource('/commissions', CommissionController::class)
-        ->only(['store', 'index', 'show', 'destroy']);
+
+    //Route::resource('/commissions', CommissionController::class)
+    //    ->only(['store', 'index', 'show', 'destroy']);
+
+    Route::post('/commissions', [CommissionStoreController::class, 'store'])->name('commissions.store');
+    Route::get('/commissions', [CommissionListController::class, 'index'])->name('commissions.index');
+    Route::get('/commissions/{commission}', [CommissionDetailsController::class, 'show'])->name('commissions.show');
+    Route::delete('/commissions/{commission}', [CommissionDeleteController::class, 'destroy'])->name('commissions.destroy');
+
 });
 
 Route::get('/mail', function () {
@@ -119,38 +115,6 @@ Route::get('/mail', function () {
     return new App\Mail\CommissionUpdated($commission);
 });
 
-// ARTESAO
-Route::middleware(['auth', 'role:artisan'])
-    ->name('artisan.') //artisan.shops.edit
-    ->prefix('artisan')
-    ->group(function () {
 
-    Route::get('/home', [\App\Http\Controllers\Artisan\IndexController::class, 'index'])->name('index');
-
-    // CONFIGURAR LOJA
-    Route::get('/shop', [ShopController::class, 'edit'])->name('shops.edit');
-    Route::delete('/shop', [ShopController::class, 'destroy'])->name('shops.destroy');
-
-    Route::get('/shop/information', [ShopInformationController::class, 'edit'])->name('shops.information.edit');
-    Route::patch('/shop/information', [ShopInformationController::class, 'update'])->name('shops.information.update');
-
-    Route::get('/shop/customization', [ShopCustomizationController::class, 'edit'])->name('shops.customization.edit');
-
-    Route::get('/shop/address', [ShopAddressController::class, 'edit'])->name('shops.address.edit');
-    Route::patch('/shop/address/update', [ShopAddressController::class, 'update'])->name('shops.address.update');
-    Route::patch('/shop/address/remove', [ShopAddressController::class, 'remove'])->name('shops.address.remove');
-
-    // GERENCIAR ENCOMENDAS
-    Route::resource('/commissions', ShopCommissionController::class)
-        ->only(['index', 'show', 'update']);
-
-    // GERENCIAR PRODUTOS
-    Route::resource('/products', ProductController::class)
-        ->except(['show']);
-
-
-});
-
-require __DIR__.'/auth.php';
 
 

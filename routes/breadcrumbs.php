@@ -66,13 +66,13 @@ Breadcrumbs::for('commissions.show', function ($trail, $commission) {
     $trail->push('Detalhes da Encomenda', route('commissions.show', $commission));
 });
 
-Breadcrumbs::for('shops.index', function ($trail) {
+Breadcrumbs::for('shop.index', function ($trail) {
     $trail->push("Lojas", route('search-results', ['search_type' => 'Lojas', 'search_text' => ' ']));
 });
 
-Breadcrumbs::for('shops.show', function ($trail, Shop $shop) {
-    $trail->parent('shops.index');
-    $trail->push($shop->name, route('shops.show', $shop->url));
+Breadcrumbs::for('shop.show', function ($trail, Shop $shop) {
+    $trail->parent('shop.index');
+    $trail->push($shop->name, route('shop.show', $shop->url));
 });
 
 Breadcrumbs::for('categories.index', function ($trail) {
@@ -85,7 +85,7 @@ Breadcrumbs::for('categories.products.index', function ($trail, $category) {
 });
 
 Breadcrumbs::for('products.show', function ($trail, $shop, $product) {
-    $trail->parent('shops.show', $shop);
+    $trail->parent('shop.show', $shop);
     $trail->push($product->name, route('products.show', $product));
 });
 
@@ -126,38 +126,38 @@ Breadcrumbs::for('artisan.index', function($trail) {
     $trail->push('Painel de Controle', route('artisan.index'));
 });
 
-Breadcrumbs::for('shops.edit', function($trail) {
+Breadcrumbs::for('shop.settings', function($trail) {
     $trail->parent('artisan.index');
-    $trail->push("Configurações", route('artisan.shops.edit'));
+    $trail->push("Configurações", route('artisan.shop.settings'));
 });
 
-Breadcrumbs::for('shops.information.edit', function($trail) {
-    $trail->parent('shops.edit');
-    $trail->push("Informações", route('artisan.shops.information.edit'));
+Breadcrumbs::for('shop.information', function($trail) {
+    $trail->parent('shop.settings');
+    $trail->push("Informações", route('artisan.shop.information'));
 });
 
-Breadcrumbs::for('shops.customization.edit', function($trail) {
-    $trail->parent('shops.edit');
-    $trail->push("Personalização", route('artisan.shops.customization.edit'));
+Breadcrumbs::for('shop.customization', function($trail) {
+    $trail->parent('shop.settings');
+    $trail->push("Personalização", route('artisan.shop.customization'));
 });
 
-Breadcrumbs::for('shops.address.create', function($trail) {
-    $trail->parent('shops.edit');
-    $trail->push("Endereço", route('artisan.shops.address.edit'));
+Breadcrumbs::for('shop.address.create', function($trail) {
+    $trail->parent('shop.settings');
+    $trail->push("Endereço", route('artisan.shop.address.edit'));
 });
 
-Breadcrumbs::for('shops.address.edit', function($trail) {
-    $trail->parent('shops.edit');
-    $trail->push("Endereço", route('artisan.shops.address.edit'));
+Breadcrumbs::for('shop.address.edit', function($trail) {
+    $trail->parent('shop.settings');
+    $trail->push("Endereço", route('artisan.shop.address.edit'));
 });
 
-Breadcrumbs::for('shops.commissions.index', function ($trail) {
+Breadcrumbs::for('shop.commissions.index', function ($trail) {
     $trail->parent('artisan.index');
     $trail->push('Encomendas da Loja', route('artisan.commissions.index'));
 });
 
-Breadcrumbs::for('shops.commissions.show', function ($trail, $commission) {
-    $trail->parent('shops.commissions.index');
+Breadcrumbs::for('shop.commissions.show', function ($trail, $commission) {
+    $trail->parent('shop.commissions.index');
     $trail->push('Detalhes da Encomenda', route('artisan.commissions.show', $commission));
 });
 

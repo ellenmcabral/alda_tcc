@@ -5,7 +5,7 @@
                 <div class="mt-4 p-6 bg-yellow-400 rounded border-5">
                     <p class="font-medium text-sm">
                         Certifique-se de
-                        <a href="{{ route('shops.activate') }}" class="underline hover:text-yellow-900 transition ease-in-out duration-150" href="">
+                        <a href="{{ route('shop.activate') }}" class="underline hover:text-yellow-900 transition ease-in-out duration-150" href="">
                             ativar a sua loja
                         </a>
                         para poder acessar o Painel de Controle do Artesão
@@ -36,7 +36,7 @@
             <div class="relative overflow-hidden h-96 rounded-lg sm:hidden">
                 @foreach($products as $product)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <a href="{{ route('products.show', $product) }}">
+                        <a href="{{ route('products.show', $product->url) }}">
                             <img src="/img/products/{{ $product->image }}"
                                  alt="Imagem do produto {{ $product->name }}"
                                  class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">

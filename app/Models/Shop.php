@@ -30,7 +30,7 @@ class Shop extends Model
     ];
 
     /**
-     * Get the user that owns the shops.
+     * Get the user that owns the shop.
      */
     public function user(): BelongsTo
     {
@@ -38,7 +38,7 @@ class Shop extends Model
     }
 
     /**
-     * Get the products associated with the shops.
+     * Get the products associated with the shop.
      */
     public function products(): hasMany
     {

@@ -14,7 +14,7 @@
             </span>
             <div class="flex flex-col">
                 <h2 class="font-extrabold">
-                    Ellen Morales Cabral da Silva
+                    {{ Auth::user()->name }}
                 </h2>
                 <p class="uppercase text-xs">
                     {{ Auth::user()->email }}
