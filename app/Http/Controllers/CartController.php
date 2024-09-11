@@ -40,24 +40,22 @@ class CartController extends Controller
                 $cartItem = Product::where('id', $item->id)->first();
 
                 if ($cartItem->shop_id != $product->shop_id) {
-                    // COMPARA O ITEM DO CARRINHO COM O PRODUTO SENDO ADICIONADO
+                    // COMPARA A LOJA DO ITEM DO CARRINHO COM O PRODUTO SENDO ADICIONADO
+                    // SE FOR DE LOJAS DIFERENTES, REDIRECIONA PARA A MSM PAGINA COM A MENSAGEM DE ERRO
 
-                    $url = route('products.show', [
-                        'product' => $product,
-                        'name' => $request->name
-                    ]);
+                    $route = route('products.show', $product->url);
                     $valid = false;
                 }
                 else {
                     $valid = true;
-                    $url = route('cart');
+                    $route = route('cart');
                 }
                 break;
             }
         }
         else { // A SACOLA ESTA VAZIA
             $valid = true;
-            $url = route('cart');
+            $route = route('cart');
         }
 
         if($valid) {
@@ -80,7 +78,7 @@ class CartController extends Controller
             $status = 'product-not-added';
         }
 
-        return redirect($url)
+        return redirect($route)
             ->with('status', $status)
             ->with('shop', $shop);
     }

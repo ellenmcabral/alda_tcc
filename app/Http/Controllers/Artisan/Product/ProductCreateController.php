@@ -23,7 +23,8 @@ class ProductCreateController extends Controller
     {
         $request->validate([
             'image' => ['required'],
-            'name' => ['required', 'string', 'alpha', 'min:3', 'max:150'],
+            'name' => ['required', 'string', 'min:3', 'max:150'],
+            'url' => ['alpha'],
             'sale_price' => ['required'],
             'category_id' => ['required'],
         ]);

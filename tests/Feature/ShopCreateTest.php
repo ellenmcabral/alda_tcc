@@ -54,7 +54,7 @@ class ShopCreateTest extends TestCase
 
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', $shop);
+            ->post('/shop', $shop);
 
         $response
             ->assertStatus(302)
@@ -62,7 +62,7 @@ class ShopCreateTest extends TestCase
 
         // colocar para ver se a mensagem de ativação da loja aparece na página inicial
 
-        $this->assertDatabaseHas('shop', $shop);
+        $this->assertDatabaseHas('shops', $shop);
     }
 
     /**
@@ -72,7 +72,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => '',
                 'url' => 'teste',
             ]);
@@ -86,7 +86,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'a',
                 'url' => 'teste',
             ]);
@@ -102,7 +102,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => str_repeat('a', 151),
                 'url' => 'teste',
             ]);
@@ -118,7 +118,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => str_repeat('a', 3),
                 'url' => 'teste',
             ]);
@@ -132,7 +132,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => str_repeat('a', 150),
                 'url' => 'teste',
             ]);
@@ -146,7 +146,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'teste',
                 'url' => 'teste de loja'
             ]);
@@ -162,7 +162,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'teste',
                 'url' => 'a',
             ]);
@@ -178,7 +178,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                'name' => 'teste',
                'url' => str_repeat('a', 51),
             ]);
@@ -194,7 +194,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'teste',
                 'url' => str_repeat('a', 3),
             ]);
@@ -208,7 +208,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'teste',
                 'url' => str_repeat('a', 50),
             ]);
@@ -230,7 +230,7 @@ class ShopCreateTest extends TestCase
 
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/shop', [
                 'name' => 'loja teste',
                 'url' => 'testeloja',
             ]);

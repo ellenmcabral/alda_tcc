@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'permission:create shop'])->group(function () {
     Route::get('/shop/create', [ShopCreateController::class, 'create'])->name('shop.create');
-    Route::post('/shop/create', [ShopCreateController::class, 'store'])->name('shop.store');
+    Route::post('/shop', [ShopCreateController::class, 'store'])->name('shop.store');
 });
 
 // ATIVAR LOJA
