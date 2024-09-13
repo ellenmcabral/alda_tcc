@@ -33,12 +33,12 @@
                    required />
         </div>
     @else
-        <x-text-input type="hidden"
+        <x-input-text type="hidden"
                       name="quantity"
                       value="1" />
     @endisset
 
-    <x-primary-button class="w-full items-center h-10">
+    <x-button-primary class="w-full items-center h-10">
         Comprar
-    </x-primary-button>
+    </x-button-primary>
 </form>

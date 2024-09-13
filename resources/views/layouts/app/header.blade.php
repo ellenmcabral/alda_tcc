@@ -12,7 +12,7 @@
 
     <div class="flex items-center">
         <button class="lg:hidden flex items-center">
-            <i class="mr-8 text-lg sm:text-sm text-neutral-white hover:text-gray-regular transition ease-in-out duration-300
+            <i class="mr-4 sm:mr-8 text-lg sm:text-sm text-neutral-white hover:text-gray-regular transition ease-in-out duration-300
                 fa-solid fa-magnifying-glass"></i>
         </button>
 
@@ -47,7 +47,7 @@
         @else
             <a class="sm:hidden sm:ml-8 uppercase text-center py-2 px-4 font-bold text-neutral-black bg-accent-regular rounded-lg hover:bg-accent-light transition duration-300"
                href="{{ route('register') }}">
-                Cadastrar
+                Criar conta
             </a>
         @endauth
 

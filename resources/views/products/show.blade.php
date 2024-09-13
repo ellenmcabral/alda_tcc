@@ -27,9 +27,9 @@
         @auth
             @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
                 <li>
-                    <x-primary-button class="w-full" href="#">
+                    <x-button-primary class="w-full" href="#">
                         Editar
-                    </x-primary-button>
+                    </x-button-primary>
                 </li>
             @else
                 <li>

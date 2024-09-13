@@ -71,11 +71,11 @@
 
                 <hr/>
 
-                <x-dropdown-link :href="route('cart')">
-                    <i class="text-accent-regular mr-2 fa-solid fa-bag-shopping"></i>
+                <x-dropdown-link class="flex items-center" :href="route('cart')">
+                    <i class="text-accent-regular mr-3 fa-solid fa-bag-shopping"></i>
                     Sacola de Compras
                     @if(\Cart::content()->isNotEmpty())
-                        <span class="text-xs ml-2 font-extrabold shadow-md bg-secondary-300 h-4 w-4 flex items-center justify-center rounded-full">
+                        <span class="ml-3 font-extrabold text-sm text-neutral-white bg-secondary-dark h-4 w-4 flex items-center justify-center rounded-full">
                             {{ \Cart::content()->count() }}
                         </span>
                     @endif

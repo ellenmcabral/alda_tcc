@@ -8,7 +8,7 @@
          class="absolute top-0 left-0 w-full min-h-screen"
          style="display: none;"
          @click="open = false">
-        <div class="fixed z-30 h-screen w-64 bg-neutral-white">
+        <div class="fixed z-30 h-screen w-fit bg-neutral-white">
             {{ $content }}
         </div>
         <div class="fixed z-10 h-screen w-full bg-black bg-opacity-25">

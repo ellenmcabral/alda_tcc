@@ -2,5 +2,5 @@
 
 <input {{ $disabled ? 'disabled' : '' }}
     {!! $attributes->merge([
-        'class' => 'focus:ring-primary-700 checked:bg-primary-700 checked:focus:bg-primary-700'
+        'class' => 'cursor-pointer focus:ring-accent-regular checked:bg-accent-dark checked:focus:bg-accent-dark'
     ]) !!}>

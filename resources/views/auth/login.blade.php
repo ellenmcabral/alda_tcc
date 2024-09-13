@@ -3,14 +3,13 @@
         Fazer Login
     </x-slot>
 
-    <form class="grid gap-8" method="POST" action="{{ route('login') }}">
+    <form class="grid gap-12 w-full sm:w-1/2 lg:w-1/3" method="POST" action="{{ route('login') }}">
         @csrf
-
 
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email"
+            <x-input-text id="email"
                           class="w-full"
                           type="email"
                           name="email"
@@ -23,7 +22,7 @@
         <!-- Password -->
         <div>
             <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password"
+            <x-input-text id="password"
                           class="w-full"
                           type="password"
                           name="password"
@@ -31,31 +30,30 @@
                           placeholder="Digite a sua senha" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
             @if (Route::has('password.request'))
-                <a class="mt-4 underline flex justify-end text-secondary-300 hover:text-secondary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700"
-                   href="{{ route('password.request') }}">
+                <x-link class="mt-4 flex justify-end" href="{{ route('password.request') }}">
                     Esqueci minha senha
-                </a>
+                </x-link>
             @endif
         </div>
 
         <!-- Remember Me -->
         <div>
-            <label for="remember_me" class="inline-flex items-center">
+            <label for="remember_me" class="cursor-pointer inline-flex items-center">
                 <input id="remember_me"
                        type="checkbox"
-                       class="rounded border-gray-600 focus:ring-primary-700"
+                       class="cursor-pointer rounded focus:ring-accent-regular checked:focus:bg-accent-dark checked:bg-accent-dark"
                        name="remember">
                 <span class="ml-2 text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
 
-        <x-primary-button class="w-full">
+        <x-button-primary class="w-full">
             {{ __('Log in') }}
-        </x-primary-button>
+        </x-button-primary>
 
-        <a class="underline text-center text-lg text-secondary-300 hover:text-secondary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-700"
-           href="">
+        <x-link class="text-center"
+                href="{{ route('register') }}">
             Criar uma conta
-        </a>
+        </x-link>
     </form>
 </x-app-layout>

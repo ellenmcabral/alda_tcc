@@ -17,7 +17,7 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-col h-screen font-sans antialiased">
+    <body class="flex flex-col font-sans h-screen">
         <!-- Page Header -->
         @include('layouts.app.header')
 
@@ -63,7 +63,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8">
+        <main class="flex-grow mx-4 mt-8 flex flex-col items-center">
 
             <!-- Page Heading -->
             @isset($heading)
@@ -76,8 +76,6 @@
         </main>
 
         <!-- Page Footer -->
-        <footer class="static bottom-0 bg-secondary-300 p-16 flex justify-center items-center mt-32">
-            2024 &#169; Alda
-        </footer>
+        @include('layouts.app.footer')
     </body>
 </html>

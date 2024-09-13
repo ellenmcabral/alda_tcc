@@ -17,7 +17,7 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
 </head>
-<body class="flex flex-col h-screen font-sans">
+<body class="flex flex-col font-sans antialiased">
     <!-- Page Header -->
     @include('layouts.app.header')
 
@@ -89,7 +89,7 @@
         </section>
 
         <!-- Call To Action -->
-        <section class="h-screen mx-4 py-16 flex flex-col sm:flex-row items-center">
+        <section class="mx-4 py-16 flex flex-col sm:flex-row sm:h-screen items-center">
             <img class="h-fit sm:w-1/3 mb-8"
                  src="img/assets/order-placed.png"
                  alt="ilustração de uma loja" />
@@ -105,9 +105,7 @@
     </main>
 
     <!-- Page Footer -->
-    <footer class="static bottom-0 text-neutral-white bg-secondary-regular p-16 flex justify-center items-center">
-        2024 &#169; Alda
-    </footer>
+    @include('layouts.app.footer')
 </body>
 </html>
 

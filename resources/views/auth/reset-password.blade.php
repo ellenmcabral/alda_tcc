@@ -17,6 +17,7 @@
                           type="email"
                           name="email"
                           :value="old('email', $request->email)"
+                          placeholder="Digite o seu e-mail"
                           required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
