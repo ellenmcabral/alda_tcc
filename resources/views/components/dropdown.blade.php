@@ -1,30 +1,3 @@
-@props(['align' => 'right', 'background' => 'primary'])
-
-@php
-
-switch ($align) {
-    case 'left':
-        $alignmentClasses = 'ltr:origin-top-left rtl:origin-top-right start-0';
-        break;
-    case 'top':
-        $alignmentClasses = 'origin-top';
-        break;
-    case 'right':
-    default:
-        $alignmentClasses = 'ltr:origin-top-right rtl:origin-top-left end-0';
-        break;
-}
-
-switch ($background) {
-    case 'primary':
-        $backgroundClass = 'bg-primary-700';
-        break;
-    case 'secondary':
-        $backgroundClass = 'bg-secondary-300';
-        break;
-}
-
-@endphp
 
 <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
     <div @click="open = ! open">
@@ -32,17 +5,14 @@ switch ($background) {
     </div>
 
     <div x-show="open"
-            x-transition:enter="transition ease-out duration-200"
-            x-transition:enter-start="opacity-0 scale-95"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-75"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-95"
-            class="absolute w-full sm:w-fit right-0"
-            style="display: none;"
-            @click="open = false">
-        <div class="mt-4 py-2 shadow-lg {{ $backgroundClass }} rounded-b-xl">
+         class="absolute top-0 left-0 w-full min-h-screen"
+         style="display: none;"
+         @click="open = false">
+        <div class="fixed z-30 h-screen w-64 bg-neutral-white">
             {{ $content }}
+        </div>
+        <div class="fixed z-10 h-screen w-full bg-black bg-opacity-25">
+
         </div>
     </div>
 </div>

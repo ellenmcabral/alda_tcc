@@ -3,7 +3,9 @@
         Criar Conta
     </x-slot>
 
-    <form class="grid gap-8" method="POST" action="{{ route('register') }}">
+    <form class="grid gap-8"
+          method="POST"
+          action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->

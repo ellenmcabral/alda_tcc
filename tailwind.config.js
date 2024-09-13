@@ -16,21 +16,25 @@ export default {
         colors: {
             transparent: 'transparent',
             current: 'currentColor',
-            'primary': {
-                700: '#00C7BE',
-                800: '#00B1A6',
-                900: '#008B79',
+            'accent': {
+                light: '#83E2C0',
+                regular: '#37D7A7',
+                dark: '#00C280',
             },
             'secondary': {
-                300: '#FD7E8B',
-                400: '#FF5C6C',
-                500: '#FF4853',
+                light: '#EB5180',
+                regular: '#D73767',
+                dark: '#C03361',
             },
             'gray': {
-                200: '#EAEBEC',
-                400: '#B8B9BA',
-                600: '#707172',
+                light: '#EAEBEC',
+                regular: '#B8B9BA',
+                dark: '#98999A',
             },
+            'neutral': {
+                black: '#212121',
+                white: '#F9F9FB',
+            }
         },
         extend: {
             fontFamily: {

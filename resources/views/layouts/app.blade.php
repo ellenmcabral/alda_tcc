@@ -19,44 +19,7 @@
     </head>
     <body class="flex flex-col h-screen font-sans antialiased">
         <!-- Page Header -->
-        <header class="flex justify-between items-center p-6 bg-primary-700 mb-8">
-            <div class="flex">
-                @include('layouts.navigation.dropdown.app')
-
-                <a class="font-extrabold text-xl"
-                   href="@auth {{ route('home') }} @else {{ route('alda') }} @endauth">
-                    Alda
-                </a>
-            </div>
-
-            <div class="flex items-center">
-                @auth
-                    @role('admin')
-                    <x-link-button class="h-8" :href="route('admin.index')">
-                        Painel do Admin
-                    </x-link-button>
-                    @endrole
-
-                    @role('artisan')
-                    <x-link-button class="h-8" :href="route('artisan.index')">
-                        Painel do Artesão
-                    </x-link-button>
-                    @endrole
-
-                    @can('activate shop')
-                        <x-link-button class="h-8" :href="route('shop.activate-form')">
-                            Ativar Loja
-                        </x-link-button>
-                    @elsecan('create shop')
-                        <x-link-button class="h-8" :href="route('shop.create')">
-                            Criar Loja
-                        </x-link-button>
-                    @endcan
-                @endauth
-
-                @include('layouts.navigation.app')
-            </div>
-        </header>
+        @include('layouts.app.header')
 
         <!-- Session Status -->
         @if(session('status') !== null)
@@ -92,17 +55,6 @@
             </div>
         @endif
 
-        <!-- Search Bar -->
-        @auth
-            @if(!request()->routeIs('categories.products.index'))
-                @if(!request()->routeIs('search-results'))
-                    <search class="mx-4 mb-8">
-                        <x-form-search/>
-                    </search>
-                @endif
-            @endif
-        @endauth
-
         <!-- Breadcrumbs -->
         @isset($breadcrumbs)
             <nav class="mx-4 mb-8">
@@ -111,7 +63,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4">
+        <main class="flex-grow mx-4 mt-8">
 
             <!-- Page Heading -->
             @isset($heading)

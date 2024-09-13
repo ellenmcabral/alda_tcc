@@ -23,10 +23,7 @@
             <div class="flex">
                 @include('layouts.navigation.dropdown.dashboard')
 
-                <a class="font-extrabold text-xl"
-                   href="@auth {{ route('home') }} @else {{ route('alda') }} @endauth">
-                    Alda
-                </a>
+                <x-application-logo />
             </div>
 
             <div class="flex items-center">

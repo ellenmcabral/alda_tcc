@@ -1,6 +1,6 @@
-<nav class="flex items-center hidden sm:flex sm:justify-between sm:ml-8">
+<nav class="items-center gap-8 hidden sm:flex sm:justify-between">
     <!-- Navigation Links -->
-    @auth
+    @auth <!-- LOGGED IN -->
         <x-nav-link
             :href="route('home')"
             :active="request()->routeIs('home')">
@@ -40,17 +40,37 @@
                 {{ __('Log Out') }}
             </x-nav-link>
         </form>
-    @else
+    @else <!-- LOGGED OUT -->
         <x-nav-link
-            :href="route('login')"
-            :active="request()->routeIs('login')">
-            Entrar
+            :href="route('alda')"
+            :active="request()->routeIs('alda')">
+            Início
         </x-nav-link>
 
-        <x-nav-link
-            :href="route('register')"
-            :active="request()->routeIs('register')">
-            Cadastrar
+        <x-nav-link :href="route('search-results')"
+                    :active="request()->routeIs('search-results')">
+            Lojas
         </x-nav-link>
+
+        <x-nav-link :href="route('cart')"
+                    :active="request()->routeIs('cart')">
+            Sacola
+            @if(\Cart::content()->isNotEmpty())
+                <span class="text-xs ml-2 font-extrabold shadow-md bg-secondary-300 h-4 w-4 flex items-center justify-center rounded-full">
+                        {{ \Cart::content()->count() }}
+                    </span>
+            @endif
+        </x-nav-link>
+
+        <a class="uppercase text-center py-2 px-4 font-bold text-neutral-white border-solid border-2 border-neutral-white rounded-lg hover:bg-gray-light hover:bg-opacity-10 transition duration-300"
+           href="{{ route('login') }}">
+            Entrar
+        </a>
+
+        <a class="uppercase text-center py-2 px-4 font-bold text-neutral-black bg-accent-regular rounded-lg hover:bg-accent-dark transition duration-300 ease-in-out"
+           href="{{ route('register') }}">
+            Criar conta
+        </a>
+
     @endauth
 </nav>
