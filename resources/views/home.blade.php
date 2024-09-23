@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="grid gap-16">
+    <div class="w-full grid gap-10 md:w-1/2 lg:w-2/3">
         <section class="grid gap-4">
             @can('activate shop')
-                <div class="mt-4 p-6 bg-yellow-400 rounded border-5">
+                <div class="p-6 bg-yellow-400 rounded border-5">
                     <p class="font-medium text-sm">
                         Certifique-se de
                         <a href="{{ route('shop.activate') }}" class="underline hover:text-yellow-900 transition ease-in-out duration-150" href="">
@@ -12,28 +12,42 @@
                     </p>
                 </div>
             @endcan
-            <div>
-                <h1 class="font-extrabold text-3xl mt-4">
-                    Oi, {{ Auth::user()->name }}
-                </h1>
-                <p class="mt-2">
-                    Bem-vindo(a) à ALDA
-                </p>
+
+            <div class="p-4 lg:p-6 bg-gray-50 border border-gray-dark rounded-lg flex justify-between z-10">
+                <div class="flex flex-col justify-between">
+                    <div class="grid gap-2">
+                        <x-heading>
+                            Oi, {{ Auth::user()->formatName() }}
+                        </x-heading>
+                        <p>
+                            Bem-vindo(a) à ALDA!
+                        </p>
+                    </div>
+
+                    <div class="text-secondary-regular flex items-center">
+                        <x-link class="flex items-center" href="{{ route('shop.create') }}">
+                            Criar loja
+                        </x-link>
+                        <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <!-- FOTO GATINHO -->
+                <img class="w-1/2 lg:w-1/4"
+                     src="/img/assets/cat.png"
+                     alt="ilustração de gatinho" />
             </div>
+
+            <span class="bg-secondary-regular rounded-br-xl rounded-bl-xl w-full h-40 absolute top-20 left-0 z-0">
+            </span>
         </section>
 
-        <section class="relative w-full" data-carousel="static">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="font-extrabold text-2xl">
-                    Últimos Produtos
-                </h2>
-                <a class="underline text-secondary-300 hover:text-secondary-500 transition ease-in-out duration-150"
-                   href="{{ route('search-results', ['search_type' => 'Produtos', 'search_text' => ' ']) }}">
-                    Ver mais
-                </a>
-            </div>
+        <section class="relative w-full z-0 grid gap-4" data-carousel="static">
+            <x-heading>
+                Últimos Produtos
+            </x-heading>
 
-            <div class="relative overflow-hidden h-96 rounded-lg sm:hidden">
+            <!-- SLIDER DE PRODUTOS -->
+            <div class="relative overflow-hidden h-96 rounded-lg lg:hidden">
                 @foreach($products as $product)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
                         <a href="{{ route('products.show', $product->url) }}">
@@ -41,60 +55,68 @@
                                  alt="Imagem do produto {{ $product->name }}"
                                  class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                         </a>
-                        <div>
-                            <h3 class="absolute bottom-0 bg-white p-2 w-full font-extrabold">{{ $product->name }}</h3>
-                            <p class="absolute top-5 right-5 font-extrabold rounded text-secondary-300 bg-white p-2">{{ $product->priceFormat($product->sale_price) }}</p>
-                        </div>
+                        <h3 class="text-lg absolute left-5 bottom-5 bg-white w-full truncate font-bold">
+                            {{ $product->name }}
+                        </h3>
+                        <p class="text-lg absolute top-5 right-5 font-bold rounded text-accent-darker p-4 bg-white">
+                            {{ $product->priceFormat($product->sale_price) }}
+                        </p>
                     </div>
 
                 @endforeach
 
                 <!-- Slider controls -->
                 <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                    </svg>
-                    <span class="sr-only">Previous</span>
-                </span>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
                 </button>
                 <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                    </svg>
-                    <span class="sr-only">Next</span>
-                </span>
+                    <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
                 </button>
             </div>
 
-            <div class="hidden sm:grid sm:grid-cols-3 sm:gap-4">
+            <!-- GRADE DE PRODUTOS PARA DESKTOP -->
+            <div class="hidden lg:grid lg:grid-cols-3 lg:gap-8">
                 @foreach($products as $product)
-                    <div>
-                        <img src="/img/products/{{ $product->image }}"
-                             alt="Imagem do produto {{ $product->name }}"
-                             class="rounded-lg">
-                        <div class="flex justify-between mt-2">
-                            <h3 class="font-extrabold">{{ $product->name }}</h3>
-                            <p class="font-extrabold rounded text-secondary-300">{{ $product->priceFormat($product->sale_price) }}</p>
-                        </div>
+                    <div class="grid gap-2">
+                        <a href="{{ route('products.show', $product->url) }}">
+                            <img src="/img/products/{{ $product->image }}"
+                                 alt="Imagem do produto {{ $product->name }}"
+                                 class="rounded-lg">
+                            <div class="flex justify-between">
+                                <h3 class="font-bold truncate">
+                                    {{ $product->name }}
+                                </h3>
+                                <p class="font-bold rounded text-accent-darker">
+                                    {{ $product->priceFormat($product->sale_price) }}
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
+
+            <a class="font-bold text-gray-dark underline text-lg"
+                href="{{ route('search-results', ['search_type' => 'Produtos', 'search_text' => ' ']) }}">
+                Ver mais produtos<i class="ml-1 text-sm text-gray-dark fa-solid fa-chevron-right"></i>
+            </a>
         </section>
 
-        <aside>
-            <div class="flex justify-between mb-4 items-center">
-                <h2 class="font-extrabold text-2xl">
-                    Categorias de Artesanato
-                </h2>
-                <a class="underline text-secondary-300 hover:text-secondary-500 transition ease-in-out duration-150"
-                   href="{{ route('categories.index') }}">
-                    Ver mais
-                </a>
-            </div>
+        <aside class="grid gap-4">
+            <x-heading>
+                Categorias
+            </x-heading>
 
-            <ul class="grid grid-cols-2 sm:grid-cols-5 gap-4">
+            <ul class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach($categories as $category)
                     <li>
                         <a class="flex justify-center w-full mr-2 px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 transition ease-in-out duration-150"
@@ -105,7 +127,10 @@
                 @endforeach
             </ul>
 
-
+            <a class="font-bold text-gray-dark underline text-lg"
+               href="{{ route('categories.index') }}">
+                Ver mais categorias<i class="ml-1 text-sm text-gray-dark fa-solid fa-chevron-right"></i>
+            </a>
         </aside>
     </div>
 

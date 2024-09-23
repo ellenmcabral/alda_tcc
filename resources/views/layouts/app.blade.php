@@ -63,15 +63,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8 flex flex-col items-center">
-
-            <!-- Page Heading -->
-            @isset($heading)
-                <h1 class="font-extrabold text-4xl text-gray-800 mb-8">
-                    {{ $heading }}
-                </h1>
-            @endisset
-
+        <main class="flex-grow mx-4 mt-8 flex justify-center">
             {{ $slot }}
         </main>
 

@@ -20,6 +20,7 @@ export default {
                 light: '#83E2C0',
                 regular: '#37D7A7',
                 dark: '#00C280',
+                darker: '#009F65'
             },
             'secondary': {
                 light: '#EB5180',

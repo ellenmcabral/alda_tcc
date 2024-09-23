@@ -1,16 +1,21 @@
 <x-app-layout>
-    <x-slot name="heading">
-        Sacola de Compras
-    </x-slot>
+    <div class="flex flex-col gap-8 w-full lg:w-1/2 xl:w-1/3">
+        <x-heading>
+            Sacola de Compras
+        </x-heading>
 
-    <section class="flex flex-col gap-12 w-full sm:w-1/2 lg:w-1/3">
         @if($items->isEmpty()) <!-- SACOLA VAZIA -->
-            <span class="h-40 w-full bg-gray-200"></span>
+            <img class="w-1/2 md:w-1/3"
+                 src="\img\assets\shopping-bag.png"
+                 alt="ilustração de sacola">
+
             <p class="text-gray-dark">
                 Sua sacola está vazia.
             </p>
+
             <hr/>
-            <x-link class="text-center" href="{{ route('home') }}">
+
+            <x-link href="{{ route('home') }}">
                 Voltar para a página inicial
             </x-link>
         @else <!-- SACOLA COM ITENS -->
@@ -110,5 +115,5 @@
                 </div>
             </div>
         @endif
-    </section>
+    </div>
 </x-app-layout>

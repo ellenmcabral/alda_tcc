@@ -71,4 +71,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Commission::class);
     }
+
+    public function formatName(): string
+    {
+        return strtok($this->name, ' ');
+    }
 }

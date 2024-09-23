@@ -11,7 +11,7 @@
         <div class="fixed z-30 h-screen w-fit bg-neutral-white">
             {{ $content }}
         </div>
-        <div class="fixed z-10 h-screen w-full bg-black bg-opacity-25">
+        <div class="fixed z-20 h-screen w-full bg-black bg-opacity-25">
 
         </div>
     </div>

@@ -1,22 +1,20 @@
 <x-app-layout>
-    <x-slot name="heading">
-        Verificar E-mail
-    </x-slot>
+    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+        <x-heading>
+            Verificar E-mail
+        </x-heading>
 
-    <div class="grid gap-8">
-        <p>
-            Enviamos um e-mail de verificação. Verifique sua caixa de entrada. Se não chegou é só solicitar outro.
-        </p>
-
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
+        <x-form action="{{ route('verification.send') }}">
+            <p>
+                Enviamos um e-mail de verificação. Verifique sua caixa de entrada. Se não chegou é só solicitar outro.
+            </p>
 
             <div>
                 <x-button-primary class="w-full">
                     Reenviar e-mail
                 </x-button-primary>
             </div>
-        </form>
+        </x-form>
 
         <form class="flex justify-center" method="POST" action="{{ route('logout') }}">
             @csrf

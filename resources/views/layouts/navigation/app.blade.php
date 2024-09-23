@@ -1,4 +1,4 @@
-<nav class="items-center gap-8 hidden sm:flex sm:justify-between">
+<nav class="items-center gap-8 hidden xl:flex">
     <!-- Navigation Links -->
     @auth <!-- LOGGED IN -->
         <x-nav-link
@@ -7,37 +7,38 @@
             Início
         </x-nav-link>
 
-        <x-nav-link class="ml-8"
-                    :href="route('profile.edit')"
+        <x-nav-link :href="route('alda')">
+            Lojas
+        </x-nav-link>
+
+        <x-nav-link :href="route('profile.edit')"
                     :active="request()->routeIs('profile.edit')">
             Minha Conta
         </x-nav-link>
 
-        <x-nav-link class="ml-8"
-                    :href="route('commissions.index')"
-                    :active="request()->routeIs('commissions.index')">
-            Minhas Encomendas
-        </x-nav-link>
-
-        <x-nav-link class="ml-8"
-                    :href="route('cart')"
+        <x-nav-link :href="route('cart')"
                     :active="request()->routeIs('cart')">
             Sacola de Compras
             @if(\Cart::content()->isNotEmpty())
                 <span class="text-xs ml-2 font-extrabold shadow-md bg-secondary-300 h-4 w-4 flex items-center justify-center rounded-full">
-                    {{ \Cart::content()->count() }}
-                </span>
+                        {{ \Cart::content()->count() }}
+                    </span>
             @endif
         </x-nav-link>
 
+        <x-nav-link :href="route('commissions.index')"
+                    :active="request()->routeIs('commissions.index')">
+            Pedidos
+        </x-nav-link>
+
         <!-- Authentication -->
-        <form class="flex items-center ml-8" method="POST" action="{{ route('logout') }}">
+        <form class="flex items-center" method="POST" action="{{ route('logout') }}">
             @csrf
 
-            <x-nav-link class="h-full" :href="route('logout')"
+            <x-nav-link :href="route('logout')"
                         onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                {{ __('Log Out') }}
+                <i class="fa-lg text-neutral-white fa-solid fa-right-from-bracket"></i>
             </x-nav-link>
         </form>
     @else <!-- LOGGED OUT -->
