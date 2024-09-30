@@ -49,4 +49,9 @@ class Shop extends Model
     {
         return $this->hasMany(Commission::class);
     }
+
+    public function formatUrl(): string
+    {
+        return '@' . $this->url;
+    }
 }

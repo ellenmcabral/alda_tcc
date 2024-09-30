@@ -53,17 +53,17 @@ Breadcrumbs::for('cart', function ($trail) {
 
 Breadcrumbs::for('checkout', function ($trail) {
     $trail->parent('cart');
-    $trail->push('Finalizar Encomenda', route('checkout.index'));
+    $trail->push('Finalizar Pedido', route('checkout.index'));
 });
 
 Breadcrumbs::for('commissions.index', function ($trail) {
     $trail->parent('home');
-    $trail->push('Minhas Encomendas', route('commissions.index'));
+    $trail->push('Meus Pedidos', route('commissions.index'));
 });
 
 Breadcrumbs::for('commissions.show', function ($trail, $commission) {
     $trail->parent('commissions.index');
-    $trail->push('Detalhes da Encomenda', route('commissions.show', $commission));
+    $trail->push('Detalhes do Pedido', route('commissions.show', $commission));
 });
 
 Breadcrumbs::for('shop.index', function ($trail) {

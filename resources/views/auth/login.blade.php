@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
-        <x-heading>
+        <x-text-heading>
             Fazer Login
-        </x-heading>
+        </x-text-heading>
 
         <x-form action="{{ route('login') }}">
             <!-- Email Address -->
@@ -46,9 +46,9 @@
                 </label>
             </div>
 
-            <x-button-primary class="w-full">
+            <x-button class="w-full">
                 {{ __('Log in') }}
-            </x-button-primary>
+            </x-button>
 
             <x-link class="text-center"
                     href="{{ route('register') }}">

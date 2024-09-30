@@ -17,7 +17,7 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-col font-sans h-screen">
+    <body class="flex flex-col font-sans h-screen text-neutral-black">
         <!-- Page Header -->
         @include('layouts.app.header')
 
@@ -33,7 +33,7 @@
                         Um novo e-mail de verificação foi enviado para o e-mail que você inseriu.
                     </x-status-message>
                 @elseif(session('status') === 'product-added')
-                    <x-status-message :type="'success'">
+                    <x-status-message :status="session('status')" :type="'success'">
                         Produto adicionado na sua sacola de compras.
                     </x-status-message>
                 @elseif(session('status') === 'product-not-added')
@@ -50,17 +50,10 @@
                         Encomenda cancelada com sucesso.
                     </x-status-message>
                 @else
-                    <x-auth-session-status :status="session('status')"/>
+                    <x-status-message :status="session('status')" :type="session('type')"/>
                 @endif
             </div>
         @endif
-
-        <!-- Breadcrumbs -->
-        @isset($breadcrumbs)
-            <nav class="mx-4 mb-8">
-                {{ $breadcrumbs }}
-            </nav>
-        @endisset
 
         <!-- Page Content -->
         <main class="flex-grow mx-4 mt-8 flex justify-center">

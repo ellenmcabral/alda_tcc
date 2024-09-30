@@ -13,9 +13,9 @@ use Illuminate\View\View;
 
 class ProductDetailsController extends Controller
 {
-    public function show($url): View
+    public function show($id): View
     {
-        $product = Product::where('url', $url)->firstOrFail();
+        $product = Product::find($id)->firstOrFail();
 
        return view('products.show', [
            'product' => $product,

@@ -18,7 +18,7 @@ class CommissionStoreController extends Controller
             'user_id' => $request->user()->id,
             'shop_id' => $request->shop_id,
             'shipping_address_id' => $request->address_id,
-            'status_id' => 2,
+            'status_id' => 1,
         ]);
 
         $items = \Cart::content();
@@ -45,6 +45,6 @@ class CommissionStoreController extends Controller
         \Cart::destroy();
 
         return redirect(route('commissions.index'))
-            ->with('status', 'commission-stored');
+            ->with('status', 'Encomenda realizada. Faça o pagamento para que o artesão possa começar a produzir.');
     }
 }

@@ -1,4 +1,4 @@
-<form class="flex items-end gap-4" method="post" action="{{ $action }}" enctype="multipart/form-data">
+<form class="w-full flex items-end gap-4" method="post" action="{{ $action }}" enctype="multipart/form-data">
     @csrf
     <input type="hidden"
            name="shop_id"
@@ -38,7 +38,7 @@
                       value="1" />
     @endisset
 
-    <x-button-primary class="w-full items-center h-10">
+    <x-button class="w-full items-center h-10">
         Comprar
-    </x-button-primary>
+    </x-button>
 </form>

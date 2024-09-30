@@ -1,4 +1,4 @@
-<nav class="xl:hidden xl:w-full flex items-center mr-4" x-data="{ open: false }">
+<nav class="2xl:hidden 2xl:w-full flex items-center mr-4" x-data="{ open: false }">
     <!-- Settings Dropdown -->
     <x-dropdown>
         <x-slot name="trigger">
@@ -53,15 +53,35 @@
 
                 <x-dropdown-link :href="route('commissions.index')">
                     <i class="text-accent-regular mr-1 fa-solid fa-box-open"></i>
-                    Pedidos
+                    Meus Pedidos
                 </x-dropdown-link>
 
                 <hr/>
 
-                <x-dropdown-link class="text-secondary-regular font-bold" :href="route('shop.create')">
-                    <i class="text-secondary-regular mr-1 fa-solid fa-store"></i>
-                    Criar Loja
-                </x-dropdown-link>
+                @can('create shop')
+                    <x-dropdown-link class="text-secondary-regular hover:text-secondary-dark font-bold" :href="route('shop.create')">
+                        <i class="text-secondary-regular mr-1 fa-solid fa-store"></i>
+                        Criar Loja
+                    </x-dropdown-link>
+                @elsecan('activate shop')
+                    <x-dropdown-link class="text-secondary-regular font-bold" :href="route('shop.activate')">
+                        <i class="text-secondary-regular mr-1 fa-solid fa-store"></i>
+                        Ativar Loja
+                    </x-dropdown-link>
+                @endcan
+
+                @role('artisan')
+                    <x-dropdown-link class="text-secondary-regular hover:text-secondary-dark font-bold" :href="route('artisan.index')">
+                        <i class="text-secondary-regular mr-1 fa-solid fa-store"></i>
+                        Painel do Artesão
+                    </x-dropdown-link>
+                @elserole('admin')
+                    <x-dropdown-link class="text-secondary-regular font-bold" :href="route('artisan.index')">
+                        <i class="text-secondary-regular mr-1 fa-solid fa-store"></i>
+                        Painel do Admin
+                    </x-dropdown-link>
+                @endrole
+
 
                 <hr/>
 

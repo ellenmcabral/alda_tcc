@@ -45,4 +45,14 @@ class Commission extends Model
     {
         return $this->hasMany(CommissionProduct::class);
     }
+
+    public function formatDate(): string
+    {
+        return date('d/m/Y', strtotime($this->created_at));
+    }
+
+    public function formatPrice(): string
+    {
+        return "R$ " . number_format($this->total, 2, ',', '.');
+    }
 }

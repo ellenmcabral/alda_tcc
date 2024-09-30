@@ -1,81 +1,75 @@
 <x-app-layout>
+    <div class="grid gap-8 w-full lg:w-2/3">
+        <div class="hidden sm:inline-flex">
+            {{ Breadcrumbs::render('products.show', $product->shop, $product) }}
+        </div>
 
-    <x-slot name="breadcrumbs">
-        {{ Breadcrumbs::render('products.show', $product->shop, $product) }}
-    </x-slot>
-
-    <ul class="mt-8 grid gap-4">
-        <li>
-            <img class="w-full rounded-lg"
+        <div class="grid lg:gap-4 xl:gap-16 lg:flex">
+            <img class="w-full rounded-lg lg:w-1/2"
                  src="/img/products/{{ $product->image }}"
                  alt="Imagem de {{ $product->name }}"/>
-        </li>
-        <li>
-            <h2 class="font-semibold text-2xl">
-                {{ $product->name }}
-            </h2>
-        </li>
-        <li class="flex items-center justify-between">
-            <p class="flex items-center px-2 py-1 bg-gray-200 text-gray-600 rounded-lg w-fit">
-                <i class="fa-solid fa-list mr-2"></i>{{ $product->category->description }}
-            </p>
-            <h2 class="text-2xl font-semibold text-secondary-300">
-                R$ {{ number_format($product->sale_price, 2, ',', '.') }}
-            </h2>
-        </li>
 
-        @auth
-            @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
-                <li>
-                    <x-button-primary class="w-full" href="#">
-                        Editar
-                    </x-button-primary>
-                </li>
-            @else
-                <li>
-                    <x-form-cart :action="route('cart.add')"
-                                 :product="$product"
-                                 :quantity="true" />
-                </li>
-            @endif
-        @else
-            <li>
-                <x-form-cart :action="route('cart.add')"
-                             :product="$product"
-                             :quantity="true" />
-            </li>
-        @endauth
+            <div class="grid gap-4 xl:gap-0">
+                <x-text-heading>
+                    {{ $product->name }}
+                </x-text-heading>
 
-        @if($product->stock > 0)
-            <li>
-                <h3 class="font-bold text-lg">
-                    Em Estoque
-                </h3>
-                <p class="text-gray-600">
-                    {{ $product->stock }} unidades
-                </p>
-            </li>
-        @endif
-        @isset($product->deadline)
-            <li>
-                <h3 class="font-bold text-lg">
-                    Sob Encomenda
-                </h3>
-                <p class="text-gray-600">
-                    Prazo de produção de <span class="font-bold">{{ $product->deadline }} dias úteis</span>
-                </p>
-            </li>
-        @endisset
+                <section class="flex justify-between">
+                    <p class="h-8 flex items-center px-2 py-1 bg-gray-200 text-gray-600 rounded-lg w-fit">
+                        <i class="fa-solid fa-list mr-2"></i>{{ $product->category->description }}
+                    </p>
+                    <h2 class="text-lg font-bold text-accent-darker">
+                        {{ $product->formatPrice() }}
+                    </h2>
+                </section>
 
-        <li class="flex flex-col">
-            <h3 class="font-bold text-lg">
-                Descrição
-            </h3>
-            <p class="text-sm text-gray-600">
-                {{ $product->description }}
-            </p>
-        </li>
+                <section class="w-full flex items-center justify-between">
+                    @auth
+                        @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
+                            <x-button class="w-full" href="#">
+                                Editar
+                            </x-button>
+                        @else
+                            <x-form-cart :action="route('cart.add')"
+                                         :product="$product"
+                                         :quantity="true" />
+                        @endif
+                    @else
+                        <x-form-cart :action="route('cart.add')"
+                                     :product="$product"
+                                     :quantity="true" />
+                    @endauth
+                </section>
 
+                <section>
+                    @if($product->stock > 0)
+                        <h3 class="font-bold text-lg">
+                            Em Estoque
+                        </h3>
+                        <p class="text-gray-600">
+                            {{ $product->stock }} unidades
+                        </p>
+                    @endif
 
-    </ul>
+                    @isset($product->deadline)
+                        <h3 class="font-bold text-lg">
+                            Sob Encomenda
+                        </h3>
+                        <p class="text-gray-600">
+                            Prazo de produção de <span class="font-bold">{{ $product->deadline }} dias úteis</span>
+                        </p>
+                    @endisset
+                </section>
+
+                <section>
+                    <h3 class="font-bold text-lg">
+                        Descrição
+                    </h3>
+                    <x-text-paragraph>
+                        {{ $product->description }}
+                    </x-text-paragraph>
+                </section>
+            </div>
+        </div>
+    </div>
 </x-app-layout>

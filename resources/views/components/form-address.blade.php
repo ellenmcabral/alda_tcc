@@ -20,7 +20,7 @@
         </div>
     @endisset
 
-    <x-primary-button class="w-full">
+    <x-button class="w-full">
         Salvar
-    </x-primary-button>
+    </x-button>
 </form>

@@ -1,7 +1,8 @@
-<x-danger-button
+<x-button-danger class="w-1/2"
     x-data=""
-    x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-deletion')"
->Cancelar Encomenda</x-danger-button>
+    x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-deletion')">
+    Cancelar Encomenda
+</x-button-danger>
 
 <x-modal name="confirm-commission-deletion" :show="$errors->commissionDeletion->isNotEmpty()" focusable>
     <form method="post" action="{{ route('commissions.destroy', $commission->id) }}" class="p-6">
@@ -19,7 +20,7 @@
         <div class="mt-6">
             <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-            <x-text-input
+            <x-input-text
                 id="password"
                 name="password"
                 type="password"
@@ -31,9 +32,9 @@
         </div>
 
         <div class="mt-6 flex justify-end">
-            <x-secondary-button x-on:click="$dispatch('close')">
+            <x-button-secondary x-on:click="$dispatch('close')">
                 Não, quero manter
-            </x-secondary-button>
+            </x-button-secondary>
 
             <x-danger-button class="ms-3">
                 Sim, quero cancelar

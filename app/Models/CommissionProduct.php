@@ -29,4 +29,8 @@ class CommissionProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function formatPrice(): string
+    {
+        return 'R$ ' . number_format($this->sale_price, 2, ',', '.');
+    }
 }

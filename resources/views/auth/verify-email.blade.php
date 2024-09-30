@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
-        <x-heading>
+        <x-text-heading>
             Verificar E-mail
-        </x-heading>
+        </x-text-heading>
 
         <x-form action="{{ route('verification.send') }}">
             <p>
@@ -10,9 +10,9 @@
             </p>
 
             <div>
-                <x-button-primary class="w-full">
+                <x-button class="w-full">
                     Reenviar e-mail
-                </x-button-primary>
+                </x-button>
             </div>
         </x-form>
 

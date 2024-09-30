@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\DB;
 class StatusesSeeder extends Seeder
 {
     static $statuses = [
-        'Pedido Efetuado',
         'Aguardando Pagamento',
         'Em Preparação',
         'Pedido Enviado',
         'Em Transporte',
         'Pedido Entregue',
+        'Cancelado',
     ];
     /**
      * Run the database seeds.

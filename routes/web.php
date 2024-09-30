@@ -50,7 +50,7 @@ Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.dest
 // PAGINAS DE LOJA / PRODUTO
 
 Route::get('/shop/{url}', [ShopDetailsController::class, 'show'])->name('shop.show');
-Route::get('/products/{url}', [ProductDetailsController::class, 'show'])->name('products.show');
+Route::get('/products/{id}', [ProductDetailsController::class, 'show'])->name('products.show');
 
 // USUARIOS LOGADOS
 

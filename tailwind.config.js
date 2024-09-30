@@ -20,7 +20,7 @@ export default {
                 light: '#83E2C0',
                 regular: '#37D7A7',
                 dark: '#00C280',
-                darker: '#009F65'
+                darker: '#008D58'
             },
             'secondary': {
                 light: '#EB5180',
@@ -30,12 +30,24 @@ export default {
             'gray': {
                 light: '#EAEBEC',
                 regular: '#B8B9BA',
-                dark: '#98999A',
+                dark: '#707172',
             },
             'neutral': {
                 black: '#212121',
                 white: '#F9F9FB',
-            }
+            },
+            'warning': {
+                regular: '#FFEDB5',
+                dark: '#FFB900',
+            },
+            'danger': {
+                regular: '#FFCCD4',
+                dark: '#FF002A',
+            },
+            'success': {
+                regular: '#EBFFB5',
+                dark: '#B9FF00',
+            },
         },
         extend: {
             fontFamily: {

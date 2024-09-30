@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Commission;
 use App\Models\ShippingAddress;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -110,16 +111,29 @@ class ShippingAddressController extends Controller
     {
         $shippingAddress = ShippingAddress::find($request->id);
 
-        $shippingAddress->delete();
+        $commission = Commission::where('shipping_address_id', $request->id);
 
-        if($shippingAddress->is_default) { // se o endereço deletado for padrão, tornar padrão o outro primeiro que aparecer
-            $otherShippingAddress = ShippingAddress::where('user_id', $request->user()->id)->first();
+        if($commission) {
+            $route = route('profile.shipping-address.edit', $request->id);
+            $message = "Você não pode deletar este endereço de e-mail porque ele está em um pedido em andamento.";
+            $type = "danger";
+        } else {
+            if($shippingAddress->is_default) { // se o endereço deletado for padrão, tornar padrão o outro primeiro que aparecer
+                $otherShippingAddress = ShippingAddress::where('user_id', $request->user()->id)->first();
 
-            if($otherShippingAddress) {
-                $otherShippingAddress->update(['is_default' => true]);
+                if($otherShippingAddress) {
+                    $otherShippingAddress->update(['is_default' => true]);
+                }
             }
+
+            $shippingAddress->delete();
+
+            $route = route('profile.shipping-address.index');
+            $message = "Shipping address successfully deleted";
+            $type = "success";
         }
 
-        return redirect(route('profile.shipping-address.index'));
+        return redirect($route)
+            ->with('status', $message)->with('type', $type);
     }
 }

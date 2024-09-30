@@ -1,67 +1,72 @@
 <x-app-layout>
-    <x-slot name="breadcrumbs">
-        {{ Breadcrumbs::render('shipping-address.index') }}
-    </x-slot>
-    <x-slot name="heading">
-        Endereços de Entrega
-    </x-slot>
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+        <div class="hidden sm:inline-flex">
+            {{ Breadcrumbs::render('shipping-address.index') }}
+        </div>
 
-    <section class="grid sm:grid-cols-2 gap-6">
-        <header class="w-full flex justify-between items-center">
-            <x-link href="{{ route('profile.shipping-address.create') }}">
-                Adicionar um novo endereço
-            </x-link>
-            <span>
-                <i class="fa-solid fa-plus text-gray-600"></i>
-            </span>
-        </header>
+        <x-text-heading>
+            Endereços de Entrega
+        </x-text-heading>
+
+        <x-link
+           href="{{ route('profile.shipping-address.create') }}">
+            <span class="underline">Adicionar um novo endereço</span>
+            <i class="text-sm fa-solid fa-plus"></i>
+        </x-link>
+
+        <hr/>
 
         @if($addresses->isEmpty())
-            <hr/>
-            <p class="text-gray-600 text-sm">
+            <p class="text-gray-dark">
                 Nenhum endereço de entrega cadastrado.
             </p>
         @else
             @foreach($addresses as $address)
-                <ul class="flex flex-col justify-between gap-2 border p-4 rounded @if($address->is_default) border-primary-700 @else border-gray-400 @endif ">
+                <section class="flex flex-col gap-8 border border-1 rounded-lg @if($address->is_default) border-accent-regular @else border-gray-light @endif p-4">
                     @if($address->is_default)
-                        <li>
-                            <p class="text-sm text-primary-700">
-                                Este o é seu endereço de entrega padrão.
-                            </p>
-                        </li>
+                        <p class="font-bold text-accent-darker">
+                            Este é o seu endereço de entrega padrão.
+                        </p>
                     @endif
-                    <li>
-                        Rua: {{ $address->street }}
-                    </li>
-                    <li>
-                        Número: {{ $address->number }}
-                    </li>
-                    @if($address->complement)
-                        <li>
-                            Complemento: {{ $address->complement }}
-                        </li>
-                    @endif
-                    <li>
-                        Bairro: {{ $address->locality }}
-                    </li>
-                    <li>
-                        Cidade: {{ $address->city }}
-                    </li>
-                    <li>
-                        Estado: {{ $address->region_code }}
-                    </li>
-                    <li>
-                        CEP: {{ $address->postal_code }}
-                    </li>
-                    <li class="flex justify-end">
-                        <x-link-button class="h-8" href="{{ route('profile.shipping-address.edit', $address->id) }}">
-                            Editar endereço
-                            <i class="ml-2 fa-solid fa-pen-to-square"></i>
-                        </x-link-button>
-                    </li>
-                </ul>
+                    <table class="text-left">
+                        <tr>
+                            <th class="w-24">Rua</th>
+                            <td>{{ $address->street }}</td>
+                        </tr>
+                        <tr>
+                            <th>Número</th>
+                            <td>{{ $address->number }}</td>
+                        </tr>
+                        @isset($address->complement)
+                            <tr>
+                                <th class="w-32">Complemento</th>
+                                <td>{{ $address->complement }}</td>
+                            </tr>
+                        @endisset
+                        <tr>
+                            <th>Bairro</th>
+                            <td>{{ $address->locality }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cidade</th>
+                            <td>{{ $address->city }}</td>
+                        </tr>
+                        <tr>
+                            <th>Estado</th>
+                            <td>{{ $address->region_code }}</td>
+                        </tr>
+                        <tr>
+                            <th>CEP</th>
+                            <td>{{ $address->postal_code }}</td>
+                        </tr>
+                    </table>
+                    <x-button-secondary class="self-end w-fit"
+                                        href="{{ route('profile.shipping-address.edit', $address->id) }}">
+                        Editar
+                        <i class="ml-2 fa-solid fa-pen-to-square"></i>
+                    </x-button-secondary>
+                </section>
             @endforeach
         @endif
-    </section>
+    </div>
 </x-app-layout>

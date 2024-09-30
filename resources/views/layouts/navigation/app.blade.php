@@ -1,4 +1,4 @@
-<nav class="items-center gap-8 hidden xl:flex">
+<nav class="items-center gap-8 hidden 2xl:flex">
     <!-- Navigation Links -->
     @auth <!-- LOGGED IN -->
         <x-nav-link
@@ -16,19 +16,20 @@
             Minha Conta
         </x-nav-link>
 
-        <x-nav-link :href="route('cart')"
+        <x-nav-link class="flex items-center gap-1"
+                    :href="route('cart')"
                     :active="request()->routeIs('cart')">
             Sacola de Compras
             @if(\Cart::content()->isNotEmpty())
-                <span class="text-xs ml-2 font-extrabold shadow-md bg-secondary-300 h-4 w-4 flex items-center justify-center rounded-full">
-                        {{ \Cart::content()->count() }}
-                    </span>
+                <span class="text-xs font-bold bg-status-warning text-neutral-black h-4 w-4 flex items-center justify-center rounded-full">
+                    {{ \Cart::content()->count() }}
+                </span>
             @endif
         </x-nav-link>
 
         <x-nav-link :href="route('commissions.index')"
                     :active="request()->routeIs('commissions.index')">
-            Pedidos
+            Meus Pedidos
         </x-nav-link>
 
         <!-- Authentication -->

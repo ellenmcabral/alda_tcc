@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
-        <x-heading>
+        <x-text-heading>
             Modificar Senha
-        </x-heading>
+        </x-text-heading>
 
         <x-form action="{{ route('password.store') }}">
             <!-- Password Reset Token -->
@@ -45,9 +45,9 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
-            <x-primary-button class="w-full">
+            <x-button class="w-full">
                 Salvar
-            </x-primary-button>
+            </x-button>
         </x-form>
     </div>
 </x-app-layout>

@@ -1,33 +1,47 @@
 <x-app-layout>
-    <x-slot name="breadcrumbs">
-        {{ Breadcrumbs::render('checkout') }}
-    </x-slot>
-    <x-slot name="heading">
-        Finalizar Encomenda
-    </x-slot>
-    <form class="grid gap-10" method="post" action="{{ route('commissions.store') }}">
-        @csrf
-
-        @include('checkout.partials.items')
-
-        @include('checkout.partials.payment')
-
-        @include('checkout.partials.shipping')
-
-        <input type="hidden" name="status_id" value="1"/>
-
-        <div>
-            <h2 class="mb-4 flex justify-between font-bold text-2xl text-primary-700">
-            <span>
-                Total:
-            </span>
-                R$ {{ number_format($cart_total, 2, ',', '.') }}
-            </h2>
-
-            <x-primary-button class="w-full"
-                              :disabled="$shippingAddresses->isEmpty() ? true : false">
-                Finalizar Encomenda
-            </x-primary-button>
+    <div class="w-full grid gap-8 md:w-1/2 lg:w-2/3">
+        <div class="hidden sm:inline-flex">
+            {{ Breadcrumbs::render('checkout') }}
         </div>
-    </form>
+
+        <x-text-heading>
+            Finalizar Pedido
+        </x-text-heading>
+
+        <x-form action="{{ route('commissions.store') }}">
+            <p class="text-lg">
+                Fazendo encomenda para a loja
+                <x-link href="{{ route('shop.show', $shop->url) }}">
+                    {{ $shop->name }}
+                </x-link>
+            </p>
+
+            <hr>
+
+            @include('checkout.partials.items')
+
+            <hr>
+
+            @include('checkout.partials.payment')
+
+            <hr>
+
+            @include('checkout.partials.shipping')
+
+            <hr>
+
+            <input type="hidden" name="status_id" value="1"/>
+
+            <div class="grid gap-8">
+                <x-text-heading class="text-secondary-regular flex justify-between">
+                    Total <span>R$ {{ number_format($cart_total, 2, ',', '.') }}</span>
+                </x-text-heading>
+
+                <x-button class="w-full"
+                                  :disabled="$shippingAddresses->isEmpty() ? true : false">
+                    Finalizar Encomenda
+                </x-button>
+            </div>
+        </x-form>
+    </div>
 </x-app-layout>

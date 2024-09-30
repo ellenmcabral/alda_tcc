@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
-        <x-heading>
+        <x-text-heading>
             Criar Conta
-        </x-heading>
+        </x-text-heading>
 
         <x-form action="{{ route('register') }}">
             <!-- Name -->
@@ -69,9 +69,9 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
             </div>
 
-            <x-button-primary class="w-full">
+            <x-button class="w-full">
                 Cadastrar
-            </x-button-primary>
+            </x-button>
 
             <x-link class="text-center"
                     href="{{ route('login') }}">

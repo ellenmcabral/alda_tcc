@@ -1,33 +1,48 @@
 <section class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-bag-shopping"></i>
-        <h3 class="text-xl font-bold">
+        <x-text-subheading>
             Resumo de Itens
-        </h3>
+        </x-text-subheading>
     </header>
 
-    <p class="text-sm text-gray-600">
-        Fazendo encomenda para a loja
-        <a class="underline hover:text-gray-400 transition ease-in-out duration-150"
-           href="{{ route('shop.show', $shop->url) }}">
-            {{ $shop->name }}
-        </a>
-    </p>
+    <table>
+        <thead>
+            <tr class="text-accent-darker text-sm uppercase">
+                <th class="py-4 text-left">
+                    Nome do item
+                </th>
+                <th class="py-4 text-center">
+                    Quantidade
+                </th>
+                <th class="py-4 text-center">
+                    Preço unitário
+                </th>
+                <th class="py-4 text-right">
+                    Subtotal
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($items as $item)
+                <tr class="border-b-1 border-gray-light">
+                    <th class="py-4 font-normal text-left">
+                        {{ $item->name }}
+                    </th>
+                    <th class="py-4 font-normal text-center">
+                        {{ $item->qty }}
+                    </th>
+                    <th class="py-4 font-normal text-center">
+                        R$ {{ number_format($item->price, 2, ',', '.') }}
+                    </th>
+                    <th class="py-4 font-bold text-right">
+                        R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
+                    </th>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-    @foreach($items as $item)
-        <ul class="flex items-center justify-between">
-            <li class="flex items-center gap-2">
-                {{ $item->qty }} x
-                <x-link href="{{ route('products.show', $item->id) }}">
-                    {{ $item->name }}
-                </x-link>
-            </li>
-            <li class="justify-end">
-                R$ {{ number_format($item->price, 2, ',', '.') }}
-            </li>
-        </ul>
-        <hr/>
-    @endforeach
     <input type="hidden" name="shop_id" value="{{ $shop->id }}" />
 
     <input type="hidden" name="total" value="{{ $cart_total }}" />

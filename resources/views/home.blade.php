@@ -2,34 +2,45 @@
     <div class="w-full grid gap-10 md:w-1/2 lg:w-2/3">
         <section class="grid gap-4">
             @can('activate shop')
-                <div class="p-6 bg-yellow-400 rounded border-5">
-                    <p class="font-medium text-sm">
+                <div class="z-10 p-6 bg-yellow-400 rounded border-5">
+                    <x-text-paragraph class="text-neutral-black">
                         Certifique-se de
-                        <a href="{{ route('shop.activate') }}" class="underline hover:text-yellow-900 transition ease-in-out duration-150" href="">
+                        <a class="underline hover:text-yellow-900 transition ease-in-out duration-150"
+                           href="{{ route('shop.activate') }}" >
                             ativar a sua loja
                         </a>
-                        para poder acessar o Painel de Controle do Artesão
-                    </p>
+                        para poder acessar o Painel de Controle do Artesão.
+                    </x-text-paragraph>
                 </div>
             @endcan
 
             <div class="p-4 lg:p-6 bg-gray-50 border border-gray-dark rounded-lg flex justify-between z-10">
                 <div class="flex flex-col justify-between">
                     <div class="grid gap-2">
-                        <x-heading>
+                        <x-text-heading>
                             Oi, {{ Auth::user()->formatName() }}
-                        </x-heading>
+                        </x-text-heading>
                         <p>
                             Bem-vindo(a) à ALDA!
                         </p>
                     </div>
 
-                    <div class="text-secondary-regular flex items-center">
-                        <x-link class="flex items-center" href="{{ route('shop.create') }}">
-                            Criar loja
-                        </x-link>
-                        <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
-                    </div>
+                    @can('create shop')
+                        <div class="text-secondary-regular flex items-center">
+                            <x-link class="flex items-center" href="{{ route('shop.create') }}">
+                                Criar loja
+                            </x-link>
+                            <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+                        </div>
+                    @endcan
+                    @role('artisan')
+                        <div class="text-secondary-regular flex items-center">
+                            <x-link class="flex items-center" href="{{ route('artisan.index') }}">
+                                Acessar painel do artesão
+                            </x-link>
+                            <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+                        </div>
+                    @endrole
                 </div>
                 <!-- FOTO GATINHO -->
                 <img class="w-1/2 lg:w-1/4"
@@ -37,20 +48,20 @@
                      alt="ilustração de gatinho" />
             </div>
 
-            <span class="bg-secondary-regular rounded-br-xl rounded-bl-xl w-full h-40 absolute top-20 left-0 z-0">
+            <span class="bg-secondary-regular rounded-br-xl rounded-bl-xl w-full h-60 absolute top-20 left-0 z-0">
             </span>
         </section>
 
         <section class="relative w-full z-0 grid gap-4" data-carousel="static">
-            <x-heading>
+            <x-text-heading>
                 Últimos Produtos
-            </x-heading>
+            </x-text-heading>
 
             <!-- SLIDER DE PRODUTOS -->
             <div class="relative overflow-hidden h-96 rounded-lg lg:hidden">
                 @foreach($products as $product)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <a href="{{ route('products.show', $product->url) }}">
+                        <a href="{{ route('products.show', $product->id) }}">
                             <img src="/img/products/{{ $product->image }}"
                                  alt="Imagem do produto {{ $product->name }}"
                                  class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
@@ -59,7 +70,7 @@
                             {{ $product->name }}
                         </h3>
                         <p class="text-lg absolute top-5 right-5 font-bold rounded text-accent-darker p-4 bg-white">
-                            {{ $product->priceFormat($product->sale_price) }}
+                            {{ $product->formatPrice() }}
                         </p>
                     </div>
 
@@ -88,7 +99,7 @@
             <div class="hidden lg:grid lg:grid-cols-3 lg:gap-8">
                 @foreach($products as $product)
                     <div class="grid gap-2">
-                        <a href="{{ route('products.show', $product->url) }}">
+                        <a href="{{ route('products.show', $product->id) }}">
                             <img src="/img/products/{{ $product->image }}"
                                  alt="Imagem do produto {{ $product->name }}"
                                  class="rounded-lg">
@@ -97,7 +108,7 @@
                                     {{ $product->name }}
                                 </h3>
                                 <p class="font-bold rounded text-accent-darker">
-                                    {{ $product->priceFormat($product->sale_price) }}
+                                    {{ $product->formatPrice() }}
                                 </p>
                             </div>
                         </a>
@@ -112,9 +123,9 @@
         </section>
 
         <aside class="grid gap-4">
-            <x-heading>
+            <x-text-heading>
                 Categorias
-            </x-heading>
+            </x-text-heading>
 
             <ul class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach($categories as $category)

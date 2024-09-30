@@ -38,9 +38,14 @@ class Product extends Model
         return $this->BelongsTo(Category::class);
     }
 
-    public function priceFormat(): string
+    public function formatPrice(): string
     {
         return 'R$ ' . number_format($this->sale_price, 2, ',', '.');
+    }
+
+    public function formatName(): string
+    {
+        return str_replace(array(' ', '.'), array('-', ''), $this->name);
     }
 
 }

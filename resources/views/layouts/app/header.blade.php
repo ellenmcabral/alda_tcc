@@ -17,31 +17,29 @@
         </button>
 
         @auth
-            @role('admin')
-            <x-button-secondary class="h-8" :href="route('admin.index')">
-                Painel do Admin
-            </x-button-secondary>
-            @endrole
-
             @role('artisan')
-            <x-button-secondary class="h-8" :href="route('artisan.index')">
-                Painel do Artesão
-            </x-button-secondary>
+                <x-button-outlined :href="route('artisan.index')">
+                    Painel do Artesão
+                </x-button-outlined>
+            @elserole('admin')
+                <x-button-outlined :href="route('admin.index')">
+                    Painel do Admin
+                </x-button-outlined>
             @endrole
 
             @can('activate shop')
-                <x-button-secondary href="{{ route('shop.activate-form') }}">
+                <x-button-outlined href="{{ route('shop.activate') }}">
                     Ativar Loja
-                </x-button-secondary>
+                </x-button-outlined>
             @elsecan('create shop')
-                <x-button-secondary href="{{ route('shop.create') }}">
+                <x-button-outlined href="{{ route('shop.create') }}">
                     Criar Loja
-                </x-button-secondary>
+                </x-button-outlined>
             @endcan
         @else
-            <x-button-secondary class="xl:hidden" href="{{ route('register') }}">
+            <x-button-outlined class="xl:hidden" href="{{ route('register') }}">
                 Criar conta
-            </x-button-secondary>
+            </x-button-outlined>
         @endauth
 
         <!-- Navigation Links -->

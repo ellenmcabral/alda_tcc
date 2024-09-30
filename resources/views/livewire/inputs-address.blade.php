@@ -1,7 +1,7 @@
 <div class="grid gap-8">
     <div>
         <x-input-label for="postal_code" :value="'CEP'" />
-        <x-text-input class="w-full"
+        <x-input-text class="w-full"
                       id="postal_code"
                       name="postal_code"
                       type="text"
@@ -16,7 +16,7 @@
     <div class="flex gap-4">
         <div class="w-full">
             <x-input-label for="street" :value="'Rua'" />
-            <x-text-input class="w-full"
+            <x-input-text class="w-full"
                           id="street"
                           name="street"
                           type="text"
@@ -28,7 +28,7 @@
 
         <div>
             <x-input-label for="number" :value="'Número'" />
-            <x-text-input class="w-full"
+            <x-input-text class="w-full"
                           id="number"
                           name="number"
                           type="number"
@@ -40,7 +40,7 @@
 
     <div>
         <x-input-label for="complement" :value="'Complemento'" />
-        <x-text-input class="w-full"
+        <x-input-text class="w-full"
                       id="complement"
                       name="complement"
                       type="text"
@@ -51,7 +51,7 @@
 
     <div>
         <x-input-label for="locality" :value="'Bairro'" />
-        <x-text-input class="w-full"
+        <x-input-text class="w-full"
                       id="locality"
                       name="locality"
                       type="text"
@@ -64,7 +64,7 @@
     <div class="flex gap-4">
         <div class="w-full">
             <x-input-label for="city" :value="'Cidade'" />
-            <x-text-input class="w-full"
+            <x-input-text class="w-full"
                           id="city"
                           name="city"
                           type="text"
@@ -76,7 +76,7 @@
 
         <div>
             <x-input-label for="region_code" :value="'Estado'" />
-            <x-text-input class="w-full"
+            <x-input-text class="w-full"
                           id="region_code"
                           name="region_code"
                           type="text"

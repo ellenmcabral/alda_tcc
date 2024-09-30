@@ -71,16 +71,21 @@ class CartController extends Controller
                     'image' => $request->image,
                 ],
             ]);
-            $status = 'product-added';
+            $type = 'success';
+            $status = 'Produto adicionado na sacola de compras.';
         }
         else {
             $shop = '';
-            $status = 'product-not-added';
+            $type = 'warning';
+            $status = 'Esvazie sua sacola de compras ou finalize seu pedido antes de comprar um produto desta loja.';
         }
 
         return redirect($route)
-            ->with('status', $status)
-            ->with('shop', $shop);
+            ->with([
+                'status' => $status,
+                'type' => $type,
+                'shop' => $shop,
+            ]);
     }
 
     public function update(Request $request, $rowId): RedirectResponse
@@ -93,14 +98,16 @@ class CartController extends Controller
 
         Cart::update($rowId, $newQty);
 
-        return redirect(route('cart'));
+        return redirect(route('cart'))
+            ->with('status', 'Produto atualizado com sucesso.');
     }
 
     public function delete($rowId): RedirectResponse
     {
         Cart::remove($rowId);
 
-        return redirect(route('cart'));
+        return redirect(route('cart'))
+            ->with('status', 'Produto removido com sucesso.');
     }
 
     public function destroy(): RedirectResponse

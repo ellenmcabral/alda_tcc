@@ -1,14 +1,19 @@
 <x-app-layout>
-    <x-slot name="heading">
-        Minhas Encomendas
-    </x-slot>
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+        <x-text-heading>
+            Meus Pedidos
+        </x-text-heading>
 
-    <section class="grid gap-8">
-        @if($commissions->isEmpty())
-            <span class="h-40 w-full bg-gray-200"></span>
-            <p class="text-gray-600 text-sm">
-                Nenhuma encomenda por aqui.
-            </p>
+        @if($commissions->isEmpty()) <!-- SEM PEDIDOS -->
+
+            <div class="flex flex-col items-center gap-4">
+                <img class="w-1/2 md:w-1/3"
+                     src="img\assets\empty-orders.png"
+                     alt="ilustração de caixa vazia" />
+                <p class="text-gray-dark">
+                    Nenhum pedido por aqui ainda.
+                </p>
+            </div>
             <hr/>
             <x-link href="{{ route('home') }}">
                 Ir para a página inicial
@@ -17,47 +22,43 @@
             @foreach($commissions as $commission)
                 <div class="rounded-lg p-4 border border-gray-200 grid gap-4">
                     <div class="flex justify-between">
-                        <p class="flex items-center gap-2 text-gray-400">
-                            <i class="fa-solid fa-hashtag"></i>
-                            {{ $commission->id }}
+                        <p class="px-3 py-1 w-fit rounded-full text-gray-dark @if($commission->status->id >= 1 and $commission->status->id < 4)
+                                          bg-warning-regular
+                                          @elseif($commission->status->id == 5)
+                                          bg-success-regular
+                                          @else
+                                          bg-danger-regular
+                                          @endif ">
+                            {{ $commission->status->description }}
                         </p>
                         <div class="flex items-center">
-                            <x-link :href="route('commissions.show', $commission->id)">
-                                Ver detalhes
+                            <x-link href="{{ route('commissions.show', $commission->id) }}">
+                                Ver detalhes <i class="fa-solid text-sm fa-chevron-right text-secondary-regular"></i>
                             </x-link>
-                            <i class="ml-2 fa-solid fa-chevron-right text-secondary-300"></i>
+
                         </div>
                     </div>
                     <hr/>
-                    <table class="w-full text-left rtl:text-right">
+                    <table class="w-full text-left">
                         <tr>
-                            <th>Status</th>
-                            <td class="flex items-center gap-2">
-                                <div class="rounded-full h-3 w-3 @if($commission->status->id > 1 and $commission->status->id < 6)
-                                          animate-pulse bg-yellow-400 text-yellow-400
-                                      @else
-                                          bg-green-400
-                                      @endif "></div>
-                                <p class="@if($commission->status->id > 1 and $commission->status->id < 6)
-                                          text-yellow-500
-                                      @else
-                                          text-green-500
-                                      @endif ">
-                                    {{ $commission->status->description }}
-                                </p>
-                            </td>
+                            <th>ID</th>
+                            <td>{{ $commission->id }}</td>
                         </tr>
                         <tr>
                             <th>Loja</th>
-                            <td>{{ $commission->shop->name }}</td>
+                            <td>
+                                <x-link-secondary href="{{ route('shop.show', $commission->shop->url) }}">
+                                    {{ $commission->shop->name }}
+                                </x-link-secondary>
+                            </td>
                         </tr>
                         <tr>
                             <th>Data</th>
-                            <td>{{ date('d/m/Y', strtotime($commission->created_at)) }}</td>
+                            <td>{{ $commission->formatDate() }}</td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td>R$ {{ number_format($commission->total, 2, ',', '.') }}</td>
+                            <td>{{ $commission->formatPrice() }}</td>
                         </tr>
                     </table>
                 </div>
@@ -66,5 +67,5 @@
                 <hr/>
             @endif
         @endif
-    </section>
+    </div>
 </x-app-layout>

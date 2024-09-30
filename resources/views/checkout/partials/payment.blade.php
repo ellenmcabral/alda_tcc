@@ -1,12 +1,12 @@
 <section class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-money-check-dollar"></i>
-        <h3 class="text-xl font-bold">
+        <x-text-subheading>
             Forma de Pagamento
-        </h3>
+        </x-text-subheading>
     </header>
 
-    <p class="text-sm text-gray-600">
+    <p class="text-gray-dark">
         Escolha uma forma de pagamento para a sua encomenda.
     </p>
 

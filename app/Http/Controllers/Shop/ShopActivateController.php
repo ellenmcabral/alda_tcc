@@ -10,7 +10,7 @@ class ShopActivateController extends Controller
 {
     public function activate(Request $request)
     {
-        return view('shop.activate-form', [
+        return view('shop.activate', [
             'shop' => $request->user()->shop,
         ]);
     }
@@ -20,11 +20,13 @@ class ShopActivateController extends Controller
         $shop = $request->user()->shop;
 
         if($request->option == 'cpf') {
-            $shop->fill($request->validate([
+            $request->user()->fill($request->validate([
                 'cpf' => ['required', 'string', 'min:14'],
             ]));
 
-            $shop->cpf = preg_replace('/[^0-9]/','', $request->cpf);
+            $request->user()->cpf = preg_replace('/[^0-9]/','', $request->cpf);
+
+            $request->user()->save();
         }
 
         if($request->option == 'cnpj') {

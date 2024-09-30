@@ -1,47 +1,51 @@
 <x-app-layout>
-    <x-slot name="heading">
-        Minha Conta
-    </x-slot>
+    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+        <x-text-heading>
+            Minha Conta
+        </x-text-heading>
 
-    <section class="grid gap-4">
-        <span class="w-full h-40 bg-gray-200">
-            <!-- Imagem -->
-        </span>
-
-        <div class="flex items-center gap-2">
-            <span class="w-16 h-16 bg-gray-200 rounded-full">
+        <section class="flex gap-4 items-center">
+            <span class="w-20 h-20 rounded-full bg-gray-200">
                 <!-- Imagem -->
             </span>
-            <div class="flex flex-col">
-                <h2 class="font-extrabold">
+            <div>
+                <h2 class="font-bold">
                     {{ Auth::user()->name }}
                 </h2>
-                <p class="uppercase text-xs">
+                <p>
                     {{ Auth::user()->email }}
                 </p>
             </div>
-        </div>
-        <div class="flex justify-between items-center">
-            <x-link class="py-4" href="{{ route('profile.information.edit') }}">
+        </section>
+
+        <section>
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('profile.information.edit') }}">
                 Dados Pessoais
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
-        <hr/>
-        <div class="flex justify-between items-center">
-            <x-link class="py-4" href="{{ route('profile.shipping-address.index') }}">
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
+
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('profile.shipping-address.index') }}">
                 Endereços de Entrega
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
-        <hr/>
-        <div class="flex justify-between items-center">
-            <x-link class="py-4" href="{{ route('profile.password.edit') }}">
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
+
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('profile.password.edit') }}">
                 Editar Senha
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
+
+            <hr/>
+        </section>
 
         @include('profile.partials.delete-user-form')
-    </section>
+    </div>
 </x-app-layout>
