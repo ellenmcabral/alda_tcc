@@ -80,7 +80,7 @@ class ProductCreateTest extends TestCase
     {
         $product = [
             'name' => 'Produto Teste',
-            'image' => 'product-image.jpg',
+            'image' => 'no-image.jpg',
             'sale_price' => 48,
             'shop_id' => $this->artisan->shop->id,
             'category_id' => Category::first()->id,
@@ -150,7 +150,7 @@ class ProductCreateTest extends TestCase
             ->actingAs($this->artisan)
             ->post('/artisan/products', [
                 'name' => str_repeat('a', 3),
-                'image' => 'product-image.jpg',
+                'image' => 'no-image.jpg',
                 'sale_price' => 48,
                 'shop_id' => $this->artisan->shop->id,
                 'category_id' => Category::first()->id,
@@ -168,7 +168,7 @@ class ProductCreateTest extends TestCase
             ->actingAs($this->artisan)
             ->post('/artisan/products', [
                 'name' => str_repeat('a', 150),
-                'image' => 'product-image.jpg',
+                'image' => 'no-image.jpg',
                 'sale_price' => 48,
                 'shop_id' => $this->artisan->shop->id,
                 'category_id' => Category::first()->id,

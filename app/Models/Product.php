@@ -48,4 +48,9 @@ class Product extends Model
         return str_replace(array(' ', '.'), array('-', ''), $this->name);
     }
 
+    public function getImagePath(): string
+    {
+        return $this->image ? '/img/products/' . $this->image : '/img/products/no-image.jpg';
+    }
+
 }

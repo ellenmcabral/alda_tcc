@@ -9,7 +9,7 @@
                     </a>
                 </li>
             @else
-                <li class="flex items-center text-neutral-black font-bold">
+                <li class="flex items-center text-secondary-regular font-bold">
                     {{ $breadcrumb->title }}
                 </li>
             @endif

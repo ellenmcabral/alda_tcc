@@ -16,6 +16,7 @@ class ShopsSeeder extends Seeder
         Shop::create([
             'name' => 'Celita Artesanatos',
             'url' => 'celitaartesanato',
+            'description' => fake()->text(100),
             'user_id' => 3,
             'is_active' => true,
         ]);

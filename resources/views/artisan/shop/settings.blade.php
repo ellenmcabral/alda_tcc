@@ -1,51 +1,52 @@
 <x-dashboard-layout>
-    <x-slot name="heading">
-        Configurações da Loja
-    </x-slot>
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+        <x-text-heading>
+            Configurações da Loja
+        </x-text-heading>
 
-    <section class="grid gap-4">
-        <span class="w-full h-40 bg-gray-200">
-            <!-- Imagem -->
-        </span>
-
-        <div class="flex items-center gap-2">
-            <span class="w-16 h-16 bg-gray-200 rounded-full">
+        <section class="flex gap-4 items-center">
+            <span class="w-20 h-20 rounded-full bg-gray-200">
                 <!-- Imagem -->
             </span>
-            <div class="flex flex-col">
-                <h2 class="font-extrabold">
+
+            <div>
+                <h2 class="font-bold">
                     {{ Auth::user()->shop->name }}
                 </h2>
-                <p class="uppercase text-xs text-gray-400">
+                <p>
                     site.com.br/<span class="font-bold text-secondary-300">{{ Auth::user()->shop->url }}</span>
                 </p>
             </div>
-        </div>
-        <div class="flex justify-between items-center">
-            <x-link :color="'primary'" class="py-4" href="{{ route('artisan.shop.information') }}">
+        </section>
+
+        <section>
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('artisan.shop.information') }}">
                 Informações
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
 
-        <hr/>
-        <div class="flex justify-between items-center">
-            <x-link :color="'primary'" class="py-4" href="{{ route('artisan.shop.customization') }}">
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('artisan.shop.customization') }}">
                 Personalização
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
 
-        <hr/>
-        <div class="flex justify-between items-center">
-            <x-link :color="'primary'" class="py-4" href="{{ route('artisan.shop.address.edit') }}">
+            <hr/>
+
+            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
+               href="{{ route('artisan.shop.address.edit') }}">
                 Endereço
-            </x-link>
-            <i class="fa-solid fa-pen text-gray-400"></i>
-        </div>
+                <i class="fa-solid fa-pen text-gray-regular"></i>
+            </a>
+
+            <hr/>
+        </section>
 
         @include('artisan.shop.partials.delete-shop-form')
-
-    </section>
-
+    </div>
 </x-dashboard-layout>

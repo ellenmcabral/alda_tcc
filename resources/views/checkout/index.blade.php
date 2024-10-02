@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full grid gap-8 md:w-1/2 lg:w-2/3">
+    <div class="grid gap-8 w-full h-fit lg:w-2/3 2xl:w-1/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('checkout') }}
         </div>
@@ -20,8 +20,6 @@
 
             @include('checkout.partials.items')
 
-            <hr>
-
             @include('checkout.partials.payment')
 
             <hr>
@@ -32,12 +30,12 @@
 
             <input type="hidden" name="status_id" value="1"/>
 
-            <div class="grid gap-8">
+            <div class="flex flex-col gap-8">
                 <x-text-heading class="text-secondary-regular flex justify-between">
                     Total <span>R$ {{ number_format($cart_total, 2, ',', '.') }}</span>
                 </x-text-heading>
 
-                <x-button class="w-full"
+                <x-button class="w-full md:w-1/2 md:self-end"
                                   :disabled="$shippingAddresses->isEmpty() ? true : false">
                     Finalizar Encomenda
                 </x-button>

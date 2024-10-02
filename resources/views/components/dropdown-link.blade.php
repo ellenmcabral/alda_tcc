@@ -1,4 +1,20 @@
-<a {{ $attributes->merge(['class' =>
-            'block w-full p-6 lg:py-5 text-start leading-5 text-gray-dark hover:bg-gray-100 hover:text-neutral-black transition duration-300']) }}>
+@props(['active' => false, 'icon' => false, 'color' => 'gray'])
+
+@php
+
+    switch($color) {
+        case 'gray':
+            $colors = 'text-gray-dark hover:text-neutral-black ';
+            break;
+        case 'secondary':
+            $colors = 'text-secondary-regular hover:text-secondary-dark ';
+            break;
+    }
+
+    $class = $colors . 'block w-full p-6 lg:py-5 hover:bg-gray-100 transition duration-300';
+@endphp
+
+<a {{ $attributes->merge(['class' => $class]) }}>
+    <i class="mr-1 fa-solid @if($active) text-accent-regular @else text-gray-regular @endif @if($color == 'secondary') text-secondary-regular @endif {{ $active }} {{ $icon }}"></i>
     {{ $slot }}
 </a>

@@ -40,7 +40,7 @@ class ProductCreateController extends Controller
 
             $requestImage->move(public_path('img/products'), $imageName);
         } else {
-            $imageName = 'product-image.jpg';
+            $imageName = 'no-image.jpg';
         }
 
         $product = Product::create([

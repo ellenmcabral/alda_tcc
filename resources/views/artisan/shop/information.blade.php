@@ -1,38 +1,47 @@
 <x-dashboard-layout>
-    <x-slot name="heading">
-        Informações da Loja
-    </x-slot>
-    <x-slot name="breadcrumbs">
-        {{ Breadcrumbs::render('shop.information') }}
-    </x-slot>
-
-    <form class="grid gap-8"
-          method="POST"
-          action="{{ route('artisan.shop.information.update', $shop->id) }}">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', $shop->name)" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+        <div class="hidden sm:inline-flex">
+            {{ Breadcrumbs::render('shop.information') }}
         </div>
 
-        <div>
+        <x-text-heading>
+            Informações da Loja
+        </x-text-heading>
 
-            <x-input-label for="url" :value="'Url da loja'" />
-            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                www.site.com/urldaloja
-            </p>
-            <x-text-input id="url" class="block mt-1 w-full" type="text" name="url" :value="old('url', $shop->url)" required autofocus autocomplete="url" />
-            <x-input-error :messages="$errors->get('url')" class="mt-2" />
-        </div>
+        <x-form action="{{ route('artisan.shop.information.update', $shop->id) }}">
+            @method('patch')
 
-        <div class="grid gap-4">
-            <x-primary-button class="w-full">
-                {{ __('Save') }}
-            </x-primary-button>
-        </div>
-    </form>
+            <div>
+                <x-input-label for="name" :value="__('Name')" />
+                <x-input-text id="name"
+                              class="w-full"
+                              type="text"
+                              name="name"
+                              :value="old('name', $shop->name)"
+                              required autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </div>
 
+            <div>
+
+                <x-input-label for="url" :value="'URL'" />
+                <p class="text-gray-dark">
+                    www.site.com/<span class="font-bold">urldaloja</span>
+                </p>
+                <x-input-text id="url"
+                              class="w-full"
+                              type="text"
+                              name="url"
+                              :value="old('url', $shop->url)"
+                              required autofocus autocomplete="url" />
+                <x-input-error :messages="$errors->get('url')" class="mt-2" />
+            </div>
+
+            <div class="flex items-center gap-4">
+                <x-button class="w-full">
+                    {{ __('Save') }}
+                </x-button>
+            </div>
+        </x-form>
+    </div>
 </x-dashboard-layout>

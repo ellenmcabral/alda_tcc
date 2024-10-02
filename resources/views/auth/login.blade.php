@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
         <x-text-heading>
             Fazer Login
         </x-text-heading>

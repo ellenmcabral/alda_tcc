@@ -54,7 +54,7 @@
                               name="name"
                               :value="old('name')"
                               placeholder="Digite o nome da loja"
-                              required autofocus autocomplete="name" />
+                              required autocomplete="name" />
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <div>
@@ -68,7 +68,7 @@
                               name="url"
                               :value="old('url')"
                               placeholder="Digite a url da loja"
-                              required autofocus autocomplete="url" />
+                              required autocomplete="url" />
                 <x-input-error :messages="$errors->get('url')" class="mt-2" />
             </div>
 

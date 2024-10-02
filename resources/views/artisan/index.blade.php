@@ -1,67 +1,54 @@
 <x-dashboard-layout>
-    <div class="grid gap-8">
+    <div class="w-full h-fit grid gap-10 lg:w-2/3">
         <section class="grid gap-2">
-            <h1 class="font-bold text-4xl">
-                Oi, artesão
-            </h1>
-            <p class="text-sm text-gray-600">
-                Bem-vindo(a) ao painel de controle da sua loja!
+            <x-text-heading>
+                Painel do Artesão
+            </x-text-heading>
+            <p class="text-lg">
+                Sua loja já está ativa no link:
+            </p>
+            <div class="flex gap-2 items-center text-lg">
+                <span class="bg-accent-regular h-4 w-4 rounded-full animate-pulse"></span>
+                <a href="{{ route('shop.show', Auth::user()->shop->url) }}"
+                   class="underline text-gray-dark hover:text-neutral-black transition duration-300">
+                    https://site.com/shop/<span class="font-bold">{{ Auth::user()->shop->url }}</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="flex gap-2 items-start border border-gray-regular rounded-lg p-4 text-gray-dark">
+            <i class="mt-3 fa-solid fa-circle-info text-gray-regular fa-xl"></i>
+            <p>
+                Para navegar, acesse o menu superior (<i class="text-gray-regular fa-solid fa-bars"></i>) ou pressione um dos cards abaixo.
             </p>
         </section>
 
-        <section class="grid gap-4">
-            <p class="flex items-center border border-gray-300 rounded-lg p-4">
-                <i class="mr-2 fa-solid fa-circle-info text-secondary-300 fa-xl"></i>
-                Acesse o menu no topo superior para ver as opções de gerenciamento.
-            </p>
+        <section class="grid grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
+            <x-card-dashboard :route="route('shop.show', Auth::user()->shop->url)"
+                              :icon="'fa-store'"
+                              :title="'Minha Loja'"
+                              :text="'Veja a fachada da sua loja'" />
 
-            <p class="flex items-center border border-gray-300 rounded-lg p-4">
-                <i class="mr-2 fa-solid fa-circle-info text-secondary-300 fa-xl"></i>
-                Ou pressione um dos cards abaixo para navegar pelas opções de gerenciamento.
-            </p>
+            <x-card-dashboard :route="route('artisan.products.index')"
+                              :icon="'fa-bag-shopping'"
+                              :title="'Produtos'"
+                              :text="'Crie, edite ou exclua produtos'" />
+
+            <x-card-dashboard :route="route('artisan.commissions.index')"
+                              :icon="'fa-box-open'"
+                              :title="'Encomendas'"
+                              :text="'Organize suas encomendas'" />
+
+            <x-card-dashboard :route="route('artisan.shop.settings')"
+                              :icon="'fa-gear'"
+                              :title="'Configurações'"
+                              :text="'Edite os dados da sua loja'" />
         </section>
 
-        <section class="grid grid-cols-2 gap-4">
-            <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('shop.show', Auth::user()->shop->url) }}">
-                <i class="fa-solid fa-store text-primary-700 text-4xl"></i>
-                <h3 class="mt-2 font-bold text-xl">
-                    Minha Loja
-                </h3>
-                <p class="text-gray-400 text-center">
-                    Veja a fachada da sua loja
-                </p>
-            </a>
-            <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('artisan.shop.settings') }}">
-                <i class="fa-solid fa-gear text-primary-700 text-4xl"></i>
-                <h3 class="mt-2 font-bold text-xl">
-                    Configurações
-                </h3>
-                <p class="text-gray-400 text-center">
-                    Edite os dados da sua loja
-                </p>
-            </a>
-            <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('artisan.products.index') }}">
-                <i class="fa-solid fa-bag-shopping text-primary-700 text-4xl"></i>
-                <h3 class="mt-2 font-bold text-xl">
-                    Produtos
-                </h3>
-                <p class="text-gray-400 text-center">
-                    Crie, edite ou exclua produtos
-                </p>
-            </a>
-            <a class="flex flex-col items-center justify-center rounded-xl shadow-md p-6 transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-               href="{{ route('artisan.commissions.index') }}">
-                <i class="fa-solid fa-box-open text-primary-700 text-4xl"></i>
-                <h3 class="mt-2 font-bold text-xl">
-                    Encomendas
-                </h3>
-                <p class="text-gray-400 text-center">
-                    Organize suas encomendas
-                </p>
-            </a>
+        <section>
+            <x-text-heading>
+                Últimas encomendas
+            </x-text-heading>
         </section>
     </div>
 </x-dashboard-layout>

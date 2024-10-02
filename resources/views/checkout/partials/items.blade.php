@@ -6,38 +6,46 @@
         </x-text-subheading>
     </header>
 
-    <table>
+    <table class="w-full">
         <thead>
-            <tr class="text-accent-darker text-sm uppercase">
-                <th class="py-4 text-left">
-                    Nome do item
+            <tr class="bg-gray-light text-gray-dark uppercase text-sm">
+                <th class="px-6 py-3 hidden md:table-cell text-left">
+                    Imagem
                 </th>
-                <th class="py-4 text-center">
-                    Quantidade
+                <th class="px-6 py-3 text-left">
+                    Item
                 </th>
-                <th class="py-4 text-center">
-                    Preço unitário
+                <th class="px-6 py-3">
+                    Qtd
                 </th>
-                <th class="py-4 text-right">
+                <th class="px-6 py-3">
+                    Preço
+                </th>
+                <th class="px-6 py-3 text-right">
                     Subtotal
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach($items as $item)
-                <tr class="border-b-1 border-gray-light">
-                    <th class="py-4 font-normal text-left">
-                        {{ $item->name }}
+                <tr class="border-b border-gray-light">
+                    <td class="p-6 text-left">
+                        <x-image :width="10" src="/img/products/{{ $item->options->image }}" />
+                    </td>
+                    <th scope="row" class="p-6 font-normal text-left truncate">
+                        <a class="text-gray-dark underline" href="{{ route('products.show', $item->id) }}">
+                            {{ $item->name }}
+                        </a>
                     </th>
-                    <th class="py-4 font-normal text-center">
+                    <td class="p-6 font-normal text-center">
                         {{ $item->qty }}
-                    </th>
-                    <th class="py-4 font-normal text-center">
+                    </td>
+                    <td class="p-6 font-normal text-center">
                         R$ {{ number_format($item->price, 2, ',', '.') }}
-                    </th>
-                    <th class="py-4 font-bold text-right">
+                    </td>
+                    <td class="p-6 font-bold text-right text-accent-darker">
                         R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
-                    </th>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

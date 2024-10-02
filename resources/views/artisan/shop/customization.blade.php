@@ -1,19 +1,19 @@
 <x-dashboard-layout>
-    <x-slot name="heading">
-        Personalização da Loja
-    </x-slot>
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+        <div class="hidden sm:inline-flex">
+            {{ Breadcrumbs::render('shop.customization') }}
+        </div>
 
-    <x-slot name="breadcrumbs">
-        {{ Breadcrumbs::render('shop.customization') }}
-    </x-slot>
+        <x-text-heading>
+            Personalização
+        </x-text-heading>
 
-    <p>
-        Foto de perfil
-    </p>
+        <p>
+            Foto de perfil
+        </p>
 
-    <p>
-        Descrição
-    </p>
-
-
+        <p>
+            Descrição
+        </p>
+    </div>
 </x-dashboard-layout>

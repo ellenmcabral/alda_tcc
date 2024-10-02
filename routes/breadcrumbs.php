@@ -143,7 +143,7 @@ Breadcrumbs::for('shop.customization', function($trail) {
 
 Breadcrumbs::for('shop.address.create', function($trail) {
     $trail->parent('shop.settings');
-    $trail->push("Endereço", route('artisan.shop.address.edit'));
+    $trail->push("Adicionar Endereço", route('artisan.shop.address.edit'));
 });
 
 Breadcrumbs::for('shop.address.edit', function($trail) {
@@ -153,7 +153,7 @@ Breadcrumbs::for('shop.address.edit', function($trail) {
 
 Breadcrumbs::for('shop.commissions.index', function ($trail) {
     $trail->parent('artisan.index');
-    $trail->push('Encomendas da Loja', route('artisan.commissions.index'));
+    $trail->push('Encomendas', route('artisan.commissions.index'));
 });
 
 Breadcrumbs::for('shop.commissions.show', function ($trail, $commission) {
@@ -163,7 +163,7 @@ Breadcrumbs::for('shop.commissions.show', function ($trail, $commission) {
 
 Breadcrumbs::for('products', function($trail) {
     $trail->parent('artisan.index');
-    $trail->push('Produtos da Loja', route('artisan.products.index'));
+    $trail->push('Produtos', route('artisan.products.index'));
 });
 
 Breadcrumbs::for('products.create', function($trail) {
@@ -173,5 +173,5 @@ Breadcrumbs::for('products.create', function($trail) {
 
 Breadcrumbs::for('products.edit', function($trail, $product) {
     $trail->parent('products');
-    $trail->push("Editar Produto '" . $product . "'", route('artisan.products.edit', $product));
+    $trail->push("Editar Produto", route('artisan.products.edit', $product));
 });

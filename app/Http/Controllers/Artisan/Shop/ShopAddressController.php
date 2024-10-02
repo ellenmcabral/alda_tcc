@@ -32,15 +32,15 @@ class ShopAddressController extends Controller
 
         $shop->save();
 
-        return redirect(route('artisan.shop.edit'));
+        return redirect(route('artisan.shop.address.edit'))
+            ->with([
+                'status' => 'Endereço atualizado com sucesso!',
+                'type' => 'success',
+            ]);
     }
 
     public function remove(Request $request): RedirectResponse
     {
-        $request->validateWithBag('shopAddressDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
-
         $shop = $request->user()->shop;
 
         $shop->fill([
@@ -55,6 +55,10 @@ class ShopAddressController extends Controller
 
         $shop->save();
 
-        return redirect(route('artisan.shop.edit'));
+        return redirect(route('artisan.shop.settings'))
+            ->with([
+                'status' => 'Endereço excluído com sucesso.',
+                'type' => 'success',
+            ]);
     }
 }

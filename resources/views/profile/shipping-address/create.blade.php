@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="w-full h-fit grid gap-8 lg:w-1/2">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('shipping-address.create') }}
         </div>

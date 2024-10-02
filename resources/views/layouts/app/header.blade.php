@@ -37,7 +37,7 @@
                 </x-button-outlined>
             @endcan
         @else
-            <x-button-outlined class="xl:hidden" href="{{ route('register') }}">
+            <x-button-outlined class="2xl:hidden" href="{{ route('register') }}">
                 Criar conta
             </x-button-outlined>
         @endauth

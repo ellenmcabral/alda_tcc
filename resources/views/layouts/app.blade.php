@@ -21,42 +21,18 @@
         <!-- Page Header -->
         @include('layouts.app.header')
 
-        <!-- Session Status -->
-        @if(session('status') !== null)
-            <div class="mx-4 relative">
-                @if(session('status') == 'profile-updated')
-                    <x-status-message :type="'success'">
-                        Perfil alterado com sucesso.
-                    </x-status-message>
-                @elseif(session('status') == 'verification-link-sent')
-                    <x-status-message :type="'success'">
-                        Um novo e-mail de verificação foi enviado para o e-mail que você inseriu.
-                    </x-status-message>
-                @elseif(session('status') === 'product-added')
-                    <x-status-message :status="session('status')" :type="'success'">
-                        Produto adicionado na sua sacola de compras.
-                    </x-status-message>
-                @elseif(session('status') === 'product-not-added')
-                    <x-status-message :type="'warning'">
-                        Esvazie sua sacola de compras ou finalize a encomenda antes de comprar um produto desta loja.
-                    </x-status-message>
-                @elseif(session('status') === 'commission-stored')
-                    <x-status-message :type="'warning'" :static="true">
-                        Encomenda solicitada!
-                        Finalize o pagamento para que o artesão possa começar a produção.
-                    </x-status-message>
-                @elseif(session('status') === 'commission-destroyed')
-                    <x-status-message :type="'success'">
-                        Encomenda cancelada com sucesso.
-                    </x-status-message>
-                @else
-                    <x-status-message :status="session('status')" :type="session('type')"/>
-                @endif
-            </div>
+        @if(request()->routeIs('home'))
+            <span class="bg-secondary-regular rounded-br-xl rounded-bl-xl w-full h-48 absolute top-24 left-0 z-0">
+            </span>
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8 flex justify-center">
+        <main class="flex-grow mx-4 mt-8 flex justify-center relative">
+            <!-- Session Status -->
+            @if(session('status') !== null)
+                <x-status-message :status="session('status')" :type="session('type')"/>
+            @endif
+
             {{ $slot }}
         </main>
 

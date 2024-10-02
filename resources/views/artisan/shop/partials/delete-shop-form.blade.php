@@ -1,43 +1,45 @@
-<x-danger-button
+<x-button-danger
     x-data=""
-    x-on:click.prevent="$dispatch('open-modal', 'confirm-shop-deletion')"
->Deletar Loja</x-danger-button>
+    x-on:click.prevent="$dispatch('open-modal', 'confirm-shop-deletion')">
+    Deletar Loja
+</x-button-danger>
 
-<x-modal name="confirm-shop-deletion" :show="$errors->shopDeletion->isNotEmpty()" focusable>
-    <form method="post" action="{{ route('artisan.shop.destroy') }}" class="p-6">
+<x-modal :maxWidth="'sm'"
+         name="confirm-shop-deletion"
+         :show="$errors->shopDeletion->isNotEmpty()" focusable>
+    <form class="grid gap-4 p-6"
+          method="post"
+          action="{{ route('artisan.shop.destroy') }}">
         @csrf
         @method('delete')
 
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            Tem certeza que quer deletar sua loja?
-        </h2>
+        <h3 class="text-2xl font-bold text-neutral-black">
+            Tem certeza que quer excluir sua loja?
+        </h3>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Depois que sua loja for excluída, todos os seus produtos serão excluídos permanentemente. Insira sua senha para deletar permanentemente sua loja.
+        <p class="text-gray-dark">
+            Todos os seus produtos e encomendas serão excluídos permanentemente.
         </p>
 
-        <div class="mt-6">
-            <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+        <x-input-text
+            id="password"
+            name="password"
+            type="password"
+            class="w-full"
+            placeholder="Digite sua senha para confirmar" />
 
-            <x-text-input
-                id="password"
-                name="password"
-                type="password"
-                class="mt-1 block w-3/4"
-                placeholder="{{ __('Password') }}"
-            />
+        <x-input-error :messages="$errors->shopDeletion->get('password')" />
 
-            <x-input-error :messages="$errors->shopDeletion->get('password')" class="mt-2" />
-        </div>
+        <div class="flex gap-4">
+            <x-button-outlined :color="'gray'"
+                               class="w-full"
+                               x-on:click="$dispatch('close')">
+                Cancelar
+            </x-button-outlined>
 
-        <div class="mt-6 flex justify-end">
-            <x-secondary-button x-on:click="$dispatch('close')">
-                {{ __('Cancel') }}
-            </x-secondary-button>
-
-            <x-danger-button class="ms-3">
-                {{ __('Delete') }}
-            </x-danger-button>
+            <x-button-danger class="w-full">
+                Sim, excluir
+            </x-button-danger>
         </div>
     </form>
 </x-modal>

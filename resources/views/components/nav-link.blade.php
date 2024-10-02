@@ -1,11 +1,26 @@
-@props(['active'])
+@props(['active' => false, 'color' => 'white'])
 
 @php
-$classes = ($active ?? false)
-            ? 'text-neutral-white text-lg font-bold hover:text-gray-light transition ease-in-out duration-300'
-            : 'text-neutral-white text-lg hover:text-gray-light transition duration-300';
+    if($active) {
+        $active = 'font-bold ';
+    }
+
+    switch($color) {
+        case 'white':
+            $color = 'text-neutral-white hover:text-gray-light ';
+            break;
+        case 'secondary':
+            $color = 'text-secondary-regular hover:text-secondary-dark ';
+            break;
+    }
+
+    $class = $active . $color . ' text-lg transition duration-300';
+
 @endphp
 
-<a {{ $attributes->merge(['class' => $classes]) }}>
+<a {{ $attributes->merge([
+        'class' => $class
+    ]) }}>
+
     {{ $slot }}
 </a>

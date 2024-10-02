@@ -1,63 +1,96 @@
 <x-dashboard-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Produtos da Loja
-        </h2>
-    </x-slot>
-    <div class="py-12 w-full">
-        <div class="p-2 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="grid gap-8 w-full h-fit lg:w-2/3 2xl:w-1/3">
+        <x-text-heading>
+            Produtos
+        </x-text-heading>
 
-            <x-primary-button>
-                <a href="{{ route('artisan.products.create') }}">Adicionar Produto</a>
-            </x-primary-button>
+        <section class="flex justify-between">
+            <button class="text-gray-dark px-4 py-2 border-2 rounded-lg border-gray-regular">
+                Filtrar
+                <i class="text-gray-regular ml-1 fa-solid fa-chevron-down"></i>
+            </button>
+            <x-button-secondary class="w-fit" href="{{ route('artisan.products.create') }}"
+                                :color="'secondary'">
+                Adicionar Produto
+                <i class="text-sm fa-solid fa-plus"></i>
+            </x-button-secondary>
+        </section>
 
-            @if($products->isNotEmpty())
-                <div class="mt-4">
+
+        @if($products->isEmpty()) <!-- SEM PRODUTOS -->
+            <div class="flex flex-col items-center gap-4">
+                <img class="w-1/2 md:w-1/3"
+                     src="\img\assets\price-tag.png"
+                     alt="ilustração de sacola" />
+                <p class="text-gray-dark">
+                    Sua loja ainda não tem nenhum produto.
+                </p>
+            </div>
+        @else
+            <section>
+                <div>
                     {{ $products->links() }}
                 </div>
 
-                @foreach($products as $product)
-                    <ul class="mt-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="flex justify-between p-6 text-gray-900 dark:text-gray-100">
-                            <div class="flex items-center">
-                                <li>
-                                    <img style="width:60px;" src="/img/products/{{ $product->image }}" alt="Imagem de {{ $product->name }}"/>
-                                </li>
-                                <li class="ml-4">
-                                    {{ $product->name }}
-                                </li>
-                            </div>
-                            <div class="flex items-center">
-                                <li>
-                                    <x-nav-link href="{{ route('products.show', $product) }}">
-                                        Ver Detalhes
-                                    </x-nav-link>
-                                </li>
-                                <li class="ml-4">
-                                    <x-secondary-button>
-                                        <a href="{{ route('artisan.products.edit', $product->id) }}">
-                                            Editar
-                                        </a>
-                                    </x-secondary-button>
-                                </li>
-                            </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="bg-gray-light text-gray-dark uppercase text-sm">
+                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                Imagem
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Item
+                            </th>
+                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                Categoria
+                            </th>
+                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                Preço
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Remover
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Editar
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($products as $product)
+                        <tr class="border-b border-gray-light">
+                            <td class="p-6 hidden md:table-cell">
+                                <x-image :width="10" :src="$product->getImagePath()" />
+                            </td>
+                            <td class="p-6 truncate">
+                                {{ $product->name }}
+                            </td>
+                            <td class="p-6 hidden md:table-cell">
+                                <span class="text-sm truncate bg-gray-light px-4 py-2 rounded-2xl">
+                                    {{ $product->category->description }}
+                                </span>
+                            </td>
+                            <td class="p-6 hidden md:table-cell">
+                                {{ $product->formatPrice() }}
+                            </td>
+                            <td class="p-6 text-center">
+                                @include('artisan.products.partials.delete-product-form')
+                            </td>
+                            <td class="p-6 text-center">
+                                <a class="text-accent-dark text-2xl hover:text-accent-darker transition duration-300"
+                                   href="{{ route('artisan.products.edit', $product->id) }}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
-                        </div>
-                    </ul>
-                @endforeach
-
-                <div class="mt-4">
+                <div>
                     {{ $products->links() }}
                 </div>
-            @else
-                <div class="mt-4 bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        Nenhum produto cadastrado ainda
-                    </div>
-                </div>
-            @endif
 
-        </div>
+            </section>
+        @endif
     </div>
-
 </x-dashboard-layout>

@@ -21,7 +21,7 @@
                     :active="request()->routeIs('cart')">
             Sacola de Compras
             @if(\Cart::content()->isNotEmpty())
-                <span class="text-xs font-bold bg-status-warning text-neutral-black h-4 w-4 flex items-center justify-center rounded-full">
+                <span class="text-xs font-bold bg-warning-regular text-neutral-black h-4 w-4 flex items-center justify-center rounded-full">
                     {{ \Cart::content()->count() }}
                 </span>
             @endif
@@ -58,9 +58,9 @@
                     :active="request()->routeIs('cart')">
             Sacola
             @if(\Cart::content()->isNotEmpty())
-                <span class="text-xs ml-2 font-extrabold shadow-md bg-secondary-300 h-4 w-4 flex items-center justify-center rounded-full">
-                        {{ \Cart::content()->count() }}
-                    </span>
+                <span class="text-xs font-bold bg-warning-regular text-neutral-black h-4 w-4 flex items-center justify-center rounded-full">
+                    {{ \Cart::content()->count() }}
+                </span>
             @endif
         </x-nav-link>
 

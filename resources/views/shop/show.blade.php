@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
         <section class="flex gap-4 items-center">
             <div class="p-8 rounded-full bg-gray-200">
                 <!-- Shop Image -->
@@ -51,9 +51,7 @@
                     @foreach($products as $product)
                         <li id="product-card" class="grid gap-2">
                             <a class="hover:-translate-y-1 transition duration-150" href="{{ route('products.show', $product->id) }}">
-                                <img class="rounded-lg"
-                                     src="/img/products/{{ $product->image }}"
-                                     alt="Imagem de {{ $product->name }}"/>
+                                <x-image :src="$product->getImagePath()" />
                             </a>
                             <a class="truncate underline text-gray-dark hover:text-neutral-black transition duration-150"
                                href="{{ route('products.show', $product->id) }}">

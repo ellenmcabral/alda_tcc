@@ -4,38 +4,38 @@
     Excluir Conta
 </x-button-danger>
 
-<x-modal :maxWidth="'sm'" name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
+<x-modal :maxWidth="'sm'"
+         name="confirm-user-deletion"
+         :show="$errors->userDeletion->isNotEmpty()" focusable>
     <form class="grid gap-4 p-6"
           method="post"
           action="{{ route('profile.destroy') }}">
         @csrf
         @method('delete')
 
-        <h2 class="text-2xl font-bold text-neutral-black">
+        <h3 class="text-2xl font-bold text-neutral-black">
             Tem certeza que deseja excluir sua conta?
-        </h2>
+        </h3>
 
         <p class="text-gray-dark">
-            Ao excluir sua conta, todos os seus dados serão perdidos permanentemente.
+            Todos os seus dados serão perdidos permanentemente.
         </p>
 
-        <div>
-            <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-            <x-input-text
-                id="password"
-                name="password"
-                type="password"
-                class="w-full"
-                placeholder="Digite sua senha para confirmar" />
-            <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
-        </div>
+        <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
+        <x-input-text
+            id="password"
+            name="password"
+            type="password"
+            class="w-full"
+            placeholder="Digite sua senha para confirmar" />
+        <x-input-error :messages="$errors->userDeletion->get('password')" />
 
-        <div class="flex justify-between gap-8">
-            <button class="w-full uppercase text-gray-dark border-2 px-4 py-2 rounded-lg border-gray-regular" x-on:click="$dispatch('close')">
+        <div class="flex justify-between mt-4">
+            <x-button-outlined :color="'gray'" x-on:click="$dispatch('close')">
                 Cancelar
-            </button>
+            </x-button-outlined>
 
-            <x-button-danger class="w-full">
+            <x-button-danger>
                 Sim, excluir conta
             </x-button-danger>
         </div>

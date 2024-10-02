@@ -14,7 +14,7 @@ switch($type) {
         break;
 }
 
-    $classes = 'w-full flex justify-between items-start gap-4 absolute top-5 p-4 border border-1 rounded text-neutral-black ' . $type;
+    $classes = 'z-50 w-full lg:w-2/3 top-0 lg:top-6 lg:py-4 flex justify-between items-start gap-4 absolute py-8 px-4 border border-1 rounded text-neutral-black ' . $type;
 
 @endphp
 

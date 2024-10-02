@@ -17,59 +17,36 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-col h-screen font-sans antialiased">
+    <body class="flex flex-col font-sans h-screen bg-neutral-white text-neutral-black">
         <!-- Page Header -->
-        <header class="flex justify-between items-center p-6 bg-secondary-300 mb-8">
+        <header class="flex justify-between items-center py-8 px-4 sm:px-8 bg-neutral-white border-b-2 border-secondary-regular">
             <div class="flex">
                 @include('layouts.navigation.dropdown.dashboard')
 
-                <x-application-logo />
+                <x-application-logo :color="'secondary'" />
             </div>
 
-            <div class="flex items-center">
-
-                <x-link-button class="h-8" :background="'primary'" :href="route('home')">
+            <div class="flex gap-6 items-center">
+                <x-button-outlined :color="'secondary'"
+                                   :href="route('home')">
                     Sair do Painel
-                </x-link-button>
+                </x-button-outlined>
 
                 @include('layouts.navigation.dashboard')
             </div>
         </header>
 
-        <!-- Session Status -->
-        @if(session('status') !== null)
-            <div class="mx-4 relative">
-                @if(session('status') === 'profile-updated')
-                    <x-status-message :type="'success'">
-                        Informações da loja alteradas com sucesso.
-                    </x-status-message>
-                @endif
-            </div>
-        @endif
-
-        <!-- Breadcrumbs -->
-        @isset($breadcrumbs)
-            <nav class="mx-4 mb-8">
-                {{ $breadcrumbs }}
-            </nav>
-        @endisset
-
         <!-- Page Content -->
-        <main class="flex-grow mx-4">
-
-            <!-- Page Heading -->
-            @isset($heading)
-                <h1 class="font-extrabold text-4xl text-gray-800 mb-8">
-                    {{ $heading }}
-                </h1>
-            @endisset
+        <main class="flex-grow mx-4 mt-8 flex justify-center">
+            <!-- Session Status -->
+            @if(session('status') !== null)
+                <x-status-message :status="session('status')" :type="session('type')"/>
+            @endif
 
             {{ $slot }}
         </main>
 
         <!-- Page Footer -->
-        <footer class="static bottom-0 bg-primary-700 p-16 flex justify-center items-center mt-32">
-            2024 &#169; Alda
-        </footer>
+        @include('layouts.app.footer')
     </body>
 </html>

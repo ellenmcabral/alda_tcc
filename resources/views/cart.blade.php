@@ -49,8 +49,10 @@
                     <li>
                         <div class="flex justify-between items-center gap-2">
                             <div class="flex items-center gap-2">
-                                <img class="w-24 rounded" src="/img/products/{{ $item->options->image }}"
-                                     alt="Imagem de {{ $item->name }}"/>
+
+                                <x-image :width="16"
+                                         src="/img/products/{{ $item->options->image }}" />
+
                                 <p class="truncate" href="{{ route('products.show', $item->id) }}">
                                     {{ $item->name }}
                                 </p>
@@ -60,14 +62,14 @@
                             </p>
                         </div>
 
-                        <div class="flex justify-between items-center">
+                        <div class="mt-4 flex justify-between items-center">
                             <form action="{{ route('cart.remove', $item->rowId) }}"
                                   method="post">
                                 @csrf
                                 @method('delete')
 
                                 <button class="text-gray-dark hover:text-neutral-black transition duration-300">
-                                    <i class="ml-2 fa-solid text-sm fa-trash text-gray-regular"></i>
+                                    <i class="mr-2 fa-solid text-sm fa-trash text-gray-regular"></i>
                                     <span class="underline">
                                         Remover
                                     </span>

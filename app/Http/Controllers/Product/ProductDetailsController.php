@@ -15,7 +15,7 @@ class ProductDetailsController extends Controller
 {
     public function show($id): View
     {
-        $product = Product::find($id)->firstOrFail();
+        $product = Product::where('id', $id)->firstOrFail();
 
        return view('products.show', [
            'product' => $product,

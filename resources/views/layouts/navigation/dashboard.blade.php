@@ -1,52 +1,63 @@
-<nav class="flex items-center hidden sm:flex sm:justify-between sm:ml-8">
+<nav class="items-center gap-8 hidden 2xl:flex">
+
     <!-- Navigation Links -->
 
-    <x-nav-link
-        :href="route('home')"
-        :active="request()->routeIs('artisan.index')">
+    <x-nav-link :href="route('artisan.index')"
+                :color="'secondary'"
+                :active="request()->routeIs('artisan.index')">
         Início
     </x-nav-link>
 
     @role('artisan')
-        <x-nav-link class="ml-8"
-                    :href="route('profile.edit')"
-                    :active="request()->routeIs('profile.edit')">
+        <x-nav-link :href="route('shop.show', Auth::user()->shop->url)"
+                    :color="'secondary'">
             Minha Loja
         </x-nav-link>
 
-        <x-nav-link class="ml-8"
-                    :href="route('commissions.index')"
-                    :active="request()->routeIs('commissions.index')">
+        <x-nav-link :href="route('artisan.products.index')"
+                    :color="'secondary'"
+                    :active="request()->routeIs('artisan.products.index')">
             Produtos
         </x-nav-link>
 
-        <x-nav-link class="ml-8"
-                    :href="route('cart')"
-                    :active="request()->routeIs('cart')">
+        <x-nav-link :href="route('artisan.commissions.index')"
+                    :color="'secondary'"
+                    :active="request()->routeIs('artisan.commissions.index')">
             Encomendas
         </x-nav-link>
 
+        <x-nav-link :href="route('artisan.shop.settings')"
+                    :color="'secondary'"
+                    :active="request()->routeIs('artisan.shop.settings')">
+            Configurações
+        </x-nav-link>
+
         <!-- Authentication -->
-        <form class="flex items-center ml-8" method="POST" action="{{ route('logout') }}">
+        <form class="flex items-center"
+              method="POST"
+              action="{{ route('logout') }}">
             @csrf
 
-            <x-nav-link class="h-full" :href="route('logout')"
+            <x-nav-link :href="route('logout')"
+                        :color="'secondary'"
                         onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                {{ __('Log Out') }}
+                <i class="fa-lg fa-solid fa-right-from-bracket"></i>
             </x-nav-link>
         </form>
     @else <!-- Admin Links -->
         <x-nav-link
             :href="route('login')"
+            :color="'secondary'"
             :active="request()->routeIs('login')">
-            Entrar
+            Usuários
         </x-nav-link>
 
         <x-nav-link
             :href="route('register')"
+            :color="'secondary'"
             :active="request()->routeIs('register')">
-            Cadastrar
+            Permissões
         </x-nav-link>
     @endrole
 </nav>
