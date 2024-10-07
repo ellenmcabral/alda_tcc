@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('profile.password.edit') }}
         </div>
@@ -43,20 +43,18 @@
                 <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
             </div>
 
-            <div class="flex items-center gap-4">
-                <x-button class="w-full">
-                    {{ __('Save') }}
-                </x-button>
+            <x-slot:button>
+                Salvar
+            </x-slot:button>
 
-                @if (session('status') === 'password-updated')
-                    <p x-data="{ show: true }"
-                       x-show="show"
-                       x-transition
-                       x-init="setTimeout(() => show = false, 2000)"
-                       class="text-sm text-gray-600"
-                    >{{ __('Saved.') }}</p>
-                @endif
-            </div>
+            <!-- @if (session('status') === 'password-updated')
+                <p x-data="{ show: true }"
+                   x-show="show"
+                   x-transition
+                   x-init="setTimeout(() => show = false, 2000)"
+                   class="text-sm text-gray-600"
+                >{{ __('Saved.') }}</p>
+            @endif -->
         </x-form>
     </div>
 </x-app-layout>

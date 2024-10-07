@@ -4,7 +4,8 @@
             Modificar Senha
         </x-text-heading>
 
-        <x-form action="{{ route('password.store') }}">
+        <x-form :width="'full'"
+                action="{{ route('password.store') }}">
             <!-- Password Reset Token -->
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 

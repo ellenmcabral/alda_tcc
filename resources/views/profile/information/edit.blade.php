@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('profile.information.edit') }}
         </div>
@@ -57,11 +57,9 @@
                 @endif
             </div>
 
-            <div class="flex items-center gap-4">
-                <x-button class="w-full">
-                    {{ __('Save') }}
-                </x-button>
-            </div>
+            <x-slot:button>
+                Salvar
+            </x-slot:button>
         </x-form>
     </div>
 </x-app-layout>

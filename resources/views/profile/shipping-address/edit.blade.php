@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="w-full h-fit grid gap-8 lg:w-1/2">
+    <div class="w-full h-fit grid gap-8 md:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('shipping-address.edit', $address) }}
         </div>
@@ -24,10 +24,9 @@
                                :value="'Este é meu endereço padrão'" />
             </div>
 
-            <x-button class="w-full">
+            <x-slot:button>
                 Salvar
-            </x-button>
+            </x-slot:button>
         </x-form>
-
     </div>
 </x-app-layout>

@@ -1,8 +1,8 @@
-<x-button-danger class="w-fit"
+<x-link-secondary class="cursor-pointer w-fit"
                  x-data=""
                  x-on:click.prevent="$dispatch('open-modal', 'confirm-shipping-address-deletion-{{ $address->id  }}')">
-    Excluir Endereço
-</x-button-danger>
+    Excluir
+</x-link-secondary>
 
 <x-modal :maxWidth="'sm'"
          name="confirm-shipping-address-deletion-{{ $address->id  }}"

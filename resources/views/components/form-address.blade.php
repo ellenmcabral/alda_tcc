@@ -1,4 +1,6 @@
-<form class="grid gap-8"  method="post" action="{{ $action }}">
+<form class="flex flex-col gap-8"
+      method="post"
+      action="{{ $action }}">
     @csrf
 
     @isset($update)
@@ -20,7 +22,7 @@
         </div>
     @endisset
 
-    <x-button class="w-full">
+    <x-button class="self-end w-full md:w-64">
         Salvar
     </x-button>
 </form>

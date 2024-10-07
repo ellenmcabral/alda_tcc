@@ -4,7 +4,8 @@
             Verificar E-mail
         </x-text-heading>
 
-        <x-form action="{{ route('verification.send') }}">
+        <x-form :width="'full'"
+                action="{{ route('verification.send') }}">
             <p>
                 Enviamos um e-mail de verificação. Verifique sua caixa de entrada. Se não chegou é só solicitar outro.
             </p>

@@ -1,23 +1,21 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-2/3">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         <x-text-heading>
             Meus Pedidos
         </x-text-heading>
 
         @if($commissions->isEmpty()) <!-- SEM PEDIDOS -->
-
-            <div class="flex flex-col items-center gap-4">
+            <section class="flex flex-col gap-8 items-center">
                 <img class="w-48"
                      src="img\assets\empty-orders.png"
                      alt="ilustração de caixa vazia" />
                 <p class="text-gray-dark">
                     Nenhum pedido por aqui ainda.
                 </p>
-            </div>
-            <hr/>
-            <x-link href="{{ route('home') }}">
-                Ir para a página inicial
-            </x-link>
+                <x-link class="text-center" href="{{ route('home') }}">
+                    Ir para a página inicial
+                </x-link>
+            </section>
         @else
             <section class="w-full grid gap-8 xl:grid-cols-2 2xl:grid-cols-3">
                 @foreach($commissions as $commission)

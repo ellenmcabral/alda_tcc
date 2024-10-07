@@ -4,7 +4,8 @@
             Criar Conta
         </x-text-heading>
 
-        <x-form action="{{ route('register') }}">
+        <x-form :width="'full'"
+                action="{{ route('register') }}">
             <!-- Name -->
             <div>
                 <x-input-label for="name" :value="'Nome'"/>
@@ -69,9 +70,9 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
             </div>
 
-            <x-button class="w-full">
+            <x-slot:button>
                 Cadastrar
-            </x-button>
+            </x-slot:button>
 
             <x-link class="text-center"
                     href="{{ route('login') }}">

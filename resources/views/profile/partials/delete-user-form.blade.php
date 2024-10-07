@@ -1,4 +1,4 @@
-<x-button-danger
+<x-button-danger class="uppercase"
     x-data=""
     x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">
     Excluir Conta

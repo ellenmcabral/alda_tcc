@@ -4,7 +4,8 @@
             Fazer Login
         </x-text-heading>
 
-        <x-form action="{{ route('login') }}">
+        <x-form :width="'full'"
+                action="{{ route('login') }}">
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
@@ -46,9 +47,9 @@
                 </label>
             </div>
 
-            <x-button class="w-full">
-                {{ __('Log in') }}
-            </x-button>
+            <x-slot:button>
+                Entrar
+            </x-slot:button>
 
             <x-link class="text-center"
                     href="{{ route('register') }}">
