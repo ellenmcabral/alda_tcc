@@ -23,7 +23,7 @@
         </p>
         <div class="grid @if($shippingAddresses->count() > 1) grid-cols-2 @endif gap-4">
             @foreach($shippingAddresses as $address)
-                <section class="flex flex-col gap-4 border border-1 rounded-lg p-4">
+                <section class="w-full md:w-fit flex flex-col gap-4 border border-1 rounded-lg p-4">
                     <div class="flex items-center">
                         <input type="radio"
                                class="focus:ring-accent-regular hover:checked:bg-accent-dark checked:bg-accent-regular checked:focus:bg-accent-regular accent-accent-regular"

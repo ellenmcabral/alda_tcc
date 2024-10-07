@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="w-full h-fit grid gap-10 lg:w-2/3">
+    <div class="w-full h-fit grid gap-10 md:w-2/3">
         <section class="grid gap-2">
             <x-text-heading>
                 Painel do Artesão
@@ -45,10 +45,20 @@
                               :text="'Edite os dados da sua loja'" />
         </section>
 
-        <section>
+
+        @if(Auth::user()->shop->commissions()->count() > 1)
             <x-text-heading>
                 Últimas encomendas
             </x-text-heading>
-        </section>
+            <section>
+                <ul>
+                    @foreach(Auth::user()->shop->commissions() as $commission)
+                        <li>
+                            {{ $commission->id }}
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
     </div>
 </x-dashboard-layout>

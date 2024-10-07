@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <x-text-heading>
             Modificar Senha
         </x-text-heading>
@@ -11,7 +11,7 @@
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="'E-mail'" />
-                <x-text-input id="email"
+                <x-input-text id="email"
                               class="w-full"
                               type="email"
                               name="email"
@@ -24,7 +24,7 @@
             <!-- Password -->
             <div>
                 <x-input-label for="password" :value="__('Password')" />
-                <x-text-input id="password"
+                <x-input-text id="password"
                               class="w-full"
                               type="password"
                               name="password"
@@ -36,7 +36,7 @@
             <!-- Confirm Password -->
             <div>
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                <x-text-input id="password_confirmation"
+                <x-input-text id="password_confirmation"
                               class="w-full"
                               type="password"
                               name="password_confirmation"

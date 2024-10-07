@@ -1,14 +1,16 @@
 <x-dashboard-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-2/3 2xl:w-1/3">
+    <div class="w-full h-fit grid gap-8 md:w-2/3">
         <x-text-heading>
             Produtos
         </x-text-heading>
 
-        <section class="flex justify-between">
-            <button class="text-gray-dark px-4 py-2 border-2 rounded-lg border-gray-regular">
-                Filtrar
-                <i class="text-gray-regular ml-1 fa-solid fa-chevron-down"></i>
-            </button>
+        <section class="flex w-full @if($products->isNotEmpty()) justify-between @else justify-end @endif">
+            @if($products->isNotEmpty())
+                <button class="text-gray-dark px-4 py-2 border-2 rounded-lg border-gray-regular">
+                    Filtrar
+                    <i class="text-gray-regular ml-1 fa-solid fa-chevron-down"></i>
+                </button>
+            @endif
             <x-button-secondary class="w-fit" href="{{ route('artisan.products.create') }}"
                                 :color="'secondary'">
                 Adicionar Produto
@@ -18,14 +20,20 @@
 
 
         @if($products->isEmpty()) <!-- SEM PRODUTOS -->
-            <div class="flex flex-col items-center gap-4">
-                <img class="w-1/2 md:w-1/3"
+            <div class="flex flex-col items-center gap-8">
+                <img class="w-48"
                      src="\img\assets\price-tag.png"
                      alt="ilustração de sacola" />
                 <p class="text-gray-dark">
                     Sua loja ainda não tem nenhum produto.
                 </p>
             </div>
+
+            <hr/>
+
+            <x-link href="{{ route('artisan.index') }}">
+                Ir para a página inicial
+            </x-link>
         @else
             <section>
                 <div>

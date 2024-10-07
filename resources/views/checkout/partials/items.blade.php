@@ -21,7 +21,7 @@
                 <th class="px-6 py-3">
                     Preço
                 </th>
-                <th class="px-6 py-3 text-right">
+                <th class="px-6 py-3 text-right hidden md:table-cell">
                     Subtotal
                 </th>
             </tr>
@@ -29,7 +29,7 @@
         <tbody>
             @foreach($items as $item)
                 <tr class="border-b border-gray-light">
-                    <td class="p-6 text-left">
+                    <td class="p-6 text-left hidden md:table-cell">
                         <x-image :width="10" src="/img/products/{{ $item->options->image }}" />
                     </td>
                     <th scope="row" class="p-6 font-normal text-left truncate">
@@ -43,7 +43,7 @@
                     <td class="p-6 font-normal text-center">
                         R$ {{ number_format($item->price, 2, ',', '.') }}
                     </td>
-                    <td class="p-6 font-bold text-right text-accent-darker">
+                    <td class="p-6 font-bold text-right text-accent-darker hidden md:table-cell">
                         R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
                     </td>
                 </tr>

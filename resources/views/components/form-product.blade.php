@@ -6,7 +6,7 @@
     <div class="grid gap-10 md:flex">
         @isset($method)
             <img src="{{ $product->getImagePath() }}"
-                 class="w-full md:w-1/4"
+                 class="w-full md:w-1/4 aspect-square object-cover"
                  alt="Imagem de {{ $product->name }}"/>
         @endisset
         <div class="grid gap-10 h-fit w-full">

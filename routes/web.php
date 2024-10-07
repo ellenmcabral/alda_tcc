@@ -56,7 +56,7 @@ Route::get('/products/{id}', [ProductDetailsController::class, 'show'])->name('p
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', function () {
-        $categories = \App\Models\Category::all()->take(10);
+        $categories = \App\Models\Category::all()->take(12);
         $products = \App\Models\Product::orderBy('id', 'desc')->take(3)->get();
 
         return view('home', [

@@ -4,11 +4,12 @@
             Ativar Loja
         </x-text-heading>
 
-        <img class="w-fit md:w-1/2 self-center" src="/img/assets/cross-stitch.png" />
+        <img class="w-48 self-center"
+             src="/img/assets/cross-stitch.png" />
 
-        <x-text-paragraph>
+        <p class="text-gray-dark">
             Preencha o seu CPF ou CNPJ para ter acesso ao <span class="font-bold">Painel de Controle do Artesão</span>.
-        </x-text-paragraph>
+        </p>
         <x-form x-data="{ option : '{{ old('option') ? old('option') : 'cpf' }}' }"
               action="{{ route('shop.activate', $shop->id) }}">
 

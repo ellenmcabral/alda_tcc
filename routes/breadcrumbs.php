@@ -76,7 +76,7 @@ Breadcrumbs::for('shop.show', function ($trail, Shop $shop) {
 });
 
 Breadcrumbs::for('categories.index', function ($trail) {
-    $trail->push('Categorias de Artesanato', route('categories.index'));
+    $trail->push('Categorias', route('categories.index'));
 });
 
 Breadcrumbs::for('categories.products.index', function ($trail, $category) {
@@ -84,8 +84,8 @@ Breadcrumbs::for('categories.products.index', function ($trail, $category) {
     $trail->push($category->description, route('categories.products.index', $category));
 });
 
-Breadcrumbs::for('products.show', function ($trail, $shop, $product) {
-    $trail->parent('shop.show', $shop);
+Breadcrumbs::for('products.show', function ($trail, $category, $product) {
+    $trail->parent('categories.products.index', $category);
     $trail->push($product->name, route('products.show', $product));
 });
 

@@ -33,7 +33,7 @@
         </x-nav-link>
 
         <!-- Authentication -->
-        <form class="flex items-center" method="POST" action="{{ route('logout') }}">
+        <form class="flex items-center " method="POST" action="{{ route('logout') }}">
             @csrf
 
             <x-nav-link :href="route('logout')"
@@ -56,7 +56,7 @@
 
         <x-nav-link :href="route('cart')"
                     :active="request()->routeIs('cart')">
-            Sacola
+            Sacola de Compras
             @if(\Cart::content()->isNotEmpty())
                 <span class="text-xs font-bold bg-warning-regular text-neutral-black h-4 w-4 flex items-center justify-center rounded-full">
                     {{ \Cart::content()->count() }}

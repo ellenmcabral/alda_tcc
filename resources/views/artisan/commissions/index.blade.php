@@ -1,12 +1,12 @@
 <x-dashboard-layout>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 lg:w-2/3">
+    <div class="w-full h-fit grid gap-8 md:w-2/3">
         <x-text-heading>
-            Encomendas da Loja
+            Encomendas
         </x-text-heading>
 
         @if($shopCommissions->isEmpty()) <!-- SEM ENCOMENDAS -->
-            <div class="flex flex-col items-center gap-4">
-                <img class="w-1/2 md:w-1/3"
+            <div class="flex flex-col items-center gap-8">
+                <img class="w-48"
                      src="/img/assets/check-list.png"
                      alt="ilustração de caixa vazia" />
                 <p class="text-gray-dark">
@@ -15,6 +15,7 @@
             </div>
 
             <hr/>
+
             <x-link href="{{ route('artisan.index') }}">
                 Ir para a página inicial
             </x-link>

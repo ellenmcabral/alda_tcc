@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <x-text-heading>
             Recuperar Senha
         </x-text-heading>
@@ -26,9 +26,8 @@
                 Enviar
             </x-button>
 
-            <x-link class="text-center"
-                    href="{{ route('login') }}">
-                Voltar
+            <x-link href="{{ route('login') }}">
+                Voltar para a página de login
             </x-link>
         </x-form>
     </div>

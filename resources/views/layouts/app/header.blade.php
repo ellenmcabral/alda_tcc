@@ -1,11 +1,11 @@
 <header class="flex justify-between items-center py-8 px-4 sm:px-8 bg-secondary-regular">
-    <div class="flex">
+    <div class="flex md:w-1/2 2xl:w-1/3">
         @include('layouts.navigation.dropdown.app')
 
         <x-application-logo />
 
         <!-- Search Bar -->
-        <search class="ml-4 hidden lg:inline-block">
+        <search class="ml-4 hidden lg:inline-block md:w-full">
             <x-form-search/>
         </search>
     </div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+    <div class="flex flex-col gap-8 w-full h-fit lg:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('commissions.show', $commission->id) }}
         </div>
@@ -10,14 +10,19 @@
             {{ $commission->id }}
         </x-text-heading>
 
-        <p class="text-lg">
-            Encomenda para a loja
-            <x-link href="{{ route('shop.show', $commission->shop->url) }}">
-                {{ $commission->shop->name }}
-            </x-link>
-        </p>
-
         <section class="flex justify-between">
+            <p class="text-lg">
+                Encomenda para a loja
+                <x-link href="{{ route('shop.show', $commission->shop->url) }}">
+                    {{ $commission->shop->name }}
+                </x-link>
+            </p>
+            <p class="text-gray-dark">
+                Feita em {{ date('d/m/Y', strtotime($commission->created_at)) }}
+            </p>
+        </section>
+
+        <section class="flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="rounded-full h-3 w-3 @if($commission->status->id >= 1 and $commission->status->id < 4)
                                                   bg-warning-regular
@@ -36,24 +41,17 @@
                     {{ $commission->status->description }}
                 </p>
             </div>
-            <p class="text-gray-dark">
-                Feita em {{ date('d/m/Y', strtotime($commission->created_at)) }}
-            </p>
-        </section>
 
-        <hr/>
+            <x-button-secondary href="#">
+                Realizar Pagamento <i class="fa-solid fa-chevron-right"></i>
+            </x-button-secondary>
+        </section>
 
         @include('commissions.partials.items-info')
 
-        <hr/>
-
         @include('commissions.partials.shipping-address-info')
 
-        <hr/>
-
         @include('commissions.partials.payment-info')
-
-        <hr/>
 
         <x-text-heading class="text-secondary-regular flex justify-between">
             Total
@@ -62,12 +60,6 @@
                 </span>
         </x-text-heading>
 
-        <div class="flex justify-between gap-4">
-            @include('commissions.partials.delete-commission')
-
-            <x-button class="w-1/2">
-                Realizar Pagamento
-            </x-button>
-        </div>
+        @include('commissions.partials.delete-commission')
     </div>
 </x-app-layout>

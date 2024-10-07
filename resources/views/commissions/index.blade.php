@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 lg:w-2/3">
+    <div class="grid gap-8 w-full h-fit lg:w-2/3">
         <x-text-heading>
             Meus Pedidos
         </x-text-heading>
@@ -7,7 +7,7 @@
         @if($commissions->isEmpty()) <!-- SEM PEDIDOS -->
 
             <div class="flex flex-col items-center gap-4">
-                <img class="w-1/2 md:w-1/3"
+                <img class="w-48"
                      src="img\assets\empty-orders.png"
                      alt="ilustração de caixa vazia" />
                 <p class="text-gray-dark">
@@ -19,11 +19,11 @@
                 Ir para a página inicial
             </x-link>
         @else
-            <section class="w-full grid gap-8 xl:grid-cols-2">
+            <section class="w-full grid gap-8 xl:grid-cols-2 2xl:grid-cols-3">
                 @foreach($commissions as $commission)
                     <div class="rounded-lg p-4 border border-gray-200 grid gap-4">
                         <div class="flex justify-between">
-                            <p class="px-3 py-1 w-fit rounded-full text-gray-dark @if($commission->status->id >= 1 and $commission->status->id < 4)
+                            <p class="text-sm px-3 py-1 w-fit rounded-full text-gray-dark @if($commission->status->id >= 1 and $commission->status->id < 4)
                                           bg-warning-regular
                                           @elseif($commission->status->id == 5)
                                           bg-success-regular
@@ -32,12 +32,6 @@
                                           @endif ">
                                 {{ $commission->status->description }}
                             </p>
-                            <div class="flex items-center">
-                                <x-link href="{{ route('commissions.show', $commission->id) }}">
-                                    Ver detalhes <i class="fa-solid text-sm fa-chevron-right text-secondary-regular"></i>
-                                </x-link>
-
-                            </div>
                         </div>
                         <hr/>
                         <table class="w-full text-left">
@@ -62,6 +56,11 @@
                                 <td>{{ $commission->formatPrice() }}</td>
                             </tr>
                         </table>
+                        <div class="flex justify-end">
+                            <x-link href="{{ route('commissions.show', $commission->id) }}">
+                                Ver detalhes <i class="fa-solid text-sm fa-chevron-right text-secondary-regular"></i>
+                            </x-link>
+                        </div>
                     </div>
                 @endforeach
             </section>

@@ -54,4 +54,9 @@ class Shop extends Model
     {
         return '@' . $this->url;
     }
+
+    public function formatDate(): string
+    {
+        return date('d/m/Y', strtotime($this->created_at));
+    }
 }

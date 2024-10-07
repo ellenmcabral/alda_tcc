@@ -23,21 +23,22 @@
 
     <!-- Page Content -->
     <main class="flex-grow">
-        <section class=" bg-secondary-regular flex items-center justify-center sm:h-screen">
+        <section id="shop"
+                 class="py-16 bg-secondary-regular flex items-center justify-center lg:h-screen">
             <div class="sm:w-2/3 mx-4 my-16 flex flex-col items-center gap-8 lg:flex-row-reverse lg:justify-center">
                 <img class="md:w-1/2" src="/img/assets/shop.png"
                      alt="imagem de uma loja ilustrada" />
 
-                <div class="grid gap-4">
+                <div class="grid gap-8">
                     <h1 class="font-extrabold text-4xl text-neutral-white">Uma plataforma acolhedora para artesãos</h1>
                     <p class="text-neutral-white">Adicione produtos, organize encomendas e divulgue a sua loja com a Alda</p>
-                    <div class="flex flex-col items-center xl:flex-row gap-4">
-                        <a class="w-full xl:w-fit uppercase text-center py-2 px-4 font-bold text-secondary-regular bg-neutral-white rounded-lg hover:bg-gray-light transition duration-300"
+                    <div class="flex flex-col items-center 2xl:flex-row gap-4">
+                        <a class="w-full 2xl:w-fit uppercase text-center py-2 px-4 font-bold text-secondary-regular bg-neutral-white rounded-lg hover:bg-gray-light transition duration-300"
                            href="{{ route('register') }}">
                             Começar agora
                             <i class="ml-2 fa-solid fa-chevron-right"></i>
                         </a>
-                        <a class="w-full xl:w-fit uppercase text-center py-2 px-4 font-bold text-neutral-white border-solid border-2 border-neutral-white rounded-lg hover:bg-gray-light hover:bg-opacity-10 transition duration-300"
+                        <a class="w-full 2xl:w-fit uppercase text-center py-2 px-4 font-bold text-neutral-white border-solid border-2 border-neutral-white rounded-lg hover:bg-gray-light hover:bg-opacity-10 transition duration-300"
                            href="{{ route('login') }}">
                             Já tenho uma conta
                         </a>
@@ -47,7 +48,8 @@
         </section>
 
         <!-- Cards -->
-        <section class="py-16 md:h-screen bg-gray-light flex items-center justify-center px-4 lg:px-16">
+        <section id="benefits"
+                 class="py-16 bg-gray-light flex items-center justify-center px-4 lg:px-16 lg:h-screen">
             <div class="grid gap-16 md:gap-8 md:grid-cols-3">
                 <div class="flex flex-col justify-between p-4 bg-white rounded-lg shadow-md">
                     <img class="w-1/2"
@@ -89,7 +91,8 @@
         </section>
 
         <!-- Call To Action -->
-        <section class="mx-4 py-16 flex flex-col sm:flex-row sm:h-screen items-center">
+        <section id="cta"
+                 class="mx-4 py-16 flex flex-col sm:flex-row items-center lg:h-screen">
             <img class="h-fit sm:w-1/3 mb-8"
                  src="img/assets/order-placed.png"
                  alt="ilustração de uma loja" />

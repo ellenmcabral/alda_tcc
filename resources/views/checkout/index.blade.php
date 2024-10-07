@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-2/3 2xl:w-1/3">
+    <div class="w-full grid gap-8 lg:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('checkout') }}
         </div>
@@ -35,7 +35,7 @@
                     Total <span>R$ {{ number_format($cart_total, 2, ',', '.') }}</span>
                 </x-text-heading>
 
-                <x-button class="w-full md:w-1/2 md:self-end"
+                <x-button class="w-full md:w-1/2 lg:w-1/3 2xl:w-1/4 md:self-end"
                                   :disabled="$shippingAddresses->isEmpty() ? true : false">
                     Finalizar Encomenda
                 </x-button>

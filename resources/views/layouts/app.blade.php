@@ -27,7 +27,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8 flex justify-center relative">
+        <main class="flex-grow mx-4 mt-10 mb-16 flex justify-center relative">
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>
