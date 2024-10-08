@@ -70,14 +70,14 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
             </div>
 
-            <x-slot:button>
+            <x-button>
                 Cadastrar
-            </x-slot:button>
-
-            <x-link class="text-center"
-                    href="{{ route('login') }}">
-                Já tenho uma conta
-            </x-link>
+            </x-button>
         </x-form>
+
+        <x-link class="text-center"
+                href="{{ route('login') }}">
+            Já tenho uma conta
+        </x-link>
     </div>
 </x-app-layout>

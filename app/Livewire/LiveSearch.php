@@ -11,6 +11,7 @@ class LiveSearch extends Component
     public $search = '';
     public $searchType = '';
     public $category = '';
+    public $shop = '';
     public $filter = '';
     public $sortField = 'name';
     public $sortDirection = 'asc';
@@ -48,6 +49,9 @@ class LiveSearch extends Component
             $results = Product::where('name', 'like', '%' . $this->search . '%');
             if($this->category) {
                 $results = $results->where('category_id', $this->category->id);
+            }
+            if($this->shop) {
+                $results = $results->where('shop_id', $this->shop->id);
             }
         }
         return view('livewire.live-search', [

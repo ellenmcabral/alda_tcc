@@ -4,9 +4,10 @@
             Recuperar Senha
         </x-text-heading>
 
-        <x-form action="{{ route('password.email') }}">
+        <x-form :width="'full'"
+                action="{{ route('password.email') }}">
             <p>
-                {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+                Informe seu endereço de e-mail que enviaremos um link que permitirá definir uma nova senha.
             </p>
 
             <!-- Email Address -->
@@ -22,7 +23,7 @@
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
-            <x-button class="w-full">
+            <x-button>
                 Enviar
             </x-button>
 

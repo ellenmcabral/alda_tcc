@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 w-full lg:w-1/2 xl:w-1/3">
+    <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <x-text-heading>
             Ativar Loja
         </x-text-heading>
@@ -10,9 +10,11 @@
         <p class="text-gray-dark">
             Preencha o seu CPF ou CNPJ para ter acesso ao <span class="font-bold">Painel de Controle do Artesão</span>.
         </p>
-        <x-form x-data="{ option : '{{ old('option') ? old('option') : 'cpf' }}' }"
-              action="{{ route('shop.activate', $shop->id) }}">
-
+        <form class="flex flex-col gap-10 w-full"
+              method="post"
+              x-data="{ option : '{{ old('option') ? old('option') : 'cpf' }}' }"
+              action="{{ route('shop.activate.update') }}">
+            @csrf
             @method('patch')
 
             <div class="flex items-center">
@@ -61,9 +63,9 @@
                 </div>
             </template>
 
-            <x-button>
+            <x-button class="w-full md:w-64 md:self-end">
                 Enviar
             </x-button>
-        </x-form>
+        </form>
     </div>
 </x-app-layout>

@@ -66,16 +66,23 @@ Breadcrumbs::for('commissions.show', function ($trail, $commission) {
     $trail->push('Detalhes do Pedido', route('commissions.show', $commission));
 });
 
-Breadcrumbs::for('shop.index', function ($trail) {
-    $trail->push("Lojas", route('search-results', ['search_type' => 'Lojas', 'search_text' => ' ']));
+Breadcrumbs::for('shop.search', function ($trail) {
+    $trail->parent('home');
+    $trail->push("Lojas", route('search', ['search_type' => 'Lojas', 'search_text' => '']));
 });
 
 Breadcrumbs::for('shop.show', function ($trail, Shop $shop) {
-    $trail->parent('shop.index');
+    $trail->parent('shop.search');
     $trail->push($shop->name, route('shop.show', $shop->url));
 });
 
+Breadcrumbs::for('search.products', function ($trail) {
+    $trail->parent('home');
+    $trail->push('Produtos', route('search', ['search_type' => 'Produtos', 'search_text' => '']));
+});
+
 Breadcrumbs::for('categories.index', function ($trail) {
+    $trail->parent('search.products');
     $trail->push('Categorias', route('categories.index'));
 });
 

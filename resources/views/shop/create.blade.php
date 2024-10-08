@@ -4,14 +4,10 @@
             Criar Loja
         </x-text-heading>
 
-        <h3 class="text-lg font-bold text-secondary-regular">
-            Dê o seu primeiro passo na Alda.
-        </h3>
-
-        <p class="text-gray-dark flex gap-2 p-4 border border-gray-light rounded-lg">
+        <p class="text-gray-dark flex gap-2 p-4 border border-gray-light rounded-lg w-fit">
             <i class="mt-1 text-gray-regular fa-solid fa-circle-info"></i>
             <span>
-                Ao criar uma loja, você terá acesso ao <span class="font-bold">Painel do Artesão</span>. Você poderá:
+                Ao criar uma loja, você terá acesso ao <span class="font-bold">Painel do Artesão</span>.
             </span>
         </p>
 
@@ -20,36 +16,30 @@
                 <span class="w-16 h-16 flex justify-center items-center p-4 rounded-full bg-[#F7EAE9] text-secondary-regular">
                     <i class="text-2xl fa-solid fa-tags"></i>
                 </span>
-                Criar, editar e remover seus produtos.
+                Crie, edite e remova seus produtos.
             </li>
-            <hr/>
+
             <li class="flex gap-4 items-center">
                 <span class="w-16 h-16 flex justify-center items-center p-4 rounded-full bg-[#F7EAE9] text-secondary-regular">
                     <i class="text-2xl fa-solid fa-list-check"></i>
                 </span>
-                Ver uma lista de encomendas da sua loja.
+                Veja uma lista de encomendas da sua loja.
             </li>
-            <hr/>
+
             <li class="flex gap-4 items-center">
                 <span class="w-16 h-16 flex justify-center items-center p-4 rounded-full bg-[#F7EAE9] text-secondary-regular">
                     <i class="text-2xl fa-solid fa-shop"></i>
                 </span>
-                Editar e personalizar a sua loja.
+                Edite e personalize o perfil da sua loja.
             </li>
         </ul>
 
-        <hr/>
+        <h3 class="mt-4 text-lg font-bold text-secondary-regular">
+            Dê o seu primeiro passo na Alda.
+        </h3>
 
-        <div class="grid gap-2">
-            <h3 class="font-bold text-lg text-secondary-regular">
-                Insira o nome e a URL da loja e faça parte!
-            </h3>
-            <p class="text-gray-dark">
-                Sem pressão, pois essas informações poderão ser alteradas depois.
-            </p>
-        </div>
-
-        <x-form action="{{ route('shop.store') }}">
+        <x-form :width="'full'"
+                :action="route('shop.store')">
             <div>
                 <x-input-label for="name" :value="__('Name')" />
                 <x-input-text id="name"
@@ -77,9 +67,9 @@
             </div>
 
 
-            <x-button class="w-full">
+            <x-slot:button>
                 {{ __('Create') }}
-            </x-button>
+            </x-slot:button>
         </x-form>
     </div>
 </x-app-layout>

@@ -14,8 +14,6 @@
                 </p>
             </div>
 
-            <hr/>
-
             <x-link href="{{ route('home') }}">
                 Voltar para a página inicial
             </x-link>

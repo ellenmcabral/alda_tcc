@@ -17,7 +17,7 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-col font-sans h-screen text-neutral-black">
+    <body class="flex flex-col font-sans h-screen text-neutral-black bg-neutral-white">
         <!-- Page Header -->
         @include('layouts.app.header')
 

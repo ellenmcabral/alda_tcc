@@ -1,51 +1,71 @@
-@if($results->isEmpty())
-    <span class="h-40 w-full bg-gray-200"></span>
-    <p class="text-gray-600 text-sm">
-        Nenhum resultado encontrado.
-    </p>
-@else
-    <section class="grid gap-4">
-        {{ $results->links() }}
-
-        <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+<div class="grid gap-8">
+    @if($results->isEmpty())
+        <p class="text-gray-dark">
+            Nenhum resultado foi encontrado.
+        </p>
+    @else
+        <section class="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             @foreach($results as $result)
-                <ul id="product-card" class="grid gap-2">
+                <x-card>
                     @if($searchType == 'Produtos')
-                        <li>
-                            <img class="w-full rounded-lg"
-                                 src="/img/products/{{ $result->image }}"
-                                 alt="Imagem de {{ $result->name }}"/>
-                        </li>
-                    @endif
-
-                    <li>
-                        <h2 class="truncate underline text-gray-900 hover:text-gray-600 transition duration-150">
-                            <a href="{{ route('products.show', $result) }}">
+                        <a class="grid" href="{{ route('products.show', $result->id) }}">
+                            <x-image :src="$result->getImagePath()"
+                                     alt="Imagem do produto {{ $result->name }}" />
+                            <span class="mt-2 line-clamp-2">
                                 {{ $result->name }}
-                            </a>
-                        </h2>
-                    </li>
+                            </span>
+                            <span class="mt-4 font-bold">
+                                {{ $result->formatPrice() }}
+                            </span>
 
-                    @if($searchType == 'Produtos')
-                        <li class="flex justify-between items-center">
-                            <p class="font-bold text-secondary-300">
-                                {{ $result->priceFormat($result->sale_price) }}
-                            </p>
-                            <x-link-button class="h-8 w-fit" href="{{ route('products.show', $result) }}">
-                                Ver Detalhes
-                            </x-link-button>
-                        </li>
+                            @if($result->stock)
+                                <span class="grid text-green-500 text-sm">
+                                    Pronta-entrega
+                                    <span class="text-gray-regular">
+                                        {{ $result->stock }} unidades disponíveis
+                                    </span>
+                                </span>
+                            @else
+                                <span class="text-yellow-500 text-sm">
+                                    Sob encomenda
+                                </span>
+                            @endif
+                        </a>
+
+                        @auth
+                            @if(Auth::user()->hasRole('artisan') && $result->shop_id == Auth::user()->shop->id)
+                                <x-button-secondary class="w-full"
+                                                    href="{{ route('artisan.products.edit', $result->id) }}">
+                                    Editar <i class="fa-solid fa-pen-to-square"></i>
+                                </x-button-secondary>
+                            @else
+                                <x-form-cart :action="route('cart.add')"
+                                             :product="$result" />
+                            @endif
+                        @else
+                            <x-form-cart :action="route('cart.add')"
+                                         :product="$result" />
+                        @endauth
                     @elseif($searchType == 'Lojas')
-                        <li class="flex justify-end">
-                            <x-link-button class="w-full" href="{{ route('shop.show', $result->url) }}">
-                                Ver Detalhes
-                            </x-link-button>
-                        </li>
-                    @endif
-                </ul>
-            @endforeach
-        </div>
+                        <a class="lg:flex lg:gap-2" href="{{ route('shop.show', $result->url) }}">
+                            <x-image class="lg:w-16" src="/img/products/no-image.jpg" />
+                            <span class=" w-full">
+                                <span class="mt-2 line-clamp-1 font-bold">
+                                    {{ $result->name }}
+                                </span>
+                                <span class="text-gray-dark line-clamp-1 font-bold">
+                                    {{ $result->formatUrl() }}
+                                </span>
+                            </span>
+                        </a>
 
-        {{ $results->links() }}
-    </section>
-@endif
+                        <x-link class="self-end"
+                                href="{{ route('shop.show', $result->url) }}">
+                            Ver perfil
+                        </x-link>
+                    @endif
+                </x-card>
+            @endforeach
+        </section>
+    @endif
+</div>

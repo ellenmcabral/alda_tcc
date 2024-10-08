@@ -68,7 +68,7 @@
                         <p class="text-lg absolute top-5 right-5 font-bold rounded text-accent-darker px-4 py-2 bg-white">
                             {{ $product->formatPrice() }}
                         </p>
-                        <h3 class="text-lg absolute left-0 bottom-0 bg-white w-full py-2 truncate font-bold">
+                        <h3 class="text-lg absolute left-0 bottom-0 bg-white w-full py-2 line-clamp-1 font-bold">
                             {{ $product->name }}
                         </h3>
                     </div>
@@ -101,7 +101,7 @@
                         <x-image :src="$product->getImagePath()"
                                  class="rounded-lg" />
                         <div class="flex justify-between">
-                            <h3 class="font-bold truncate">
+                            <h3 class="font-bold line-clamp-1">
                                 {{ $product->name }}
                             </h3>
                             <p class="font-bold rounded text-accent-darker">
@@ -112,11 +112,12 @@
                 @endforeach
             </div>
 
-            <x-link-secondary href="{{ route('search-results', ['search_type' => 'Produtos', 'search_text' => ' ']) }}">
+            <x-link-secondary href="{{ route('search', ['search_type' => 'Produtos', 'search_text' => '']) }}">
                 Ver mais produtos<i class="ml-1 text-sm text-gray-dark fa-solid fa-chevron-right"></i>
             </x-link-secondary>
         </section>
 
+        <!-- CATEGORIAS -->
         <aside class="grid gap-4">
             <x-text-heading>
                 Categorias
@@ -125,10 +126,9 @@
             <ul class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach($categories as $category)
                     <li>
-                        <a class="flex justify-center w-full mr-2 px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 transition ease-in-out duration-150"
-                           href="{{ route('categories.products.index', $category->id) }}">
+                        <x-tag href="{{ route('categories.products.index', $category->id) }}">
                             {{ $category->description }}
-                        </a>
+                        </x-tag>
                     </li>
                 @endforeach
             </ul>

@@ -19,7 +19,7 @@
         <section class="flex gap-2 items-start border border-gray-regular rounded-lg p-4 text-gray-dark">
             <i class="mt-3 fa-solid fa-circle-info text-gray-regular fa-xl"></i>
             <p>
-                Para navegar, acesse o menu superior (<i class="text-gray-regular fa-solid fa-bars"></i>) ou pressione um dos cards abaixo.
+                Para navegar, acesse o menu superior <span class="inline-flex 2xl:hidden items-center">(<i class="text-gray-regular fa-solid fa-bars"></i>)</span> ou pressione um dos cards abaixo.
             </p>
         </section>
 

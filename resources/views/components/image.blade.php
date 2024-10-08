@@ -1,4 +1,6 @@
-@props(['width' => 'full', 'src'])
+@props(['src'])
 
-<img class="w-{{ $width }} object-cover rounded-lg aspect-square"
+<img {{ $attributes->merge([
+    'class' => 'object-cover rounded-lg aspect-square'
+]) }}
      src="{{ $src }}" />

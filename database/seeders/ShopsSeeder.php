@@ -14,16 +14,16 @@ class ShopsSeeder extends Seeder
     public function run(): void
     {
         Shop::create([
-            'name' => 'Celita Artesanatos',
-            'url' => 'celitaartesanato',
-            'description' => fake()->text(100),
+            'name' => 'Celita Artesanatos - Feitos com Muito Amor',
+            'url' => 'celitaartesanatocomamor',
+            'description' => fake()->text(),
             'user_id' => 3,
             'is_active' => true,
         ]);
 
         Shop::create([
-            'name' => 'Artesanato Maria',
-            'url' => 'artesanatomaria',
+            'name' => 'Jaci Costuras, Laços e outros Tecidos',
+            'url' => 'jacicosturaselaços',
             'user_id' => 4,
             'is_active' => true,
         ]);

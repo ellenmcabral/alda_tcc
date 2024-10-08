@@ -1,8 +1,4 @@
-<form class="flex flex-col gap-8"
-      method="post"
-      action="{{ $action }}">
-    @csrf
-
+<x-form :action="$action">
     @isset($update)
         @method('patch')
     @endisset
@@ -22,7 +18,7 @@
         </div>
     @endisset
 
-    <x-button class="self-end w-full md:w-64">
+    <x-slot:button>
         Salvar
-    </x-button>
-</form>
+    </x-slot:button>
+</x-form>

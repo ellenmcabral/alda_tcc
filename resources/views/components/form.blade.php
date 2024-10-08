@@ -13,7 +13,9 @@ $width = [
 
     {{ $slot }}
 
-    <x-button class="self-end w-full md:w-64">
-        {{ $button }}
-    </x-button>
+    @isset($button)
+        <x-button class="w-full md:self-end md:w-64">
+            {{ $button }}
+        </x-button>
+    @endisset
 </form>

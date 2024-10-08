@@ -36,8 +36,8 @@ class UsersSeeder extends Seeder
         ]);
 
         $artisan1 = User::create([
-            'name' => 'Maria Joana',
-            'email' => 'maria@example',
+            'name' => 'Jaci Joana',
+            'email' => 'jaci@example',
             'phone' => '(53) 9 8431-4099',
             'email_verified_at' => now(),
             'password' => 123,

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\View\View;
 
@@ -15,7 +14,7 @@ class CategoryProductListController extends Controller
 
         return view('categories.products.index', [
             'category' => $category,
-            'products' => $products,
+            'results' => $products,
         ]);
     }
 }

@@ -47,14 +47,14 @@
                 </label>
             </div>
 
-            <x-slot:button>
+            <x-button>
                 Entrar
-            </x-slot:button>
-
-            <x-link class="text-center"
-                    href="{{ route('register') }}">
-                Criar uma conta
-            </x-link>
+            </x-button>
         </x-form>
+
+        <x-link class="text-center"
+                href="{{ route('register') }}">
+            Criar uma conta
+        </x-link>
     </div>
 </x-app-layout>

@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryProductListController;
 use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\Commission\CommissionController;
 use App\Http\Controllers\Commission\CommissionDeleteController;
 use App\Http\Controllers\Commission\CommissionDetailsController;
 use App\Http\Controllers\Commission\CommissionListController;
 use App\Http\Controllers\Commission\CommissionStoreController;
-use App\Http\Controllers\Product\CategoryProductListController;
+use App\Http\Controllers\Product\ProductListController;
 use App\Http\Controllers\Product\ProductDetailsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Shop\ShopActivateController;
@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'permission:create shop'])->group(function () {
     Route::get('/shop/create', [ShopCreateController::class, 'create'])->name('shop.create');
-    Route::post('/shop', [ShopCreateController::class, 'store'])->name('shop.store');
+    Route::post('/shop/create', [ShopCreateController::class, 'store'])->name('shop.store');
 });
 
 // ATIVAR LOJA
@@ -52,6 +52,19 @@ Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('cart.dest
 Route::get('/shop/{url}', [ShopDetailsController::class, 'show'])->name('shop.show');
 Route::get('/products/{id}', [ProductDetailsController::class, 'show'])->name('products.show');
 
+Route::get('/categories', function () {
+    $categories = \App\Models\Category::all();
+
+    return view('categories.index', [
+        'categories' => $categories
+    ]);
+})->name('categories.index');
+
+// PESQUISAR PRODUTOS/LOJAS
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+Route::get('/categories/{category}/products', [CategoryProductListController::class, 'index'])->name('categories.products.index');
+
 // USUARIOS LOGADOS
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -64,18 +77,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'products' => $products
         ]);
     })->name('home');
-
-    Route::get('/categories', function () {
-        $categories = \App\Models\Category::all();
-
-        return view('categories.index', ['categories' => $categories]);
-    })->name('categories.index');
-
-    // PESQUISAR PRODUTOS/LOJAS
-    Route::get('/search', [SearchController::class, 'search'])->name('search-results');
-
-    Route::get('/categories/{category}/products', [CategoryProductListController::class, 'index'])->name('categories.products.index');
-    Route::get('/shops', [ShopListController::class, 'index'])->name('shops-index');
 
     // EDITAR PERFIL DO USUARIO
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

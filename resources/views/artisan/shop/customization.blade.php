@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('shop.customization') }}
         </div>

@@ -49,8 +49,7 @@
             Início
         </x-nav-link>
 
-        <x-nav-link :href="route('search-results')"
-                    :active="request()->routeIs('search-results')">
+        <x-nav-link :href="route('alda')">
             Lojas
         </x-nav-link>
 

@@ -1,13 +1,17 @@
 <x-app-layout>
-    <x-slot name="heading">
-        Categorias de Artesanato
-    </x-slot>
+    <div class="grid gap-8 h-fit w-full lg:px-8">
+        <x-text-heading>
+            Categorias de Artesanato
+        </x-text-heading>
 
-    @foreach($categories as $category)
-        <li class="mt-2 mr-2">
-            <a class="flex justify-center w-full text-gray-300 bg-gray-700 rounded-lg p-2" href="{{ route('categories.products.index', $category->id) }}">
-                {{ $category->description }}
-            </a>
-        </li>
-    @endforeach
+        <ul class="grid gap-4 md:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8">
+            @foreach($categories as $category)
+                <li>
+                    <x-tag href="{{ route('categories.products.index', $category->id) }}">
+                        {{ $category->description }}
+                    </x-tag>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </x-app-layout>

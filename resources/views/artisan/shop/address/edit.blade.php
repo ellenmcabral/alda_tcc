@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="w-full h-fit grid gap-8 lg:w-1/2">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         @if($shop->street)
             <div class="hidden sm:inline-flex">
                 {{ Breadcrumbs::render('shop.address.edit') }}
@@ -19,6 +19,10 @@
             <x-text-heading>
                 Adicionar Endereço
             </x-text-heading>
+
+            <p>
+                Digite seu CEP para preencher o restante dos campos de endereço.
+            </p>
 
             <x-form-address :action="route('artisan.shop.address.update')"
                             :address="false" :update="true" />

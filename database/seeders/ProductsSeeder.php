@@ -13,14 +13,14 @@ class ProductsSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 1; $i < 5; $i++) {
+        for($i = 1; $i <= 5; $i++) {
             Product::factory()->create([
                 'shop_id' => 1,
                 'image' => $i . '.jpg',
             ]);
         }
 
-        for($i = 5; $i < 11; $i++) {
+        for($i = 6; $i <= 10; $i++) {
             Product::factory()->create([
                 'shop_id' => 2,
                 'image' => $i . '.jpg',

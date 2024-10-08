@@ -1,5 +1,5 @@
 <x-dashboard-layout>
-    <div class="grid gap-8 w-full h-fit lg:w-1/2 xl:w-1/3">
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         <div class="hidden sm:inline-flex">
             {{ Breadcrumbs::render('shop.information') }}
         </div>
@@ -37,11 +37,9 @@
                 <x-input-error :messages="$errors->get('url')" class="mt-2" />
             </div>
 
-            <div class="flex items-center gap-4">
-                <x-button class="w-full">
-                    {{ __('Save') }}
-                </x-button>
-            </div>
+            <x-slot:button>
+                {{ __('Save') }}
+            </x-slot:button>
         </x-form>
     </div>
 </x-dashboard-layout>

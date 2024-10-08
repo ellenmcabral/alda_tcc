@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
@@ -30,10 +31,11 @@ class SearchController extends Controller
                 $results = $model::where('name', 'like', '%' . $searchText . '%')->paginate(10);
             }
 
-            return view('search-results', [
+            return view('search', [
                 'results' => $results,
                 'searchText' => $searchText,
-                'searchType' => $searchType
+                'searchType' => $searchType,
+                'categories' => Category::all(),
             ]);
         } catch(\Exception $e) {
             return back();

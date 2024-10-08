@@ -17,11 +17,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => str_replace('.', '', fake()->text(20)),
-            'description' => fake()->text(250),
-            'sale_price' => fake()->numberBetween(10, 300),
-            'stock' => false,
-            'deadline' => fake()->numberBetween(3, 60),
+            'name' => str_replace('.', '', fake()->text(150)),
+            'description' => fake()->text(700),
+            'sale_price' => fake()->numberBetween(5, 300),
+            'stock' => fake()->numberBetween(0, 10),
+            'deadline' => fake()->numberBetween(0, 30),
             'category_id' => fake()->numberBetween(1, 59),
         ];
     }
