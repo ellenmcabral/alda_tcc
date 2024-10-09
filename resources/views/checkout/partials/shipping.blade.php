@@ -12,7 +12,7 @@
         </p>
 
         <div class="w-full flex justify-between items-center">
-            <x-link href="{{ route('profile.shipping-address.create') }}">
+            <x-link href="{{ route('profile.shipping-addresses.create') }}">
                 Adicionar um novo endereço
                 <i class="text-sm fa-solid fa-plus"></i>
             </x-link>

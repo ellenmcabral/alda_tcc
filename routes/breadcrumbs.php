@@ -17,12 +17,12 @@ Breadcrumbs::for('home', function ($trail) {
 
 Breadcrumbs::for('profile', function ($trail) {
     $trail->parent('home');
-    $trail->push('Minha Conta', route('profile.edit'));
+    $trail->push('Minha Conta', route('profile.show'));
 });
 
-Breadcrumbs::for('profile.information.edit', function ($trail) {
+Breadcrumbs::for('profile.edit', function ($trail) {
     $trail->parent('profile');
-    $trail->push('Dados Pessoais', route('profile.information.edit'));
+    $trail->push('Dados Pessoais', route('profile.edit'));
 });
 
 Breadcrumbs::for('profile.password.edit', function ($trail) {
@@ -31,19 +31,19 @@ Breadcrumbs::for('profile.password.edit', function ($trail) {
 });
 
 
-Breadcrumbs::for('shipping-address.index', function ($trail) {
+Breadcrumbs::for('shipping-addresses.index', function ($trail) {
     $trail->parent('profile');
-    $trail->push('Endereços', route('profile.shipping-address.index'));
+    $trail->push('Endereços de Entrega', route('profile.shipping-addresses.index'));
 });
 
-Breadcrumbs::for('shipping-address.create', function ($trail) {
-    $trail->parent('shipping-address.index');
-    $trail->push('Adicionar Endereço', route('profile.shipping-address.create'));
+Breadcrumbs::for('shipping-addresses.create', function ($trail) {
+    $trail->parent('shipping-addresses.index');
+    $trail->push('Adicionar Endereço', route('profile.shipping-addresses.create'));
 });
 
-Breadcrumbs::for('shipping-address.edit', function ($trail, $address) {
-    $trail->parent('shipping-address.index');
-    $trail->push('Editar Endereço', route('profile.shipping-address.edit', $address));
+Breadcrumbs::for('shipping-addresses.edit', function ($trail, $address) {
+    $trail->parent('shipping-addresses.index');
+    $trail->push('Editar Endereço', route('profile.shipping-addresses.edit', $address));
 });
 
 Breadcrumbs::for('cart', function ($trail) {
@@ -76,13 +76,8 @@ Breadcrumbs::for('shop.show', function ($trail, Shop $shop) {
     $trail->push($shop->name, route('shop.show', $shop->url));
 });
 
-Breadcrumbs::for('search.products', function ($trail) {
-    $trail->parent('home');
-    $trail->push('Produtos', route('search', ['search_type' => 'Produtos', 'search_text' => '']));
-});
-
 Breadcrumbs::for('categories.index', function ($trail) {
-    $trail->parent('search.products');
+    $trail->parent('home');
     $trail->push('Categorias', route('categories.index'));
 });
 

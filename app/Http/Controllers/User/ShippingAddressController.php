@@ -13,17 +13,15 @@ class ShippingAddressController extends Controller
 {
     public function index(Request $request): View
     {
-        return view('profile.shipping-address.index', [
-            'addresses' => ShippingAddress::where('user_id', $request->user()->id)
+        return view('profile.shipping-addresses.index', [
+            'addresses' => $request->user()->shippingAddresses()
                 ->orderBy('is_default', 'desc')->get(),
         ]);
     }
 
-    public function create(Request $request): View
+    public function create(): View
     {
-        return view('profile.shipping-address.create', [
-            'user' => $request->user(),
-        ]);
+        return view('profile.shipping-addresses.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -60,34 +58,40 @@ class ShippingAddressController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect(route('profile.shipping-address.index'));
+        return redirect(route('profile.shipping-addresses.index'));
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request, $id): View
     {
-        $address = $request->user()->shippingAddresses()->where('id', $request->id)->first();
+        try {
+            $address = $request->user()->shippingAddresses()->get()
+                ->where('id', $id)->firstOrFail();
 
-        return view('profile.shipping-address.edit', [
+        } catch(\Exception $e) {
+            return view('errors.404');
+        }
+
+        return view('profile.shipping-addresses.edit', [
             'address' => $address,
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(ShippingAddress $shippingAddress, Request $request): RedirectResponse
     {
-        $shippingAddress = ShippingAddress::find($request->id);
-        $oldDefaultShippingAddress = ShippingAddress::where('is_default', true);
+        $addresses = $request->user()->shippingAddresses()->get();
 
-        if($request->has('is_default')) {
-            // se o checkbox estiver marcado,
-            // trocar o antigo padrão para falso e atualizar o atual para true
-            $oldDefaultShippingAddress->update(['is_default' => false]);
-            $shippingAddress->is_default = true;
-        } else {
-            if($shippingAddress->is_default) {
-                $shippingAddress->is_default = true;
-            } else {
-                $shippingAddress->is_default = false;
+        // trocar o antigo padrão para falso e atualizar o atual para true
+
+        if($request->has('is_default')) { // se o checkbox estiver marcado
+            $oldDefaultShippingAddress = $addresses->where('is_default', true)->first();
+
+            if ($oldDefaultShippingAddress) {
+                $oldDefaultShippingAddress->update(['is_default' => false]);
             }
+            $shippingAddress->is_default = true;
+
+        } else { // se o checkbox não estiver marcado
+            $shippingAddress->is_default = false;
         }
 
         $shippingAddress->fill($request->validate([
@@ -104,21 +108,23 @@ class ShippingAddressController extends Controller
 
         $shippingAddress->save();
 
-        return redirect(route('profile.shipping-address.index'));
+        return redirect(route('profile.shipping-addresses.index'))->with([
+            'status' => 'Endereço atualizado com sucesso',
+        ]);
     }
 
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(ShippingAddress $shippingAddress, Request $request): RedirectResponse
     {
-        $shippingAddress = ShippingAddress::find($request->id);
+        $commission = Commission::where('shipping_address_id', $shippingAddress->id)->first();
 
-        $commission = Commission::where('shipping_address_id', $request->id);
-
-        if($commission) {
-            $route = route('profile.shipping-address.edit', $request->id);
-            $message = "Você não pode deletar este endereço de e-mail porque ele está em um pedido em andamento.";
+        if($commission) { // se o endereço estiver em uma encomenda
+            $route = route('profile.shipping-addresses.index');
+            $message = "Não foi possível excluir este endereço de e-mail porque ele está em um pedido em andamento";
             $type = "danger";
-        } else {
-            if($shippingAddress->is_default) { // se o endereço deletado for padrão, tornar padrão o outro primeiro que aparecer
+        } else { // se o endereço não estiver em uma encomenda
+            if($shippingAddress->is_default) {
+                // se o endereço deletado for padrão, tornar padrão o outro primeiro que aparecer
+
                 $otherShippingAddress = ShippingAddress::where('user_id', $request->user()->id)->first();
 
                 if($otherShippingAddress) {
@@ -128,12 +134,14 @@ class ShippingAddressController extends Controller
 
             $shippingAddress->delete();
 
-            $route = route('profile.shipping-address.index');
-            $message = "Shipping address successfully deleted";
+            $route = route('profile.shipping-addresses.index');
+            $message = "Endereço excluído com sucesso";
             $type = "success";
         }
 
-        return redirect($route)
-            ->with('status', $message)->with('type', $type);
+        return redirect($route)->with([
+            'status' => $message,
+            'type' => $type,
+        ]);
     }
 }

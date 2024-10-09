@@ -17,9 +17,21 @@
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
-    <body class="flex flex-col font-sans h-screen text-neutral-black bg-neutral-white">
+    <body class="flex flex-col font-sans text-neutral-black bg-neutral-white h-screen">
         <!-- Page Header -->
         @include('layouts.app.header')
+
+        @isset($heading)
+            <x-text-heading class="w-full px-4 py-8 lg:px-6 bg-gray-light text-gray-dark">
+                {{ $heading }}
+            </x-text-heading>
+        @endisset
+
+        @isset($breadcrumbs)
+            <section class="w-full px-4 py-8 lg:px-6 bg-gray-light">
+                {{ $breadcrumbs }}
+            </section>
+        @endisset
 
         @if(request()->routeIs('home'))
             <span class="bg-secondary-regular rounded-br-xl rounded-bl-xl w-full h-48 absolute top-24 left-0 z-0">
@@ -27,7 +39,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-10 mb-16 flex justify-center relative">
+        <main class="flex-grow mx-4 mt-10 pb-16 flex justify-center relative">
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>
@@ -35,8 +47,5 @@
 
             {{ $slot }}
         </main>
-
-        <!-- Page Footer -->
-        @include('layouts.app.footer')
     </body>
 </html>

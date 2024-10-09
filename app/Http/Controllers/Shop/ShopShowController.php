@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\View\View;
 
-class ShopDetailsController extends Controller
+class ShopShowController extends Controller
 {
     public function show($url): View
     {

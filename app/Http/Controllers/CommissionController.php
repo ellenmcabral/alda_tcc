@@ -1,15 +1,24 @@
 <?php
 
-namespace App\Http\Controllers\Commission;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Commission;
 use App\Models\CommissionProduct;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class CommissionStoreController extends Controller
+class CommissionController extends Controller
 {
+    public function index(Request $request): View
+    {
+        return view('commissions.index', [
+            'commissions' => $request->user()->commissions()
+                ->orderBy('created_at', 'desc')
+                ->get(),
+        ]);
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $commission = Commission::create([
@@ -46,5 +55,25 @@ class CommissionStoreController extends Controller
 
         return redirect(route('commissions.index'))
             ->with('status', 'Encomenda realizada. Faça o pagamento para que o artesão possa começar a produzir.');
+    }
+
+    public function show(Commission $commission, Request $request): View
+    {
+        return view('commissions.show', [
+            'commission' => $request->user()->commissions()->findOrFail($commission->id),
+            'commissionProducts' => $commission->commissionProducts()->get(),
+        ]);
+    }
+
+    public function destroy(Commission $commission, Request $request): RedirectResponse
+    {
+        $request->validateWithBag('commissionDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $commission->delete();
+
+        return redirect(route('commissions.index'))
+            ->with('status', 'commission-destroyed');
     }
 }

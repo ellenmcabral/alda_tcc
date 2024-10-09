@@ -48,7 +48,7 @@
                         @endauth
                     @elseif($searchType == 'Lojas')
                         <a class="lg:flex lg:gap-2" href="{{ route('shop.show', $result->url) }}">
-                            <x-image class="lg:w-16" src="/img/products/no-image.jpg" />
+                            <x-image class="lg:w-16" src="{{ $result->getImagePath() }}" />
                             <span class=" w-full">
                                 <span class="mt-2 line-clamp-1 font-bold">
                                     {{ $result->name }}

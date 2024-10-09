@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="grid gap-8 h-fit w-full lg:px-8">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('products.show', $product->category, $product) }}
-        </div>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('products.show', $product->category, $product) }}
+    </x-slot:breadcrumbs>
 
+    <div class="grid gap-8 h-fit w-full lg:px-8">
         <section class="grid lg:flex gap-8">
-            <img class="w-full rounded-lg h-fit"
+            <img class="xl:w-2/3 rounded-lg h-fit"
                  src="{{ $product->getImagePath() }}"
                  alt="Imagem de {{ $product->name }}"/>
 

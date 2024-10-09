@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 w-full h-fit lg:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('commissions.show', $commission->id) }}
-        </div>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('commissions.show', $commission->id) }}
+    </x-slot:breadcrumbs>
 
+    <div class="flex flex-col gap-8 w-full h-fit lg:w-2/3">
         <x-text-heading>
             Pedido
             <i class="fa-solid fa-hashtag"></i>

@@ -8,7 +8,7 @@
          name="confirm-shipping-address-deletion-{{ $address->id  }}"
          :show="$errors->shippingAddressDeletion->isNotEmpty()" focusable>
     <form method="post"
-          action="{{ route('shipping-address.destroy', $address->id) }}">
+          action="{{ route('profile.shipping-addresses.destroy', $address->id) }}">
         @csrf
         @method('delete')
 

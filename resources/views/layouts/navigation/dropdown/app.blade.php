@@ -25,14 +25,14 @@
 
                 <hr/>
 
-                <x-dropdown-link :href="route('alda')">
+                <x-dropdown-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])">
                     <i class="text-accent-regular mr-1 fa-solid fa-store"></i>
                     Lojas
                 </x-dropdown-link>
 
                 <hr/>
 
-                <x-dropdown-link :href="route('profile.edit')">
+                <x-dropdown-link :href="route('profile.show')">
                     <i class="text-accent-regular mr-1 fa-solid fa-user"></i>
                     Minha Conta
                 </x-dropdown-link>
@@ -109,7 +109,7 @@
 
                 <hr/>
 
-                <x-dropdown-link :href="route('alda')">
+                <x-dropdown-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])">
                     <i class="text-accent-regular mr-1 fa-solid fa-store"></i>
                     Lojas
                 </x-dropdown-link>

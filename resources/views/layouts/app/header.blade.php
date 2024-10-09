@@ -1,4 +1,4 @@
-<header class="flex justify-between items-center py-8 px-4 sm:px-8 bg-secondary-regular">
+<header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 sm:px-8 bg-secondary-regular">
     <div class="flex md:w-1/2 2xl:w-1/3">
         @include('layouts.navigation.dropdown.app')
 

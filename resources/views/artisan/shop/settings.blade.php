@@ -1,9 +1,9 @@
 <x-dashboard-layout>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Configurações da Loja
-        </x-text-heading>
+    <x-slot:heading>
+        Minha Loja
+    </x-slot:heading>
 
+    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <section class="flex gap-4 items-center">
             <span class="w-20 h-20 rounded-full bg-gray-200">
                 <!-- Imagem -->
@@ -13,9 +13,9 @@
                 <h2 class="font-bold">
                     {{ Auth::user()->shop->name }}
                 </h2>
-                <p>
+                <a href="{{ route('shop.show', Auth::user()->shop->url) }}">
                     site.com.br/<span class="font-bold text-secondary-300">{{ Auth::user()->shop->url }}</span>
-                </p>
+                </a>
             </div>
         </section>
 

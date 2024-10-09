@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit md:w-2/3">
-        <x-text-heading>
-            Meus Pedidos
-        </x-text-heading>
+    <x-slot:heading>
+        Meus Pedidos
+    </x-slot:heading>
 
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
         @if($commissions->isEmpty()) <!-- SEM PEDIDOS -->
             <section class="flex flex-col gap-8 items-center">
                 <img class="w-48"

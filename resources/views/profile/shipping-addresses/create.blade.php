@@ -1,14 +1,10 @@
 <x-app-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shipping-addresses.create') }}
+    </x-slot:breadcrumbs>
+
     <div class="w-full h-fit grid gap-8 md:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('shipping-address.create') }}
-        </div>
-
-        <x-text-heading>
-            Adicionar Endereço
-        </x-text-heading>
-
-        <x-form action="{{ route('shipping-address.store') }}">
+        <x-form action="{{ route('profile.shipping-addresses.store') }}">
 
             <livewire:inputs-address :address="null" />
 

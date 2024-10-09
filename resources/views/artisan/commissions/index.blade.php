@@ -1,8 +1,8 @@
 <x-dashboard-layout>
+    <x-slot:heading>
+        Encomendas
+    </x-slot:heading>
     <div class="w-full h-fit grid gap-8 md:w-2/3">
-        <x-text-heading>
-            Encomendas
-        </x-text-heading>
 
         @if($shopCommissions->isEmpty()) <!-- SEM ENCOMENDAS -->
             <div class="flex flex-col items-center gap-8">
@@ -10,15 +10,13 @@
                      src="/img/assets/check-list.png"
                      alt="ilustração de caixa vazia" />
                 <p class="text-gray-dark">
-                    Nenhuma encomenda por aqui ainda.
+                    Sua loja não possui nenhuma encomenda
                 </p>
+
+                <x-link href="{{ route('artisan.index') }}">
+                    Ir para a página inicial
+                </x-link>
             </div>
-
-            <hr/>
-
-            <x-link href="{{ route('artisan.index') }}">
-                Ir para a página inicial
-            </x-link>
         @else
             @foreach($shopCommissions as $commission)
                 <div class="rounded-lg p-4 border border-gray-200 grid gap-4">

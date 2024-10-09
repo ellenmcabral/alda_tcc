@@ -1,7 +1,7 @@
 <x-dashboard-layout>
-    <x-slot name="header">
+    <x-slot:breadcrumbs>
         {{ Breadcrumbs::render('shop.commissions.show', $commission->id) }}
-    </x-slot>
+    </x-slot:breadcrumbs>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

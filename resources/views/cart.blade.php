@@ -1,22 +1,22 @@
 <x-app-layout>
+    <x-slot:heading>
+        Sacola de Compras
+    </x-slot:heading>
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Sacola de Compras
-        </x-text-heading>
 
         @if($items->isEmpty()) <!-- SACOLA VAZIA -->
-            <div class="flex flex-col items-center gap-4">
+            <div class="flex flex-col items-center gap-8">
                 <img class="w-1/2 md:w-1/3"
                      src="\img\assets\shopping-bag.png"
                      alt="ilustração de sacola" />
                 <p class="text-gray-dark">
                     Sua sacola está vazia.
                 </p>
-            </div>
 
-            <x-link href="{{ route('home') }}">
-                Voltar para a página inicial
-            </x-link>
+                <x-link href="{{ route('home') }}">
+                    Voltar para a página inicial
+                </x-link>
+            </div>
         @else <!-- SACOLA COM ITENS -->
             <p class="text-lg">
                 Sua sacola tem
@@ -46,16 +46,17 @@
 
                     <li>
                         <div class="flex justify-between items-center gap-2">
-                            <div class="flex items-center gap-2">
+                            <a class="flex items-center gap-2"
+                               href="{{ route('products.show', $item->id) }}">
 
-                                <x-image :width="16"
+                                <x-image :width="48"
                                          src="/img/products/{{ $item->options->image }}" />
 
-                                <p class="truncate" href="{{ route('products.show', $item->id) }}">
-                                    {{ $item->name }}
-                                </p>
-                            </div>
-                            <p class="font-bold text-neutral-black">
+                                <span class="line-clamp-1">
+                                        {{ $item->name }}
+                                </span>
+                            </a>
+                            <p class="font-bold text-neutral-black w-full text-right">
                                 R$ {{ number_format($item->price, 2, ',', '.') }}
                             </p>
                         </div>

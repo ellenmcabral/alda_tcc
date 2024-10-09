@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Ativar Loja
-        </x-text-heading>
+    <x-slot:heading>
+        Ativar Loja
+    </x-slot:heading>
 
+    <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <img class="w-48 self-center"
              src="/img/assets/cross-stitch.png" />
 

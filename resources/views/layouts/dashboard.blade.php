@@ -19,7 +19,7 @@
     </head>
     <body class="flex flex-col font-sans h-screen bg-neutral-white text-neutral-black">
         <!-- Page Header -->
-        <header class="flex justify-between items-center py-8 px-4 sm:px-8 bg-neutral-white border-b-2 border-secondary-regular">
+        <header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 sm:px-8 bg-neutral-white border-b-2 border-secondary-regular">
             <div class="flex">
                 @include('layouts.navigation.dropdown.dashboard')
 
@@ -36,8 +36,20 @@
             </div>
         </header>
 
+        @isset($heading)
+            <x-text-heading class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED] text-secondary-dark">
+                {{ $heading }}
+            </x-text-heading>
+        @endisset
+
+        @isset($breadcrumbs)
+            <section class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED]">
+                {{ $breadcrumbs }}
+            </section>
+        @endisset
+
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8 mb-16 flex justify-center">
+        <main class="flex-grow mx-4 mt-8 pb-16 flex justify-center">
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>
@@ -45,8 +57,5 @@
 
             {{ $slot }}
         </main>
-
-        <!-- Page Footer -->
-        @include('layouts.app.footer')
     </body>
 </html>

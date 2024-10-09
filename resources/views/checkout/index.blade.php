@@ -1,14 +1,10 @@
 <x-app-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('checkout') }}
+    </x-slot:breadcrumbs>
+
     <div class="w-full grid gap-8 lg:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('checkout') }}
-        </div>
-
-        <x-text-heading>
-            Finalizar Pedido
-        </x-text-heading>
-
-        <x-form action="{{ route('commissions.store') }}">
+        <x-form :width="'full'" action="{{ route('commissions.store') }}">
             <p class="text-lg">
                 Fazendo encomenda para a loja
                 <x-link href="{{ route('shop.show', $shop->url) }}">
@@ -16,17 +12,11 @@
                 </x-link>
             </p>
 
-            <hr>
-
             @include('checkout.partials.items')
 
             @include('checkout.partials.payment')
 
-            <hr>
-
             @include('checkout.partials.shipping')
-
-            <hr>
 
             <input type="hidden" name="status_id" value="1"/>
 
@@ -35,8 +25,8 @@
                     Total <span>R$ {{ number_format($cart_total, 2, ',', '.') }}</span>
                 </x-text-heading>
 
-                <x-button class="w-full md:w-1/2 lg:w-1/3 2xl:w-1/4 md:self-end"
-                                  :disabled="$shippingAddresses->isEmpty() ? true : false">
+                <x-button class="w-full md:self-end md:w-64"
+                          :disabled="$shippingAddresses->isEmpty() ? true : false">
                     Finalizar Encomenda
                 </x-button>
             </div>

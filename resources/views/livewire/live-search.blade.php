@@ -1,11 +1,9 @@
-<div class="grid gap-8">
+<div class="grid gap-8 h-fit">
     @if($results->count() > 0)
-        <div class="w-full flex justify-between">
-            <p class="text-gray-dark">
-                Foram encontrados <span class="font-bold">{{ $results->count() }}</span> resultados
-            </p>
+        {{  $results->appends(Request::all())->links() }}
 
-            <div>
+        <div class="w-full flex flex-col md:flex-row md:justify-between items-center gap-8">
+            <div class="flex w-full justify-end">
                 <x-input-select wire:model.change="filter">
                     <option>Filtrar</option>
                     <option value="alphabetical_order">Ordem alfabética</option>
@@ -20,4 +18,8 @@
     @endif
 
     <x-results-list :results="$results" :searchType="$searchType" />
+
+    @if($results->count() == 10)
+        {{  $results->appends(Request::all())->links() }}
+    @endif
 </div>

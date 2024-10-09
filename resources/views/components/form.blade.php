@@ -1,20 +1,24 @@
-@props(['width' => 'md'])
+@props(['width' => 'lg'])
 
 @php
 $width = [
     'full' => 'w-full',
-    'md' => 'md:w-1/2',
+    'lg' => 'lg:w-1/2',
 ][$width];
+
+$class = $width . ' flex flex-col gap-10'
 @endphp
 
-<form class="flex flex-col gap-10 {{ $width }}"
-      method="POST">
+<form {{ $attributes->merge([
+    'class' => $class,
+    'method' => 'post',
+    ]) }}>
     @csrf
 
     {{ $slot }}
 
     @isset($button)
-        <x-button class="w-full md:self-end md:w-64">
+        <x-button class="w-full lg:self-end lg:w-64">
             {{ $button }}
         </x-button>
     @endisset

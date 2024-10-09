@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Criar Loja
-        </x-text-heading>
+    <x-slot:heading>
+        Criar Loja
+    </x-slot:heading>
 
+    <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <p class="text-gray-dark flex gap-2 p-4 border border-gray-light rounded-lg w-fit">
             <i class="mt-1 text-gray-regular fa-solid fa-circle-info"></i>
             <span>

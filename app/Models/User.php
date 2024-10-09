@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Get the shipping-address associated with the user.
+     * Get the shipping-addresses associated with the user.
      */
     public function shippingAddresses(): HasMany
     {

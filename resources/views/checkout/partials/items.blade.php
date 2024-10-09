@@ -12,7 +12,7 @@
                 <th class="px-6 py-3 hidden md:table-cell text-left">
                     Imagem
                 </th>
-                <th class="px-6 py-3 text-left">
+                <th class="px-6 py-3 text-left w-48">
                     Item
                 </th>
                 <th class="px-6 py-3">
@@ -29,21 +29,21 @@
         <tbody>
             @foreach($items as $item)
                 <tr class="border-b border-gray-light">
-                    <td class="p-6 text-left hidden md:table-cell">
-                        <x-image :width="10" src="/img/products/{{ $item->options->image }}" />
+                    <td class="md:p-6 text-left hidden md:table-cell">
+                        <x-image :width="40" src="/img/products/{{ $item->options->image }}" />
                     </td>
-                    <th scope="row" class="p-6 font-normal text-left truncate">
+                    <th scope="row" class="md:m-6 m-4 font-normal text-left line-clamp-1">
                         <a class="text-gray-dark underline" href="{{ route('products.show', $item->id) }}">
                             {{ $item->name }}
                         </a>
                     </th>
-                    <td class="p-6 font-normal text-center">
+                    <td class="md:p-6 p-4 font-normal text-center">
                         {{ $item->qty }}
                     </td>
-                    <td class="p-6 font-normal text-center">
+                    <td class="md:p-6 p-4 font-normal text-center">
                         R$ {{ number_format($item->price, 2, ',', '.') }}
                     </td>
-                    <td class="p-6 font-bold text-right text-accent-darker hidden md:table-cell">
+                    <td class="md:p-6 p-4 font-bold text-right text-accent-darker hidden md:table-cell">
                         R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
                     </td>
                 </tr>

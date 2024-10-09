@@ -1,14 +1,10 @@
 <x-dashboard-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shop.address.edit') }}
+    </x-slot:breadcrumbs>
+
     <div class="grid gap-8 w-full h-fit md:w-2/3">
         @if($shop->street)
-            <div class="hidden sm:inline-flex">
-                {{ Breadcrumbs::render('shop.address.edit') }}
-            </div>
-
-            <x-text-heading>
-                Editar Endereço
-            </x-text-heading>
-
             @include('artisan.shop.address.partials.update-address-form')
 
         @else

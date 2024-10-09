@@ -1,9 +1,9 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Fazer Login
-        </x-text-heading>
+    <x-slot:heading>
+        Fazer Login
+    </x-slot:heading>
 
+    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <x-form :width="'full'"
                 action="{{ route('login') }}">
             <!-- Email Address -->

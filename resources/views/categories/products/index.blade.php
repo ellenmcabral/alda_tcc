@@ -1,13 +1,9 @@
 <x-app-layout>
-    <div class="grid gap-8 h-fit w-full lg:px-8">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('categories.products.index', $category) }}
-        </div>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('categories.products.index', $category) }}
+    </x-slot:breadcrumbs>
 
-        <x-text-heading>
-            Exibindo resultados para "{{ $category->description }}"
-        </x-text-heading>
-
+    <div class="h-fit w-full lg:px-8">
         <livewire:live-search :searchType="'Produtos'" :category="$category" />
     </div>
 </x-app-layout>

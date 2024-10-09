@@ -7,12 +7,13 @@
             Início
         </x-nav-link>
 
-        <x-nav-link :href="route('alda')">
+        <x-nav-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
+                    :active="request()->routeIs('search', ['search_type' => 'Lojas', 'search_text' => ''])">
             Lojas
         </x-nav-link>
 
-        <x-nav-link :href="route('profile.edit')"
-                    :active="request()->routeIs('profile.edit')">
+        <x-nav-link :href="route('profile.show')"
+                    :active="request()->routeIs('profile.show')">
             Minha Conta
         </x-nav-link>
 
@@ -49,7 +50,8 @@
             Início
         </x-nav-link>
 
-        <x-nav-link :href="route('alda')">
+        <x-nav-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
+                    :active="request()->routeIs('search', ['search_type' => 'Lojas', 'search_text' => ''])">
             Lojas
         </x-nav-link>
 

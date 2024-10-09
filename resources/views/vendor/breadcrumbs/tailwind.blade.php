@@ -15,7 +15,7 @@
             @endif
 
             @unless($loop->last)
-                <i class="text-gray-regular p-2 fa-solid fa-angle-right"></i>
+                <i class="text-gray-dark p-2 fa-solid fa-angle-right"></i>
             @endif
 
         @endforeach

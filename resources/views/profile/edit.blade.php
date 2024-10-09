@@ -1,51 +1,61 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <x-text-heading>
-            Minha Conta
-        </x-text-heading>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('profile.edit') }}
+    </x-slot:breadcrumbs>
 
-        <section class="flex gap-4 items-center">
-            <span class="w-20 h-20 rounded-full bg-gray-200">
-                <!-- Imagem -->
-            </span>
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
+        {{--    <form id="send-verification" method="post" action="{{ route('verification.send') }}">--}}
+        {{--        @csrf--}}
+        {{--    </form>--}}
+
+        <x-form action="{{ route('profile.update') }}">
+            @method('patch')
+
             <div>
-                <h2 class="font-bold">
-                    {{ Auth::user()->name }}
-                </h2>
-                <p>
-                    {{ Auth::user()->email }}
-                </p>
+                <x-input-label for="name" value="Nome" />
+                <x-input-text id="name"
+                              name="name"
+                              type="text"
+                              class="w-full"
+                              :value="old('name', $user->name)"
+                              placeholder="Digite o seu nome completo"
+                              required autofocus autocomplete="name" />
+                <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
-        </section>
 
-        <section>
-            <hr/>
+            <div>
+                <x-input-label for="email" value="E-mail" />
+                <x-input-text id="email"
+                              name="email"
+                              type="email"
+                              class="w-full"
+                              :value="old('email', $user->email)"
+                              placeholder="Digite o seu endereço de e-mail"
+                              required autocomplete="username" />
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
-               href="{{ route('profile.information.edit') }}">
-                Dados Pessoais
-                <i class="fa-solid fa-pen text-gray-regular"></i>
-            </a>
+                @if($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+                    <div>
+                        <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
+                            {{ __('Your email address is unverified.') }}
 
-            <hr/>
+                            <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                                {{ __('Click here to re-send the verification email.') }}
+                            </button>
+                        </p>
 
-            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
-               href="{{ route('profile.shipping-address.index') }}">
-                Endereços de Entrega
-                <i class="fa-solid fa-pen text-gray-regular"></i>
-            </a>
+                        @if(session('status') === 'verification-link-sent')
+                            <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
+                                {{ __('A new verification link has been sent to your email address.') }}
+                            </p>
+                        @endif
+                    </div>
+                @endif
+            </div>
 
-            <hr/>
-
-            <a class="flex justify-between items-center px-4 py-8 text-secondary-regular font-bold text-lg hover:bg-gray-100 transition duration-300"
-               href="{{ route('profile.password.edit') }}">
-                Editar Senha
-                <i class="fa-solid fa-pen text-gray-regular"></i>
-            </a>
-
-            <hr/>
-        </section>
-
-        @include('profile.partials.delete-user-form')
+            <x-slot:button>
+                Salvar
+            </x-slot:button>
+        </x-form>
     </div>
 </x-app-layout>

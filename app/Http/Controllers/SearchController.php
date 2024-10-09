@@ -13,32 +13,24 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        try {
-            $searchType = $request->input('search_type');
+        $searchType = $request->search_type;
 
-            $searchText = $request->input('search_text');
+        $searchText = $request->search_text;
 
-            if($searchType != null) {
-                if($searchType == 'Produtos') {
-                    $model = new Product();
-                }
-                elseif($searchType == 'Lojas') {
-                    $model = new Shop();
-                }
+
+        if($searchType != null) {
+            if ($searchType == 'Produtos') {
+                $results = Product::where('name', 'like', '%' . $searchText . '%')->paginate(10);
+            } elseif ($searchType == 'Lojas') {
+                $results = Shop::where('name', 'like', '%' . $searchText . '%')->paginate(10);
             }
-
-            if($model) {
-                $results = $model::where('name', 'like', '%' . $searchText . '%')->paginate(10);
-            }
-
-            return view('search', [
-                'results' => $results,
-                'searchText' => $searchText,
-                'searchType' => $searchType,
-                'categories' => Category::all(),
-            ]);
-        } catch(\Exception $e) {
-            return back();
         }
+
+        return view('search', [
+            'results' => $results,
+            'searchText' => $searchText,
+            'searchType' => $searchType,
+            'categories' => Category::all(),
+        ]);
     }
 }

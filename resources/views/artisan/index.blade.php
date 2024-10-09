@@ -1,9 +1,10 @@
 <x-dashboard-layout>
+    <x-slot:heading>
+        Painel do Artesão
+    </x-slot:heading>
+
     <div class="w-full h-fit grid gap-10 md:w-2/3">
         <section class="grid gap-2">
-            <x-text-heading>
-                Painel do Artesão
-            </x-text-heading>
             <p class="text-lg">
                 Sua loja já está ativa no link:
             </p>
@@ -23,11 +24,11 @@
             </p>
         </section>
 
-        <section class="grid grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8">
+        <section class="grid lg:grid-cols-3 gap-4 md:gap-8">
             <x-card-dashboard :route="route('shop.show', Auth::user()->shop->url)"
                               :icon="'fa-store'"
                               :title="'Minha Loja'"
-                              :text="'Veja a fachada da sua loja'" />
+                              :text="'Edite os dados da sua loja'" />
 
             <x-card-dashboard :route="route('artisan.products.index')"
                               :icon="'fa-bag-shopping'"
@@ -38,11 +39,6 @@
                               :icon="'fa-box-open'"
                               :title="'Encomendas'"
                               :text="'Organize suas encomendas'" />
-
-            <x-card-dashboard :route="route('artisan.shop.settings')"
-                              :icon="'fa-gear'"
-                              :title="'Configurações'"
-                              :text="'Edite os dados da sua loja'" />
         </section>
 
 

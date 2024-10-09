@@ -1,9 +1,9 @@
 <x-dashboard-layout>
-    <div class="w-full h-fit grid gap-8 md:w-2/3">
-        <x-text-heading>
-            Produtos
-        </x-text-heading>
+    <x-slot:heading>
+        Produtos
+    </x-slot:heading>
 
+    <div class="w-full h-fit grid gap-8 md:w-2/3">
         <section class="flex w-full @if($products->isNotEmpty()) justify-between @else justify-end @endif">
             @if($products->isNotEmpty())
                 <button class="text-gray-dark px-4 py-2 border-2 rounded-lg border-gray-regular">
@@ -25,15 +25,12 @@
                      src="\img\assets\price-tag.png"
                      alt="ilustração de sacola" />
                 <p class="text-gray-dark">
-                    Sua loja ainda não tem nenhum produto.
+                    Sua loja ainda não tem nenhum produto
                 </p>
+                <x-link href="{{ route('artisan.index') }}">
+                    Ir para a página inicial
+                </x-link>
             </div>
-
-            <hr/>
-
-            <x-link href="{{ route('artisan.index') }}">
-                Ir para a página inicial
-            </x-link>
         @else
             <section>
                 <div>
@@ -50,9 +47,6 @@
                                 Item
                             </th>
                             <th scope="col" class="px-6 py-3 hidden md:table-cell">
-                                Categoria
-                            </th>
-                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
                                 Preço
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
@@ -66,18 +60,15 @@
                     <tbody>
                     @foreach($products as $product)
                         <tr class="border-b border-gray-light">
-                            <td class="p-6 hidden md:table-cell">
-                                <x-image :width="10" :src="$product->getImagePath()" />
+                            <td class="p-6 hidden md:table-cell text-center">
+                                <x-image :width="42" :src="$product->getImagePath()" />
                             </td>
-                            <td class="p-6 truncate">
-                                {{ $product->name }}
+                            <td class="m-6 line-clamp-1">
+                                <x-link-secondary href="{{ route('products.show', $product->id) }}">
+                                    {{ $product->name }}
+                                </x-link-secondary>
                             </td>
-                            <td class="p-6 hidden md:table-cell">
-                                <span class="text-sm truncate bg-gray-light px-4 py-2 rounded-2xl">
-                                    {{ $product->category->description }}
-                                </span>
-                            </td>
-                            <td class="p-6 hidden md:table-cell">
+                            <td class="p-6 hidden md:table-cell w-32">
                                 {{ $product->formatPrice() }}
                             </td>
                             <td class="p-6 text-center">

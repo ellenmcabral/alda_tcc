@@ -1,12 +1,9 @@
 <x-app-layout>
-    <div class="grid gap-8 w-full h-fit md:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('profile.password.edit') }}
-        </div>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('profile.password.edit') }}
+    </x-slot:breadcrumbs>
 
-        <x-text-heading>
-            Editar Senha
-        </x-text-heading>
+    <div class="grid gap-8 w-full h-fit md:w-2/3">
 
         <x-form action="{{ route('password.update') }}">
             @method('put')

@@ -1,13 +1,9 @@
 <x-dashboard-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shop.information') }}
+    </x-slot:breadcrumbs>
+
     <div class="grid gap-8 w-full h-fit md:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('shop.information') }}
-        </div>
-
-        <x-text-heading>
-            Informações da Loja
-        </x-text-heading>
-
         <x-form action="{{ route('artisan.shop.information.update', $shop->id) }}">
             @method('patch')
 

@@ -1,15 +1,11 @@
 <x-app-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shipping-addresses.index') }}
+    </x-slot:breadcrumbs>
+
     <div class="flex flex-col gap-8 w-full h-fit md:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('shipping-address.index') }}
-        </div>
-
-        <x-text-heading>
-            Endereços de Entrega
-        </x-text-heading>
-
         <x-button-secondary class="w-fit self-end" :color="'secondary'"
-           href="{{ route('profile.shipping-address.create') }}">
+           href="{{ route('profile.shipping-addresses.create') }}">
             Adicionar endereço
             <i class="fa-solid fa-plus"></i>
         </x-button-secondary>
@@ -49,7 +45,7 @@
                                 @include('profile.partials.delete-address-form')
 
                                 <x-link class="self-end w-fit"
-                                        href="{{ route('profile.shipping-address.edit', $address->id) }}">
+                                        href="{{ route('profile.shipping-addresses.edit', $address->id) }}">
                                     Editar <i class="ml-1 fa-solid fa-pen-to-square"></i>
                                 </x-link>
                             </div>

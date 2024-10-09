@@ -1,14 +1,15 @@
 <x-app-layout>
-    <div class="flex flex-col gap-8 h-fit w-full lg:px-8">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('shop.show', $shop) }}
-        </div>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shop.show', $shop) }}
+    </x-slot:breadcrumbs>
 
+    <div class="flex flex-col gap-8 h-fit w-full lg:px-8">
         <section class="flex flex-col gap-8">
             <div class="w-full h-fit flex flex-col lg:flex-row gap-4 items-center">
-                <div class="w-48 lg:w-32 self-center aspect-square rounded-full bg-gray-200">
-                    <!-- Shop Image -->
-                </div>
+                <!-- Shop Image -->
+                <img src="{{ $shop->getImagePath() }}"
+                     class="w-48 lg:w-32 self-center aspect-square object-cover rounded-full bg-gray-200"
+                     alt="Imagem de perfil da loja {{ $shop->name }}" />
                 <div class="w-full flex flex-col lg:items-start items-center gap-2">
                     <x-text-heading class="text-center lg:text-left">
                         {{ $shop->name }}

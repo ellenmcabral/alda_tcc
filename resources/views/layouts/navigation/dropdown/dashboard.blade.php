@@ -25,16 +25,9 @@
 
                 <hr/>
 
-                <x-dropdown-link :href="route('shop.show', Auth::user()->shop->url)"
-                                 :icon="'fa-store'">
-                    Minha Loja
-                </x-dropdown-link>
-
-                <hr/>
-
                 <x-dropdown-link :href="route('artisan.shop.settings')"
                                  :icon="'fa-gear'">
-                    Configurações
+                    Minha Loja
                 </x-dropdown-link>
 
                 <hr/>
@@ -50,6 +43,7 @@
                                  :icon="'fa-box-open'">
                     Encomendas
                 </x-dropdown-link>
+
             @else <!-- Admin Links -->
                 <x-dropdown-link :href="route('login')">
                     Usuários

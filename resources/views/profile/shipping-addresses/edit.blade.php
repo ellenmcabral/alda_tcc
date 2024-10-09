@@ -1,14 +1,10 @@
 <x-app-layout>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shipping-addresses.edit', $address->id) }}
+    </x-slot:breadcrumbs>
+
     <div class="w-full h-fit grid gap-8 md:w-2/3">
-        <div class="hidden sm:inline-flex">
-            {{ Breadcrumbs::render('shipping-address.edit', $address) }}
-        </div>
-
-        <x-text-heading>
-            Editar Endereço
-        </x-text-heading>
-
-        <x-form action="{{ route('shipping-address.update', $address->id) }}">
+        <x-form action="{{ route('profile.shipping-addresses.update', $address->id) }}">
             @method('patch')
 
             <livewire:inputs-address :address="$address" />

@@ -59,4 +59,9 @@ class Shop extends Model
     {
         return date('d/m/Y', strtotime($this->created_at));
     }
+
+    public function getImagePath(): string
+    {
+        return $this->image ? '/img/shops/' . $this->image : '/img/assets/no-image.jpg';
+    }
 }
