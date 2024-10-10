@@ -12,7 +12,7 @@
         </x-slot>
         <x-slot name="content">
             <p class="pt-24 py-2 px-6">
-                Oi, {{ Auth::user()->name }}
+                Oi, {{ Auth::user()->formatName() }}!
             </p>
 
             <hr/>
@@ -26,7 +26,7 @@
                 <hr/>
 
                 <x-dropdown-link :href="route('artisan.shop.settings')"
-                                 :icon="'fa-gear'">
+                                 :icon="'fa-store'">
                     Minha Loja
                 </x-dropdown-link>
 

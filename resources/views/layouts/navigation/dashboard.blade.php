@@ -26,19 +26,6 @@
             Encomendas
         </x-nav-link>
 
-        <!-- Authentication -->
-        <form class="flex items-center"
-              method="POST"
-              action="{{ route('logout') }}">
-            @csrf
-
-            <x-nav-link :href="route('logout')"
-                        :color="'secondary'"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                <i class="fa-lg fa-solid fa-right-from-bracket"></i>
-            </x-nav-link>
-        </form>
     @else <!-- Admin Links -->
         <x-nav-link
             :href="route('login')"

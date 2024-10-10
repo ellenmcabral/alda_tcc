@@ -33,16 +33,6 @@
             Meus Pedidos
         </x-nav-link>
 
-        <!-- Authentication -->
-        <form class="flex items-center " method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <x-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                <i class="fa-lg text-neutral-white fa-solid fa-right-from-bracket"></i>
-            </x-nav-link>
-        </form>
     @else <!-- LOGGED OUT -->
         <x-nav-link
             :href="route('alda')"

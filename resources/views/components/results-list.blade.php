@@ -50,10 +50,10 @@
                         <a class="lg:flex lg:gap-2" href="{{ route('shop.show', $result->url) }}">
                             <x-image class="lg:w-16" src="{{ $result->getImagePath() }}" />
                             <span class=" w-full">
-                                <span class="mt-2 line-clamp-1 font-bold">
+                                <span class="mt-2 line-clamp-1 font-bold lg:w-3/4">
                                     {{ $result->name }}
                                 </span>
-                                <span class="text-gray-dark line-clamp-1 font-bold">
+                                <span class="text-gray-dark line-clamp-1 font-bold lg:w-3/4">
                                     {{ $result->formatUrl() }}
                                 </span>
                             </span>

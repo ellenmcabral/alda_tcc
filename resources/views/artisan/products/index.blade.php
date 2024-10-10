@@ -34,7 +34,9 @@
         @else
             <section>
                 <div>
-                    {{ $products->links() }}
+                    @if($products->count() > 10)
+                        {{ $products->links() }}
+                    @endif
                 </div>
 
                 <table class="w-full text-left">
@@ -86,7 +88,9 @@
                 </table>
 
                 <div>
-                    {{ $products->links() }}
+                    @if($products->count() > 10)
+                        {{ $products->links() }}
+                    @endif
                 </div>
 
             </section>

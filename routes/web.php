@@ -47,7 +47,7 @@ Route::get('/products/{id}', [ProductShowController::class, 'show'])->name('prod
 
 // PESQUISAR PRODUTOS/LOJAS
 
-Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::any('/search', [SearchController::class, 'search'])->name('search');
 
 // LISTA DE CATEGORIAS
 

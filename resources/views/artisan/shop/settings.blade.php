@@ -5,9 +5,9 @@
 
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <section class="flex gap-4 items-center">
-            <span class="w-20 h-20 rounded-full bg-gray-200">
-                <!-- Imagem -->
-            </span>
+            <!-- Imagem -->
+            <img src="{{ Auth::user()->shop->getImagePath() }}" alt="Imagem da loja {{ Auth::user()->shop->name }}"
+                 class="object-fit w-20 h-20 rounded-full bg-gray-200" />
 
             <div>
                 <h2 class="font-bold">

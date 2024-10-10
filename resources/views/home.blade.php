@@ -101,7 +101,7 @@
                         <x-image :src="$product->getImagePath()"
                                  class="rounded-lg" />
                         <div class="flex justify-between">
-                            <h3 class="font-bold line-clamp-1">
+                            <h3 class="font-bold line-clamp-1 h-fit w-2/3">
                                 {{ $product->name }}
                             </h3>
                             <p class="font-bold rounded text-accent-darker">

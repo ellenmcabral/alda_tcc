@@ -6,11 +6,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="flex justify-end">
-                <x-secondary-button
+                <x-button-secondary
                         x-data=""
                         x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-update')"
                 >Alterar Status
-                </x-secondary-button>
+                </x-button-secondary>
 
                 <x-modal name="confirm-commission-update" focusable>
                     <form method="post" action="{{ route('artisan.commissions.update', $commission->id) }}" class="p-6">
@@ -22,7 +22,7 @@
                         </h2>
 
                         <x-input-label for="statuses" :value="'Status'"/>
-                        <x-select-input id="statuses"
+                        <x-input-select id="statuses"
                                         name="status_id"
                                         class="block mt-1 w-full">
                             @foreach($statuses as $status)
@@ -31,7 +31,7 @@
                                     {{ $status->description }}
                                 </option>
                             @endforeach
-                        </x-select-input>
+                        </x-input-select>
 
                         <div class="mt-6 flex justify-end">
                             <x-secondary-button x-on:click="$dispatch('close')">
