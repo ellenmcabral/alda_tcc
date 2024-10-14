@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Artisan;
+namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -65,6 +65,16 @@ class ProductController extends Controller
         ]);
 
         return redirect(route('artisan.products.index'));
+    }
+
+    public function show($id): View
+    {
+        $product = Product::where('id', $id)->firstOrFail();
+
+        return view('products.show', [
+            'product' => $product,
+            'shop' => $product->shop,
+        ]);
     }
 
     public function edit(Product $product): View

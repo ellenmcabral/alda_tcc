@@ -1,7 +1,5 @@
-<div class="grid gap-8 h-fit">
+<div class="w-full grid gap-8 h-fit">
     @if($results->count() > 0)
-        {{  $results->appends(Request::all())->links() }}
-
         <div class="w-full flex flex-col md:flex-row md:justify-between items-center gap-8">
             <div class="flex w-full justify-end">
                 <x-input-select wire:model.change="filter">
@@ -19,7 +17,5 @@
 
     <x-results-list :results="$results" :searchType="$searchType" />
 
-    @if($results->count() == 10)
-        {{  $results->appends(Request::all())->links() }}
-    @endif
+    {{  $results->appends(Request::all())->links() }}
 </div>

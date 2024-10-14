@@ -28,23 +28,23 @@
         </div>
 
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-            <p class="text-gray-dark">
-                Mostrando
-                @if ($paginator->firstItem())
-                    <span class="font-medium">
-                        {{ $paginator->firstItem() }}
-                    </span>
-                    até
-                    <span class="font-medium">
-                        {{ $paginator->lastItem() }}
-                    </span>
-                @else
-                    {{ $paginator->count() }}
-                @endif
-                de
-                <span class="font-bold">{{ $paginator->total() }}</span>
-                resultados
-            </p>
+{{--            <p class="text-gray-dark">--}}
+{{--                Mostrando--}}
+{{--                @if ($paginator->firstItem())--}}
+{{--                    <span class="font-medium">--}}
+{{--                        {{ $paginator->firstItem() }}--}}
+{{--                    </span>--}}
+{{--                    até--}}
+{{--                    <span class="font-medium">--}}
+{{--                        {{ $paginator->lastItem() }}--}}
+{{--                    </span>--}}
+{{--                @else--}}
+{{--                    {{ $paginator->count() }}--}}
+{{--                @endif--}}
+{{--                de--}}
+{{--                <span class="font-bold">{{ $paginator->total() }}</span>--}}
+{{--                resultados--}}
+{{--            </p>--}}
 
             <div class="relative z-0 inline-flex rtl:flex-row-reverse rounded-md">
 
@@ -117,14 +117,4 @@
             </div>
         </div>
     </nav>
-@else
-    <p class="text-gray-dark">
-        Mostrando <span class="font-bold">{{ $paginator->total() }}</span>
-
-        @if($paginator->total() == 0 or $paginator->total() == 1)
-            resultado
-        @else
-            resultados
-        @endif
-    </p>
 @endif

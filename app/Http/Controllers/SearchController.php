@@ -20,9 +20,9 @@ class SearchController extends Controller
 
         if($searchType != null) {
             if ($searchType == 'Produtos') {
-                $results = Product::where('name', 'like', '%' . $searchText . '%')->paginate(10);
+                $results = Product::where('name', 'like', '%' . $searchText . '%');
             } elseif ($searchType == 'Lojas') {
-                $results = Shop::where('name', 'like', '%' . $searchText . '%')->paginate(10);
+                $results = Shop::where('name', 'like', '%' . $searchText . '%');
             }
         }
 

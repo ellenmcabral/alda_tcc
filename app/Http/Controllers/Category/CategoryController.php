@@ -6,9 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\View\View;
 
-class CategoryProductListController extends Controller
+class CategoryController extends Controller
 {
-    public function index(Category $category): View
+    public function index(): View
+    {
+        $categories = \App\Models\Category::all();
+
+        return view('categories.index', [
+            'categories' => $categories
+        ]);
+    }
+
+    public function products(Category $category): View
     {
         $products = $category->products()
             ->paginate(10);

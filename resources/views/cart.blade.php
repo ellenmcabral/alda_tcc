@@ -39,11 +39,10 @@
                     Limpar sacola
                 </x-link-secondary>
             </div>
+            <hr/>
 
-            <ul class="flex flex-col gap-8">
+            <ul class="flex flex-col gap-12">
                 @foreach($items as $item)
-                    <hr/>
-
                     <li>
                         <div class="flex justify-between items-center gap-2">
                             <a class="flex items-center gap-2"

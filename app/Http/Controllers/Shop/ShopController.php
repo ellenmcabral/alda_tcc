@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Shop;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShopController extends Controller
 {
@@ -34,6 +35,16 @@ class ShopController extends Controller
         $request->user()->givePermissionTo(['activate shop']);
 
         return redirect(route('home'));
+    }
+
+    public function show($url): View
+    {
+        $shop = Shop::where('url', $url)->firstOrFail();
+
+        return view('shop.show', [
+            'shop' => $shop,
+            'products' => $shop->products()->paginate(10),
+        ]);
     }
 
     public function activate(Request $request)
