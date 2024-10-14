@@ -8,7 +8,7 @@ use App\Http\Controllers\Artisan\Shop\ShopCommissionController;
 use App\Http\Controllers\Artisan\Shop\ShopCustomizationController;
 use App\Http\Controllers\Artisan\Shop\ShopInformationController;
 use App\Http\Controllers\Artisan\Shop\ShopSettingsController;
-use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 // ADMIN
