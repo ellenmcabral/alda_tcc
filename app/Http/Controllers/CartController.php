@@ -43,7 +43,7 @@ class CartController extends Controller
                     // COMPARA A LOJA DO ITEM DO CARRINHO COM O PRODUTO SENDO ADICIONADO
                     // SE FOR DE LOJAS DIFERENTES, REDIRECIONA PARA A MSM PAGINA COM A MENSAGEM DE ERRO
 
-                    $route = route('products.show', $product->url);
+                    $route = route('products.show', $product->id);
                     $valid = false;
                 }
                 else {
