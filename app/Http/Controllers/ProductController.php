@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -29,41 +30,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, ProductRepository $repository): RedirectResponse
     {
-        $request->validate([
-            'image' => ['required'],
-            'name' => ['required', 'string', 'min:3', 'max:150'],
-            'url' => ['alpha'],
-            'sale_price' => ['required'],
-            'category_id' => ['required'],
-        ]);
+        $product = $repository->add($request);
 
-        if($request->hasFile('image') && $request->file('image')->isValid()) {
-
-            $requestImage = $request->image;
-
-            $extension = $requestImage->extension();
-
-            $imageName = md5($requestImage->getClientOriginalName()
-                    . strtotime("now")) . "." . $extension;
-
-            $requestImage->move(public_path('img/products'), $imageName);
-        } else {
-            $imageName = 'no-image.jpg';
-        }
-
-        $product = Product::create([
-            'name' => $request->name,
-            'image' => $imageName,
-            'url' => str_replace(' ', '-', $request->name),
-            'sale_price' => $request->sale_price,
-            'description' => $request->description,
-            'shop_id' => $request->user()->shop->id,
-            'category_id' => $request->category_id,
-        ]);
-
-        return redirect(route('artisan.products.index'));
+        return redirect(route('artisan.products.index'))
+            ->with('status', 'Produto adicionado com sucesso');
     }
 
     public function show($id): View
