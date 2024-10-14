@@ -3,11 +3,28 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 
-class ProductRepository
+class EloquentProductRepository extends EloquentBaseRepository implements ProductRepositoryInterface
 {
-    public function add(Request $request): Product
+    protected $model;
+
+    public function __construct(Product $model)
+    {
+        $this->model = $model;
+    }
+
+    public function getProductsByShopId(int $id)
+    {
+        return Product::where('shop_id', $id)->orderBy('id', 'DESC')->paginate(10);
+    }
+
+    public function findProductByName(string $name)
+    {
+        return Product::where('name', $name)->first();
+    }
+
+    /*public function add(Request $request)
     {
         $request->validate([
             'image' => ['required'],
@@ -42,5 +59,5 @@ class ProductRepository
         ]);
 
         return $product;
-    }
+    }*/
 }
