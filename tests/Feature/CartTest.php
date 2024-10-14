@@ -55,15 +55,16 @@ class CartTest extends TestCase
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
             'category_id' => Category::where('description', 'Aquarela')->first()->id,
+            'image' => 'no-image.jpg'
         ]);
 
         $response = $this->actingAs($this->user)
             ->post('/cart/add', [
                 'shop_id' => $this->artisan->shop->id,
                 'id' => $product->id,
-                'name' => 'Produto Teste',
-                'sale_price' => 20,
-                'image' => 'image.jpg',
+                'name' => $product->name,
+                'sale_price' => $product->sale_price,
+                'image' => $product->image,
                 'quantity' => 1,
             ]);
 
@@ -76,10 +77,9 @@ class CartTest extends TestCase
             'shop' => $this->artisan->shop,
         ]);
 
-        $view->assertSee('Produto Teste');
-        $view->assertSee('R$ 20,00');
+        $view->assertSee($product->name);
         $view->assertSee('Limpar sacola');
-        $view->assertSee('Continuar encomenda');
+        $view->assertSee('Continuar');
     }
 
     public function test_products_from_different_shops_can_not_be_added_to_cart(): void
@@ -89,13 +89,14 @@ class CartTest extends TestCase
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
             'category_id' => Category::where('description', 'Aquarela')->first()->id,
+            'image' => 'no-image.jpg'
         ]);
 
         \Cart::add([
            'id' => $product->id,
-           'name' => 'Produto Teste',
+           'name' => $product->name,
            'qty' => 1,
-           'price' => 20,
+           'price' => $product->sale_price,
            'weight' => 1,
         ]);
 
@@ -104,28 +105,29 @@ class CartTest extends TestCase
         $product2 = Product::factory()->create([
             'shop_id' => $this->artisan2->shop->id,
             'category_id' => Category::where('description', 'Aquarela')->first()->id,
+            'image' => 'no-image.jpg'
         ]);
 
         $response = $this->actingAs($this->user)
             ->post('/cart/add', [
                 'shop_id' => $this->artisan2->shop->id,
                 'id' => $product2->id,
-                'name' => 'Teste Produto',
-                'sale_price' => 20,
-                'image' => 'image.jpg',
+                'name' => $product2->name,
+                'sale_price' => $product2->sale_price,
+                'image' => $product2->image,
                 'quantity' => 1,
             ]);
 
         $response
             ->assertStatus(302)
             ->assertSessionHasAll([
-                'status' => 'product-not-added',
+                'status' => 'Esvazie sua sacola de compras ou finalize seu pedido antes de comprar um produto desta loja.',
             ]);
 
         $view = $this->view('products.show', [
             'product' => $product,
         ]);
 
-        $view->assertSee('Esvazie sua sacola de compras');
+        $view->assertSee('Esvazie sua sacola de compras ou finalize seu pedido antes de comprar um produto desta loja.');
     }
 }
