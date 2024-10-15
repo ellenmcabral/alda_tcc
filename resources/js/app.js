@@ -1,8 +1,6 @@
-import Alpine from 'alpinejs';
+import './bootstrap';
 import mask from '@alpinejs/mask'
 import 'flowbite';
 
-window.Alpine = Alpine;
 Alpine.plugin(mask)
 
-Alpine.start();
