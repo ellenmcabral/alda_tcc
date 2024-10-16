@@ -7,31 +7,26 @@
     </header>
 
     <ul class="grid gap-8">
-        @foreach($items as $item)
-            <x-list-item :link="route('products.show', $item->id)"
-                         :image="$item->options->image">
+        @foreach($commissionProducts as $commissionProduct)
+            <x-list-item :link="route('products.show', $commissionProduct->product->id)"
+                         :image="$commissionProduct->product->image">
 
                 <x-slot:quantity>
-                    {{ $item->qty }} x
+                    {{ $commissionProduct->quantity }} x
                 </x-slot:quantity>
 
                 <x-slot:product>
-                    {{ $item->name }}
+                    {{ $commissionProduct->product->name }}
                 </x-slot:product>
 
                 <x-slot:price>
-                    R$ {{ number_format($item->price, 2, ',', '.') }}
+                    {{ $commissionProduct->formatPrice() }}
                 </x-slot:price>
 
                 <x-slot:subtotal>
-                    R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
+                    R$ {{ number_format($commissionProduct->total, 2, ',', '.') }}
                 </x-slot:subtotal>
             </x-list-item>
         @endforeach
     </ul>
-
-    <input type="hidden" name="shop_id" value="{{ $shop->id }}" />
-
-    <input type="hidden" name="total" value="{{ $cart_total }}" />
-
 </section>

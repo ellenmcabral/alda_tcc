@@ -17,7 +17,7 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => str_replace('.', '', fake()->text(150)),
+            'name' => str_replace('.', '', fake()->text(60)),
             'description' => fake()->text(700),
             'sale_price' => fake()->numberBetween(5, 300),
             'stock' => fake()->numberBetween(0, 10),

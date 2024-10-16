@@ -3,68 +3,53 @@
         {{ Breadcrumbs::render('shop.commissions.show', $commission->id) }}
     </x-slot:breadcrumbs>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="flex justify-end">
-                <x-button-secondary
-                        x-data=""
-                        x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-update')"
-                >Alterar Status
-                </x-button-secondary>
+    <div class="flex flex-col gap-10 w-full h-fit lg:w-2/3">
+        <x-text-heading>
+            Encomenda
+            <i class="fa-solid fa-hashtag"></i>
+            {{ $commission->id }}
+        </x-text-heading>
 
-                <x-modal name="confirm-commission-update" focusable>
-                    <form method="post" action="{{ route('artisan.commissions.update', $commission->id) }}" class="p-6">
-                        @csrf
-                        @method('patch')
+        <section class="flex justify-end">
+            @include('artisan.commissions.partials.update-commission')
+        </section>
 
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            Alterar Status da Encomenda
-                        </h2>
+        <section class="flex justify-between items-center gap-4">
+            <x-tag-commission :status="$commission->status->id">
+                {{ $commission->status->description }}
+            </x-tag-commission>
 
-                        <x-input-label for="statuses" :value="'Status'"/>
-                        <x-input-select id="statuses"
-                                        name="status_id"
-                                        class="block mt-1 w-full">
-                            @foreach($statuses as $status)
-                                <option value="{{ $status->id }}"
-                                        @if($commission->status->id == $status->id) selected @endif>
-                                    {{ $status->description }}
-                                </option>
-                            @endforeach
-                        </x-input-select>
+            <p class="text-sm md:text-base">
+                Feita em {{ date('d/m/Y', strtotime($commission->created_at)) }}
+            </p>
+        </section>
 
-                        <div class="mt-6 flex justify-end">
-                            <x-secondary-button x-on:click="$dispatch('close')">
-                                {{ __('Cancel') }}
-                            </x-secondary-button>
-
-                            <x-danger-button class="ms-3">
-                                {{ __('Save') }}
-                            </x-danger-button>
-                        </div>
-                    </form>
-                </x-modal>
+        <section class="grid gap-4">
+            <x-text-subheading>
+                <i class="mr-1 fa-solid fa-user"></i>
+                Cliente
+            </x-text-subheading>
+            <div class="flex gap-4 justify-between sm:items-center sm:flex-row flex-col">
+                <p>
+                    {{ $commission->user->name }}
+                </p>
+                <x-link href="https://wa.me/{{ preg_replace('/\D/', '', $commission->user->phone) }}">
+                    Entrar em contato <i class="ml-1 text-sm fa-solid fa-arrow-up-right-from-square"></i>
+                </x-link>
             </div>
+        </section>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('artisan.commissions.partials.commission-info')
-            </div>
+        @include('artisan.commissions.partials.items')
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('artisan.commissions.partials.products-info')
-            </div>
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('artisan.commissions.partials.client-info')
-            </div>
+        @include('artisan.commissions.partials.shipping')
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('artisan.commissions.partials.shipping-address-info')
-            </div>
+        @include('artisan.commissions.partials.payment')
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                @include('artisan.commissions.partials.payment-info')
-            </div>
-
-        </div>
+        <x-text-heading class="text-secondary-regular flex justify-between">
+            Total
+            <span>
+                    {{ $commission->formatPrice() }}
+                </span>
+        </x-text-heading>
     </div>
 </x-dashboard-layout>

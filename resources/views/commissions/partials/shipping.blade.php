@@ -1,4 +1,4 @@
-<section id="shipping-address-info" class="grid gap-4">
+<section class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-truck-fast"></i>
         <x-text-subheading>

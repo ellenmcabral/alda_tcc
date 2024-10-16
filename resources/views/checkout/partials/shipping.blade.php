@@ -24,16 +24,11 @@
         <div class="grid @if($shippingAddresses->count() > 1) grid-cols-2 @endif gap-4">
             @foreach($shippingAddresses as $address)
                 <section class="w-full md:w-fit flex flex-col gap-4 border border-1 rounded-lg p-4">
-                    <div class="flex items-center">
-                        <input type="radio"
-                               class="focus:ring-accent-regular hover:checked:bg-accent-dark checked:bg-accent-regular checked:focus:bg-accent-regular accent-accent-regular"
-                               id="{{ $address->id }}"
-                               name="address_id"
-                               value="{{ $address->id }}" {{ $address->is_default ? 'checked' : '' }} />
-                        <x-input-label for="{{ $address->id }}"
-                                       class="ml-2"
-                                       :value="'Enviar para este endereço'"/>
-                    </div>
+                    @if($address->is_default)
+                        <p class="font-bold text-accent-darker">
+                            Este é o seu endereço de entrega padrão.
+                        </p>
+                    @endif
 
                     <ul>
                         <li>{{ $address->street }}, {{ $address->number }}</li>
@@ -45,12 +40,18 @@
                         <li>{{ $address->postal_code }}</li>
                     </ul>
 
-                    @if($address->is_default)
-                        <p class="font-bold text-accent-darker">
-                            Este é o seu endereço de entrega padrão.
-                        </p>
-                    @endif
+                    <hr/>
 
+                    <div class="flex items-center">
+                        <input type="radio"
+                               class="focus:ring-accent-regular hover:checked:bg-accent-dark checked:bg-accent-regular checked:focus:bg-accent-regular accent-accent-regular"
+                               id="{{ $address->id }}"
+                               name="address_id"
+                               value="{{ $address->id }}" {{ $address->is_default ? 'checked' : '' }} />
+                        <x-input-label for="{{ $address->id }}"
+                                       class="ml-2"
+                                       :value="'Enviar para este endereço'"/>
+                    </div>
                 </section>
             @endforeach
         </div>

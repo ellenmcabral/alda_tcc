@@ -2,8 +2,7 @@
     <x-slot:heading>
         Sacola de Compras
     </x-slot:heading>
-    <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-
+    <div class="grid gap-10 w-full h-fit md:w-1/2 xl:w-1/3">
         @if($items->isEmpty()) <!-- SACOLA VAZIA -->
             <div class="flex flex-col items-center gap-8">
                 <img class="w-1/2 md:w-1/3"
@@ -25,8 +24,7 @@
                 @else
                     <span class="font-bold">{{ $items->count() }} itens</span>
                 @endif
-                da loja
-                <x-link href="{{ route('shop.show', $shop->url) }}">
+                da loja <x-link href="{{ route('shop.show', $shop->url) }}">
                     {{ $shop->name }}
                 </x-link>
             </p>
@@ -39,28 +37,28 @@
                     Limpar sacola
                 </x-link-secondary>
             </div>
+
             <hr/>
 
-            <ul class="flex flex-col gap-12">
+            <ul class="grid gap-12">
                 @foreach($items as $item)
-                    <li>
-                        <div class="flex justify-between items-center gap-2">
-                            <a class="flex items-center gap-2"
-                               href="{{ route('products.show', $item->id) }}">
+                    <div class="grid gap-4">
+                        <x-list-item :link="route('products.show', $item->id)"
+                                     :image="$item->options->image">
 
-                                <x-image :width="48"
-                                         src="/img/products/{{ $item->options->image }}" />
+                            <x-slot:product>
+                                {{ $item->name }}
+                            </x-slot:product>
 
-                                <span class="line-clamp-1">
-                                        {{ $item->name }}
-                                </span>
-                            </a>
-                            <p class="font-bold text-neutral-black w-full text-right">
+                            <x-slot:price>
                                 R$ {{ number_format($item->price, 2, ',', '.') }}
-                            </p>
-                        </div>
+                            </x-slot:price>
 
-                        <div class="mt-4 flex justify-between items-center">
+                            <x-slot:subtotal>
+                                R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
+                            </x-slot:subtotal>
+                        </x-list-item>
+                        <div class="flex justify-between items-center">
                             <form action="{{ route('cart.remove', $item->rowId) }}"
                                   method="post">
                                 @csrf
@@ -123,7 +121,7 @@
                                 </form>
                             </div>
                         </div>
-                    </li>
+                    </div>
                 @endforeach
             </ul>
 

@@ -6,13 +6,19 @@
 
 <x-modal :maxWidth="'sm'" name="confirm-commission-deletion"
          :show="$errors->commissionDeletion->isNotEmpty()" focusable>
-    <form method="post" action="{{ route('commissions.destroy', $commission->id) }}" class="p-6">
+    <form method="post"
+          action="{{ route('commissions.destroy', $commission->id) }}"
+          class="grid gap-4 p-6">
         @csrf
         @method('delete')
 
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            Cancelar essa encomenda?
-        </h2>
+        <x-text-subheading>
+            Cancelar esta encomenda?
+        </x-text-subheading>
+
+        <p class="text-gray-dark">
+            A encomenda <i class="fa-solid fa-hashtag"></i>{{ $commission->id }} será cancelada permanentemente.
+        </p>
 
         <div>
             <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
@@ -21,20 +27,19 @@
                 id="password"
                 name="password"
                 type="password"
-                class="mt-1 block w-3/4"
                 placeholder="Digite sua senha para confirmar"
             />
 
             <x-input-error :messages="$errors->commissionDeletion->get('password')" class="mt-2" />
         </div>
 
-        <div class="mt-6 flex justify-end">
+        <div class="flex gap-4 justify-end">
             <x-button-outlined class="cursor-pointer" :color="'gray'"
                                x-on:click="$dispatch('close')">
                 Manter
             </x-button-outlined>
 
-            <x-button-danger class="ms-3">
+            <x-button-danger class="uppercase">
                 Cancelar
             </x-button-danger>
         </div>
