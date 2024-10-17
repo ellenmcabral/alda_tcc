@@ -122,6 +122,8 @@ Route::middleware(['auth', 'verified'])
             ->name('commissions.index');
         Route::get('/pedidos/{commission}', [CommissionController::class, 'show'])
             ->name('commissions.show');
+        Route::post('/pedidos', [CommissionController::class, 'store'])
+            ->name('commissions.store');
         Route::delete('/pedidos/{commission}', [CommissionController::class, 'destroy'])
             ->name('commissions.destroy');
 });
