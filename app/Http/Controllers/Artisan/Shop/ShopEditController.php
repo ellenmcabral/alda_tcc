@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Artisan\Shop;
 
 use App\Http\Controllers\Controller;
-use App\Models\Shop;
+use App\Http\Requests\Shop\ShopUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ShopEditController extends Controller
@@ -25,16 +24,14 @@ class ShopEditController extends Controller
         ]);
     }
 
-    public function updateInformation(Request $request): RedirectResponse
+    public function updateInformation(ShopUpdateRequest $request): RedirectResponse
     {
         $shop = $request->user()->shop;
 
-        $shop->fill($request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:60'],
-            'url' => ['required', 'string', 'min:3', 'max:60', 'alpha_dash', Rule::unique(Shop::class)->ignore($request->user()->shop->id)],
-        ]));
-
-        $shop->save();
+        $shop->update([
+            'name' => $request->name,
+            'url' => $request->url,
+        ]);
 
         return redirect(route('artisan.shop.information'))
             ->with('status', 'Loja atualizada com sucesso!');

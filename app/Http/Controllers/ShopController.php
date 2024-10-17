@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Shop\ShopActivateRequest;
+use App\Http\Requests\Shop\ShopStoreRequest;
 use App\Models\Shop;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +16,7 @@ class ShopController extends Controller
         return view('shop.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ShopStoreRequest $request): RedirectResponse
     {
         Shop::create([
             'name' => $request->name,
@@ -48,27 +50,18 @@ class ShopController extends Controller
         ]);
     }
 
-    public function update(Request $request): RedirectResponse
+    public function update(ShopActivateRequest $request): RedirectResponse
     {
         $shop = $request->user()->shop;
 
         if($request->option == 'cpf') {
-            $request->user()->fill($request->validate([
-                'cpf' => ['required', 'string', 'min:14'],
-            ]));
-
             $request->user()->cpf = preg_replace('/[^0-9]/','', $request->cpf);
 
             $request->user()->save();
         }
 
         if($request->option == 'cnpj') {
-            $shop->fill($request->validate([
-                'cnpj' => ['required', 'string', 'min:18'],
-            ]));
-
             $shop->cnpj = preg_replace('/[^0-9]/','', $request->cnpj);
-
         }
         $shop->is_active = true;
 
