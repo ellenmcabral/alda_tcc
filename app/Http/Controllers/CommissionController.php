@@ -13,9 +13,7 @@ class CommissionController extends Controller
     public function index(Request $request): View
     {
         return view('commissions.index', [
-            'commissions' => $request->user()->commissions()
-                ->orderBy('created_at', 'desc')
-                ->get(),
+            'commissions' => $request->user()->commissions()->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -54,7 +52,7 @@ class CommissionController extends Controller
         \Cart::destroy();
 
         return redirect(route('commissions.index'))
-            ->with('status', 'Encomenda realizada. Faça o pagamento para que o artesão possa começar a produzir.');
+            ->with('status', 'Encomenda realizada. Faça o pagamento para que o artesão possa começar a produzir');
     }
 
     public function show(Commission $commission, Request $request): View
@@ -74,6 +72,6 @@ class CommissionController extends Controller
         $commission->delete();
 
         return redirect(route('commissions.index'))
-            ->with('status', 'commission-destroyed');
+            ->with('status', 'Encomenda cancelada');
     }
 }

@@ -14,8 +14,7 @@ class ShippingAddressController extends Controller
     public function index(Request $request): View
     {
         return view('profile.shipping-addresses.index', [
-            'addresses' => $request->user()->shippingAddresses()
-                ->orderBy('is_default', 'desc')->get(),
+            'addresses' => $request->user()->shippingAddresses()->orderBy('is_default', 'desc')->get(),
         ]);
     }
 

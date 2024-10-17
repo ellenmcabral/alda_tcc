@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
-use App\Repositories\EloquentProductRepository;
-use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    public function __construct(
-        private ProductRepositoryInterface $repository
-    ) { }
-
     public function index(Request $request): View
     {
-        $products = $this->repository->getProductsByShopId($request->user()->shop->id);
-
+        $products = $request->user()->shop->products()->orderBy('id', 'desc')->paginate(10);
 
         return view('artisan.products.index', [
             'shop' => $request->user()->shop,
@@ -29,10 +22,9 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create(Request $request): View
+    public function create(): View
     {
         return view('artisan.products.create', [
-            'shop_id' => $request->user()->shop->id,
             'categories' => Category::orderBy('description', 'asc')->get(),
         ]);
     }
@@ -50,7 +42,7 @@ class ProductController extends Controller
             $imageName = 'no-image.jpg';
         }
 
-        $this->repository->create([
+        Product::create([
             'name' => $request->name,
             'image' => $imageName,
             'sale_price' => $request->sale_price,
@@ -63,9 +55,9 @@ class ProductController extends Controller
             ->with('status', 'Produto adicionado com sucesso');
     }
 
-    public function show($id): View
+    public function show(int $id): View
     {
-        $product = $this->repository->find($id);
+        $product = Product::findOrFail($id);
 
         return view('products.show', [
             'product' => $product,
@@ -94,7 +86,7 @@ class ProductController extends Controller
             $imageName = $product->image;
         }
 
-        $this->repository->update($product->id, [
+        $product->update([
             'name' => $request->name,
             'image' => $imageName,
             'sale_price' => $request->sale_price,
@@ -109,7 +101,7 @@ class ProductController extends Controller
     {
         File::delete(public_path('img/products').'/'.$product->image);
 
-        $this->repository->delete($product->id);
+        $product->delete();
 
         return redirect(route('artisan.products.index'))->with([
             'status' => 'Produto excluído com sucesso',

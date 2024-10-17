@@ -1,10 +1,10 @@
 @props(['link', 'image'])
 
 <li {{ $attributes->merge(['class' => 'flex justify-between items-center']) }}>
-    <div class="w-full flex items-center gap-4 md:w-1/2">
+    <div class="flex items-center gap-4 lg:w-full">
         @isset($image)
-            <a class="hidden sm:block" href="{{ $link }}">
-                <x-image class="w-16"
+            <a class="hidden sm:inline-flex" href="{{ $link }}">
+                <x-image class="max-w-16"
                          src="/img/products/{{ $image }}" />
             </a>
         @endisset

@@ -25,13 +25,6 @@
 
                 <hr/>
 
-                <x-dropdown-link :href="route('artisan.shop.settings')"
-                                 :icon="'fa-store'">
-                    Minha Loja
-                </x-dropdown-link>
-
-                <hr/>
-
                 <x-dropdown-link :href="route('artisan.products.index')"
                                  :icon="'fa-bag-shopping'">
                     Produtos
@@ -42,6 +35,13 @@
                 <x-dropdown-link :href="route('artisan.commissions.index')"
                                  :icon="'fa-box-open'">
                     Encomendas
+                </x-dropdown-link>
+
+                <hr/>
+
+                <x-dropdown-link :href="route('artisan.shop.edit')"
+                                 :icon="'fa-gear'">
+                    Minha Loja
                 </x-dropdown-link>
 
             @else <!-- Admin Links -->

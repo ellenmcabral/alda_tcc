@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Category;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\View\View;
 
@@ -10,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index(): View
     {
-        $categories = \App\Models\Category::all();
+        $categories = Category::orderBy('description', 'asc')->get();
 
         return view('categories.index', [
             'categories' => $categories
@@ -19,8 +18,7 @@ class CategoryController extends Controller
 
     public function products(Category $category): View
     {
-        $products = $category->products()
-            ->paginate(10);
+        $products = $category->products()->get();
 
         return view('categories.products.index', [
             'category' => $category,

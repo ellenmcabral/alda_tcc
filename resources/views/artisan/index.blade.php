@@ -25,11 +25,6 @@
                 </p>
             </div>
             <div class="grid lg:grid-cols-3 gap-4 md:gap-8">
-                <x-card-dashboard :route="route('artisan.shop.settings')"
-                                  :icon="'fa-store'"
-                                  :title="'Minha Loja'"
-                                  :text="'Edite os dados da sua loja'" />
-
                 <x-card-dashboard :route="route('artisan.products.index')"
                                   :icon="'fa-bag-shopping'"
                                   :title="'Produtos'"
@@ -39,6 +34,11 @@
                                   :icon="'fa-box-open'"
                                   :title="'Encomendas'"
                                   :text="'Organize suas encomendas'" />
+
+                <x-card-dashboard :route="route('artisan.shop.edit')"
+                                  :icon="'fa-gear'"
+                                  :title="'Minha Loja'"
+                                  :text="'Edite os dados da sua loja'" />
             </div>
         </section>
 

@@ -34,8 +34,7 @@ class ShopAddressController extends Controller
 
         return redirect(route('artisan.shop.address.edit'))
             ->with([
-                'status' => 'Endereço atualizado com sucesso!',
-                'type' => 'success',
+                'status' => 'Endereço atualizado com sucesso!'
             ]);
     }
 
@@ -57,8 +56,7 @@ class ShopAddressController extends Controller
 
         return redirect(route('artisan.shop.settings'))
             ->with([
-                'status' => 'Endereço excluído com sucesso.',
-                'type' => 'success',
+                'status' => 'Endereço excluído com sucesso!'
             ]);
     }
 }

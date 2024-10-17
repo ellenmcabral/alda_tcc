@@ -8,12 +8,6 @@
     </x-nav-link>
 
     @role('artisan')
-        <x-nav-link :href="route('artisan.shop.settings')"
-                    :color="'secondary'"
-                    :active="request()->routeIs('artisan.shop.settings')">
-            Minha Loja
-        </x-nav-link>
-
         <x-nav-link :href="route('artisan.products.index')"
                     :color="'secondary'"
                     :active="request()->routeIs('artisan.products.index')">
@@ -24,6 +18,12 @@
                     :color="'secondary'"
                     :active="request()->routeIs('artisan.commissions.index')">
             Encomendas
+        </x-nav-link>
+
+        <x-nav-link :href="route('artisan.shop.edit')"
+                    :color="'secondary'"
+                    :active="request()->routeIs('artisan.shop.edit')">
+            Minha Loja
         </x-nav-link>
 
     @else <!-- Admin Links -->

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ProductController;
@@ -20,23 +20,23 @@ Route::get('/', function () {
 // CRIAR LOJA
 Route::middleware(['auth', 'permission:create shop'])
     ->group(function () {
-        Route::get('/shop/create', [ShopController::class, 'create'])
+        Route::get('/loja/criar', [ShopController::class, 'create'])
             ->name('shop.create');
-        Route::post('/shop/create', [ShopController::class, 'store'])
+        Route::post('/loja/criar', [ShopController::class, 'store'])
             ->name('shop.store');
 });
 
 // ATIVAR LOJA
 Route::middleware(['auth', 'permission:activate shop'])
         ->group(function () {
-        Route::get('/shop/activate', [ShopController::class, 'activate'])
+        Route::get('/loja/ativar', [ShopController::class, 'activate'])
             ->name('shop.activate');
-        Route::patch('/shop/activate', [ShopController::class, 'update'])
+        Route::patch('/loja/ativar', [ShopController::class, 'update'])
             ->name('shop.activate.update');
 });
 
 // CARRINHO
-Route::get('/cart', [CartController::class, 'index'])
+Route::get('/sacola', [CartController::class, 'index'])
     ->name('cart');
 Route::post('/cart/add', [CartController::class, 'add'])
     ->name('cart.add');
@@ -48,27 +48,27 @@ Route::get('/cart/destroy', [CartController::class, 'destroy'])
     ->name('cart.destroy');
 
 // PAGINAS DE LOJA / PRODUTO
-Route::get('/shop/{url}', [ShopController::class, 'show'])
+Route::get('/loja/{url}', [ShopController::class, 'show'])
     ->name('shop.show');
-Route::get('/products/{id}', [ProductController::class, 'show'])
+Route::get('/produto/{id}', [ProductController::class, 'show'])
     ->name('products.show');
 
 // PESQUISAR PRODUTOS/LOJAS
-Route::any('/search', [SearchController::class, 'search'])
+Route::any('/busca', [SearchController::class, 'search'])
     ->name('search');
 
 // LISTA DE CATEGORIAS
-Route::get('/categories', [CategoryController::class, 'index'])
+Route::get('/categorias', [CategoryController::class, 'index'])
     ->name('categories.index');
 
 // LISTA DE PRODUTOS POR CATEGORIA
-Route::get('/categories/{category}/products', [CategoryController::class, 'products'])
+Route::get('/categorias/{category}/produtos', [CategoryController::class, 'products'])
     ->name('categories.products.index');
 
 // USUARIOS LOGADOS
 Route::middleware(['auth', 'verified'])
     ->group(function () {
-        Route::get('/home', function () {
+        Route::get('/inicio', function () {
             $categories = \App\Models\Category::all()->take(12);
             $products = \App\Models\Product::orderBy('id', 'desc')->take(3)->get();
 
@@ -79,21 +79,38 @@ Route::middleware(['auth', 'verified'])
         })->name('home');
 
         // PERFIL DO USUARIO
-        Route::singleton('/profile', ProfileController::class)
-            ->destroyable();
+        Route::get('/conta', [ProfileController::class, 'show'])
+            ->name('profile.show');
+        Route::get('/conta/dados', [ProfileController::class, 'edit'])
+            ->name('profile.edit');
+        Route::patch('/conta', [ProfileController::class, 'update'])
+            ->name('profile.update');
+        Route::delete('/conta', [ProfileController::class, 'destroy'])
+            ->name('profile.destroy');
 
-        Route::prefix('profile')
+        Route::prefix('conta')
             ->name('profile.')
             ->group(function () {
 
-                Route::get('password/edit', [PasswordController::class, 'edit'] )
+                // SENHA
+                Route::get('senha', [PasswordController::class, 'edit'] )
                     ->name('password.edit');
-                Route::patch('password', [PasswordController::class, 'update'] )
+                Route::patch('senha', [PasswordController::class, 'update'] )
                     ->name('password.update');
 
-                // EDITAR ENDEREÇO DE ENTREGA
-                Route::resource('/shipping-addresses', ShippingAddressController::class)
-                    ->except('show');
+                // ENDEREÇO DE ENTREGA
+                Route::get('/enderecos', [ShippingAddressController::class, 'index'])
+                    ->name('shipping-addresses.index');
+                Route::get('/enderecos/adicionar', [ShippingAddressController::class, 'create'])
+                    ->name('shipping-addresses.create');
+                Route::post('/enderecos', [ShippingAddressController::class, 'store'])
+                    ->name('shipping-addresses.store');
+                Route::get('/enderecos/{shippingAddress}/editar', [ShippingAddressController::class, 'edit'])
+                    ->name('shipping-addresses.edit');
+                Route::patch('/enderecos/{shippingAddress}', [ShippingAddressController::class, 'update'])
+                    ->name('shipping-addresses.update');
+                Route::delete('/enderecos/{shippingAddress}', [ShippingAddressController::class, 'destroy'])
+                    ->name('shipping-addresses.destroy');
         });
 
         // CHECKOUT
@@ -101,8 +118,12 @@ Route::middleware(['auth', 'verified'])
             ->name('checkout.index');
 
         // ENCOMENDAS REALIZADAS
-        Route::resource('/commissions', CommissionController::class)
-            ->except(['create', 'edit', 'update']);
+        Route::get('/pedidos', [CommissionController::class, 'index'])
+            ->name('commissions.index');
+        Route::get('/pedidos/{commission}', [CommissionController::class, 'show'])
+            ->name('commissions.show');
+        Route::delete('/pedidos/{commission}', [CommissionController::class, 'destroy'])
+            ->name('commissions.destroy');
 });
 
 Route::get('/mail', function () {

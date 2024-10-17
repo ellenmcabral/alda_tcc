@@ -15,12 +15,8 @@ class ShopCommissionController extends Controller
 {
     public function index(Request $request): View
     {
-        $shopCommissions = $request->user()->shop->commissions()
-            ->orderBy('created_at', 'desc')
-            ->get();
-
         return view('artisan.commissions.index', [
-            'shopCommissions' => $shopCommissions,
+            'shopCommissions' => $request->user()->shop->commissions()->orderBy('created_at', 'desc')->get(),
         ]);
     }
 
@@ -41,8 +37,8 @@ class ShopCommissionController extends Controller
 
         $commission->save();
 
-        Mail::to($commission->user->email, $commission->user->name)
-            ->send(new CommissionUpdated($commission));
+//        Mail::to($commission->user->email, $commission->user->name)
+//            ->send(new CommissionUpdated($commission));
 
         return redirect(route('artisan.commissions.show', $commission->id));
     }

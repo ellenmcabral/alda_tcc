@@ -9,20 +9,13 @@ use Illuminate\View\View;
 
 class ShopController extends Controller
 {
-    public function create(Request $request)
+    public function create()
     {
-        return view('shop.create',[
-            'user' => $request->user()
-        ]);
+        return view('shop.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:150'],
-            'url' => ['required', 'string', 'min:3', 'max:50', 'unique:'.Shop::class, 'alpha_dash'],
-        ]);
-
         Shop::create([
             'name' => $request->name,
             'url' => $request->url,
@@ -31,6 +24,7 @@ class ShopController extends Controller
         ]);
 
         $request->user()->revokePermissionTo(['create shop']);
+
         $request->user()->givePermissionTo(['activate shop']);
 
         return redirect(route('home'));
@@ -39,10 +33,11 @@ class ShopController extends Controller
     public function show($url): View
     {
         $shop = Shop::where('url', $url)->firstOrFail();
+        $products = $shop->products()->get();
 
         return view('shop.show', [
             'shop' => $shop,
-            'products' => $shop->products()->paginate(10),
+            'products' => $products,
         ]);
     }
 

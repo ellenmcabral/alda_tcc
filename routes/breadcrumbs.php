@@ -128,28 +128,28 @@ Breadcrumbs::for('artisan.index', function($trail) {
     $trail->push('Painel de Controle', route('artisan.index'));
 });
 
-Breadcrumbs::for('shop.settings', function($trail) {
+Breadcrumbs::for('shop.edit', function($trail) {
     $trail->parent('artisan.index');
-    $trail->push("Configurações", route('artisan.shop.settings'));
+    $trail->push("Minha Loja", route('artisan.shop.edit'));
 });
 
 Breadcrumbs::for('shop.information', function($trail) {
-    $trail->parent('shop.settings');
+    $trail->parent('shop.edit');
     $trail->push("Informações", route('artisan.shop.information'));
 });
 
 Breadcrumbs::for('shop.customization', function($trail) {
-    $trail->parent('shop.settings');
+    $trail->parent('shop.edit');
     $trail->push("Personalização", route('artisan.shop.customization'));
 });
 
 Breadcrumbs::for('shop.address.create', function($trail) {
-    $trail->parent('shop.settings');
+    $trail->parent('shop.edit');
     $trail->push("Adicionar Endereço", route('artisan.shop.address.edit'));
 });
 
 Breadcrumbs::for('shop.address.edit', function($trail) {
-    $trail->parent('shop.settings');
+    $trail->parent('shop.edit');
     $trail->push("Endereço", route('artisan.shop.address.edit'));
 });
 
