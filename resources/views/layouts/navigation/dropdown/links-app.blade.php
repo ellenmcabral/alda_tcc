@@ -85,6 +85,8 @@
     </x-dropdown-link>
     @endrole
 
+    <hr/>
+
 @else <!-- LOGGED OUT -->
     <x-dropdown-link :href="route('login')"
                      :icon="'fa-right-to-bracket'"
