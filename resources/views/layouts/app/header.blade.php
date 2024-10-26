@@ -1,30 +1,33 @@
-<header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 sm:px-8 bg-secondary-regular">
+<header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 bg-secondary-regular">
     <div class="flex md:w-1/2 2xl:w-1/3">
-        @include('layouts.navigation.dropdown.app')
+        <x-dropdown :links="'app'"/>
 
-        <x-application-logo />
+        <x-application-logo/>
 
         <!-- Search Bar -->
-        <search class="ml-4 hidden lg:inline-block md:w-full">
-            <x-form-search/>
+        <search class="ml-4 hidden lg:inline-block w-full">
+            @include('layouts.search')
         </search>
+
+        <a class="lg:ml-4 lg:hidden flex items-center"
+           href="{{ route('search', ['search_text' => '', 'search_type' => 'Produtos']) }}">
+            <i class="fa-lg text-neutral-white hover:text-gray-regular transition ease-in-out duration-300
+                fa-solid fa-magnifying-glass"></i>
+        </a>
     </div>
 
     <div class="flex items-center gap-6">
-        <button class="lg:hidden flex items-center">
-            <i class="text-lg text-neutral-white hover:text-gray-regular transition ease-in-out duration-300
-                fa-solid fa-magnifying-glass"></i>
-        </button>
-
         @auth
             @role('artisan')
-                <x-button-outlined :href="route('artisan.index')">
-                    Painel do Artesão
-                </x-button-outlined>
+            <a class="2xl:flex uppercase text-center py-2 px-4 font-bold text-neutral-black bg-accent-regular rounded-lg hover:bg-accent-dark transition duration-300 ease-in-out"
+               href="{{ route('artisan.index') }}">
+                Painel
+            </a>
             @elserole('admin')
-                <x-button-outlined :href="route('admin.index')">
-                    Painel do Admin
-                </x-button-outlined>
+            <a class="2xl:flex uppercase text-center py-2 px-4 font-bold text-neutral-black bg-accent-regular rounded-lg hover:bg-accent-dark transition duration-300 ease-in-out"
+               href="{{  route('admin.index') }}">
+                Painel
+            </a>
             @endrole
 
             @can('activate shop')
@@ -37,24 +40,27 @@
                 </x-button-outlined>
             @endcan
         @else
-            <x-button-outlined class="2xl:hidden" href="{{ route('register') }}">
+            <a class="2xl:hidden uppercase text-center py-2 px-4 font-bold text-neutral-black bg-accent-regular rounded-lg hover:bg-accent-dark transition duration-300 ease-in-out"
+               href="{{ route('register') }}">
                 Criar conta
-            </x-button-outlined>
+            </a>
         @endauth
 
         <!-- Navigation Links -->
-        @include('layouts.navigation.app')
+        @include('layouts.navigation.links-app')
 
         @auth
             <!-- Authentication -->
-            <form class="flex items-center " method="POST" action="{{ route('logout') }}">
+            <form class="hidden md:flex items-center"
+                  method="POST"
+                  action="{{ route('logout') }}">
                 @csrf
 
-                <x-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                <x-link-navigation :href="route('logout')"
+                                   onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                    <i class="fa-lg text-neutral-white fa-solid fa-right-from-bracket"></i>
-                </x-nav-link>
+                    <i class="fa-xl text-neutral-white fa-solid fa-right-from-bracket"></i>
+                </x-link-navigation>
             </form>
         @endauth
     </div>

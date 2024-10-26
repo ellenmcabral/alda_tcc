@@ -1,44 +1,44 @@
 <nav class="items-center gap-8 hidden 2xl:flex">
 
     <!-- Navigation Links -->
-    <x-nav-link :href="route('artisan.index')"
+    <x-link-navigation :href="route('artisan.index')"
                 :color="'secondary'"
                 :active="request()->routeIs('artisan.index')">
         Início
-    </x-nav-link>
+    </x-link-navigation>
 
     @role('artisan')
-        <x-nav-link :href="route('artisan.products.index')"
+        <x-link-navigation :href="route('artisan.products.index')"
                     :color="'secondary'"
                     :active="request()->routeIs('artisan.products.index')">
             Produtos
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('artisan.commissions.index')"
+        <x-link-navigation :href="route('artisan.commissions.index')"
                     :color="'secondary'"
                     :active="request()->routeIs('artisan.commissions.index')">
             Encomendas
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('artisan.shop.edit')"
+        <x-link-navigation :href="route('artisan.shop.edit')"
                     :color="'secondary'"
                     :active="request()->routeIs('artisan.shop.edit')">
             Minha Loja
-        </x-nav-link>
+        </x-link-navigation>
 
     @else <!-- Admin Links -->
-        <x-nav-link
+        <x-link-navigation
             :href="route('login')"
             :color="'secondary'"
             :active="request()->routeIs('login')">
             Usuários
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link
+        <x-link-navigation
             :href="route('register')"
             :color="'secondary'"
             :active="request()->routeIs('register')">
             Permissões
-        </x-nav-link>
+        </x-link-navigation>
     @endrole
 </nav>

@@ -19,11 +19,11 @@
     </head>
     <body class="flex flex-col font-sans h-screen bg-neutral-white text-neutral-black">
         <!-- Page Header -->
-        <header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 sm:px-8 bg-neutral-white border-b-2 border-secondary-regular">
+        <header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 bg-neutral-white border-b-2 border-secondary-regular">
             <div class="flex">
-                @include('layouts.navigation.dropdown.dashboard')
+                <x-dropdown :links="'dashboard'"/>
 
-                <x-application-logo :color="'secondary'" />
+                <x-application-logo :color="'secondary'"/>
             </div>
 
             <div class="flex gap-6 items-center">
@@ -32,20 +32,20 @@
                     Sair do Painel
                 </x-button-outlined>
 
-                @include('layouts.navigation.dashboard')
+                @include('layouts.navigation.links-dashboard')
 
                 <!-- Authentication -->
-                <form class="flex items-center"
+                <form class="hidden md:flex items-center"
                       method="POST"
                       action="{{ route('logout') }}">
                     @csrf
 
-                    <x-nav-link :href="route('logout')"
-                                :color="'secondary'"
-                                onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                        <i class="fa-lg fa-solid fa-right-from-bracket"></i>
-                    </x-nav-link>
+                    <x-link-navigation :href="route('logout')"
+                                       :color="'secondary'"
+                                       onclick="event.preventDefault();
+                                       this.closest('form').submit();">
+                        <i class="fa-xl fa-solid fa-right-from-bracket"></i>
+                    </x-link-navigation>
                 </form>
             </div>
         </header>
@@ -63,7 +63,7 @@
         @endisset
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-8 pb-16 flex justify-center">
+        <main class="flex-grow mx-4 mt-10 pb-16 flex justify-center">
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>

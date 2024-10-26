@@ -10,7 +10,7 @@
             break;
     }
 
-    $class = $color . 'z-40 font-bold text-4xl';
+    $class = $color . 'z-40 font-bold text-4xl hidden sm:flex';
 
 @endphp
 

@@ -1,12 +1,14 @@
-<form class="h-fit" action="{{ route('search') }}" method="GET">
+<form class="h-fit"
+      action="{{ route('search') }}"
+      method="GET">
     <div class="flex bg-neutral-white items-center justify-center py-2 px-4 rounded-xl">
-        <select class="p-0 w-32 sm:w-32 text-sm cursor-pointer border-none text-gray-600 focus:ring-transparent"
+        <select class="p-0 w-24 text-sm cursor-pointer border-none text-gray-600 focus:ring-transparent"
                 name="search_type">
-            <option class="p-2" value="Produtos">Produtos</option>
+            <option value="Produtos">Produtos</option>
             <option value="Lojas">Lojas</option>
         </select>
 
-        <span class="mr-4 text-gray-regular">|</span>
+        <span class="mr-2 text-gray-regular">|</span>
 
         <input class="p-0 w-full text-sm border-none focus:bg-transparent focus:ring-transparent text-primary-700"
                type="text"

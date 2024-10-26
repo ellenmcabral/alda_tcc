@@ -1,23 +1,23 @@
 <nav class="items-center gap-8 hidden 2xl:flex">
     <!-- Navigation Links -->
     @auth <!-- LOGGED IN -->
-        <x-nav-link
+        <x-link-navigation
             :href="route('home')"
             :active="request()->routeIs('home')">
             Início
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
+        <x-link-navigation :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
                     :active="request()->routeIs('search', ['search_type' => 'Lojas', 'search_text' => ''])">
             Lojas
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('profile.show')"
+        <x-link-navigation :href="route('profile.show')"
                     :active="request()->routeIs('profile.show')">
             Minha Conta
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link class="flex items-center gap-1"
+        <x-link-navigation class="flex items-center gap-1"
                     :href="route('cart')"
                     :active="request()->routeIs('cart')">
             Sacola de Compras
@@ -26,26 +26,26 @@
                     {{ \Cart::content()->count() }}
                 </span>
             @endif
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('commissions.index')"
+        <x-link-navigation :href="route('commissions.index')"
                     :active="request()->routeIs('commissions.index')">
             Meus Pedidos
-        </x-nav-link>
+        </x-link-navigation>
 
     @else <!-- LOGGED OUT -->
-        <x-nav-link
+        <x-link-navigation
             :href="route('alda')"
             :active="request()->routeIs('alda')">
             Início
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
+        <x-link-navigation :href="route('search', ['search_type' => 'Lojas', 'search_text' => ''])"
                     :active="request()->routeIs('search', ['search_type' => 'Lojas', 'search_text' => ''])">
             Lojas
-        </x-nav-link>
+        </x-link-navigation>
 
-        <x-nav-link :href="route('cart')"
+        <x-link-navigation :href="route('cart')"
                     :active="request()->routeIs('cart')">
             Sacola de Compras
             @if(\Cart::content()->isNotEmpty())
@@ -53,7 +53,7 @@
                     {{ \Cart::content()->count() }}
                 </span>
             @endif
-        </x-nav-link>
+        </x-link-navigation>
 
         <a class="uppercase text-center py-2 px-4 font-bold text-neutral-white border-solid border-2 border-neutral-white rounded-lg hover:bg-gray-light hover:bg-opacity-10 transition duration-300"
            href="{{ route('login') }}">

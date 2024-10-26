@@ -11,10 +11,10 @@
             break;
     }
 
-    $class = $colors . 'block w-full p-6 lg:py-5 hover:bg-gray-100 transition duration-300';
+    $class = $colors . 'flex items-center gap-2 w-full p-6 lg:py-5 hover:bg-gray-100 transition duration-300';
 @endphp
 
 <a {{ $attributes->merge(['class' => $class]) }}>
-    <i class="mr-1 fa-solid @if($active) text-accent-regular @else text-gray-regular @endif @if($color == 'secondary') text-secondary-regular @endif {{ $active }} {{ $icon }}"></i>
+    <i class="fa-solid @if($active) text-accent-regular @else text-gray-regular @endif @if($color == 'secondary') text-secondary-regular @endif {{ $active }} {{ $icon }}"></i>
     {{ $slot }}
 </a>

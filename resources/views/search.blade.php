@@ -8,6 +8,10 @@
     </x-slot:heading>
 
     <div class="grid @if($searchType == 'Produtos') lg:flex @endif gap-8 h-fit w-full lg:px-8">
+        <search class="inline-block lg:hidden border rounded-lg border-gray-regular">
+            @include('layouts.search')
+        </search>
+
         @if($searchType == 'Produtos')
             <div class="hidden lg:flex">
                 <ul class="w-44 grid gap-2 border-r-2 border-accent-light pr-4">
