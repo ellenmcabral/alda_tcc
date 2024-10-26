@@ -12,6 +12,7 @@ class ProductRequest extends FormRequest
             'name' => ['required', 'string', 'min:3', 'max:150'],
             'image' => 'file',
             'sale_price' => ['required', 'numeric'],
+            'description' => ['min:3', 'max:700'],
             'category_id' => 'required',
         ];
     }
