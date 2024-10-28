@@ -19,6 +19,7 @@ class Shop extends Model
         'cnpj',
         'image',
         'is_active',
+        'created_at',
         'street',
         'number',
         'complement',
@@ -29,17 +30,11 @@ class Shop extends Model
         'user_id',
     ];
 
-    /**
-     * Get the user that owns the shop.
-     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Get the products associated with the shop.
-     */
     public function products(): hasMany
     {
         return $this->hasMany(Product::class);

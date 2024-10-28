@@ -17,7 +17,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->binary('image');
             $table->string('url')->nullable();
-            $table->decimal('cost_price', 10, 2)->nullable();
             $table->decimal('sale_price', 10, 2);
             $table->unsignedInteger('stock')->nullable();
             $table->unsignedInteger('deadline')->nullable();

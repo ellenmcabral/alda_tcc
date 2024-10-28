@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Commission extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
         'description',
         'total',
         'payment',
+        'created_at',
         'user_id',
         'shop_id',
         'shipping_address_id',

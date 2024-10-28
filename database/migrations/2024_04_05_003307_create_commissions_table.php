@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->id();
-            $table->text('description')->nullable();
             $table->decimal('total', 5, 2);
             $table->string('payment');
             $table->timestamps();
