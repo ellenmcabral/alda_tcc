@@ -9,8 +9,7 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'min:3', 'max:150'],
-            'image' => 'file',
+            'name' => ['required', 'string', 'min:3', 'max:60'],
             'sale_price' => ['required', 'numeric'],
             'description' => ['min:3', 'max:700'],
             'category_id' => 'required',

@@ -8,12 +8,12 @@ use App\Models\Shop;
 use App\Models\User;
 use Database\Seeders\CategoriesSeeder;
 use Database\Seeders\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Tests\TestCase;
 
 class ProductCreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTruncation;
 
     protected User $artisan;
     protected User $user;
@@ -40,47 +40,37 @@ class ProductCreateTest extends TestCase
         $this->artisan->syncRoles('artisan');
     }
 
-    /**
-     * Create a product page can be rendered to artisans
-     */
     public function test_create_a_product_page_can_be_rendered_to_artisans(): void
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->get('/artisan/products/create');
+            ->get('/artesao/produtos/adicionar');
 
         $response->assertStatus(200);
     }
 
-    /**
-     * Create a product page can not be rendered to non artisans
-     */
     public function test_create_a_product_page_can_not_be_rendered_to_non_artisans(): void
     {
         $response = $this
             ->actingAs($this->user)
-            ->get('/artisan/products/create');
+            ->get('/artesao/produtos/adicionar');
 
         $response->assertStatus(403);
     }
 
     public function test_create_a_product_page_can_not_be_rendered_to_non_registered(): void
     {
-        $response = $this->get('/artisan/products/create');
+        $response = $this->get('/artesao/produtos/adicionar');
 
         $response
             ->assertStatus(302)
             ->assertRedirect('/login');
     }
 
-    /**
-     * Artisans can create a product
-     */
     public function test_artisans_can_create_a_product(): void
     {
         $product = [
             'name' => 'Produto Teste',
-            'image' => 'no-image.jpg',
             'sale_price' => 48,
             'shop_id' => $this->artisan->shop->id,
             'category_id' => Category::first()->id,
@@ -88,11 +78,11 @@ class ProductCreateTest extends TestCase
 
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', $product);
+            ->post('/artesao/produtos', $product);
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/artisan/products');
+            ->assertRedirect('/artesao/produtos');
 
         $this->assertDatabaseHas('products', $product);
 
@@ -101,11 +91,11 @@ class ProductCreateTest extends TestCase
         $this->assertEquals($product['name'], $lastProduct->name);
     }
 
-    public function test_artisans_can_not_create_a_product_with_empty_field(): void
+    public function test_artisans_can_not_create_a_product_with_an_empty_field(): void
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', [
+            ->post('/artesao/produtos', [
                 'name' => '',
             ]);
 
@@ -118,7 +108,7 @@ class ProductCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', [
+            ->post('/artesao/produtos', [
                 'name' => 'a',
             ]);
 
@@ -133,14 +123,14 @@ class ProductCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', [
-                'name' => str_repeat('a', 151),
+            ->post('/artesao/produtos', [
+                'name' => str_repeat('a', 61),
             ]);
 
         $response
             ->assertStatus(302)
             ->assertSessionHasErrors([
-                'name' => 'O campo nome não pode ser superior a 150 caracteres.',
+                'name' => 'O campo nome não pode ser superior a 60 caracteres.',
             ]);
     }
 
@@ -148,9 +138,8 @@ class ProductCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', [
+            ->post('/artesao/produtos', [
                 'name' => str_repeat('a', 3),
-                'image' => 'no-image.jpg',
                 'sale_price' => 48,
                 'shop_id' => $this->artisan->shop->id,
                 'category_id' => Category::first()->id,
@@ -158,7 +147,7 @@ class ProductCreateTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/artisan/products')
+            ->assertRedirect('/artesao/produtos')
             ->assertValid(['name']);
     }
 
@@ -166,9 +155,8 @@ class ProductCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->artisan)
-            ->post('/artisan/products', [
-                'name' => str_repeat('a', 150),
-                'image' => 'no-image.jpg',
+            ->post('/artesao/produtos', [
+                'name' => str_repeat('a', 60),
                 'sale_price' => 48,
                 'shop_id' => $this->artisan->shop->id,
                 'category_id' => Category::first()->id,
@@ -176,7 +164,7 @@ class ProductCreateTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/artisan/products')
+            ->assertRedirect('/artesao/produtos')
             ->assertValid(['name']);
     }
 }

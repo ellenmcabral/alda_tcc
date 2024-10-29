@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('shop_id')->constrained()->onDelete('cascade');
-            $table->foreignId('shipping_address_id')->constrained();
+            $table->foreignId('shipping_address_id')->nullable()->constrained();
             $table->foreignId('status_id')->constrained();
         });
     }

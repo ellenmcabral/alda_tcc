@@ -2,22 +2,18 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
 use App\Models\Product;
 use App\Models\Shop;
 use App\Models\User;
 use Database\Seeders\CategoriesSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected User $user;
+    use DatabaseTruncation;
 
     protected User $artisan;
-
     protected User $artisan2;
 
     public function setUp(): void
@@ -25,8 +21,6 @@ class CartTest extends TestCase
         parent::setUp();
 
         $this->seed(CategoriesSeeder::class);
-
-        $this->user = User::factory()->create();
 
         $this->artisan = User::factory()->create();
         $this->artisan2 = User::factory()->create();
@@ -45,7 +39,7 @@ class CartTest extends TestCase
 
     public function test_cart_page_can_be_rendered(): void
     {
-        $response = $this->get('/cart');
+        $response = $this->get('/sacola');
 
         $response->assertStatus(200);
     }
@@ -54,12 +48,10 @@ class CartTest extends TestCase
     {
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'category_id' => Category::where('description', 'Aquarela')->first()->id,
             'image' => 'no-image.jpg'
         ]);
 
-        $response = $this->actingAs($this->user)
-            ->post('/cart/add', [
+        $response = $this->post('/cart/add', [
                 'shop_id' => $this->artisan->shop->id,
                 'id' => $product->id,
                 'name' => $product->name,
@@ -70,16 +62,17 @@ class CartTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('/cart');
+            ->assertRedirect('/sacola');
 
         $view = $this->view('cart', [
             'items' => \Cart::content(),
             'shop' => $this->artisan->shop,
         ]);
 
-        $view->assertSee($product->name);
-        $view->assertSee('Limpar sacola');
-        $view->assertSee('Continuar');
+        $view
+            ->assertSee($product->name)
+            ->assertSee('Limpar sacola')
+            ->assertSee('Continuar');
     }
 
     public function test_products_from_different_shops_can_not_be_added_to_cart(): void
@@ -88,7 +81,6 @@ class CartTest extends TestCase
 
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'category_id' => Category::where('description', 'Aquarela')->first()->id,
             'image' => 'no-image.jpg'
         ]);
 
@@ -104,12 +96,10 @@ class CartTest extends TestCase
 
         $product2 = Product::factory()->create([
             'shop_id' => $this->artisan2->shop->id,
-            'category_id' => Category::where('description', 'Aquarela')->first()->id,
             'image' => 'no-image.jpg'
         ]);
 
-        $response = $this->actingAs($this->user)
-            ->post('/cart/add', [
+        $response = $this->post('/cart/add', [
                 'shop_id' => $this->artisan2->shop->id,
                 'id' => $product2->id,
                 'name' => $product2->name,

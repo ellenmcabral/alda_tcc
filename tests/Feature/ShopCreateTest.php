@@ -6,12 +6,12 @@ use App\Models\Shop;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTruncation;
 use Tests\TestCase;
 
 class ShopCreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTruncation;
 
     protected User $user;
 
@@ -27,24 +27,17 @@ class ShopCreateTest extends TestCase
         $this->user = User::factory()->create();
 
         $this->user->syncPermissions('create shop');
-
     }
 
-    /**
-     * Create a shop page is rendered properly
-     */
     public function test_create_a_shop_screen_can_be_rendered(): void
     {
         $response = $this
             ->actingAs($this->user)
-            ->get('/shop/create');
+            ->get('/loja/criar');
 
         $response->assertStatus(200);
     }
 
-    /**
-     * Users can create a shop
-     */
     public function test_users_can_create_a_shop(): void
     {
         $shop = [
@@ -54,25 +47,20 @@ class ShopCreateTest extends TestCase
 
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', $shop);
+            ->post('/loja/criar', $shop);
 
         $response
             ->assertStatus(302)
-            ->assertRedirect('home');
-
-        // colocar para ver se a mensagem de ativação da loja aparece na página inicial
+            ->assertSee('inicio');
 
         $this->assertDatabaseHas('shops', $shop);
     }
 
-    /**
-     * Users cannot create a shop with an empty field
-     */
     public function test_users_can_not_create_a_shop_with_empty_field(): void
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => '',
                 'url' => 'teste',
             ]);
@@ -86,7 +74,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'a',
                 'url' => 'teste',
             ]);
@@ -102,15 +90,15 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
-                'name' => str_repeat('a', 151),
+            ->post('/loja/criar', [
+                'name' => str_repeat('a', 61),
                 'url' => 'teste',
             ]);
 
         $response
             ->assertStatus(302)
             ->assertSessionHasErrors([
-                'name' => 'O campo nome não pode ser superior a 150 caracteres.',
+                'name' => 'O campo nome não pode ser superior a 60 caracteres.',
             ]);
     }
 
@@ -118,7 +106,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => str_repeat('a', 3),
                 'url' => 'teste',
             ]);
@@ -132,8 +120,8 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
-                'name' => str_repeat('a', 150),
+            ->post('/loja/criar', [
+                'name' => str_repeat('a', 60),
                 'url' => 'teste',
             ]);
 
@@ -146,7 +134,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'teste',
                 'url' => 'teste de loja'
             ]);
@@ -162,7 +150,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'teste',
                 'url' => 'a',
             ]);
@@ -178,15 +166,15 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                'name' => 'teste',
-               'url' => str_repeat('a', 51),
+               'url' => str_repeat('a', 61),
             ]);
 
         $response
             ->assertStatus(302)
             ->assertSessionHasErrors([
-               'url' => 'O campo url não pode ser superior a 50 caracteres.'
+               'url' => 'O campo url não pode ser superior a 60 caracteres.'
             ]);
     }
 
@@ -194,7 +182,7 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'teste',
                 'url' => str_repeat('a', 3),
             ]);
@@ -208,9 +196,9 @@ class ShopCreateTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'teste',
-                'url' => str_repeat('a', 50),
+                'url' => str_repeat('a', 60),
             ]);
 
         $response
@@ -230,7 +218,7 @@ class ShopCreateTest extends TestCase
 
         $response = $this
             ->actingAs($this->user)
-            ->post('/shop/create', [
+            ->post('/loja/criar', [
                 'name' => 'loja teste',
                 'url' => 'testeloja',
             ]);

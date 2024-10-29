@@ -46,7 +46,7 @@
                         <input type="radio"
                                class="focus:ring-accent-regular hover:checked:bg-accent-dark checked:bg-accent-regular checked:focus:bg-accent-regular accent-accent-regular"
                                id="{{ $address->id }}"
-                               name="address_id"
+                               name="shipping_address_id"
                                value="{{ $address->id }}" {{ $address->is_default ? 'checked' : '' }} />
                         <x-input-label for="{{ $address->id }}"
                                        class="ml-2"

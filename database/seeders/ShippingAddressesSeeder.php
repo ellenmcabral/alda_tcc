@@ -14,7 +14,7 @@ class ShippingAddressesSeeder extends Seeder
     public function run(): void
     {
         ShippingAddress::create([
-            'street' => 'Juscelino Kubitschek',
+        'street' => 'Juscelino Kubitschek',
             'number' => '2000',
             'complement' => 'Bloco S, apto. 105',
             'locality' => 'São Gonçalo',

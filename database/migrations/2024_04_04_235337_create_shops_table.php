@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->string('url', 50)->unique();
-            $table->string('name', 150);
+            $table->string('url', 60)->unique();
+            $table->string('name', 60);
             $table->text('description')->nullable();
             $table->string('cpf', 11)->unique()->nullable();
             $table->string('cnpj', 14)->unique()->nullable();
@@ -22,11 +22,11 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
             $table->boolean('is_active')->default(false);
 
-            $table->string('street', 150)->nullable();
+            $table->string('street', 160)->nullable();
             $table->string('number', 20)->nullable();
-            $table->string('complement', 150)->nullable();
-            $table->string('locality', 50)->nullable();
-            $table->string('city', 50)->nullable();
+            $table->string('complement', 40)->nullable();
+            $table->string('locality', 60)->nullable();
+            $table->string('city', 90)->nullable();
             $table->char('region_code', 2)->nullable();
             $table->string('postal_code', 9)->nullable();
 

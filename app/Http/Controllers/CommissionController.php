@@ -24,7 +24,7 @@ class CommissionController extends Controller
             'payment' => $request->payment,
             'user_id' => $request->user()->id,
             'shop_id' => $request->shop_id,
-            'shipping_address_id' => $request->address_id,
+            'shipping_address_id' => $request->shipping_address_id,
             'status_id' => 1,
         ]);
 

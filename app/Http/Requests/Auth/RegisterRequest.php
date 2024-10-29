@@ -12,9 +12,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:60'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:60', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'min:3', 'max:60', 'unique:'.User::class],
             'phone' => ['required', 'min:16', 'max:16', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults(), 'max:100'],
         ];
     }
 }
