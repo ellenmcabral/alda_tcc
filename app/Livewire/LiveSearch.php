@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Product;
 use App\Models\Shop;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LiveSearch extends Component
 {
+    use WithPagination;
+
     public $search = '';
     public $searchType = '';
     public $category = '';
@@ -15,6 +18,11 @@ class LiveSearch extends Component
     public $filter = '';
     public $sortField = 'name';
     public $sortDirection = 'asc';
+
+    public function updated()
+    {
+        $this->resetPage();
+    }
 
     public function updatedFilter()
     {
@@ -55,7 +63,7 @@ class LiveSearch extends Component
             }
         }
         return view('livewire.live-search', [
-            'results' => $results->orderBy($this->sortField, $this->sortDirection)->paginate(10),
+            'results' => $results->orderBy($this->sortField, $this->sortDirection)->paginate(20),
         ]);
     }
 }
