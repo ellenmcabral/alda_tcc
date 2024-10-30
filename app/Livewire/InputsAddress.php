@@ -23,16 +23,22 @@ class InputsAddress extends Component
     {
         $value = str_replace(' ', '', $value);
 
-        $response = Http::get("https://viacep.com.br/ws/{$value}/json/")->json();
+        $response = Http::get('https://viacep.com.br/ws/' . $value . '/json/');
 
-        if(!array_key_exists('erro', $response)) {
-            $this->error = '';
+        $dadosApi = $response->json();
 
-            $this->postal_code = $value;
-            $this->street = $response['logradouro'];
-            $this->locality = $response['bairro'];
-            $this->city = $response['localidade'];
-            $this->region_code = $response['uf'];
+        if(!$dadosApi == null) {
+            if(!empty($dadosApi['erro']) and $dadosApi['erro'] == true) {
+                $this->error = 'Este CEP é inválido.';
+            } else {
+                $this->error = '';
+
+                $this->postal_code = $value;
+                $this->street = $response['logradouro'];
+                $this->locality = $response['bairro'];
+                $this->city = $response['localidade'];
+                $this->region_code = $response['uf'];
+            }
         } else {
             $this->error = 'Este CEP é inválido.';
         }
