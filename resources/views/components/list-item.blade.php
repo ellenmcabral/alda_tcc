@@ -1,10 +1,10 @@
 @props(['link', 'image'])
 
 <li {{ $attributes->merge(['class' => 'flex justify-between items-center']) }}>
-    <div class="flex items-center gap-4 lg:w-full">
+    <div class="flex items-center">
         @isset($image)
             <a class="hidden sm:inline-flex" href="{{ $link }}">
-                <x-image class="max-w-16"
+                <x-image class="mr-6 max-w-16"
                          src="/img/products/{{ $image }}" />
             </a>
         @endisset
@@ -15,18 +15,18 @@
             </p>
         @endisset
 
-        <x-link-secondary class="line-clamp-1" href="{{ $link }}">
+        <x-link class="line-clamp-1 w-40 sm:w-fit lg:line-clamp-none" href="{{ $link }}">
             {{ $product }}
-        </x-link-secondary>
+        </x-link>
     </div>
 
-    <div class="text-right w-1/2">
-        <p class="text-gray-regular">
+    <div class="text-right">
+        <p class="text-gray-regular hidden md:block">
             {{ $price }}
         </p>
 
         @isset($subtotal)
-            <p class="font-bold text-accent-dark">
+            <p class="font-bold">
                 {{ $subtotal }}
             </p>
         @endisset

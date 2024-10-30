@@ -1,4 +1,4 @@
-<x-button-secondary class="cursor-pointer"
+<x-button-secondary class="w-full sm:w-fit cursor-pointer"
     x-data=""
     x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-update')">
     Alterar Status <i class="fa-solid fa-edit"></i>

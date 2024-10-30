@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->decimal('total', 5, 2);
             $table->string('payment');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('shop_id')->constrained()->onDelete('cascade');

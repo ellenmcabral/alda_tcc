@@ -1,8 +1,8 @@
-<x-button-danger class="w-fit"
+<x-button-outlined :color="'gray'" class="w-full sm:w-fit"
     x-data=""
     x-on:click.prevent="$dispatch('open-modal', 'confirm-commission-deletion')">
     Cancelar Encomenda
-</x-button-danger>
+</x-button-outlined>
 
 <x-modal :maxWidth="'sm'" name="confirm-commission-deletion"
          :show="$errors->commissionDeletion->isNotEmpty()" focusable>

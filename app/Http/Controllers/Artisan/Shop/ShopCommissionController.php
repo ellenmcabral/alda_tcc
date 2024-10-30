@@ -35,6 +35,8 @@ class ShopCommissionController extends Controller
     {
         $commission->status_id = $request->status_id;
 
+        $commission->updated_at = date('Y-m-d H:i:s');
+
         $commission->save();
 
 //        Mail::to($commission->user->email, $commission->user->name)

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Commission extends Model
@@ -17,6 +16,7 @@ class Commission extends Model
         'total',
         'payment',
         'created_at',
+        'updated_at',
         'user_id',
         'shop_id',
         'shipping_address_id',
@@ -48,9 +48,15 @@ class Commission extends Model
         return $this->hasMany(CommissionProduct::class);
     }
 
-    public function formatDate(): string
+    public function formatDate(string $column = 'created_at'): string
     {
-        return date('d/m/Y', strtotime($this->created_at));
+        if ($column == 'created_at') {
+            $date = date('d/m/Y \à\s\ H:i', strtotime($this->created_at));
+        }
+        if ($column == 'updated_at') {
+            $date = date('d/m/Y \à\s\ H:i', strtotime($this->updated_at));
+        }
+        return $date;
     }
 
     public function formatPrice(): string
