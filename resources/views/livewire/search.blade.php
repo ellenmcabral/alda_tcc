@@ -17,5 +17,5 @@
 
     <x-results-list :results="$results" :searchType="$searchType" />
 
-    {{  $results->appends(Request::all())->links() }}
+    {{  $results->links() }}
 </div>

@@ -7,7 +7,7 @@ use App\Models\Shop;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class LiveSearch extends Component
+class Search extends Component
 {
     use WithPagination;
 
@@ -62,7 +62,7 @@ class LiveSearch extends Component
                 $results = $results->where('shop_id', $this->shop->id);
             }
         }
-        return view('livewire.live-search', [
+        return view('livewire.search', [
             'results' => $results->orderBy($this->sortField, $this->sortDirection)->paginate(20),
         ]);
     }

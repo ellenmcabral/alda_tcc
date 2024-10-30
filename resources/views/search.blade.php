@@ -27,7 +27,7 @@
             </div>
        @endif
 
-        <livewire:live-search :search="$searchText" :searchType="$searchType" />
+        <livewire:search :search="$searchText" :searchType="$searchType" />
     </div>
 </x-app-layout>
 
