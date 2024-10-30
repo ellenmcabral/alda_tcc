@@ -4,6 +4,6 @@
     </x-slot:breadcrumbs>
 
     <div class="h-fit w-full lg:px-8">
-        <livewire:live-search :searchType="'Produtos'" :category="$category" />
+        <livewire:search :searchType="'Produtos'" :category="$category" />
     </div>
 </x-app-layout>
