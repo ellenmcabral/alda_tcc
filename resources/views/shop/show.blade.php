@@ -48,6 +48,6 @@
 
         <hr/>
 
-        <livewire:live-search :searchType="'Produtos'" :shop="$shop" />
+        <livewire:search :searchType="'Produtos'" :shop="$shop" />
     </div>
 </x-app-layout>
