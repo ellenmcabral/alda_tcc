@@ -13,7 +13,8 @@ class CommissionController extends Controller
     public function index(Request $request): View
     {
         return view('commissions.index', [
-            'commissions' => $request->user()->commissions()->orderBy('created_at', 'desc')->get(),
+            'commissions' => $request->user()->commissions()
+                ->orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
@@ -69,9 +70,16 @@ class CommissionController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $commission->delete();
+        $commission->status_id = 6; // cancelada
+
+        $commission->updated_at = date('Y-m-d H:i:s');
+
+        $commission->save();
+
+//        Mail::to($commission->shop->user->email, $commission->shop->user->name)
+//            ->send(new CommissionUpdated($commission));
 
         return redirect(route('commissions.index'))
-            ->with('status', 'Encomenda cancelada');
+            ->with('status', 'Encomenda cancelada com sucesso');
     }
 }

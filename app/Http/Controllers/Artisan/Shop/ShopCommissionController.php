@@ -16,7 +16,8 @@ class ShopCommissionController extends Controller
     public function index(Request $request): View
     {
         return view('artisan.commissions.index', [
-            'shopCommissions' => $request->user()->shop->commissions()->orderBy('created_at', 'desc')->get(),
+            'shopCommissions' => $request->user()->shop->commissions()
+                ->orderBy('updated_at', 'desc')->get(),
         ]);
     }
 
