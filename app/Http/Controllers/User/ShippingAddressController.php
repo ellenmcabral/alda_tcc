@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingAddressRequest;
 use App\Models\Commission;
 use App\Models\ShippingAddress;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
 
 class ShippingAddressController extends Controller
@@ -23,7 +25,7 @@ class ShippingAddressController extends Controller
         return view('profile.shipping-addresses.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(ShippingAddressRequest $request): RedirectResponse
     {
         $addresses = $request->user()->shippingAddresses()->get();
 
@@ -32,18 +34,6 @@ class ShippingAddressController extends Controller
         } else {
             $default = false;
         }
-
-        $postalCode = str_replace(' ', '', $request->postal_code);
-
-        $request->validate([
-            'street' => ['required', 'string', 'max:160'],
-            'number' => ['required', 'string', 'max:20'],
-            'complement' => ['max:40'],
-            'locality' => ['required', 'string', 'max:60'],
-            'city' => ['required', 'string', 'max:90'],
-            'region_code' => ['required', 'string', 'max:2'],
-            'postal_code' => ['required'],
-        ]);
 
         ShippingAddress::create([
             'street' => $request->street,

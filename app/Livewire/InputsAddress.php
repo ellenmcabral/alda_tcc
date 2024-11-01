@@ -19,7 +19,7 @@ class InputsAddress extends Component
 
     public $address;
 
-    public function updatedPostalCode(string $value)
+    public function updatedPostalCode(string $value): void
     {
         $value = str_replace(' ', '', $value);
 
@@ -27,38 +27,37 @@ class InputsAddress extends Component
 
         $dadosApi = $response->json();
 
-        if(!$dadosApi == null) {
-            if(!empty($dadosApi['erro']) and $dadosApi['erro'] == true) {
-                $this->error = 'Este CEP é inválido.';
-            } else {
-                $this->error = '';
+        if(!$dadosApi == null and empty($dadosApi['erro'])) {
+            $this->error = '';
 
-                $this->postal_code = $value;
-                $this->street = $response['logradouro'];
-                $this->locality = $response['bairro'];
-                $this->city = $response['localidade'];
-                $this->region_code = $response['uf'];
+            $this->postal_code = $value;
+            $this->street = $response['logradouro'];
+            $this->locality = $response['bairro'];
+            $this->city = $response['localidade'];
+            $this->region_code = $response['uf'];
+        }
+        else {
+            $this->street = '';
+            $this->locality = '';
+            $this->city = '';
+            $this->region_code = '';
+
+            if($dadosApi == null) {
+                $this->error = 'O campo CEP está em um formato inválido.';
             }
-        } else {
-            $this->error = 'Este CEP é inválido.';
+            if(!empty($dadosApi['erro']) and $dadosApi['erro'] == true) {
+                $this->error = 'Este CEP não foi encontrado.';
+            }
         }
     }
-    /**
-     * In Livewire components, you use mount() instead of a class constructor __construct() like you may be used to.
-     */
-    public function mount($address)
+
+    public function mount($address): void
     {
-        if($address) {
-            $this->street = $address->street;
-            $this->number = $address->number;
-            if($address->complement) {
-                $this->complement = $address->complement;
-            }
-            $this->locality = $address->locality;
-            $this->city = $address->city;
-            $this->region_code = $address->region_code;
-            $this->postal_code = $address->postal_code;
-        }
+        $this->postal_code = $address->postal_code;
+        $this->street = $address->street;
+        $this->locality = $address->locality;
+        $this->city = $address->city;
+        $this->region_code = $address->region_code;
     }
 
     public function render()

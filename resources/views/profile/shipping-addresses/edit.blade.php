@@ -13,8 +13,7 @@
                 <input type="checkbox"
                        id="is_default"
                        name="is_default"
-                       value="1"
-                    {{ $address->is_default ? 'checked' : '' }} >
+                       value="1" {{ $address->is_default ? 'checked' : '' }} >
                 <x-input-label for="is_default"
                                class="ml-2"
                                :value="'Este é meu endereço padrão'" />
