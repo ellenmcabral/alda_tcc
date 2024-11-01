@@ -25,6 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'Cart' => \Gloudemans\Shoppingcart\Facades\Cart::class,
         ]);
+        $middleware->trustProxies('*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
