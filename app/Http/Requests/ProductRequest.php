@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ProductImageRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -10,6 +11,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:60'],
+            'images' => ['required', 'array'],
             'sale_price' => ['required', 'numeric'],
             'description' => ['min:3', 'max:700'],
             'category_id' => 'required',
@@ -19,7 +21,7 @@ class ProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'image.required' => 'O campo imagem é obrigatório.',
+            'images.required' => 'Pelo menos uma imagem é obrigatória.',
             'category_id.required' => 'O campo categoria é obrigatório.',
         ];
     }

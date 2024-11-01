@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -22,20 +21,19 @@ class Product extends Model
         'category_id',
     ];
 
-    /**
-     * Get the shop associated with the product.
-     */
     public function shop(): BelongsTo
     {
         return $this->BelongsTo(Shop::class);
     }
 
-    /**
-     * Get the category associated with the product.
-     */
     public function category(): BelongsTo
     {
         return $this->BelongsTo(Category::class);
+    }
+
+    public function images(): HasMany
+    {
+        return $this->HasMany(ProductImage::class);
     }
 
     public function formatPrice(): string

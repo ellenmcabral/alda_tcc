@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
@@ -31,25 +32,33 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-        if($request->hasFile('image')) {
-            $requestImage = $request->image;
+        $defaultImage = md5($request->images[0]->getClientOriginalName()
+                . strtotime("now")) . "." . $request->images[0]->extension();
 
-            $imageName = md5($requestImage->getClientOriginalName()
-                    . strtotime("now")) . "." . $request->image->extension();
-
-            $requestImage->move(public_path('img/products'), $imageName);
-        } else {
-            $imageName = 'no-image.jpg';
-        }
-
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
-            'image' => $imageName,
+            'image' => $defaultImage,
             'sale_price' => $request->sale_price,
             'description' => $request->description,
             'shop_id' => $request->user()->shop->id,
             'category_id' => $request->category_id,
         ]);
+
+        if($request->images) {
+            foreach ($request->images as $image) {
+                $requestImage = $image;
+
+                $imageName = md5($requestImage->getClientOriginalName()
+                        . strtotime("now")) . "." . $requestImage->extension();
+
+                $requestImage->move(public_path('img/products'), $imageName);
+
+                ProductImage::create([
+                    'image' => $imageName,
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
 
         return redirect(route('artisan.products.index'))
             ->with('status', 'Produto adicionado com sucesso');
