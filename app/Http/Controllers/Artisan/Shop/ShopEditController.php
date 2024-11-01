@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Shop\ShopUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 class ShopEditController extends Controller
@@ -34,7 +35,7 @@ class ShopEditController extends Controller
         ]);
 
         return redirect(route('artisan.shop.information'))
-            ->with('status', 'Loja atualizada com sucesso!');
+            ->with('status', 'Informações da loja atualizadas com sucesso');
     }
 
     public function customization(Request $request): View
@@ -46,18 +47,42 @@ class ShopEditController extends Controller
 
     public function updateCustomization(Request $request): RedirectResponse
     {
-        //
+        $shop = $request->user()->shop;
 
-        return redirect(route('artisan.shop.customization'));
+        if($request->hasFile('image')) {
+            $requestImage = $request->image;
+
+            $imageName = md5($requestImage->getClientOriginalName()
+                    . strtotime("now")) . "." . $request->image->extension();
+
+            $requestImage->move(public_path('img/shops'), $imageName);
+
+            $shop->image = $imageName;
+        }
+
+        if($request->description) {
+            $shop->description = $request->description;
+        } else {
+            $shop->description = null;
+        }
+
+        $shop->save();
+
+        return redirect(route('artisan.shop.customization'))
+            ->with('status', 'Customizações da loja atualizadas com sucesso');
     }
 
     public function destroy(Request $request): RedirectResponse
     {
+        $shop = $request->user()->shop;
+
         $request->validateWithBag('shopDeletion', [
             'password' => ['required', 'current_password'],
         ]);
 
-        $request->user()->shop->delete();
+        File::delete(public_path('img/shops') . '/' . $shop->image);
+
+        $shop->delete();
 
         $request->user()->syncRoles('user');
 
