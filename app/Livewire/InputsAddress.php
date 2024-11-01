@@ -55,6 +55,9 @@ class InputsAddress extends Component
     {
         $this->postal_code = $address->postal_code;
         $this->street = $address->street;
+        if($address->complement) {
+            $this->complement = $address->complement;
+        }
         $this->locality = $address->locality;
         $this->city = $address->city;
         $this->region_code = $address->region_code;
