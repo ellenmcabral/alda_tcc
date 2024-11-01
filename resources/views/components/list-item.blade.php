@@ -20,7 +20,7 @@
         </x-link>
     </div>
 
-    <div class="text-right">
+    <div class="text-right w-32">
         <p class="text-gray-regular hidden md:block">
             {{ $price }}
         </p>

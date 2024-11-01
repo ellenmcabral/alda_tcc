@@ -2,140 +2,145 @@
     <x-slot:heading>
         Sacola de Compras
     </x-slot:heading>
-    <div class="grid gap-10 w-full h-fit md:w-1/2 xl:w-1/3">
-        @if($items->isEmpty()) <!-- SACOLA VAZIA -->
-            <div class="flex flex-col items-center gap-8">
-                <img class="w-1/2 md:w-1/3"
-                     src="\img\assets\shopping-bag.png"
-                     alt="ilustração de sacola" />
-                <p class="text-gray-dark">
-                    Sua sacola está vazia.
-                </p>
-
-                <x-link href="{{ route('home') }}">
-                    Voltar para a página inicial
-                </x-link>
-            </div>
-        @else <!-- SACOLA COM ITENS -->
-            <p class="text-lg">
-                Sua sacola tem
-                @if($items->count() == 1)
-                    <span class="font-bold">{{ $items->count() }} item</span>
-                @else
-                    <span class="font-bold">{{ $items->count() }} itens</span>
-                @endif
-                da loja <x-link href="{{ route('shop.show', $shop->url) }}">
-                    {{ $shop->name }}
-                </x-link>
+    @if($items->isEmpty()) <!-- SACOLA VAZIA -->
+        <div class="flex flex-col items-center gap-8">
+            <img class="w-1/2 md:w-1/3"
+                 src="\img\assets\shopping-bag.png"
+                 alt="ilustração de sacola" />
+            <p class="text-gray-dark">
+                Sua sacola está vazia.
             </p>
 
-            <div class="flex justify-between">
-                <x-link-secondary href="{{ route('home') }}">
-                    Voltar para o início
-                </x-link-secondary>
-                <x-link-secondary href="{{ route('cart.destroy') }}">
-                    Limpar sacola
-                </x-link-secondary>
-            </div>
+            <x-link href="{{ route('home') }}">
+                Voltar para a página inicial
+            </x-link>
+        </div>
+    @else <!-- SACOLA COM ITENS -->
+        <div class="flex flex-col lg:flex-row gap-10 xl:gap-20 w-full h-fit xl:px-8">
+            <section class="grid gap-10 lg:w-1/2">
+                <div class="flex justify-between">
+                    <x-link-secondary href="{{ route('home') }}">
+                        Voltar para o início
+                    </x-link-secondary>
+                    <x-link-secondary href="{{ route('cart.destroy') }}">
+                        Limpar sacola
+                    </x-link-secondary>
+                </div>
 
-            <hr/>
+                <hr/>
 
-            <ul class="grid gap-12">
-                @foreach($items as $item)
-                    <div class="grid gap-4">
-                        <x-list-item :link="route('products.show', $item->id)"
-                                     :image="$item->options->image">
+                <ul class="grid gap-12">
+                    @foreach($items as $item)
+                        <div class="grid gap-4">
+                            <x-list-item :link="route('products.show', $item->id)"
+                                         :image="$item->options->image">
 
-                            <x-slot:product>
-                                {{ $item->name }}
-                            </x-slot:product>
+                                <x-slot:product>
+                                    {{ $item->name }}
+                                </x-slot:product>
 
-                            <x-slot:price>
-                                R$ {{ number_format($item->price, 2, ',', '.') }}
-                            </x-slot:price>
+                                <x-slot:price>
+                                    R$ {{ number_format($item->price, 2, ',', '.') }}
+                                </x-slot:price>
 
-                            <x-slot:subtotal>
-                                R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
-                            </x-slot:subtotal>
-                        </x-list-item>
-                        <div class="flex justify-between items-center">
-                            <form action="{{ route('cart.remove', $item->rowId) }}"
-                                  method="post">
-                                @csrf
-                                @method('delete')
-
-                                <button class="text-gray-dark hover:text-neutral-black transition duration-300">
-                                    <i class="mr-2 fa-solid text-sm fa-trash text-gray-regular"></i>
-                                    <span class="underline">
-                                        Remover
-                                    </span>
-                                </button>
-                            </form>
-                            <div class="flex items-center">
-                                <form action="{{ route('cart.update', $item->rowId) }}"
+                                <x-slot:subtotal>
+                                    R$ {{ number_format($item->price * $item->qty, 2, ',', '.') }}
+                                </x-slot:subtotal>
+                            </x-list-item>
+                            <div class="flex justify-between items-center">
+                                <form action="{{ route('cart.remove', $item->rowId) }}"
                                       method="post">
                                     @csrf
-                                    @method('patch')
+                                    @method('delete')
 
-                                    <input type="hidden"
-                                           name="decrement"
-                                           value="decrement">
-
-                                    <input type="hidden"
-                                           name="quantity"
-                                           value="{{ $item->qty }}">
-
-                                    <button class="flex items-center justify-center font-bold px-2 w-10 h-8 border border-gray-dark rounded text-accent-darker"
-                                            type="submit">
-                                        -
+                                    <button class="text-gray-dark hover:text-neutral-black transition duration-300">
+                                        <i class="mr-2 fa-solid text-sm fa-trash text-gray-regular"></i>
+                                        <span class="underline">
+                                        Remover
+                                    </span>
                                     </button>
                                 </form>
+                                <div class="flex items-center">
+                                    <form action="{{ route('cart.update', $item->rowId) }}"
+                                          method="post">
+                                        @csrf
+                                        @method('patch')
 
-                                <p class="px-4">
-                                    {{ $item->qty }}
-                                </p>
+                                        <input type="hidden"
+                                               name="decrement"
+                                               value="decrement">
 
-                                <form action="{{ route('cart.update', $item->rowId) }}"
-                                      method="post">
-                                    @csrf @method('patch')
+                                        <input type="hidden"
+                                               name="quantity"
+                                               value="{{ $item->qty }}">
 
-                                    {{--                        <input class="w-8 rounded border-gray-400"--}}
-                                    {{--                               type="number"--}}
-                                    {{--                               name="quantity"--}}
-                                    {{--                               value="{{ old('qty', $item->qty) }}"--}}
-                                    {{--                               required />--}}
+                                        <button class="flex items-center justify-center font-bold px-2 w-10 h-8 border border-gray-dark rounded text-accent-darker"
+                                                type="submit">
+                                            -
+                                        </button>
+                                    </form>
+
+                                    <p class="px-4">
+                                        {{ $item->qty }}
+                                    </p>
+
+                                    <form action="{{ route('cart.update', $item->rowId) }}"
+                                          method="post">
+                                        @csrf @method('patch')
+
+                                        {{--                        <input class="w-8 rounded border-gray-400"--}}
+                                        {{--                               type="number"--}}
+                                        {{--                               name="quantity"--}}
+                                        {{--                               value="{{ old('qty', $item->qty) }}"--}}
+                                        {{--                               required />--}}
 
 
-                                    <input type="hidden"
-                                           name="increment"
-                                           value="increment">
+                                        <input type="hidden"
+                                               name="increment"
+                                               value="increment">
 
-                                    <input type="hidden"
-                                           name="quantity"
-                                           value="{{ $item->qty }}">
+                                        <input type="hidden"
+                                               name="quantity"
+                                               value="{{ $item->qty }}">
 
-                                    <button class="font-bold text-neutral-white rounded px-2 w-10 h-8 bg-accent-darker"
-                                            type="submit">
-                                        +
-                                    </button>
-                                </form>
+                                        <button class="font-bold text-neutral-white rounded px-2 w-10 h-8 bg-accent-darker"
+                                                type="submit">
+                                            +
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </ul>
+                    @endforeach
+                </ul>
 
-            <hr/>
+                <hr/>
+            </section>
 
-            <div class="flex flex-col gap-8">
-                <x-text-heading class="text-secondary-regular flex justify-between">
-                    Subtotal <span>R$ {{ \Cart::subtotal(2, ',', '.') }}</span>
-                </x-text-heading>
-                <a class="w-full h-fit uppercase text-center font-bold text-neutral-white border-solid bg-secondary-regular hover:bg-secondary-dark p-3 rounded-lg transition duration-300" href="{{ route('checkout.index') }}">
-                    Continuar pedido
-                    <i class="ml-2 fa-solid fa-chevron-right"></i>
-                </a>
-            </div>
-        @endif
-    </div>
+            <section class="grid gap-10 lg:w-1/2 h-fit">
+                <p class="text-lg">
+
+                    @if($items->count() == 1)
+                        <span class="font-bold">{{ $items->count() }} item</span>
+                    @else
+                        <span class="font-bold">{{ $items->count() }} itens</span>
+                    @endif
+                    da loja <x-link href="{{ route('shop.show', $shop->url) }}">
+                        {{ $shop->name }}
+                    </x-link>
+                </p>
+
+                <div class="flex flex-col gap-8">
+                    <x-text-heading class="text-secondary-regular flex gap-2 flex-col sm:flex-row sm:justify-between">
+                        <span>Subtotal</span> <span>R$ {{ \Cart::subtotal(2, ',', '.') }}</span>
+                    </x-text-heading>
+                    <a class="w-full md:self-end md:w-64 h-fit uppercase text-center font-bold text-neutral-white border-solid bg-secondary-regular hover:bg-secondary-dark p-3 rounded-lg transition duration-300"
+                       href="{{ route('checkout.index') }}">
+                        Continuar pedido
+                        <i class="ml-2 fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+    @endif
 </x-app-layout>
