@@ -5,6 +5,12 @@
 
     <div class="flex flex-col gap-10 w-full h-fit lg:w-2/3">
         <section class="grid gap-4">
+            @if($commission->status->id == 6)
+                <p class="p-4 bg-danger-regular rounded border border-danger-dark">
+                    Este pedido será removido permanentemente após 1 mês.
+                </p>
+            @endif
+
             <div class="flex flex-col sm:items-center sm:flex-row sm:justify-between gap-4">
                 <x-text-heading>
                     Pedido
@@ -17,15 +23,15 @@
                     {{ $commission->status->description }}
                 </x-tag-commission>
             </div>
+        </section>
 
-            <div class="grid gap-2">
-                <p class="text-gray-dark text-sm md:text-base">
-                    Feito em {{ $commission->formatDate() }}
-                </p>
-                <p class="text-gray-dark text-sm md:text-base">
-                    Atualizado em {{ $commission->formatDate('updated_at') }}
-                </p>
-            </div>
+        <section class="grid gap-2 text-sm md:text-base">
+            <p>
+                Feito em {{ $commission->formatDate() }}
+            </p>
+            <p>
+                Atualizado em {{ $commission->formatDate('updated_at') }}
+            </p>
         </section>
 
         @if($commission->status->id == 1)
