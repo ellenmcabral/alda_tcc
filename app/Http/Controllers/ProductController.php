@@ -44,6 +44,17 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
         ]);
 
+        $product->url = $product->formatName();
+
+        if($request->option == 'stock') {
+            $product->stock = $request->stock;
+        }
+        if($request->option == 'deadline') {
+            $product->deadline = $request->deadline;
+        }
+
+        $product->save();
+
         if($request->images) {
             foreach ($request->images as $image) {
                 $requestImage = $image;
@@ -108,7 +119,11 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        File::delete(public_path('img/products').'/'.$product->image);
+        $productImages = ProductImage::where('product_id', $product->id)->get();
+
+        foreach ($productImages as $productImage) {
+            File::delete(public_path('img/products').'/'. $productImage->image);
+        }
 
         $product->delete();
 

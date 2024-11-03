@@ -43,7 +43,9 @@ class Product extends Model
 
     public function formatName(): string
     {
-        return str_replace(array(' ', '.'), array('-', ''), $this->name);
+        $name = strtolower($this->name);
+
+        return str_replace(array(' ', '.'), array('-', ''), $name);
     }
 
     public function getImagePath(): string

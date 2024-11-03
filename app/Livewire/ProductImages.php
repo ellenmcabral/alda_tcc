@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class ImageGallery extends Component
+class ProductImages extends Component
 {
     use WithFileUploads;
 
@@ -33,6 +33,6 @@ class ImageGallery extends Component
             $this->images = [];
         }
 
-        return view('livewire.image-gallery');
+        return view('livewire.product-images');
     }
 }

@@ -9,11 +9,19 @@ class ProductRequest extends FormRequest
 {
     public function rules(): array
     {
+        if(request()->option == 'stock') {
+            $attribute = 'stock';
+        }
+        elseif(request()->option == 'deadline') {
+            $attribute = 'deadline';
+        }
+
         return [
             'name' => ['required', 'string', 'min:3', 'max:60'],
+            $attribute => ['required', 'numeric'],
             'images' => ['required', 'array'],
             'sale_price' => ['required', 'numeric'],
-            'description' => ['min:3', 'max:700'],
+            'description' => ['max:700'],
             'category_id' => 'required',
         ];
     }
@@ -22,6 +30,9 @@ class ProductRequest extends FormRequest
     {
         return [
             'images.required' => 'Pelo menos uma imagem é obrigatória.',
+            'stock.required' => 'O campo estoque é obrigatório.',
+            'deadline.required' => 'O campo prazo é obrigatório.',
+            'sale_price.required' => 'O campo preço é obrigatório.',
             'category_id.required' => 'O campo categoria é obrigatório.',
         ];
     }

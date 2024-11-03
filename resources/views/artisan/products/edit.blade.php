@@ -5,7 +5,8 @@
 
     <div class="w-full h-fit grid gap-8 md:w-2/3">
         <x-form action="{{ route('artisan.products.update', $product->id) }}"
-                enctype="multipart/form-data">
+                enctype="multipart/form-data"
+                x-data="{ option : '{{ $product->stock ? 'stock' : 'deadline' }}' }" >
 
             @method('patch')
 
@@ -39,17 +40,76 @@
 
                 <div class="w-1/3">
                     <x-input-label for="sale_price" :value="'Preço'" />
-                    <x-input-text id="sale_price"
-                                  type="number"
-                                  min="1"
-                                  step="any"
-                                  name="sale_price"
-                                  :value="isset($product) ? $product->sale_price : old('sale_price')"
-                                  required autofocus
-                                  autocomplete="sale_price"
-                                  placeholder="R$ 0"/>
+                    <x-input-number id="sale_price"
+                                    type="number" class="w-full mt-2"
+                                    min="1"
+                                    step="any"
+                                    name="sale_price"
+                                    :value="isset($product) ? $product->sale_price : old('sale_price')"
+                                    autofocus autocomplete="sale_price"
+                                    placeholder="R$ 0"/>
                     <x-input-error :messages="$errors->get('sale_price')" class="mt-2" />
                 </div>
+            </div>
+
+            <div class="flex gap-4 flex-col md:flex-row md:items-center md:gap-8 md:h-10">
+                <div class="flex items-center gap-4">
+                    <x-input-radio type="radio"
+                                   id="option_stock"
+                                   name="option"
+                                   value="stock"
+                                   x-model="option"
+                                   :checked="!!$product->stock" autofocus />
+                    <x-input-label for="option_stock"
+                                   :value="'Em estoque'" />
+                </div>
+
+                <template x-if="option == 'stock'">
+                    <div x-data>
+                        <div class="flex items-center gap-2">
+                            <x-input-number type="number"
+                                            class="w-16"
+                                            id="stock"
+                                            min="1"
+                                            name="stock"
+                                            :value="old('stock', $product->stock)"
+                                            placeholder="0" />
+                            <span class="text-gray-dark">unidades</span>
+                        </div>
+
+                        <x-input-error class="mt-2" :messages="$errors->get('stock')" />
+                    </div>
+                </template>
+            </div>
+
+            <div class="flex gap-4 flex-col md:flex-row md:items-center md:gap-8 md:h-10">
+                <div class="flex items-center gap-4">
+                    <x-input-radio type="radio"
+                                   id="option_deadline"
+                                   name="option"
+                                   value="deadline"
+                                   x-model="option"
+                                   :checked="!!$product->deadline" autofocus />
+                    <x-input-label for="option_deadline"
+                                   :value="'Sob encomenda'" />
+                </div>
+
+                <template x-if="option == 'deadline'">
+                    <div x-data>
+                        <div class="flex items-center gap-2">
+                            <x-input-number type="number"
+                                            class="w-16"
+                                            id="deadline"
+                                            min="1"
+                                            name="deadline"
+                                            :value="old('deadline', $product->deadline)"
+                                            placeholder="0" />
+                            <span class="text-gray-dark">dias úteis</span>
+                        </div>
+
+                        <x-input-error class="mt-2" :messages="$errors->get('deadline')" />
+                    </div>
+                </template>
             </div>
 
             <div>
