@@ -19,7 +19,7 @@ class PostalCodeRule implements ValidationRule
         if($dadosApi == null) {
             $fail('O campo CEP está em um formato inválido.');
         }
-        elseif($dadosApi['erro']) {
+        elseif(!empty($dadosApi['erro']) and $dadosApi['erro'] == true) {
             $fail('Este CEP não foi encontrado.');
         }
     }

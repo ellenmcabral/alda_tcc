@@ -23,7 +23,7 @@
         </p>
         <div class="grid @if($shippingAddresses->count() > 1) grid-cols-2 @endif gap-4">
             @foreach($shippingAddresses as $address)
-                <section class="w-full md:w-fit flex flex-col gap-4 border border-1 rounded-lg p-4">
+                <section class="w-full md:w-fit flex flex-col gap-4 border border-1 rounded-lg p-4 @if($address->is_default) border-accent-regular @endif">
                     @if($address->is_default)
                         <p class="font-bold text-accent-darker">
                             Este é o seu endereço de entrega padrão.

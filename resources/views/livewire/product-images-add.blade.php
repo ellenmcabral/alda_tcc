@@ -25,11 +25,12 @@
             </p>
         </div>
 
-        @if($images)
+        @isset($images)
             <div class="grid gap-2 grid-cols-2 sm:grid-cols-4">
                 @foreach($images as $key => $image)
                     <div class="relative">
-                        <x-image class="w-full" src="{{ $image->temporaryUrl() }}" />
+                        <x-image class="w-full"
+                                 :src="$image->temporaryUrl()" />
 
                         <button class="absolute top-1 right-1 bg-white/50 text-black/75 rounded-full w-8 h-8"
                                 type="button"

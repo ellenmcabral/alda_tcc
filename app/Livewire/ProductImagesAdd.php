@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class ProductImages extends Component
+class ProductImagesAdd extends Component
 {
     use WithFileUploads;
 
