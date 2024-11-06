@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        $products = $request->user()->shop->products()->orderBy('id', 'desc')->paginate(10);
+        $products = $request->user()->shop->products()->get();
 
         return view('artisan.products.index', [
             'shop' => $request->user()->shop,
