@@ -31,7 +31,7 @@ class Product extends Model
         return $this->BelongsTo(Category::class);
     }
 
-    public function images(): HasMany
+    public function productImages(): HasMany
     {
         return $this->HasMany(ProductImage::class);
     }
@@ -48,9 +48,8 @@ class Product extends Model
         return str_replace(array(' ', '.'), array('-', ''), $name);
     }
 
-    public function getImagePath(): string
+    public function getDefaultImagePath($product): string
     {
-        return $this->image ? '/img/products/' . $this->image : '/img/products/no-image.jpg';
+        return $product->productImages()->where('is_default', true)->first()->getImagePath();
     }
-
 }

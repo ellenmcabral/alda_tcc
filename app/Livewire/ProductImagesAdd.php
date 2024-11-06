@@ -33,6 +33,6 @@ class ProductImagesAdd extends Component
             $this->images = [];
         }
 
-        return view('livewire.product-images');
+        return view('livewire.product-images-add');
     }
 }

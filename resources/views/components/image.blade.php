@@ -1,3 +1,3 @@
 <img {{ $attributes->merge([
-    'class' => 'object-cover rounded-lg aspect-square'
+    'class' => 'object-cover aspect-square'
 ]) }} />

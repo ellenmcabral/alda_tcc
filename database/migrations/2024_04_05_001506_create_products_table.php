@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 60);
             $table->text('description')->nullable();
-            $table->binary('image');
             $table->string('url')->nullable();
             $table->decimal('sale_price', 10, 2);
             $table->unsignedInteger('stock')->nullable();

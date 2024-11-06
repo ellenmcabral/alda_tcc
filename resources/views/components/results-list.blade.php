@@ -9,7 +9,7 @@
                 <x-card>
                     @if($searchType == 'Produtos')
                         <a class="grid" href="{{ route('products.show', $result->id) }}">
-                            <x-image :src="$result->getImagePath()"
+                            <x-image :src="$result->getDefaultImagePath($result)"
                                      alt="Imagem do produto {{ $result->name }}" />
                             <span class="mt-2 line-clamp-2">
                                 {{ $result->name }}

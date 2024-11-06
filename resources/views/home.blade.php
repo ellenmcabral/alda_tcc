@@ -98,7 +98,7 @@
                 @foreach($products as $product)
                     <a class="grid gap-4"
                        href="{{ route('products.show', $product->id) }}">
-                        <x-image :src="$product->getImagePath()"
+                        <x-image :src="$product->getDefaultImagePath($product)"
                                  class="rounded-lg" />
                         <div class="flex justify-between">
                             <h3 class="font-bold line-clamp-1 h-fit w-2/3">

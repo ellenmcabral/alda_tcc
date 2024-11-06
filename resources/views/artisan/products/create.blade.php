@@ -8,7 +8,7 @@
                 enctype="multipart/form-data"
                 x-data="{ option : '{{ old('option') ? old('option') : 'stock' }}' }" >
 
-            <livewire:product-images />
+            <livewire:product-images-add />
 
             <div class="flex gap-6">
                 <div class="w-full">

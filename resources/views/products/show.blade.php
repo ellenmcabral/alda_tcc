@@ -3,13 +3,28 @@
         {{ Breadcrumbs::render('products.show', $product->category, $product) }}
     </x-slot:breadcrumbs>
 
-    <div class="grid gap-8 h-fit w-full lg:px-8">
-        <section class="grid lg:flex gap-8">
-            <img class="xl:w-2/3 rounded-lg h-fit"
-                 src="{{ $product->getImagePath() }}"
-                 alt="Imagem de {{ $product->name }}"/>
+    <div class="grid gap-8 h-fit lg:px-8">
+        <section class="grid md:grid-cols-[60%_auto] gap-16">
+            <div class="grid gap-4 @if($productImages->count() > 1) md:grid-cols-[auto_80%] @endif"
+                 x-data="{ imageUrl: '{{ $defaultProductImage->getImagePath() }}' }" >
 
-            <div class="flex flex-col gap-4 xl:gap-8 lg:w-2/3 h-fit">
+                @if($productImages->count() > 1)
+                    <div class="grid grid-cols-5 order-last md:order-none gap-2 md:grid-cols-1 h-fit">
+                        @foreach($productImages as $productImage)
+                            <x-image class="cursor-pointer hover:opacity-75 transition duration-300"
+                                     src="{{ $productImage->getImagePath() }}"
+                                     alt="Imagem de {{ $productImage->product->name }}"
+                                     x-on:click="imageUrl = '{{$productImage->getImagePath()}}'" />
+                        @endforeach
+                    </div>
+                @endif
+
+                <img class="w-full object-cover aspect-square h-full"
+                     :src="imageUrl"
+                     alt="Imagem de {{ $product->name }}"/>
+            </div>
+
+            <div class="flex flex-col gap-4 h-fit">
                 <h3 class="font-bold text-2xl">
                     {{ $product->name }}
                 </h3>

@@ -22,4 +22,9 @@ class ProductImage extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getImagePath(): string
+    {
+        return url('storage/img/products/'. $this->image);
+    }
 }

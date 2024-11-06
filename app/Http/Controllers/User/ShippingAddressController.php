@@ -107,21 +107,24 @@ class ShippingAddressController extends Controller
         $commission = Commission::where('shipping_address_id', $shippingAddress->id)->first();
 
         if($commission) { // se o endereço estiver em uma encomenda
+
             $route = route('profile.shipping-addresses.index');
             $message = "Não foi possível excluir este endereço de e-mail porque ele está em um pedido em andamento";
             $type = "danger";
         } else { // se o endereço não estiver em uma encomenda
+
+            $shippingAddress->delete();
+
             if($shippingAddress->is_default) {
                 // se o endereço deletado for padrão, tornar padrão o outro primeiro que aparecer
 
                 $otherShippingAddress = ShippingAddress::where('user_id', $request->user()->id)->first();
 
                 if($otherShippingAddress) {
-                    $otherShippingAddress->update(['is_default' => true]);
+                    $otherShippingAddress->is_default = true;
+                    $otherShippingAddress->save();
                 }
             }
-
-            $shippingAddress->delete();
 
             $route = route('profile.shipping-addresses.index');
             $message = "Endereço excluído com sucesso";

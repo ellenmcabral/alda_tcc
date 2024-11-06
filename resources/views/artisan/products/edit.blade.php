@@ -10,20 +10,14 @@
 
             @method('patch')
 
-            <x-image :src="$product->getImagePath()"
-                     alt="Imagem de {{ $product->name }}"/>
+{{--            <div class="grid gap-4 grid-cols-2 md:grid-cols-4 border border-gray-regular rounded-lg p-4">--}}
+{{--                @foreach($productImages as $image)--}}
+{{--                    <x-image src="/img/products/{{ $image->image }}"--}}
+{{--                             alt="Imagem de {{ $product->name }}" />--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
 
-            <div>
-                <x-input-label for="image" :value="'Imagem'" />
-                <input id="image"
-                       class="w-full mt-2 file:rounded-lg rounded-lg cursor-pointer focus:outline-none"
-                       type="file"
-                       name="image"
-                       :value="old('image')"
-                       autofocus
-                       autocomplete="image" />
-                <x-input-error :messages="$errors->get('image')" class="mt-2" />
-            </div>
+            <livewire:product-images-edit :id="$product->id" />
 
             <div class="flex gap-6">
                 <div class="w-full">
@@ -32,7 +26,6 @@
                                   type="text"
                                   name="name"
                                   :value="isset($product) ? $product->name : old('name')"
-                                  required autofocus
                                   autocomplete="name"
                                   placeholder="Digite o nome do produto"/>
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -46,7 +39,7 @@
                                     step="any"
                                     name="sale_price"
                                     :value="isset($product) ? $product->sale_price : old('sale_price')"
-                                    autofocus autocomplete="sale_price"
+                                    autocomplete="sale_price"
                                     placeholder="R$ 0"/>
                     <x-input-error :messages="$errors->get('sale_price')" class="mt-2" />
                 </div>
@@ -59,7 +52,7 @@
                                    name="option"
                                    value="stock"
                                    x-model="option"
-                                   :checked="!!$product->stock" autofocus />
+                                   :checked="!!$product->stock" />
                     <x-input-label for="option_stock"
                                    :value="'Em estoque'" />
                 </div>
@@ -89,7 +82,7 @@
                                    name="option"
                                    value="deadline"
                                    x-model="option"
-                                   :checked="!!$product->deadline" autofocus />
+                                   :checked="!!$product->deadline" />
                     <x-input-label for="option_deadline"
                                    :value="'Sob encomenda'" />
                 </div>

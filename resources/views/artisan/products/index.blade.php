@@ -63,7 +63,7 @@
                     @foreach($products as $product)
                         <tr class="border-b border-gray-light">
                             <td class="p-6 hidden md:table-cell text-center">
-                                <x-image :width="42" :src="$product->getImagePath()" />
+                                <x-image :width="42" :src="$product->getDefaultImagePath($product)" />
                             </td>
                             <td class="m-6 line-clamp-1">
                                 <x-link-secondary href="{{ route('products.show', $product->id) }}">

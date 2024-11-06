@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProductController extends Controller
@@ -32,12 +33,8 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-        $defaultImage = md5($request->images[0]->getClientOriginalName()
-                . strtotime("now")) . "." . $request->images[0]->extension();
-
         $product = Product::create([
             'name' => $request->name,
-            'image' => $defaultImage,
             'sale_price' => $request->sale_price,
             'description' => $request->description,
             'shop_id' => $request->user()->shop->id,
@@ -53,23 +50,31 @@ class ProductController extends Controller
             $product->deadline = $request->deadline;
         }
 
-        $product->save();
-
         if($request->images) {
-            foreach ($request->images as $image) {
+            foreach ($request->images as $key => $image) {
                 $requestImage = $image;
 
                 $imageName = md5($requestImage->getClientOriginalName()
                         . strtotime("now")) . "." . $requestImage->extension();
 
-                $requestImage->move(public_path('img/products'), $imageName);
+                $requestImage->storeAs('img/products', $imageName, 'public');
+
+                if($request->is_default == $key) {
+                    $is_default = true;
+                }
+                else {
+                    $is_default = false;
+                }
 
                 ProductImage::create([
                     'image' => $imageName,
                     'product_id' => $product->id,
+                    'is_default' => $is_default,
                 ]);
             }
         }
+
+        $product->save();
 
         return redirect(route('artisan.products.index'))
             ->with('status', 'Produto adicionado com sucesso');
@@ -79,8 +84,14 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
+        $productImages = $product->productImages()->orderBy('is_default', 'desc')->get();
+
+        $defaultProductImage = $product->productImages()->where('is_default', true)->first();
+
         return view('products.show', [
             'product' => $product,
+            'productImages' => $productImages,
+            'defaultProductImage' => $defaultProductImage,
             'shop' => $product->shop,
         ]);
     }
@@ -89,29 +100,27 @@ class ProductController extends Controller
     {
         return view('artisan.products.edit', [
             'product' => $product,
+            'productImages' => $product->productImages()->get(),
             'categories' => Category::orderBy('description', 'asc')->get(),
         ]);
     }
 
-    public function update(Product $product, ProductRequest $request): RedirectResponse
+    public function update(Product $product, Request $request): RedirectResponse
     {
-        if($request->hasFile('image')) {
-            $requestImage = $request->image;
-
-            $imageName = md5($requestImage->getClientOriginalName()
-                    . strtotime("now")) . "." . $requestImage->extension();
-
-            $requestImage->move(public_path('img/products'), $imageName);
-        } else {
-            $imageName = $product->image;
-        }
-
         $product->update([
             'name' => $request->name,
-            'image' => $imageName,
             'sale_price' => $request->sale_price,
             'description' => $request->description,
         ]);
+
+        if($request->option == 'stock') {
+            $product->stock = $request->stock;
+        }
+        if($request->option == 'deadline') {
+            $product->deadline = $request->deadline;
+        }
+
+        $product->save();
 
         return redirect(route('artisan.products.edit', $product->id))
             ->with('status', 'Produto atualizado com sucesso');
@@ -122,7 +131,7 @@ class ProductController extends Controller
         $productImages = ProductImage::where('product_id', $product->id)->get();
 
         foreach ($productImages as $productImage) {
-            File::delete(public_path('img/products').'/'. $productImage->image);
+            Storage::disk('local')->delete('public/img/products/' . $productImage->image);
         }
 
         $product->delete();
