@@ -10,7 +10,7 @@
                 Imagem
             </th>
             <th scope="col" class="px-6 py-3" x-data="{ sort: false }">
-                Item
+                Nome
                 <button type="button" wire:click="sortBy('name')" @click="sort = ! sort">
                     <i class="fa-solid ml-2 {{ $sortIconName }}"></i>
                 </button>
