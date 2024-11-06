@@ -9,8 +9,18 @@ use Illuminate\View\View;
 
 class ShopAddressController extends Controller
 {
+    public function create(Request $request): View
+    {
+        return view('artisan.shop.address.create', [
+            'shop' => $request->user()->shop,
+        ]);
+    }
     public function edit(Request $request): View
     {
+        if($request->user()->shop->street) {
+
+        }
+
         return view('artisan.shop.address.edit', [
             'shop' => $request->user()->shop,
         ]);
@@ -54,7 +64,7 @@ class ShopAddressController extends Controller
 
         $shop->save();
 
-        return redirect(route('artisan.shop.settings'))
+        return redirect(route('artisan.shop.edit'))
             ->with([
                 'status' => 'Endereço excluído com sucesso!'
             ]);

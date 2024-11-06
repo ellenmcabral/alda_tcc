@@ -1,8 +1,8 @@
-<x-button-danger class="w-full"
+<x-link-secondary class="cursor-po"
                  x-data=""
                  x-on:click.prevent="$dispatch('open-modal', 'confirm-shop-address-deletion')">
     Excluir Endereço
-</x-button-danger>
+</x-link-secondary>
 
 <x-modal :maxWidth="'sm'"
          name="confirm-shop-address-deletion" focusable>
