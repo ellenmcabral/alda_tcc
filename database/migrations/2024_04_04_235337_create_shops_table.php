@@ -16,8 +16,6 @@ return new class extends Migration
             $table->string('url', 60)->unique();
             $table->string('name', 60);
             $table->text('description')->nullable();
-            $table->string('cpf', 11)->unique()->nullable();
-            $table->string('cnpj', 14)->unique()->nullable();
             $table->binary('image')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->boolean('is_active')->default(false);

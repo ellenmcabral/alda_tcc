@@ -19,7 +19,6 @@ return new class extends Migration
             $table->decimal('sale_price', 10, 2);
             $table->unsignedInteger('stock')->nullable();
             $table->unsignedInteger('deadline')->nullable();
-            $table->timestamp('created_at')->useCurrent();
             $table->boolean('is_active')->default(true);
 
             $table->foreignId('shop_id')->constrained()->onDelete('cascade');
