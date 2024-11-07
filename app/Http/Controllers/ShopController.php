@@ -52,25 +52,29 @@ class ShopController extends Controller
 
     public function update(ShopActivateRequest $request): RedirectResponse
     {
-        $shop = $request->user()->shop;
+        $user = $request->user();
+
+        $shop = $user->shop;
 
         if($request->option == 'cpf') {
-            $request->user()->cpf = preg_replace('/[^0-9]/','', $request->cpf);
-
-            $request->user()->save();
+            $user->cpf = preg_replace('/[^0-9]/','', $request->cpf);
         }
 
         if($request->option == 'cnpj') {
-            $shop->cnpj = preg_replace('/[^0-9]/','', $request->cnpj);
+            $user->cnpj = preg_replace('/[^0-9]/','', $request->cnpj);
         }
+
+        $user->save();
+
         $shop->is_active = true;
 
         $shop->save();
 
-        $request->user()->revokePermissionTo(['activate shop']);
+        $user->revokePermissionTo(['activate shop']);
 
-        $request->user()->syncRoles('artisan');
+        $user->syncRoles('artisan');
 
-        return redirect(route('artisan.index'));
+        return redirect(route('artisan.index'))
+            ->with('status', 'Loja ativada com sucesso');
     }
 }
