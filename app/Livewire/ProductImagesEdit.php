@@ -46,7 +46,7 @@ class ProductImagesEdit extends Component
         } else {
             $image->delete();
 
-            Storage::delete($image->image);
+            Storage::disk('local')->delete('public/img/products/' . $image->image);
 
             array_splice($this->productImages, $key, 1);
 
