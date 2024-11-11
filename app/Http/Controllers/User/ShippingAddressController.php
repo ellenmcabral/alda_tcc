@@ -47,7 +47,8 @@ class ShippingAddressController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        return redirect(route('profile.shipping-addresses.index'));
+        return redirect(route('profile.shipping-addresses.index'))
+            ->with('status', 'Endereço adicionado!');
     }
 
     public function edit(Request $request, $id): View
@@ -97,9 +98,8 @@ class ShippingAddressController extends Controller
 
         $shippingAddress->save();
 
-        return redirect(route('profile.shipping-addresses.index'))->with([
-            'status' => 'Endereço atualizado com sucesso',
-        ]);
+        return redirect(route('profile.shipping-addresses.edit', $shippingAddress->id))
+            ->with('status', 'Endereço atualizado!');
     }
 
     public function destroy(ShippingAddress $shippingAddress, Request $request): RedirectResponse
@@ -109,7 +109,7 @@ class ShippingAddressController extends Controller
         if($commission) { // se o endereço estiver em uma encomenda
 
             $route = route('profile.shipping-addresses.index');
-            $message = "Não foi possível excluir este endereço de e-mail porque ele está em um pedido em andamento";
+            $message = "Não foi possível excluir este endereço de e-mail porque ele está em um pedido em andamento.";
             $type = "danger";
         } else { // se o endereço não estiver em uma encomenda
 
@@ -127,7 +127,7 @@ class ShippingAddressController extends Controller
             }
 
             $route = route('profile.shipping-addresses.index');
-            $message = "Endereço excluído com sucesso";
+            $message = "Endereço excluído!";
             $type = "success";
         }
 

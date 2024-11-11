@@ -6,15 +6,15 @@
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <section class="flex gap-4 items-center">
             <!-- Imagem -->
-            <img src="{{ Auth::user()->shop->getImagePath() }}" alt="Imagem da loja {{ Auth::user()->shop->name }}"
+            <img src="{{ $shop->getImagePath() }}" alt="Imagem da loja {{ $shop->name }}"
                  class="object-fit w-20 h-20 rounded-full bg-gray-200" />
 
             <div>
                 <h2 class="font-bold">
-                    {{ Auth::user()->shop->name }}
+                    {{ $shop->name }}
                 </h2>
-                <a href="{{ route('shop.show', Auth::user()->shop->url) }}">
-                    site.com.br/<span class="font-bold text-secondary-300">{{ Auth::user()->shop->url }}</span>
+                <a href="{{ route('shop.show', $shop->url) }}">
+                    site.com.br/<span class="font-bold text-secondary-300">{{ $shop->url }}</span>
                 </a>
             </div>
         </section>

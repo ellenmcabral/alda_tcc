@@ -53,7 +53,7 @@ class CommissionController extends Controller
         \Cart::destroy();
 
         return redirect(route('commissions.index'))
-            ->with('status', 'Encomenda realizada. Faça o pagamento para que o artesão possa começar a produzir');
+            ->with('status', 'Pedido realizado! Finalize o pagamento para que o artesão possa começar a produzir.');
     }
 
     public function show(Commission $commission, Request $request): View
@@ -80,6 +80,6 @@ class CommissionController extends Controller
 //            ->send(new CommissionUpdated($commission));
 
         return redirect(route('commissions.index'))
-            ->with('status', 'Encomenda cancelada com sucesso');
+            ->with('status', 'Pedido cancelado!');
     }
 }

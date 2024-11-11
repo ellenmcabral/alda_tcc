@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class ShopController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('shop.create');
     }
@@ -21,7 +21,6 @@ class ShopController extends Controller
         Shop::create([
             'name' => $request->name,
             'url' => $request->url,
-            'image' => 'no-image.jpg',
             'user_id' => auth()->id(),
         ]);
 
@@ -43,7 +42,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function activate(Request $request)
+    public function activate(Request $request): View
     {
         return view('shop.activate', [
             'shop' => $request->user()->shop,
@@ -75,6 +74,6 @@ class ShopController extends Controller
         $user->syncRoles('artisan');
 
         return redirect(route('artisan.index'))
-            ->with('status', 'Loja ativada com sucesso');
+            ->with('status', 'Loja ativada!');
     }
 }

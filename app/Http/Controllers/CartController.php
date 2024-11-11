@@ -72,7 +72,7 @@ class CartController extends Controller
                 ],
             ]);
             $type = 'success';
-            $status = 'Produto adicionado na sacola de compras.';
+            $status = 'Produto adicionado na sacola de compras!';
         }
         else {
             $shop = '';
@@ -99,7 +99,7 @@ class CartController extends Controller
         Cart::update($rowId, $newQty);
 
         return redirect(route('cart'))
-            ->with('status', 'Produto atualizado com sucesso.');
+            ->with('status', 'Produto atualizado na sacola de compras!');
     }
 
     public function delete($rowId): RedirectResponse
@@ -107,7 +107,7 @@ class CartController extends Controller
         Cart::remove($rowId);
 
         return redirect(route('cart'))
-            ->with('status', 'Produto removido com sucesso.');
+            ->with('status', 'Produto removido da sacola de compras!');
     }
 
     public function destroy(): RedirectResponse

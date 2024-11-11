@@ -15,8 +15,6 @@ class Shop extends Model
         'url',
         'name',
         'description',
-        'cpf',
-        'cnpj',
         'image',
         'is_active',
         'created_at',

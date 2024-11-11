@@ -43,6 +43,7 @@ class ShopCommissionController extends Controller
 //        Mail::to($commission->user->email, $commission->user->name)
 //            ->send(new CommissionUpdated($commission));
 
-        return redirect(route('artisan.commissions.show', $commission->id));
+        return redirect(route('artisan.commissions.show', $commission->id))
+            ->with('status', 'Encomenda atualizada!');
     }
 }

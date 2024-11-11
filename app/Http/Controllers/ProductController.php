@@ -77,7 +77,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect(route('artisan.products.index'))
-            ->with('status', 'Produto adicionado com sucesso');
+            ->with('status', 'Produto adicionado!');
     }
 
     public function show(int $id): View
@@ -123,7 +123,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect(route('artisan.products.edit', $product->id))
-            ->with('status', 'Produto atualizado com sucesso');
+            ->with('status', 'Produto atualizado!');
     }
 
     public function destroy(Product $product): RedirectResponse
@@ -137,7 +137,7 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect(route('artisan.products.index'))->with([
-            'status' => 'Produto excluído com sucesso',
+            'status' => 'Produto excluído!',
         ]);
     }
 }

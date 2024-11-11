@@ -35,7 +35,7 @@ class ShopEditController extends Controller
         ]);
 
         return redirect(route('artisan.shop.information'))
-            ->with('status', 'Informações da loja atualizadas com sucesso');
+            ->with('status', 'Informações da loja atualizadas!');
     }
 
     public function customization(Request $request): View
@@ -69,7 +69,7 @@ class ShopEditController extends Controller
         $shop->save();
 
         return redirect(route('artisan.shop.customization'))
-            ->with('status', 'Customizações da loja atualizadas com sucesso');
+            ->with('status', 'Personalização da loja atualizada!');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -88,6 +88,7 @@ class ShopEditController extends Controller
 
         $request->user()->givePermissionTo('create shop');
 
-        return redirect(route('home'));
+        return redirect(route('home'))
+            ->with('status', 'Loja excluída!');
     }
 }

@@ -18,6 +18,7 @@
         <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
     </head>
     <body class="flex flex-col font-sans text-neutral-black bg-neutral-white h-screen">
+
         <!-- Page Header -->
         @include('layouts.app.header')
 
@@ -39,7 +40,8 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow mx-4 mt-10 pb-16 flex justify-center relative">
+        <main class="flex-grow mx-4 mt-10 pb-16 flex justify-center">
+
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>

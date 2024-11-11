@@ -64,6 +64,7 @@
 
         <!-- Page Content -->
         <main class="flex-grow mx-4 mt-10 pb-16 flex justify-center">
+
             <!-- Session Status -->
             @if(session('status') !== null)
                 <x-status-message :status="session('status')" :type="session('type')"/>
