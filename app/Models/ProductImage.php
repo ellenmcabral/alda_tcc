@@ -25,6 +25,6 @@ class ProductImage extends Model
 
     public function getImagePath(): string
     {
-        return url('storage/img/products/'. $this->image);
+        return asset('storage/img/products/'. $this->image);
     }
 }
