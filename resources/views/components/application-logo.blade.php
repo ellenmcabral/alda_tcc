@@ -10,11 +10,11 @@
             break;
     }
 
-    $class = $color . 'z-40 font-bold text-4xl hidden sm:flex';
+    $class = $color . 'z-40 w-12 aspect-square hidden sm:flex';
 
 @endphp
 
 <a class="{{ $class }}"
    href="@auth {{ route('home') }} @else {{ route('alda') }} @endauth">
-    Alda
+    <img src="/img/assets/logo.png" alt="Logo do site" />
 </a>
