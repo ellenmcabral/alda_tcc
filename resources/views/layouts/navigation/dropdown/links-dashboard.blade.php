@@ -30,15 +30,29 @@
     </x-dropdown-link>
 
 @else <!-- ADMIN LINKS -->
-    <x-dropdown-link :href="route('login')">
+    <x-dropdown-link :href="route('admin.index')"
+                     :icon="'fa-table-columns'"
+                     :active="request()->routeIs('admin.index')">
+        Painel
+    </x-dropdown-link>
+
+    <hr/>
+
+    <x-dropdown-link :href="route('admin.users.index')"
+                     :icon="'fa-users'"
+                     :active="request()->routeIs('admin.users.index')">
         Usuários
     </x-dropdown-link>
 
     <hr/>
 
-    <x-dropdown-link :href="route('register')">
-        Permissões
+    <x-dropdown-link :href="route('admin.shops.index')"
+                     :icon="'fa-store'"
+                     :active="request()->routeIs('admin.shops.index')">
+        Lojas
     </x-dropdown-link>
+
+    <hr/>
 @endrole
 
 <hr/>

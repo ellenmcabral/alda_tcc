@@ -78,7 +78,7 @@
         Painel do Artesão
     </x-dropdown-link>
     @elserole('admin')
-    <x-dropdown-link :href="route('artisan.index')"
+    <x-dropdown-link :href="route('admin.index')"
                      :color="'secondary'"
                      :icon="'fa-table-columns'">
         Painel do Admin

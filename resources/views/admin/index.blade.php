@@ -1,15 +1,19 @@
-<x-admin-layout>
-    <x-slot name="header">
-        {{ Breadcrumbs::render('admin') }}
-    </x-slot>
+<x-dashboard-layout>
+    <x-slot:heading>
+        Painel do Administrador
+    </x-slot:heading>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+    <div class="w-full h-fit grid gap-16 md:w-2/3">
+        <section class="grid gap-4 lg:grid-cols-2 md:gap-8">
+            <x-card-dashboard :route="route('admin.users.index')"
+                              :icon="'fa-users'"
+                              :title="'Usuários'"
+                              :text="'Edite ou exclua usuários'" />
+
+            <x-card-dashboard :route="route('admin.shops.index')"
+                              :icon="'fa-store'"
+                              :title="'Lojas'"
+                              :text="'Edite ou exclua lojas'" />
+        </section>
     </div>
-</x-admin-layout>
+</x-dashboard-layout>

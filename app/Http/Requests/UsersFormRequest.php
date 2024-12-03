@@ -7,49 +7,31 @@ use Illuminate\Validation\Rule;
 
 class UsersFormRequest extends FormRequest
 {
-    /**
-     * Indicates if the validator should stop on the first rule failure.
-     *
-     * @var bool
-     */
     protected $stopOnFirstFailure = true;
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
-        if (request()->isMethod('POST')) {
-            $emailRule = 'unique:users,email';
-        } else {
-            $emailRule = Rule::unique('users')->ignore($this->user['id']);
-        }
-
         return [
-            'name' => ['required', 'min:3'],
+            'name' => ['required', 'min:3', 'max:60'],
             'email' => [
                 'required',
                 'email',
-                $emailRule
+                'min:3',
+                'max:60',
+                Rule::unique('users')->ignore($this->user['id'])
             ],
             'password' => [
                 Rule::when(request()->isMethod('POST'), 'required|min:6'),
-            ]
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
+            ],
+            'phone' => [
+                'required', 'min:16', 'max:16',
+                Rule::unique('users')->ignore($this->user['id'])
+            ],
         ];
     }
 }

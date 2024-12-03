@@ -3,51 +3,44 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\UsersFormRequest;
+use App\Models\Permission;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class UserController
 {
-    public function index()
+    public function index(): View
     {
-        $users = User::query()->orderBy('name')->get();
-
-        $message = session('message.success');
-
-        return view('admin.users.index')
-            ->with('users', $users)
-            ->with('message', $message);
+        return view('admin.users.index', [
+            'users' => User::query()->orderBy('id')->paginate(10),
+        ]);
     }
-    public function create()
+
+    public function edit(User $user): View
     {
-        return view('admin.users.create');
-    }
-    public function store(UsersFormRequest $request)
-    {
-        $data = $request->except(['_token']);
-        $data['password'] = Hash::make($data['password']);
+        $permissions = Permission::where('name', 'like', '%' . 'shop' . '%')->get();
 
-        $user = User::create($data);
-        //Auth::login($user);
+        $userPermissions = Permission::where('model_id', $user->id);
 
-        return to_route('admin.users.index')
-            ->with('message.success', "Usuário '{$user->name}' criado com sucesso");
+        return view('admin.users.edit', [
+            'user' => $user,
+            'permissions' => $permissions,
+        ]);
     }
-    public function edit(User $user)
-    {
-        return view('admin.users.edit')
-            ->with('user', $user);
-    }
-    public function update(User $user, UsersFormRequest $request)
+
+    public function update(User $user, UsersFormRequest $request): RedirectResponse
     {
         $user->fill($request->all());
+
         $user->save();
 
-        return to_route('admin.users.index')
-            ->with('message.success', "Usuário '{$user->name}' atualizado com sucesso");
+        return to_route('admin.users.edit', $user)
+            ->with('status', "Usuário '{$user->name}' atualizado!");
     }
-    public function destroy(User $user, Request $request)
+
+    public function destroy(User $user, Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
@@ -55,7 +48,7 @@ class UserController
 
         $user->delete();
 
-        return to_route('admin.users.index')
-            ->with('message.success', "Usuário '{$user->name}' removido com sucesso");
+        return redirect()->route('admin.users.index')
+            ->with('status', "Usuário '{$user->name}' excluído!");
     }
 }

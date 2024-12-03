@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\ShopController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Artisan\Shop\ShopAddressController;
 use App\Http\Controllers\Artisan\Shop\ShopCommissionController;
@@ -16,11 +17,28 @@ Route::middleware(['auth', 'role:admin'])
     ->name('admin.') //admin.users.edit
     ->prefix('admin')
     ->group(function () {
-        Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        Route::get('/inicio', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
             ->name('index');
 
+        Route::get('/usuarios', [UserController::class, 'index'])
+            ->name('users.index');
+        Route::get('/usuarios/{user}/editar', [UserController::class, 'edit'])
+            ->name('users.edit');
+        Route::patch('/usuarios/{user}', [UserController::class, 'update'])
+            ->name('users.update');
+        Route::delete('/usuarios/{user}', [UserController::class, 'destroy'])
+            ->name('users.destroy');
+
+        Route::get('/lojas', [ShopController::class, 'index'])
+            ->name('shops.index');
+        Route::get('/lojas/{shop}/editar', [ShopController::class, 'edit'])
+            ->name('shops.edit');
+        Route::patch('/lojas/{shop}', [ShopController::class, 'update'])
+            ->name('shops.update');
+        Route::delete('/lojas/{shop}', [ShopController::class, 'destroy'])
+            ->name('shops.destroy');
+
         Route::resources([
-           'users' => UserController::class,
            'roles' => RoleController::class,
            'permissions' => PermissionController::class,
         ]);

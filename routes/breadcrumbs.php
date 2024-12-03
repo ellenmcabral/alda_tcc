@@ -94,7 +94,7 @@ Breadcrumbs::for('products.show', function ($trail, $category, $product) {
 // Admin
 
 Breadcrumbs::for('admin', function (BreadcrumbTrail $trail) {
-    $trail->push('Painel de Controle do Admin', route('admin.index'));
+    $trail->push('Painel do Admin', route('admin.index'));
 });
 
 Breadcrumbs::for('users', function($trail) {
@@ -102,14 +102,19 @@ Breadcrumbs::for('users', function($trail) {
    $trail->push('Usuários', route('admin.users.index'));
 });
 
-Breadcrumbs::for('users.create', function($trail) {
-   $trail->parent('users');
-   $trail->push('Novo Usuário', route('admin.users.create'));
-});
-
 Breadcrumbs::for('users.edit', function($trail, $user) {
    $trail->parent('users');
-   $trail->push("Editar Usuário '" . $user . "'", route('admin.users.edit', $user));
+   $trail->push("Editar usuário '" . $user . "'", route('admin.users.edit', $user));
+});
+
+Breadcrumbs::for('shops', function($trail) {
+    $trail->parent('admin');
+    $trail->push('Lojas', route('admin.shops.index'));
+});
+
+Breadcrumbs::for('shops.edit', function($trail, $shop) {
+    $trail->parent('shops');
+    $trail->push("Editar loja '" . $shop . "'", route('admin.shops.edit', $shop));
 });
 
 Breadcrumbs::for('permissions', function($trail) {
