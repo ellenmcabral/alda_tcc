@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\ProductImage;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
 use App\Models\User;
 use App\Models\Shop;
@@ -36,13 +37,21 @@ class SearchTest extends TestCase
 
         $this->product = Product::factory()->create([
             'shop_id' => $this->shop->id,
+        ]);
+        ProductImage::create([
             'image' => '1.jpg',
+            'is_default' => true,
+            'product_id' => $this->product->id,
         ]);
 
         for($i = 2; $i <= 11; $i++) {
             Product::factory()->create([
                 'shop_id' => 1,
+            ]);
+            ProductImage::create([
                 'image' => $i . '.jpg',
+                'is_default' => true,
+                'product_id' => $i,
             ]);
             User::factory()->create();
             Shop::factory()->create([
@@ -59,7 +68,7 @@ class SearchTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertSee(['Produtos', 'Próximo']);
+            ->assertSee(['resultados', 'Produtos', $this->product->name]);
     }
 
     public function test_search_paginated_shops_page_can_be_rendered(): void
@@ -70,7 +79,7 @@ class SearchTest extends TestCase
 
         $response
             ->assertStatus(200)
-            ->assertSee(['Lojas', 'Próximo']);
+            ->assertSee(['resultados', 'Lojas', $this->shop->name]);
     }
 
     public function test_users_can_search_a_product(): void

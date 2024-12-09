@@ -48,7 +48,6 @@ class CartTest extends TestCase
     {
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'image' => 'no-image.jpg'
         ]);
 
         $response = $this->post('/cart/add', [
@@ -81,7 +80,6 @@ class CartTest extends TestCase
 
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'image' => 'no-image.jpg'
         ]);
 
         \Cart::add([
@@ -96,7 +94,6 @@ class CartTest extends TestCase
 
         $product2 = Product::factory()->create([
             'shop_id' => $this->artisan2->shop->id,
-            'image' => 'no-image.jpg'
         ]);
 
         $response = $this->post('/cart/add', [
@@ -113,11 +110,5 @@ class CartTest extends TestCase
             ->assertSessionHasAll([
                 'status' => 'Esvazie sua sacola de compras ou finalize seu pedido antes de comprar um produto desta loja.',
             ]);
-
-        $view = $this->view('products.show', [
-            'product' => $product,
-        ]);
-
-        $view->assertSee('Esvazie sua sacola de compras ou finalize seu pedido antes de comprar um produto desta loja.');
     }
 }

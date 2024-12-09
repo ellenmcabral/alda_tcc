@@ -42,12 +42,10 @@ class CommissionTest extends TestCase
     {
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'image' => '1.jpg'
         ]);
 
         $product2 = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'image' => '2.jpg'
         ]);
 
         $this->actingAs($this->user)
@@ -56,7 +54,6 @@ class CommissionTest extends TestCase
                 'id' => $product->id,
                 'name' => $product->name,
                 'sale_price' => $product->sale_price,
-                'image' => $product->image,
                 'quantity' => 1,
             ],
             [
@@ -64,7 +61,6 @@ class CommissionTest extends TestCase
                 'id' => $product2->id,
                 'name' => $product2->name,
                 'sale_price' => $product2->sale_price,
-                'image' => $product2->image,
                 'quantity' => 1,
             ])
             ->assertStatus(302)

@@ -34,7 +34,6 @@ class CheckoutTest extends TestCase
     {
         $product = Product::factory()->create([
             'shop_id' => $this->artisan->shop->id,
-            'image' => '1.jpg'
         ]);
 
         $response = $this->actingAs($this->user)
