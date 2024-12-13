@@ -4,7 +4,10 @@
     EXCLUIR LOJA
 </x-button-danger>
 
-<x-modal-delete :name="'confirm-shop-deletion'" :show="'shopDeletion'" :action="route('artisan.shop.destroy')" :password="true">
+<x-modal-delete :name="'confirm-shop-deletion'"
+                :show="'shopDeletion'"
+                :action="route('artisan.shop.destroy')"
+                :password="true">
     <x-slot:heading>
         Excluir loja?
     </x-slot:heading>

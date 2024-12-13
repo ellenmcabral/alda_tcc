@@ -4,9 +4,9 @@
     </x-slot:breadcrumbs>
 
     <div class="grid gap-8 h-fit lg:px-8">
-        <section class="grid md:grid-cols-[60%_auto] gap-16">
+        <div class="grid md:grid-cols-[60%_auto] gap-16">
             <div class="grid gap-4 @if($productImages->count() > 1) md:grid-cols-[auto_80%] @endif"
-                 x-data="{ imageUrl: '{{ $defaultProductImage->getImagePath() }}' }" >
+                 x-data="{ imageUrl: '{{ $product->getDefaultImagePath() }}' }" >
 
                 @if($productImages->count() > 1)
                     <div class="grid grid-cols-5 order-last md:order-none gap-2 md:grid-cols-1 h-fit">
@@ -24,34 +24,36 @@
                      alt="Imagem de {{ $product->name }}"/>
             </div>
 
-            <div class="flex flex-col gap-4 h-fit">
-                <h3 class="font-bold text-2xl">
-                    {{ $product->name }}
-                </h3>
+            <div class="flex flex-col gap-10 h-fit">
+                <section class="flex flex-col gap-4">
+                    <x-text-heading class="font-bold text-2xl">
+                        {{ $product->name }}
+                    </x-text-heading>
 
-                <x-text-heading class="self-end text-accent-darker">
-                    {{ $product->formatPrice() }}
-                </x-text-heading>
+                    <x-text-heading class="text-accent-darker">
+                        {{ $product->formatPrice() }}
+                    </x-text-heading>
+                </section>
 
                 <section class="grid gap-1">
                     @if($product->deadline > 0)
-                        <h3 class="font-bold text-lg">
+                        <x-text-subheading>
                             Sob Encomenda
-                        </h3>
-                        <p class="text-gray-dark">
+                        </x-text-subheading>
+                        <x-text class="text-gray-dark">
                             <i class="text-gray-regular mr-1 fa-solid fa-clock"></i> Prazo de produção de <span class="font-bold">{{ $product->deadline }} dias úteis</span>
-                        </p>
+                        </x-text>
                     @elseif($product->stock > 0)
-                        <h3 class="font-bold text-lg">
+                        <x-text-subheading>
                             Pronta-entrega
-                        </h3>
-                        <p class="text-gray-600">
+                        </x-text-subheading>
+                        <x-text class="text-gray-600">
                             <i class="text-gray-regular mr-1 fa-solid fa-box"></i> {{ $product->stock }} unidades disponíveis
-                        </p>
+                        </x-text>
                     @endif
                 </section>
 
-                <section>
+                <div>
                     @auth
                         @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
                             <x-button-secondary class="w-full"
@@ -68,47 +70,52 @@
                                      :product="$product"
                                      :quantity="true" />
                     @endauth
-                </section>
+                </div>
 
-                <section class="h-fit w-full flex flex-col gap-2 border border-gray-regular p-4 rounded-lg">
-                    <p>
-                        Vendido por
-                        <x-link-secondary href="{{ route('shop.show', $product->shop->url) }}">
-                            {{ $product->shop->name }}
-                        </x-link-secondary>
-                    </p>
+                <section class="h-fit w-full flex flex-col gap-4 border border-gray-regular p-4 rounded-lg">
+                    <div>
+                        <x-text-subheading>
+                            Loja
+                        </x-text-subheading>
+                        <x-text>
+                            <x-link-secondary href="{{ route('shop.show', $product->shop->url) }}">
+                                {{ $product->shop->name }}
+                            </x-link-secondary>
+                        </x-text>
+                    </div>
 
-                    <div class="text-sm w-full flex flex-col gap-4 xl:flex-row xl:justify-between">
-                        <div class="flex gap-4">
-                            <p>
+                    <hr/>
+
+                    <div class="flex flex-col gap-4">
+                        <div class="w-full flex justify-between">
+                            <x-text>
                                 <i class="mr-1 text-gray-regular fa-solid fa-calendar-days"></i>
                                 Desde {{ $product->shop->formatDate() }}
-                            </p>
-                            <p>
+                            </x-text>
+                            <x-text>
                                 <i class="mr-1 text-gray-regular fa-solid fa-tags"></i>
                                 {{ $product->shop->products()->count() }} produtos
-                            </p>
+                            </x-text>
                         </div>
 
-                        <x-link class="self-end"
+                        <x-link class="self-end flex items-center gap-1"
                                 href="{{ route('shop.show', $product->shop->url) }}">
-                            Ver loja
+                            Ver loja <i class="text-secondary-regular fa-solid fa-chevron-right"></i>
                         </x-link>
                     </div>
                 </section>
             </div>
+        </div>
+
+        <section class="grid gap-2">
+            <x-text-subheading>
+                Descrição do produto
+            </x-text-subheading>
+            <x-text>{{ $product->description }}</x-text>
         </section>
 
-        <section>
-            <h3 class="font-bold text-lg">
-                Descrição
-            </h3>
-            <p>
-                {{ $product->description }}
-            </p>
-        </section>
-
-        <x-tag class="w-fit" href="{{ route('categories.products.index', $product->category->id) }}">
+        <x-tag class="w-fit"
+               href="{{ route('categories.products.index', $product->category->id) }}">
             <i class="fa-solid fa-list mr-2"></i>{{ $product->category->description }}
         </x-tag>
     </div>

@@ -9,7 +9,7 @@
                      src="/img/assets/check-list.png"
                      alt="ilustração de caixa vazia" />
                 <p class="text-gray-dark">
-                    Sua loja não possui nenhuma encomenda
+                    Sua loja não possui encomendas.
                 </p>
 
                 <x-link href="{{ route('artisan.index') }}">

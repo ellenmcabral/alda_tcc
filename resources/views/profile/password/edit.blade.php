@@ -4,11 +4,10 @@
     </x-slot:breadcrumbs>
 
     <div class="grid gap-8 w-full h-fit md:w-2/3">
-
         <x-form action="{{ route('password.update') }}">
             @method('put')
             <div>
-                <x-input-label for="update_password_current_password" :value="__('Current Password')" />
+                <x-input-label for="update_password_current_password" :value="'Senha Atual'" />
                 <x-input-text id="update_password_current_password"
                               name="current_password"
                               type="password"
@@ -19,7 +18,7 @@
             </div>
 
             <div>
-                <x-input-label for="update_password_password" :value="__('New Password')" />
+                <x-input-label for="update_password_password" :value="'Nova Senha'" />
                 <x-input-text id="update_password_password"
                               name="password"
                               type="password"
@@ -30,7 +29,7 @@
             </div>
 
             <div>
-                <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
+                <x-input-label for="update_password_password_confirmation" :value="'Confirmar Senha'" />
                 <x-input-text id="update_password_password_confirmation"
                               name="password_confirmation"
                               type="password"
@@ -50,7 +49,7 @@
                    x-transition
                    x-init="setTimeout(() => show = false, 2000)"
                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >Senha salva.</p>
             @endif -->
         </x-form>
     </div>

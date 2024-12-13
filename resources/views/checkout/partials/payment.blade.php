@@ -1,4 +1,4 @@
-<section class="grid gap-4">
+<div class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-money-check-dollar"></i>
         <x-text-subheading>
@@ -47,4 +47,4 @@
             </h2>
         </div>
     </div>
-</section>
+</div>

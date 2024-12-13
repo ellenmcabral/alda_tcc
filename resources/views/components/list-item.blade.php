@@ -5,30 +5,30 @@
         @isset($image)
             <a class="hidden sm:inline-flex" href="{{ $link }}">
                 <x-image class="mr-6 max-w-16"
-                         src="/img/products/{{ $image }}" />
+                         src="/storage/img/products/{{ $image }}" />
             </a>
         @endisset
 
         @isset($quantity)
-            <p class="w-12">
+            <x-text class="w-10">
                 {{ $quantity }}
-            </p>
+            </x-text>
         @endisset
 
-        <x-link class="line-clamp-1 w-40 sm:w-fit lg:line-clamp-none" href="{{ $link }}">
+        <x-link class="line-clamp-1 sm:w-fit" href="{{ $link }}">
             {{ $product }}
         </x-link>
     </div>
 
     <div class="text-right w-32">
-        <p class="text-gray-regular hidden md:block">
+        <x-text class="text-gray-regular hidden md:block">
             {{ $price }}
-        </p>
+        </x-text>
 
         @isset($subtotal)
-            <p class="font-bold">
+            <x-text class="font-bold">
                 {{ $subtotal }}
-            </p>
+            </x-text>
         @endisset
     </div>
 </li>

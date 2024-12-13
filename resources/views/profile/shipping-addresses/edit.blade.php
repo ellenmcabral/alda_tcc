@@ -9,13 +9,13 @@
 
             <livewire:inputs-address :address="$address" />
 
-            <div class="flex items-center">
-                <input type="checkbox"
-                       id="is_default"
+            <div class="flex items-center gap-2">
+                <input id="is_default"
                        name="is_default"
-                       value="1" {{ $address->is_default ? 'checked' : '' }} >
+                       type="checkbox"
+                       class="cursor-pointer rounded focus:ring-accent-regular checked:focus:bg-accent-dark checked:bg-accent-dark"
+                       value="1" {{ $address->is_default ? 'checked' : '' }} />
                 <x-input-label for="is_default"
-                               class="ml-2"
                                :value="'Este é meu endereço padrão'" />
             </div>
 

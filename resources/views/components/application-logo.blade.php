@@ -1,20 +1,33 @@
-@props(['color' => 'white'])
+@props(['type' => 'white'])
 
 @php
-    switch($color) {
+
+    switch($type) {
+        case 'iconSecondary':
+            $imgPath = '/img/assets/logo_icon_secondary.png';
+            $class = 'w-8';
+            break;
+        case 'iconWhite':
+            $imgPath = '/img/assets/logo_icon_white.png';
+            $class = 'w-8';
+            break;
         case 'white':
-            $color = 'text-neutral-white ';
+            $imgPath = '/img/assets/logo_white.png';
+            $class = 'w-28';
             break;
         case 'secondary':
-            $color = 'text-secondary-regular ';
+            $imgPath = '/img/assets/logo.png';
+            $class = 'w-28';
             break;
     }
 
-    $class = $color . 'z-40 w-12 aspect-square hidden sm:flex';
-
 @endphp
 
-<a class="{{ $class }}"
+<a {{ $attributes->merge([
+        'class' => $class,
+        ]) }}
    href="@auth {{ route('home') }} @else {{ route('alda') }} @endauth">
-    <img src="/img/assets/logo.png" alt="Logo do site" />
+
+    <img src="{{ $imgPath }}"
+         alt="Logo do site Alda" />
 </a>

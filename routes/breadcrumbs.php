@@ -94,7 +94,7 @@ Breadcrumbs::for('products.show', function ($trail, $category, $product) {
 // Admin
 
 Breadcrumbs::for('admin', function (BreadcrumbTrail $trail) {
-    $trail->push('Painel do Admin', route('admin.index'));
+    $trail->push('Painel', route('admin.index'));
 });
 
 Breadcrumbs::for('users', function($trail) {
@@ -130,7 +130,7 @@ Breadcrumbs::for('permissions.create', function($trail) {
 // Artesão
 
 Breadcrumbs::for('artisan.index', function($trail) {
-    $trail->push('Painel de Controle', route('artisan.index'));
+    $trail->push('Painel', route('artisan.index'));
 });
 
 Breadcrumbs::for('shop.edit', function($trail) {

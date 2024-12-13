@@ -23,9 +23,11 @@
         @include('layouts.app.header')
 
         @isset($heading)
-            <x-text-heading class="w-full px-4 py-8 lg:px-6 bg-gray-light text-gray-dark">
-                {{ $heading }}
-            </x-text-heading>
+            <section class="w-full px-4 py-8 lg:px-6 bg-gray-light ">
+                <x-text-heading class="text-gray-dark">
+                    {{ $heading }}
+                </x-text-heading>
+            </section>
         @endisset
 
         @isset($breadcrumbs)
@@ -44,7 +46,8 @@
 
             <!-- Session Status -->
             @if(session('status') !== null)
-                <x-status-message :status="session('status')" :type="session('type')"/>
+                <x-status-message :status="session('status')"
+                                  :type="session('type')"/>
             @endif
 
             {{ $slot }}

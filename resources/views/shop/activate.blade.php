@@ -4,12 +4,13 @@
     </x-slot:heading>
 
     <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <img class="w-48 self-center"
-             src="/img/assets/cross-stitch.png" />
+        <x-image class="w-48 self-center"
+                 src="/img/assets/cross-stitch.png" />
 
-        <p class="text-gray-dark">
+        <x-text class="text-gray-dark">
             Preencha o seu CPF ou CNPJ para ter acesso ao <span class="font-bold">Painel de Controle do Artesão</span>.
-        </p>
+        </x-text>
+
         <form class="flex flex-col gap-10 w-full"
               method="post"
               x-data="{ option : '{{ old('option') ? old('option') : 'cpf' }}' }"
@@ -22,22 +23,21 @@
                               id="option-cpf"
                               name="option"
                               value="cpf"
-                              x-model="option"
-                />
+                              x-model="option" />
                 <x-input-label for="option-cpf"
                                class="ml-2"
                                :value="'CPF'" />
             </div>
+
             <div class="flex items-center">
                 <x-input-radio type="radio"
                               id="option-cnpj"
                               name="option"
                               value="cnpj"
-                              x-model="option"
-                />
+                              x-model="option" />
                 <x-input-label for="option-cnpj"
                                class="ml-2"
-                               :value="'CNPJ'"/>
+                               :value="'CNPJ'" />
             </div>
 
             <template x-if="option == 'cpf'" >
@@ -51,6 +51,7 @@
                     <x-input-error :messages="$errors->get('cpf')" class="mt-2" />
                 </div>
             </template>
+
             <template x-if="option == 'cnpj'">
                 <div x-data>
                     <x-input-text class="w-full"

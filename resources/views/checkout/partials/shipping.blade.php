@@ -1,4 +1,4 @@
-<section class="grid gap-4">
+<div class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-truck-fast"></i>
         <x-text-subheading>
@@ -13,8 +13,8 @@
 
         <div class="w-full flex justify-between items-center">
             <x-link href="{{ route('profile.shipping-addresses.create') }}">
-                Adicionar um novo endereço
-                <i class="text-sm fa-solid fa-plus"></i>
+                Adicionar endereço
+                <i class="text-sm fa-solid fa-chevron-right"></i>
             </x-link>
         </div>
     @else {{-- se o usuário possui endereço --}}
@@ -56,4 +56,4 @@
             @endforeach
         </div>
     @endif
-</section>
+</div>

@@ -5,16 +5,16 @@
 
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <section class="flex gap-4 items-center">
-            <img src="/img/assets/user.png" alt="Imagem de perfil do usuário"
-                 class="w-20 h-20 rounded-full bg-gray-200" />
-
+            <x-image src="/img/assets/user.png"
+                     alt="Imagem de perfil do usuário {{ Auth::user()->name }}"
+                     class="w-20 h-20 rounded-full bg-gray-200" />
             <div>
-                <h2 class="font-bold">
+                <x-text-subheading>
                     {{ Auth::user()->name }}
-                </h2>
-                <p>
+                </x-text-subheading>
+                <x-text>
                     {{ Auth::user()->email }}
-                </p>
+                </x-text>
             </div>
         </section>
 

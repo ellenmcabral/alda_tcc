@@ -48,8 +48,8 @@ class Product extends Model
         return str_replace(array(' ', '.'), array('-', ''), $name);
     }
 
-    public function getDefaultImagePath($product): string
+    public function getDefaultImagePath(): string
     {
-        return $product->productImages()->where('is_default', true)->first()->getImagePath();
+        return $this->productImages()->where('is_default', true)->first()->getImagePath();
     }
 }

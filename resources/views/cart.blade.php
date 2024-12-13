@@ -2,14 +2,15 @@
     <x-slot:heading>
         Sacola de Compras
     </x-slot:heading>
+
     @if($items->isEmpty()) <!-- SACOLA VAZIA -->
         <div class="flex flex-col items-center gap-8">
-            <img class="w-1/2 md:w-1/3"
-                 src="\img\assets\shopping-bag.png"
-                 alt="ilustração de sacola" />
-            <p class="text-gray-dark">
+            <x-image class="w-1/2 md:w-1/3"
+                     src="\img\assets\shopping-bag.png"
+                     alt="Ilustração de sacola de compras" />
+            <x-text class="text-gray-dark">
                 Sua sacola está vazia.
-            </p>
+            </x-text>
 
             <x-link href="{{ route('home') }}">
                 Voltar para a página inicial
@@ -88,13 +89,6 @@
                                           method="post">
                                         @csrf @method('patch')
 
-                                        {{--                        <input class="w-8 rounded border-gray-400"--}}
-                                        {{--                               type="number"--}}
-                                        {{--                               name="quantity"--}}
-                                        {{--                               value="{{ old('qty', $item->qty) }}"--}}
-                                        {{--                               required />--}}
-
-
                                         <input type="hidden"
                                                name="increment"
                                                value="increment">
@@ -118,8 +112,7 @@
             </section>
 
             <section class="grid gap-10 lg:w-1/2 h-fit">
-                <p class="text-lg">
-
+                <x-text>
                     @if($items->count() == 1)
                         <span class="font-bold">{{ $items->count() }} item</span>
                     @else
@@ -128,7 +121,7 @@
                     da loja <x-link href="{{ route('shop.show', $shop->url) }}">
                         {{ $shop->name }}
                     </x-link>
-                </p>
+                </x-text>
 
                 <div class="flex flex-col gap-8">
                     <x-text-heading class="text-secondary-regular flex gap-2 flex-col sm:flex-row sm:justify-between">

@@ -1,4 +1,4 @@
-<nav class="items-center gap-8 hidden 2xl:flex">
+<nav class="items-center gap-6 hidden 2xl:flex">
     <!-- Navigation Links -->
     @auth <!-- LOGGED IN -->
         <x-link-navigation

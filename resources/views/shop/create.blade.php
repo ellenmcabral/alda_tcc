@@ -4,12 +4,16 @@
     </x-slot:heading>
 
     <div class="flex flex-col gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <p class="text-gray-dark flex gap-2 p-4 border border-gray-light rounded-lg w-fit">
+        <x-text-subheading class="mt-4 text-secondary-regular">
+            Dê o seu primeiro passo na Alda.
+        </x-text-subheading>
+
+        <section class="flex gap-2 p-4 border border-gray-light rounded-lg w-fit">
             <i class="mt-1 text-gray-regular fa-solid fa-circle-info"></i>
-            <span>
+            <x-text class="text-gray-dark">
                 Ao criar uma loja, você terá acesso ao <span class="font-bold">Painel do Artesão</span>.
-            </span>
-        </p>
+            </x-text>
+        </section>
 
         <ul class="grid gap-8">
             <li class="flex gap-4 items-center">
@@ -34,14 +38,10 @@
             </li>
         </ul>
 
-        <h3 class="mt-4 text-lg font-bold text-secondary-regular">
-            Dê o seu primeiro passo na Alda.
-        </h3>
-
         <x-form :width="'full'"
                 :action="route('shop.store')">
             <div>
-                <x-input-label for="name" :value="__('Name')" />
+                <x-input-label for="name" :value="'Nome '" />
                 <x-input-text id="name"
                               class="w-full"
                               type="text"
@@ -52,7 +52,7 @@
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <div>
-                <x-input-label for="url" :value="'Url da loja'" />
+                <x-input-label for="url" :value="'URL'" />
                 <p class="text-gray-dark">
                     www.site.com/<span class="font-bold">urldaloja</span>
                 </p>

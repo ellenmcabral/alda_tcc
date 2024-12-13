@@ -1,4 +1,4 @@
-<section class="grid gap-4">
+<div class="grid gap-4">
     <header class="flex items-center gap-2">
         <i class="fa-solid fa-bag-shopping"></i>
         <x-text-subheading>
@@ -34,4 +34,4 @@
 
     <input type="hidden" name="total" value="{{ $cart_total }}" />
 
-</section>
+</div>

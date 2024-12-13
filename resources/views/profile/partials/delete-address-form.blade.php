@@ -4,33 +4,19 @@
     Excluir
 </x-link-secondary>
 
-<x-modal :maxWidth="'sm'"
-         name="confirm-shipping-address-deletion-{{ $address->id  }}"
-         :show="$errors->shippingAddressDeletion->isNotEmpty()" focusable>
-    <form method="post"
-          action="{{ route('profile.shipping-addresses.destroy', $address->id) }}">
-        @csrf
-        @method('delete')
+<x-modal-delete name="confirm-shipping-address-deletion-{{ $address->id }}"
+                :show="'shippingAddressDeletion'"
+                :action="route('profile.shipping-addresses.destroy', $address->id)"
+                :password="false">
+    <x-slot:heading>
+        Excluir este endereço?
+    </x-slot:heading>
 
-        <div class="grid gap-4 p-6">
-            <h3 class="text-2xl font-bold text-neutral-black">
-                Tem certeza que deseja excluir este endereço?
-            </h3>
+    <x-slot:description>
+        {{ $address->street }}, {{ $address->number }} {{ isset($address->complement) ?? '.' . $address->complement }} - {{ $address->locality }} - {{ $address->city }} / {{ $address->region_code }} - {{ $address->postal_code }}
+    </x-slot:description>
 
-            <p>
-                {{ $address->street }}, {{ $address->number }} {{ isset($address->complement) ?? '.' . $address->complement }} - {{ $address->locality }} - {{ $address->city }} / {{ $address->region_code }} - {{ $address->postal_code }}
-            </p>
+    <x-slot:button>
 
-            <div class="flex justify-between">
-                <x-button-outlined :color="'gray'" x-on:click="$dispatch('close')">
-                    Cancelar
-                </x-button-outlined>
-
-                <x-button-danger>
-                    Sim, excluir
-                </x-button-danger>
-            </div>
-        </div>
-
-    </form>
-</x-modal>
+    </x-slot:button>
+</x-modal-delete>

@@ -86,13 +86,9 @@ class ProductController extends Controller
 
         $productImages = $product->productImages()->orderBy('is_default', 'desc')->get();
 
-        $defaultProductImage = $product->productImages()->where('is_default', true)->first();
-
         return view('products.show', [
             'product' => $product,
             'productImages' => $productImages,
-            'defaultProductImage' => $defaultProductImage,
-            'shop' => $product->shop,
         ]);
     }
 

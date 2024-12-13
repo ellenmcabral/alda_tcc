@@ -18,6 +18,7 @@
     <script src="https://kit.fontawesome.com/ab1643a237.js" crossorigin="anonymous"></script>
 </head>
 <body class="flex flex-col font-sans antialiased">
+
     <!-- Page Header -->
     @include('layouts.app.header')
 
@@ -26,22 +27,30 @@
         <section id="shop"
                  class="py-16 bg-secondary-regular flex items-center justify-center lg:h-screen">
             <div class="sm:w-2/3 mx-4 my-16 flex flex-col items-center gap-8 lg:flex-row-reverse lg:justify-center">
-                <img class="md:w-1/2" src="/img/assets/shop.png"
-                     alt="imagem de uma loja ilustrada" />
+                <img class="md:w-1/2 aspect-square"
+                     src="/img/assets/shop.png"
+                     alt="Ilustração de uma loja on-line com um carrinho de compras" />
 
                 <div class="grid gap-8">
-                    <h1 class="font-extrabold text-4xl text-neutral-white">Uma plataforma acolhedora para artesãos</h1>
-                    <p class="text-neutral-white">Adicione produtos, organize encomendas e divulgue a sua loja com a Alda</p>
+                    <x-text-heading class="font-extrabold text-4xl text-neutral-white">
+                        Uma plataforma acolhedora para artesãos
+                    </x-text-heading>
+                    <x-text class="text-neutral-white">
+                        Adicione produtos, organize encomendas e divulgue a sua loja com a Alda
+                    </x-text>
                     <div class="flex flex-col items-center 2xl:flex-row gap-4">
-                        <a class="w-full 2xl:w-fit uppercase text-center py-2 px-4 font-bold text-secondary-regular bg-neutral-white rounded-lg hover:bg-gray-light transition duration-300"
-                           href="{{ route('register') }}">
+                        <x-button-secondary :color="'white'"
+                                            class="w-full"
+                                            href="{{ route('register') }}">
                             Começar agora
                             <i class="ml-2 fa-solid fa-chevron-right"></i>
-                        </a>
-                        <a class="w-full 2xl:w-fit uppercase text-center py-2 px-4 font-bold text-neutral-white border-solid border-2 border-neutral-white rounded-lg hover:bg-gray-light hover:bg-opacity-10 transition duration-300"
-                           href="{{ route('login') }}">
+                        </x-button-secondary>
+                        <x-button-outlined :color="'white'"
+                                           class="w-full"
+                                           href="{{ route('login') }}">
                             Já tenho uma conta
-                        </a>
+                            <i class="ml-2 fa-solid fa-chevron-right"></i>
+                        </x-button-outlined>
                     </div>
                 </div>
             </div>
@@ -51,41 +60,41 @@
         <section id="benefits"
                  class="py-16 bg-gray-light flex items-center justify-center px-4 lg:px-16 lg:h-screen">
             <div class="grid gap-16 md:gap-8 md:grid-cols-3">
-                <div class="flex flex-col justify-between p-4 bg-white rounded-lg shadow-md">
-                    <img class="w-1/2"
+                <div class="grid gap-4 justify-between p-6 bg-white rounded-lg shadow-md">
+                    <img class="w-1/2 aspect-square"
                          src="/img/assets/online-shop.png"
-                         alt="ilustração de uma loja com um carrinho de compras"/>
-                    <h2 class="font-bold text-3xl text-neutral-black">
+                         alt="Ilustração de uma página web de loja com uma sacola de compras"/>
+                    <x-text-subheading>
                         Abra sua loja
-                    </h2>
-                    <div class="w-32 h-1 bg-accent-regular my-4"></div>
-                    <p>
+                    </x-text-subheading>
+                    <div class="w-32 h-1 bg-accent-regular"></div>
+                    <x-text>
                         Seus produtos vão ficar na página da sua loja e acessíveis para qualquer um na internet conseguir ver e comprar.
-                    </p>
+                    </x-text>
                 </div>
-                <div class="flex flex-col justify-between p-4 bg-white rounded-lg shadow-md">
-                    <img class="w-1/2"
+                <div class="grid gap-4 justify-between p-6 bg-white rounded-lg shadow-md">
+                    <img class="w-1/2 aspect-square"
                          src="/img/assets/online-payment.png"
-                         alt="ilustração de uma loja"/>
-                    <h2 class="font-bold text-3xl text-neutral-black">
+                         alt="Ilustração de laptop com símbolo monetário e um carrinho de compras"/>
+                    <x-text-subheading>
                         Venda com praticidade
-                    </h2>
-                    <div class="w-32 h-1 bg-accent-regular my-4"></div>
-                    <p>
+                    </x-text-subheading>
+                    <div class="w-32 h-1 bg-accent-regular"></div>
+                    <x-text>
                         Você vai conseguir organizar seus produtos rapidamente com nossa interface limpa e sem complicação.
-                    </p>
+                    </x-text>
                 </div>
-                <div class="flex flex-col justify-between p-4 bg-white rounded-lg shadow-md">
-                    <img class="w-1/2"
+                <div class="grid gap-4 justify-between p-6 bg-white rounded-lg shadow-md">
+                    <img class="w-1/2 aspect-square"
                          src="/img/assets/worldwide-shopping.png"
-                         alt="ilustração de uma loja"/>
-                    <h2 class="font-bold text-3xl text-neutral-black">
+                         alt="Ilustração de um globo terrestre com locais marcados em vermelho e uma sacola de compras"/>
+                    <x-text-subheading>
                         Faça parte da comunidade
-                    </h2>
-                    <div class="w-32 h-1 bg-accent-regular my-4"></div>
-                    <p>
+                    </x-text-subheading>
+                    <div class="w-32 h-1 bg-accent-regular"></div>
+                    <x-text>
                         Pesquise por artesanato de vários outros locais. Crochê, biscuit ou madeira: Todos os tipos de artesanato são bem-vindos.
-                    </p>
+                    </x-text>
                 </div>
             </div>
         </section>
@@ -93,16 +102,20 @@
         <!-- Call To Action -->
         <section id="cta"
                  class="mx-4 py-16 flex flex-col sm:flex-row items-center lg:h-screen">
-            <img class="h-fit sm:w-1/3 mb-8"
+            <img class="h-fit sm:w-1/3 mb-8 aspect-square"
                  src="img/assets/order-placed.png"
                  alt="ilustração de uma loja" />
             <div class="grid gap-4 h-fit">
-                <h1 class="text-secondary-regular font-extrabold text-4xl">Artesão, venha abrir a sua loja na Alda</h1>
-                <a class="h-fit lg:w-fit uppercase text-center font-bold text-neutral-white border-solid bg-secondary-regular hover:bg-secondary-dark p-3 rounded-lg transition duration-300"
-                   href="{{ route('register') }}">
+                <x-text-heading class="text-secondary-regular">
+                    Artesão, venha abrir a sua loja
+                </x-text-heading>
+
+                <x-button-secondary :color="'secondary'"
+                                    class="w-fit"
+                                    href="{{ route('register') }}">
                     Começar agora
                     <i class="ml-2 fa-solid fa-chevron-right"></i>
-                </a>
+                </x-button-secondary>
             </div>
         </section>
     </main>

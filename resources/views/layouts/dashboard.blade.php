@@ -20,16 +20,23 @@
     <body class="flex flex-col font-sans h-screen bg-neutral-white text-neutral-black">
         <!-- Page Header -->
         <header class="sticky top-0 z-50 shadow-md flex justify-between items-center py-8 px-4 bg-neutral-white border-b-2 border-secondary-regular">
-            <div class="flex">
+            <div class="flex items-center gap-4">
                 <x-dropdown :links="'dashboard'"/>
 
-                <x-application-logo :color="'secondary'"/>
+                <x-application-logo class="hidden lg:flex"
+                                    :type="'secondary'"/>
             </div>
+
+            <x-application-logo class="flex lg:hidden"
+                                :type="'iconSecondary'"/>
 
             <div class="flex gap-6 items-center">
                 <x-button-outlined :color="'secondary'"
                                    :href="route('home')">
-                    Sair do Painel
+                    <span class="flex items-center justify-center md:hidden h-6">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </span>
+                    <span class="hidden md:flex">Sair do Painel</span>
                 </x-button-outlined>
 
                 @include('layouts.navigation.links-dashboard')
@@ -51,9 +58,11 @@
         </header>
 
         @isset($heading)
-            <x-text-heading class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED] text-secondary-dark">
-                {{ $heading }}
-            </x-text-heading>
+            <section class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED]">
+                <x-text-heading class="text-secondary-dark">
+                    {{ $heading }}
+                </x-text-heading>
+            </section>
         @endisset
 
         @isset($breadcrumbs)
@@ -67,7 +76,8 @@
 
             <!-- Session Status -->
             @if(session('status') !== null)
-                <x-status-message :status="session('status')" :type="session('type')"/>
+                <x-status-message :status="session('status')"
+                                  :type="session('type')"/>
             @endif
 
             {{ $slot }}

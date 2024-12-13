@@ -13,7 +13,7 @@ switch($links) {
 
 @endphp
 
-<nav class="2xl:hidden 2xl:w-full flex items-center mr-4" x-data="{ open: false }">
+<nav class="2xl:hidden 2xl:w-full flex items-center" x-data="{ open: false }">
     <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
         <div @click="open = ! open">
             <!-- Hamburger -->

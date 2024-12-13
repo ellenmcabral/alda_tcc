@@ -37,14 +37,11 @@
             </div>
 
             <!-- Remember Me -->
-            <div>
-                <label for="remember_me" class="cursor-pointer inline-flex items-center">
-                    <input id="remember_me"
-                           type="checkbox"
-                           class="cursor-pointer rounded focus:ring-accent-regular checked:focus:bg-accent-dark checked:bg-accent-dark"
-                           name="remember">
-                    <span class="ml-2 text-gray-600">{{ __('Remember me') }}</span>
-                </label>
+            <div class="flex items-center gap-2">
+                <x-input-checkbox id="remember_me"
+                                  name="remember" />
+                <x-input-label for="remember_me"
+                               :value="'Manter conectado'" />
             </div>
 
             <x-button>

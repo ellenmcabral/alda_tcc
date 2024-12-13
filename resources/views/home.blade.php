@@ -1,53 +1,58 @@
 <x-app-layout>
     <div class="w-full grid gap-16 md:w-2/3">
-        <section class="grid gap-4">
-            <div class="grid gap-4 p-4 lg:p-6 bg-gray-50 border border-gray-dark rounded-lg z-10">
-                @can('activate shop')
-                    <div class="z-10 p-6 flex items-center gap-2 bg-warning-regular rounded border border-warning-dark">
-                        <i class="text-warning-dark fa-solid fa-triangle-exclamation"></i>
-                        <p class="text-neutral-black">
-                            Certifique-se de
-                            <a class="underline hover:text-yellow-900 transition ease-in-out duration-150"
-                               href="{{ route('shop.activate') }}" >
-                                ativar a sua loja
-                            </a>
-                            para poder acessar o Painel de Controle do Artesão.
-                        </p>
-                    </div>
-                @endcan
-                <div class="w-full flex justify-between">
-                    <div class="flex flex-col justify-between">
-                        <div class="grid gap-2">
-                            <x-text-heading>
-                                Oi, {{ Auth::user()->formatName() }}
-                            </x-text-heading>
-                            <p>
-                                Bem-vindo(a) à ALDA!
-                            </p>
-                        </div>
-                    </div>
-                    <!-- FOTO GATINHO -->
-                    <img class="w-1/3 xl:w-40"
-                         src="/img/assets/cat.png"
-                         alt="ilustração de gatinho" />
+        <section class="grid gap-4 p-4 lg:p-6 bg-gray-50 border border-gray-dark rounded-lg z-10">
+            @can('activate shop')
+                <div class="z-10 p-6 flex items-center gap-2 bg-warning-regular rounded border border-warning-dark">
+                    <i class="text-warning-dark fa-solid fa-triangle-exclamation"></i>
+                    <p class="text-neutral-black">
+                        Certifique-se de
+                        <a class="underline hover:text-yellow-900 transition ease-in-out duration-150"
+                           href="{{ route('shop.activate') }}" >
+                            ativar a sua loja
+                        </a>
+                        para poder acessar o Painel de Controle do Artesão.
+                    </p>
                 </div>
-                @can('create shop')
-                    <div class="text-secondary-regular flex items-center">
-                        <x-link class="flex items-center" href="{{ route('shop.create') }}">
-                            Criar loja
-                        </x-link>
-                        <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+            @endcan
+            <div class="w-full flex justify-between">
+                <div class="flex flex-col justify-between">
+                    <div class="grid gap-2">
+                        <x-text-heading>
+                            Oi, {{ Auth::user()->formatName() }}
+                        </x-text-heading>
+                        <x-text>
+                            Bem-vindo(a) à ALDA!
+                        </x-text>
                     </div>
-                @endcan
-                @role('artisan')
+                </div>
+                <!-- FOTO GATINHO -->
+                <img class="w-1/3 xl:w-40"
+                     src="/img/assets/cat.png"
+                     alt="ilustração de gatinho" />
+            </div>
+            @can('create shop')
+                <div class="text-secondary-regular flex items-center">
+                    <x-link class="flex items-center" href="{{ route('shop.create') }}">
+                        Criar loja
+                    </x-link>
+                    <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+                </div>
+            @endcan
+            @role('artisan')
                 <div class="text-secondary-regular flex items-center">
                     <x-link class="flex items-center" href="{{ route('artisan.index') }}">
                         Acessar painel do artesão
                     </x-link>
                     <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
                 </div>
-                @endrole
-            </div>
+            @elserole('admin')
+                <div class="text-secondary-regular flex items-center">
+                    <x-link class="flex items-center" href="{{ route('admin.index') }}">
+                        Acessar painel do administrador
+                    </x-link>
+                    <i class="ml-1 text-sm fa-solid fa-chevron-right"></i>
+                </div>
+            @endrole
         </section>
 
         <section class="relative w-full z-0 grid gap-4"
@@ -56,21 +61,21 @@
                 Últimos Produtos
             </x-text-heading>
 
-            <!-- SLIDER DE PRODUTOS -->
+            <!-- SLIDER DE PRODUTOS MOBILE -->
             <div class="relative overflow-hidden h-96 lg:hidden">
                 @foreach($products as $product)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
                         <a href="{{ route('products.show', $product->id) }}">
-                            <img src="/img/products/{{ $product->image }}"
+                            <x-image src="{{ $product->getDefaultImagePath() }}"
                                  alt="Imagem do produto {{ $product->name }}"
-                                 class="object-cover aspect-square absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                 class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" />
                         </a>
-                        <p class="text-lg absolute top-5 right-5 font-bold rounded text-accent-darker px-4 py-2 bg-white">
+                        <x-text-subheading class="absolute top-0 right-0 font-bold rounded text-accent-darker px-4 py-2 bg-white">
                             {{ $product->formatPrice() }}
-                        </p>
-                        <h3 class="text-lg absolute left-0 bottom-0 bg-white w-full py-2 line-clamp-1 font-bold">
+                        </x-text-subheading>
+                        <x-text-subheading class="absolute left-0 bottom-0 bg-white w-full py-2 line-clamp-1">
                             {{ $product->name }}
-                        </h3>
+                        </x-text-subheading>
                     </div>
                 @endforeach
 
@@ -93,12 +98,12 @@
                 </button>
             </div>
 
-            <!-- GRADE DE PRODUTOS PARA DESKTOP -->
+            <!-- GRADE DE PRODUTOS DESKTOP -->
             <div class="hidden lg:grid lg:grid-cols-3 lg:gap-8">
                 @foreach($products as $product)
                     <a class="grid gap-4"
                        href="{{ route('products.show', $product->id) }}">
-                        <x-image :src="$product->getDefaultImagePath($product)"
+                        <x-image :src="$product->getDefaultImagePath()"
                                  class="rounded-lg" />
                         <div class="flex justify-between">
                             <h3 class="font-bold line-clamp-1 h-fit w-2/3">
@@ -118,7 +123,7 @@
         </section>
 
         <!-- CATEGORIAS -->
-        <aside class="grid gap-4">
+        <section class="grid gap-4">
             <x-text-heading>
                 Categorias
             </x-text-heading>
@@ -136,7 +141,7 @@
             <x-link-secondary href="{{ route('categories.index') }}">
                 Ver mais categorias<i class="ml-1 text-sm text-gray-dark fa-solid fa-chevron-right"></i>
             </x-link-secondary>
-        </aside>
+        </section>
     </div>
 
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>

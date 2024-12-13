@@ -4,18 +4,19 @@
     </x-slot:heading>
 
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
-        <section class="flex gap-4 items-center">
-            <!-- Imagem -->
-            <img src="{{ $shop->getImagePath() }}" alt="Imagem da loja {{ $shop->name }}"
-                 class="object-fit w-20 h-20 rounded-full bg-gray-200" />
+        <section class="flex flex-col items-center gap-4 lg:flex-row">
+            <!-- Imagem da Loja -->
+            <x-image src="{{ $shop->getImagePath() }}"
+                     alt="Imagem da loja {{ $shop->name }}"
+                     class="w-32 lg:w-20 rounded-full bg-gray-200" />
 
             <div>
-                <h2 class="font-bold">
+                <x-text-subheading class="line-clamp-1">
                     {{ $shop->name }}
-                </h2>
-                <a href="{{ route('shop.show', $shop->url) }}">
-                    site.com.br/<span class="font-bold text-secondary-300">{{ $shop->url }}</span>
-                </a>
+                </x-text-subheading>
+                <x-link-secondary href="{{ route('shop.show', $shop->url) }}">
+                    {{ $shop->formatUrl() }}
+                </x-link-secondary>
             </div>
         </section>
 

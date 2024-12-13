@@ -1,20 +1,21 @@
 <div class="grid gap-8">
     @if($results->isEmpty())
-        <p class="text-gray-dark">
+        <x-text class="text-gray-dark">
             Nenhum resultado foi encontrado.
-        </p>
+        </x-text>
     @else
-        <section class="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             @foreach($results as $result)
                 <x-card>
                     @if($searchType == 'Produtos')
-                        <a class="grid" href="{{ route('products.show', $result->id) }}">
-                            <x-image :src="$result->getDefaultImagePath($result)"
+                        <a class="grid"
+                           href="{{ route('products.show', $result->id) }}">
+                            <x-image :src="$result->getDefaultImagePath()"
                                      alt="Imagem do produto {{ $result->name }}" />
-                            <span class="mt-2 line-clamp-2">
+                            <span class="mt-2 line-clamp-2 h-16">
                                 {{ $result->name }}
                             </span>
-                            <span class="mt-4 font-bold">
+                            <span class="font-bold">
                                 {{ $result->formatPrice() }}
                             </span>
 
@@ -26,8 +27,11 @@
                                     </span>
                                 </span>
                             @else
-                                <span class="text-yellow-500 text-sm">
+                                <span class="grid text-yellow-500 text-sm">
                                     Sob encomenda
+                                    <span class="text-gray-regular">
+                                        {{ $result->deadline }} dias úteis
+                                    </span>
                                 </span>
                             @endif
                         </a>

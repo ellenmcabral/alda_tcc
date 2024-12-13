@@ -69,7 +69,7 @@ Route::get('/categorias/{category}/produtos', [CategoryController::class, 'produ
 Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/inicio', function () {
-            $categories = \App\Models\Category::all()->take(12);
+            $categories = \App\Models\Category::query()->inRandomOrder()->limit(12)->get();
             $products = \App\Models\Product::orderBy('id', 'desc')->take(3)->get();
 
             return view('home', [

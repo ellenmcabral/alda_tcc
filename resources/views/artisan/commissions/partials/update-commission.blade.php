@@ -4,16 +4,17 @@
     Alterar Status <i class="fa-solid fa-edit"></i>
 </x-button-secondary>
 
-<x-modal :maxWidth="'sm'" name="confirm-commission-update" focusable>
+<x-modal :maxWidth="'sm'"
+         name="confirm-commission-update" focusable>
     <form method="post"
           action="{{ route('artisan.commissions.update', $commission->id) }}"
           class="grid gap-4 p-6">
         @csrf
         @method('patch')
 
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+        <x-text-subheading>
             Alterar Status da Encomenda
-        </h2>
+        </x-text-subheading>
 
         <div>
             <x-input-label for="statuses" :value="'Status'"/>
@@ -29,13 +30,15 @@
             </x-input-select>
         </div>
 
-        <div class="mt-6 flex justify-end">
-            <x-button-outlined :color="'gray'" class="cursor-pointer" x-on:click="$dispatch('close')">
-                {{ __('Cancel') }}
+        <div class="flex gap-4">
+            <x-button-outlined :color="'gray'"
+                               class="w-full cursor-pointer"
+                               x-on:click="$dispatch('close')">
+                Cancelar
             </x-button-outlined>
 
-            <x-button class="ms-3">
-                SALVAR
+            <x-button class="w-full">
+                Salvar
             </x-button>
         </div>
     </form>

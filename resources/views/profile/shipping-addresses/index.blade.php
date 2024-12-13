@@ -4,24 +4,25 @@
     </x-slot:breadcrumbs>
 
     <div class="flex flex-col gap-8 w-full h-fit md:w-2/3">
-        <x-button-secondary class="w-fit self-end" :color="'secondary'"
-           href="{{ route('profile.shipping-addresses.create') }}">
-            Adicionar endereço
+        <x-button-secondary class="w-fit self-end"
+                            :color="'secondary'"
+                            href="{{ route('profile.shipping-addresses.create') }}">
+            Adicionar
             <i class="fa-solid fa-plus"></i>
         </x-button-secondary>
 
         @if($addresses->isEmpty())
-            <p class="text-gray-dark">
-                Nenhum endereço de entrega cadastrado.
-            </p>
+            <x-text class="text-gray-dark">
+                Nenhum endereço de entrega.
+            </x-text>
         @else
             <section class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
                 @foreach($addresses as $address)
                     <div class="p-4 flex flex-col justify-between gap-4 border rounded-lg @if($address->is_default) border-accent-dark @else border-gray-light @endif">
                         @if($address->is_default)
-                            <p class="text-sm font-bold text-accent-darker">
+                            <x-text class="font-bold text-accent-darker">
                                 Este é o seu endereço de entrega padrão.
-                            </p>
+                            </x-text>
 
                             <hr/>
                         @endif
