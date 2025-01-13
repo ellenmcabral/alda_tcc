@@ -5,13 +5,16 @@
 
     <div class="w-full h-fit grid gap-8 md:w-2/3">
         <section class="flex w-full justify-end">
-            <x-button-secondary class="w-fit" href="{{ route('artisan.products.create') }}"
+            <x-button-secondary class="w-full md:w-fit" href="{{ route('artisan.products.create') }}"
                                 :color="'secondary'">
                 Adicionar produto
                 <i class="text-sm fa-solid fa-plus"></i>
             </x-button-secondary>
         </section>
 
+        <x-link-secondary href="{{ route('artisan.products.deleted-products') }}">
+            Produtos Excluídos
+        </x-link-secondary>
 
         @if($products->isEmpty()) <!-- SEM PRODUTOS -->
             <div class="flex flex-col items-center gap-8">

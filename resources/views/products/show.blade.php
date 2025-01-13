@@ -58,22 +58,26 @@
                 </section>
 
                 <div>
-                    @auth
-                        @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
-                            <x-button-secondary class="w-full"
-                                                href="{{ route('artisan.products.edit', $product->id) }}">
-                                Editar <i class="fa-solid fa-pen-to-square"></i>
-                            </x-button-secondary>
+                    @if($product->is_active == true)
+                        @auth
+                            @if(Auth::user()->hasRole('artisan') && $product->shop_id == Auth::user()->shop->id)
+                                <x-button-secondary class="w-full"
+                                                    href="{{ route('artisan.products.edit', $product->id) }}">
+                                    Editar <i class="fa-solid fa-pen-to-square"></i>
+                                </x-button-secondary>
+                            @else
+                                <x-form-cart :action="route('cart.add')"
+                                             :product="$product"
+                                             :quantity="true" />
+                            @endif
                         @else
                             <x-form-cart :action="route('cart.add')"
                                          :product="$product"
                                          :quantity="true" />
-                        @endif
+                        @endauth
                     @else
-                        <x-form-cart :action="route('cart.add')"
-                                     :product="$product"
-                                     :quantity="true" />
-                    @endauth
+                        <x-text class="text-danger-dark font-bold uppercase">Produto indisponível</x-text>
+                    @endif
                 </div>
 
                 <section class="h-fit w-full flex flex-col gap-4 border border-gray-regular p-4 rounded-lg">

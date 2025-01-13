@@ -87,6 +87,17 @@ Route::middleware(['auth', 'role:artisan'])
     // GERENCIAR PRODUTOS
     Route::get('/produtos', [ProductController::class, 'index'])
         ->name('products.index');
+
+    Route::get('/produtos/excluidos', function () {
+
+        $deletedProducts = \App\Models\Product::where('is_active', false)->paginate(15);
+
+        return view('artisan.products.deleted-products', [
+            'products' => $deletedProducts,
+            'shop' => Auth::user()->shop,
+        ]);
+    })->name('products.deleted-products');
+
     Route::get('/produtos/adicionar', [ProductController::class, 'create'])
         ->name('products.create');
     Route::post('/produtos', [ProductController::class, 'store'])
@@ -97,6 +108,9 @@ Route::middleware(['auth', 'role:artisan'])
         ->name('products.edit');
     Route::patch('/produtos/{product}', [ProductController::class, 'update'])
         ->name('products.update');
-    Route::delete('/produtos/{product}', [ProductController::class, 'destroy'])
-        ->name('products.destroy');
+    Route::patch('/produtos/{product}/deletar', [ProductController::class, 'delete'])
+        ->name('products.delete');
+
+    Route::patch('/produtos/{product}/ativar', [ProductController::class, 'activate'])
+        ->name('products.activate');
 });

@@ -11,27 +11,21 @@
          :show="$errors->productDeletion->isNotEmpty()" focusable>
     <form class="grid gap-4 p-6 text-left"
           method="post"
-          action="{{ route('artisan.products.destroy', $product->id) }}">
+          action="{{ route('artisan.products.delete', $product->id) }}">
         @csrf
-        @method('delete')
+        @method('patch')
 
-        <h3 class="text-2xl font-bold text-neutral-black">
+        <x-text-subheading>
             Tem certeza que quer excluir este produto?
-        </h3>
+        </x-text-subheading>
 
-        <p class="text-gray-dark">
-            O produto "<span class="font-bold">{{ $product->name }}</span>" será excluído permanentemente, junto com qualquer pedido que o possuir.
-        </p>
+        <x-text class="text-gray-dark">
+            O produto "<span class="font-bold">{{ $product->name }}</span>" será marcado como excluído.
+        </x-text>
 
-        <x-input-text
-            id="password"
-            name="password"
-            type="password"
-            class="w-full"
-            placeholder="Digite sua senha para confirmar"
-        />
-
-        <x-input-error :messages="$errors->productDeletion->get('password')"/>
+        <x-text class="text-gray-dark">
+            Você poderá ativá-lo novamente na página de Produtos Excluídos.
+        </x-text>
 
         <div class="flex gap-4 mt-4">
             <x-button-outlined :color="'gray'"

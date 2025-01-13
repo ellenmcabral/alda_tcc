@@ -212,6 +212,11 @@ Breadcrumbs::for('products.index', function($trail) {
     $trail->push('Produtos', route('artisan.products.index'));
 });
 
+Breadcrumbs::for('deleted-products', function ($trail) {
+   $trail->parent('products.index');
+   $trail->push('Produtos Excluídos', route('artisan.products.deleted-products'));
+});
+
 Breadcrumbs::for('products.create', function($trail) {
     $trail->parent('products.index');
     $trail->push('Adicionar Produto', route('artisan.products.create'));

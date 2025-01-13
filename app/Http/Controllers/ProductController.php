@@ -16,7 +16,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): View
     {
-        $products = $request->user()->shop->products()->get();
+        $products = $request->user()->shop->products()->where('is_active', 1)->get();
 
         return view('artisan.products.index', [
             'shop' => $request->user()->shop,
@@ -122,18 +122,29 @@ class ProductController extends Controller
             ->with('status', 'Produto atualizado!');
     }
 
-    public function destroy(Product $product): RedirectResponse
+    public function delete(Product $product): RedirectResponse
     {
-        $productImages = ProductImage::where('product_id', $product->id)->get();
+        //$productImages = ProductImage::where('product_id', $product->id)->get();
 
-        foreach ($productImages as $productImage) {
-            Storage::disk('local')->delete('public/img/products/' . $productImage->image);
-        }
+        //foreach ($productImages as $productImage) {
+        //    Storage::disk('local')->delete('public/img/products/' . $productImage->image);
+        //}
 
-        $product->delete();
+        $product->is_active = false;
+        $product->save();
 
         return redirect(route('artisan.products.index'))->with([
             'status' => 'Produto excluído!',
+        ]);
+    }
+
+    public function activate(Product $product): RedirectResponse
+    {
+        $product->is_active = true;
+        $product->save();
+
+        return redirect(route('artisan.products.deleted-products'))->with([
+           'status' => 'Produto ativado!',
         ]);
     }
 }

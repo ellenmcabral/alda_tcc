@@ -47,7 +47,7 @@ class ProductsSort extends Component
     public function render()
     {
         return view('livewire.products-sort', [
-            'products' => $this->shop->products()->orderBy($this->sortField, $this->sortDirection)->paginate(10),
+            'products' => $this->shop->products()->where('is_active', 1)->orderBy($this->sortField, $this->sortDirection)->paginate(10),
         ]);
     }
 }

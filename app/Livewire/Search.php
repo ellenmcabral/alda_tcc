@@ -63,7 +63,7 @@ class Search extends Component
             }
         }
         return view('livewire.search', [
-            'results' => $results->orderBy($this->sortField, $this->sortDirection)->paginate(20),
+            'results' => $results->where('is_active', 1)->orderBy($this->sortField, $this->sortDirection)->paginate(20),
         ]);
     }
 }
