@@ -53,8 +53,8 @@
             </div>
             <div>
                 <x-input-label for="url" :value="'URL'" />
-                <x-text class="text-gray-dark">
-                    https://alda.com/loja/<span class="font-bold">urldaloja</span>
+                <x-text class="text-sm text-gray-dark">
+                    http://alda-tcc-d1ff4d1fabe2.herokuapp.com/loja/<span class="font-bold">urldaloja</span>
                 </x-text>
                 <x-input-text id="url"
                               class="w-full"

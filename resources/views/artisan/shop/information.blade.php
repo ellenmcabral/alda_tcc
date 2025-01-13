@@ -19,10 +19,9 @@
             </div>
 
             <div>
-
                 <x-input-label for="url" :value="'URL'" />
-                <p class="text-gray-dark">
-                    www.site.com/<span class="font-bold">urldaloja</span>
+                <p class="text-sm text-gray-dark">
+                    http://alda-tcc-d1ff4d1fabe2.herokuapp.com/loja/<span class="font-bold">urldaloja</span>
                 </p>
                 <x-input-text id="url"
                               class="w-full"
