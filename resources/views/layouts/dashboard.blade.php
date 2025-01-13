@@ -60,7 +60,7 @@
         </header>
 
         @isset($heading)
-            <section class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED]">
+            <section class="w-full px-4 py-8 lg:px-12 bg-[#FCE5ED]">
                 <x-text-heading class="text-secondary-dark">
                     {{ $heading }}
                 </x-text-heading>
@@ -68,7 +68,7 @@
         @endisset
 
         @isset($breadcrumbs)
-            <section class="w-full px-4 py-8 lg:px-6 bg-[#FCE5ED]">
+            <section class="w-full px-4 py-8 lg:px-12 bg-[#FCE5ED]">
                 {{ $breadcrumbs }}
             </section>
         @endisset
