@@ -213,11 +213,11 @@ Breadcrumbs::for('products.index', function($trail) {
 });
 
 Breadcrumbs::for('products.create', function($trail) {
-    $trail->parent('products');
+    $trail->parent('products.index');
     $trail->push('Adicionar Produto', route('artisan.products.create'));
 });
 
 Breadcrumbs::for('products.edit', function($trail, $product) {
-    $trail->parent('products');
+    $trail->parent('products.index');
     $trail->push("Editar Produto", route('artisan.products.edit', $product));
 });
