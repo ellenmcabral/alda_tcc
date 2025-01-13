@@ -1,6 +1,10 @@
 <x-app-layout>
     <x-slot:breadcrumbs>
-        {{ Breadcrumbs::render('shop.show', $shop) }}
+        @auth
+            {{ Breadcrumbs::render('shop.show', $shop) }}
+        @else
+            {{ Breadcrumbs::render('shop.show.loggedOut', $shop) }}
+        @endauth
     </x-slot:breadcrumbs>
 
     <div class="flex flex-col gap-8 h-fit w-full lg:px-8">

@@ -1,7 +1,7 @@
 <x-dashboard-layout>
-    <x-slot:heading>
-        Produtos
-    </x-slot:heading>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('products.index') }}
+    </x-slot:breadcrumbs>
 
     <div class="w-full h-fit grid gap-8 md:w-2/3">
         <section class="flex w-full justify-end">

@@ -1,7 +1,7 @@
 <x-dashboard-layout>
-    <x-slot:heading>
-        Minha Loja
-    </x-slot:heading>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shop.edit') }}
+    </x-slot:breadcrumbs>
 
     <div class="grid gap-8 w-full h-fit md:w-1/2 xl:w-1/3">
         <section class="flex flex-col items-center gap-4 lg:flex-row">

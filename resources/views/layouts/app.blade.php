@@ -23,7 +23,7 @@
         @include('layouts.app.header')
 
         @isset($heading)
-            <section class="w-full px-4 py-8 lg:px-6 bg-gray-light ">
+            <section class="w-full px-4 py-8 lg:px-12 bg-gray-light ">
                 <x-text-heading class="text-gray-dark">
                     {{ $heading }}
                 </x-text-heading>
@@ -31,7 +31,7 @@
         @endisset
 
         @isset($breadcrumbs)
-            <section class="w-full px-4 py-8 lg:px-6 bg-gray-light">
+            <section class="w-full px-4 py-8 lg:px-12 bg-gray-light">
                 {{ $breadcrumbs }}
             </section>
         @endisset

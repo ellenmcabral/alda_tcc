@@ -15,6 +15,10 @@ Breadcrumbs::for('home', function ($trail) {
    $trail->push('Início', route('home'));
 });
 
+Breadcrumbs::for('alda', function ($trail) {
+   $trail->push('Início', route('alda'));
+});
+
 Breadcrumbs::for('profile', function ($trail) {
     $trail->parent('home');
     $trail->push('Minha Conta', route('profile.show'));
@@ -66,13 +70,33 @@ Breadcrumbs::for('commissions.show', function ($trail, $commission) {
     $trail->push('Detalhes do Pedido', route('commissions.show', $commission));
 });
 
-Breadcrumbs::for('shop.search', function ($trail) {
+Breadcrumbs::for('shops.search', function ($trail) {
     $trail->parent('home');
     $trail->push("Lojas", route('search', ['search_type' => 'Lojas', 'search_text' => '']));
 });
 
+Breadcrumbs::for('shops.search.loggedOut', function ($trail) {
+   $trail->parent('alda');
+   $trail->push("Lojas", route('search', ['search_type' => 'Lojas', 'search_text' => '']));
+});
+
+Breadcrumbs::for('products.search', function ($trail) {
+   $trail->parent('home');
+   $trail->push("Produtos", route('search', ['search_type' => 'Produtos', 'search_text' => '']));
+});
+
+Breadcrumbs::for('products.search.loggedOut', function ($trail) {
+   $trail->parent('alda');
+   $trail->push("Produtos", route('search', ['search_type' => 'Produtos', 'search_text' => '']));
+});
+
 Breadcrumbs::for('shop.show', function ($trail, Shop $shop) {
-    $trail->parent('shop.search');
+    $trail->parent('shops.search');
+    $trail->push($shop->name, route('shop.show', $shop->url));
+});
+
+Breadcrumbs::for('shop.show.loggedOut', function ($trail, Shop $shop){
+    $trail->parent('shops.search.loggedOut');
     $trail->push($shop->name, route('shop.show', $shop->url));
 });
 
@@ -81,13 +105,28 @@ Breadcrumbs::for('categories.index', function ($trail) {
     $trail->push('Categorias', route('categories.index'));
 });
 
+Breadcrumbs::for('categories.index.loggedOut', function ($trail) {
+    $trail->parent('alda');
+    $trail->push('Categorias', route('categories.index'));
+});
+
 Breadcrumbs::for('categories.products.index', function ($trail, $category) {
     $trail->parent('categories.index');
     $trail->push($category->description, route('categories.products.index', $category));
 });
 
+Breadcrumbs::for('categories.products.index.loggedOut', function ($trail, $category) {
+    $trail->parent('categories.index.loggedOut');
+    $trail->push($category->description, route('categories.products.index', $category));
+});
+
 Breadcrumbs::for('products.show', function ($trail, $category, $product) {
     $trail->parent('categories.products.index', $category);
+    $trail->push($product->name, route('products.show', $product));
+});
+
+Breadcrumbs::for('products.show.loggedOut', function ($trail, $category, $product) {
+    $trail->parent('categories.products.index.loggedOut', $category);
     $trail->push($product->name, route('products.show', $product));
 });
 
@@ -168,7 +207,7 @@ Breadcrumbs::for('shop.commissions.show', function ($trail, $commission) {
     $trail->push('Detalhes da Encomenda', route('artisan.commissions.show', $commission));
 });
 
-Breadcrumbs::for('products', function($trail) {
+Breadcrumbs::for('products.index', function($trail) {
     $trail->parent('artisan.index');
     $trail->push('Produtos', route('artisan.products.index'));
 });

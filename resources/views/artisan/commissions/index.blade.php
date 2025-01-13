@@ -1,7 +1,8 @@
 <x-dashboard-layout>
-    <x-slot:heading>
-        Encomendas
-    </x-slot:heading>
+    <x-slot:breadcrumbs>
+        {{ Breadcrumbs::render('shop.commissions.index') }}
+    </x-slot:breadcrumbs>
+
     <div class="grid gap-8 w-full h-fit md:px-8">
         @if($shopCommissions->isEmpty()) <!-- SEM ENCOMENDAS -->
             <div class="flex flex-col items-center gap-8">

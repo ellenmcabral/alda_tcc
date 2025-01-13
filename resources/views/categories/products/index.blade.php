@@ -1,6 +1,10 @@
 <x-app-layout>
     <x-slot:breadcrumbs>
-        {{ Breadcrumbs::render('categories.products.index', $category) }}
+        @auth
+            {{ Breadcrumbs::render('categories.products.index', $category) }}
+        @else
+            {{ Breadcrumbs::render('categories.products.index.loggedOut', $category) }}
+        @endauth
     </x-slot:breadcrumbs>
 
     <div class="h-fit w-full lg:px-8">
