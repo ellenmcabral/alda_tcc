@@ -19,8 +19,8 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:3', 'max:60'],
             $attribute => ['required', 'numeric'],
-            'images' => ['required', 'array'],
-            'sale_price' => ['required', 'numeric'],
+            'images' => ['array'],
+            'sale_price' => ['required', 'numeric', 'between:0,99999999.99'],
             'description' => ['max:700'],
             'category_id' => 'required',
         ];
@@ -33,6 +33,7 @@ class ProductRequest extends FormRequest
             'stock.required' => 'O campo estoque é obrigatório.',
             'deadline.required' => 'O campo prazo é obrigatório.',
             'sale_price.required' => 'O campo preço é obrigatório.',
+            'sale_price.between' => 'O campo preço ultrapassa o limite.',
             'category_id.required' => 'O campo categoria é obrigatório.',
         ];
     }

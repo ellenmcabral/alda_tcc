@@ -101,7 +101,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Product $product, Request $request): RedirectResponse
+    public function update(Product $product, ProductRequest $request): RedirectResponse
     {
         $product->update([
             'name' => $request->name,
