@@ -35,7 +35,7 @@
                     <x-text-heading class="font-extrabold text-4xl text-neutral-white">
                         Uma plataforma acolhedora para artesãos
                     </x-text-heading>
-                    <x-text class="text-neutral-white">
+                    <x-text class="text-lg text-neutral-white">
                         Adicione produtos, organize encomendas e divulgue a sua loja com a Alda
                     </x-text>
                     <div class="flex flex-col items-center 2xl:flex-row gap-4">

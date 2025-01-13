@@ -20,16 +20,16 @@
                             </span>
 
                             @if($result->stock)
-                                <span class="grid text-green-500 text-sm">
-                                    Pronta-entrega
-                                    <span class="text-gray-regular">
+                                <span class="grid gap-2 mt-2 text-sm">
+                                    <span class="px-2 py-1 border border-green-500 rounded-lg w-fit">Pronta-entrega</span>
+                                    <span class="text-gray-dark">
                                         {{ $result->stock }} unidades disponíveis
                                     </span>
                                 </span>
                             @else
-                                <span class="grid text-yellow-500 text-sm">
-                                    Sob encomenda
-                                    <span class="text-gray-regular">
+                                <span class="grid gap-2 mt-2 text-sm">
+                                    <span class="px-2 py-1 border border-yellow-500 rounded-lg w-fit">Sob encomenda</span>
+                                    <span class="text-gray-dark">
                                         {{ $result->deadline }} dias úteis
                                     </span>
                                 </span>
@@ -52,7 +52,9 @@
                         @endauth
                     @elseif($searchType == 'Lojas')
                         <a class="lg:flex lg:gap-2" href="{{ route('shop.show', $result->url) }}">
-                            <x-image class="lg:w-16" src="{{ $result->getImagePath() }}" />
+                            <x-image class="lg:w-16"
+                                     alt="Imagem da loja {{ $result->name }}"
+                                     src="{{ $result->getImagePath() }}" />
                             <span class=" w-full">
                                 <span class="mt-2 line-clamp-1 font-bold lg:w-3/4">
                                     {{ $result->name }}

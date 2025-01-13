@@ -39,6 +39,13 @@
                 <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
             </div>
 
+            <x-slot:cancelButton>
+                <x-button-outlined href="{{ route('profile.show') }}"
+                                   class="w-full" :color="'gray'">
+                    Cancelar
+                </x-button-outlined>
+            </x-slot:cancelButton>
+
             <x-slot:button>
                 Salvar
             </x-slot:button>

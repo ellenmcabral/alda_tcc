@@ -1,9 +1,10 @@
-<a class="cursor-pointer text-gray-regular text-2xl hover:text-gray-dark transition duration-300"
+<button aria-label="Excluir produto"
+   class="cursor-pointer text-gray-regular text-2xl hover:text-gray-dark transition duration-300"
    x-data=""
    x-on:click.prevent="$dispatch('open-modal', 'confirm-product-deletion-{{ $product->id }}')"
 >
     <i class="fa-solid fa-trash"></i>
-</a>
+</button>
 
 <x-modal :maxWidth="'sm'"
          name="confirm-product-deletion-{{ $product->id }}"

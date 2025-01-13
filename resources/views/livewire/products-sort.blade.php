@@ -11,13 +11,18 @@
             </th>
             <th scope="col" class="p-3 lg:p-6" x-data="{ sort: false }">
                 Nome
-                <button type="button" wire:click="sortBy('name')" @click="sort = ! sort">
+                <button aria-label="Ordenar por nome"
+                        type="button"
+                        wire:click="sortBy('name')"
+                        @click="sort = ! sort">
                     <i class="fa-solid ml-2 {{ $sortIconName }}"></i>
                 </button>
             </th>
             <th scope="col" class="p-3 lg:p-6 hidden md:table-cell">
                 Preço
-                <button type="button" wire:click="sortBy('sale_price')">
+                <button aria-label="Ordenar por preço"
+                        type="button"
+                        wire:click="sortBy('sale_price')">
                     <i class="fa-solid ml-2 {{ $sortIconSalePrice }}"></i>
                 </button>
             </th>
@@ -33,7 +38,9 @@
         @foreach($products as $product)
             <tr class="border-b border-gray-light">
                 <td class="p-3 py-6 lg:p-6 hidden md:table-cell text-center">
-                    <x-image :width="42" :src="$product->getDefaultImagePath($product)" />
+                    <x-image alt="Imagem do produto {{ $product->name }}"
+                             :width="42"
+                             :src="$product->getDefaultImagePath($product)" />
                 </td>
                 <td class="p-3 py-6 lg:p-6">
                     <x-link-secondary class="line-clamp-1" href="{{ route('products.show', $product->id) }}">
@@ -47,7 +54,8 @@
                     @include('artisan.products.partials.delete-product-form')
                 </td>
                 <td class="p-3 lg:p-6 text-center">
-                    <a class="text-accent-dark text-2xl hover:text-accent-darker transition duration-300"
+                    <a aria-label="Editar produto"
+                       class="text-accent-dark text-2xl hover:text-accent-darker transition duration-300"
                        href="{{ route('artisan.products.edit', $product->id) }}">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>

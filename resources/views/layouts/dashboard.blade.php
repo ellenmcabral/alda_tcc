@@ -31,7 +31,8 @@
                                 :type="'iconSecondary'"/>
 
             <div class="flex gap-6 items-center">
-                <x-button-outlined :color="'secondary'"
+                <x-button-outlined aria-label="Sair do painel"
+                                   :color="'secondary'"
                                    :href="route('home')">
                     <span class="flex items-center justify-center md:hidden h-6">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -47,7 +48,8 @@
                       action="{{ route('logout') }}">
                     @csrf
 
-                    <x-link-navigation :href="route('logout')"
+                    <x-link-navigation aria-label="Sair da conta"
+                                       :href="route('logout')"
                                        :color="'secondary'"
                                        onclick="event.preventDefault();
                                        this.closest('form').submit();">

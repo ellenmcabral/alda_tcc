@@ -17,7 +17,7 @@ switch($links) {
     <div x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
         <div @click="open = ! open">
             <!-- Hamburger -->
-            <button class="flex items-center rounded-md transition">
+            <button aria-label="Botão do menu" class="flex items-center rounded-md transition">
                 <svg class="z-50 h-10 w-10 {{ $buttonColor }}"
                      stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round"

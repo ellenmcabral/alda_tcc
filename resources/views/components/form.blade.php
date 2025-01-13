@@ -18,8 +18,12 @@ $class = $width . ' flex flex-col gap-10'
     {{ $slot }}
 
     @isset($button)
-        <x-button class="w-full lg:self-end lg:w-64">
-            {{ $button }}
-        </x-button>
+        <div class="flex gap-2 lg:gap-8 justify-between">
+            {{ $cancelButton }}
+            <x-button class="w-full">
+                {{ $button }}
+            </x-button>
+        </div>
+
     @endisset
 </form>

@@ -16,7 +16,7 @@
                 Nenhum endereço de entrega.
             </x-text>
         @else
-            <section class="grid gap-4 lg:grid-cols-2 xl:grid-cols-3">
+            <section class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
                 @foreach($addresses as $address)
                     <div class="p-4 flex flex-col justify-between gap-4 border rounded-lg @if($address->is_default) border-accent-dark @else border-gray-light @endif">
                         @if($address->is_default)
@@ -42,13 +42,13 @@
                         <div class="grid gap-4">
                             <hr/>
 
-                            <div class="flex justify-between">
+                            <div class="flex justify-between items-center">
                                 @include('profile.partials.delete-address-form')
 
-                                <x-link class="self-end w-fit"
+                                <x-button-secondary class="self-end w-fit"
                                         href="{{ route('profile.shipping-addresses.edit', $address->id) }}">
                                     Editar <i class="ml-1 fa-solid fa-pen-to-square"></i>
-                                </x-link>
+                                </x-button-secondary>
                             </div>
                         </div>
                     </div>

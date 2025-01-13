@@ -16,7 +16,7 @@
             break;
     }
 
-    $classes = $color . ' uppercase flex justify-center items-center gap-2 font-bold rounded-lg py-2 px-4 transition duration-300'
+    $classes = $color . ' text-lg uppercase flex justify-center items-center gap-2 font-bold rounded-lg py-2 px-4 transition duration-300'
 @endphp
 
 <a {{ $attributes->merge([

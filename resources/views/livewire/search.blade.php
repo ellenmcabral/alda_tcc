@@ -2,7 +2,7 @@
     @if($results->count() > 0)
         <div class="w-full flex flex-col md:flex-row md:justify-between items-center gap-8">
             <div class="flex w-full justify-end">
-                <x-input-select wire:model.change="filter">
+                <x-input-select aria-label="Filtrar por" wire:model.change="filter">
                     <option>Filtrar</option>
                     <option value="alphabetical_order">Ordem alfabética</option>
                     @if($searchType == 'Produtos')

@@ -53,9 +53,9 @@
             </div>
             <div>
                 <x-input-label for="url" :value="'URL'" />
-                <p class="text-gray-dark">
-                    www.site.com/<span class="font-bold">urldaloja</span>
-                </p>
+                <x-text class="text-gray-dark">
+                    https://alda.com/loja/<span class="font-bold">urldaloja</span>
+                </x-text>
                 <x-input-text id="url"
                               class="w-full"
                               type="text"
@@ -66,6 +66,12 @@
                 <x-input-error :messages="$errors->get('url')" class="mt-2" />
             </div>
 
+            <x-slot:cancelButton>
+                <x-button-outlined href="{{ route('home') }}"
+                                   class="w-full" :color="'gray'">
+                    Cancelar
+                </x-button-outlined>
+            </x-slot:cancelButton>
 
             <x-slot:button>
                 {{ __('Create') }}

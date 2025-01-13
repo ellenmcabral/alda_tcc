@@ -13,7 +13,7 @@
           break;
     };
 
-    $class = 'cursor-pointer text-center uppercase font-bold rounded-lg py-2 px-4 border border-2 hover:bg-gray-light hover:bg-opacity-10 transition duration-300 ' . $color;
+    $class = 'text-lg cursor-pointer text-center uppercase font-bold rounded-lg py-2 px-4 border border-2 hover:bg-gray-light hover:bg-opacity-10 transition duration-300 ' . $color;
 
 @endphp
 

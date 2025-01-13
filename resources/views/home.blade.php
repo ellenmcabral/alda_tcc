@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="w-full grid gap-16 md:w-2/3">
-        <section class="grid gap-4 p-4 lg:p-6 bg-gray-50 border border-gray-dark rounded-lg z-10">
+        <section class="grid gap-4 p-4 lg:p-6 bg-white border border-gray-dark rounded-lg z-10">
             @can('activate shop')
                 <div class="z-10 p-6 flex items-center gap-2 bg-warning-regular rounded border border-warning-dark">
                     <i class="text-warning-dark fa-solid fa-triangle-exclamation"></i>
@@ -128,7 +128,7 @@
                 Categorias
             </x-text-heading>
 
-            <ul class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach($categories as $category)
                     <li>
                         <x-tag href="{{ route('categories.products.index', $category->id) }}">

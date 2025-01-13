@@ -18,6 +18,13 @@
         </div>
     @endisset
 
+    <x-slot:cancelButton>
+        <x-button-outlined href="{{ route('artisan.shop.edit') }}"
+                           class="w-full" :color="'gray'">
+            Cancelar
+        </x-button-outlined>
+    </x-slot:cancelButton>
+
     <x-slot:button>
         Salvar
     </x-slot:button>

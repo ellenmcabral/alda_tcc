@@ -20,7 +20,7 @@ export default {
                 light: '#83E2C0',
                 regular: '#37D7A7',
                 dark: '#00C280',
-                darker: '#008D58'
+                darker: '#008050'
             },
             'secondary': {
                 light: '#EB5180',
@@ -30,11 +30,11 @@ export default {
             'gray': {
                 light: '#EAEBEC',
                 regular: '#B8B9BA',
-                dark: '#707172',
+                dark: '#68696A',
             },
             'neutral': {
                 black: '#212121',
-                white: '#F9F9FB',
+                white: '#FFFFFF',
             },
             'warning': {
                 regular: '#FFEDB5',

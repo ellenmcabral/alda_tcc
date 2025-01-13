@@ -119,9 +119,16 @@
                 <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
             </div>
 
-            <x-button class="md:w-1/3 md:self-end">
+            <x-slot:cancelButton>
+                <x-button-outlined href="{{ route('artisan.products.index') }}"
+                                   class="w-full" :color="'gray'">
+                    Cancelar
+                </x-button-outlined>
+            </x-slot:cancelButton>
+
+            <x-slot:button>
                 Salvar
-            </x-button>
+            </x-slot:button>
         </x-form>
 
     </div>

@@ -22,14 +22,14 @@
 
             @auth
                 @role('artisan')
-                <x-button-secondary href="{{ route('artisan.index') }}">
+                <x-button-secondary aria-label="Painel do artesão" href="{{ route('artisan.index') }}">
                     <span class="flex items-center justify-center md:hidden h-6">
                             <i class="fa-solid fa-table-columns"></i>
                         </span>
                     <span class="hidden md:flex">Painel do Artesão</span>
                 </x-button-secondary>
                 @elserole('admin')
-                <x-button-secondary href="{{  route('admin.index') }}">
+                <x-button-secondary aria-label="Painel do admin" href="{{  route('admin.index') }}">
                     <span class="flex items-center justify-center md:hidden h-6">
                             <i class="fa-solid fa-table-columns"></i>
                         </span>
@@ -45,7 +45,7 @@
                         <span class="hidden md:flex">Ativar loja</span>
                     </x-button-secondary>
                 @elsecan('create shop')
-                    <x-button-secondary href="{{ route('shop.create') }}">
+                    <x-button-secondary aria-label="Criar loja" href="{{ route('shop.create') }}">
                         <span class="flex items-center justify-center md:hidden h-6">
                             <i class="fa-solid fa-shop"></i>
                         </span>
@@ -53,7 +53,7 @@
                     </x-button-secondary>
                 @endcan
             @else
-                <x-button-secondary class="flex 2xl:hidden"
+                <x-button-secondary aria-label="Criar conta" class="flex 2xl:hidden"
                                     href="{{ route('register') }}">
                     <span class="flex items-center justify-center md:hidden h-6">
                         <i class="fa-solid fa-user"></i>
@@ -69,7 +69,8 @@
                       action="{{ route('logout') }}">
                     @csrf
 
-                    <x-link-navigation :href="route('logout')"
+                    <x-link-navigation aria-label="Sair da conta"
+                                       :href="route('logout')"
                                        onclick="event.preventDefault();
                                     this.closest('form').submit();">
                         <i class="fa-xl text-neutral-white fa-solid fa-right-from-bracket"></i>
