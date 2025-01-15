@@ -66,7 +66,7 @@ Route::get('/categorias/{category}/produtos', [CategoryController::class, 'produ
     ->name('categories.products.index');
 
 // USUARIOS LOGADOS
-Route::middleware(['auth', 'verified'])
+Route::middleware(['auth'])
     ->group(function () {
         Route::get('/inicio', function () {
             $categories = \App\Models\Category::query()->inRandomOrder()->limit(12)->get();
