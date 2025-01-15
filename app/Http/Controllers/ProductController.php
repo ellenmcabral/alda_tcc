@@ -54,6 +54,8 @@ class ProductController extends Controller
             foreach ($request->images as $key => $image) {
                 $filename = $image->getClientOriginalName();
 
+                dd($image);
+
                 $imageName = md5($filename . strtotime("now")) . "." . $image->extension();
 
                 Storage::disk('s3')->put(

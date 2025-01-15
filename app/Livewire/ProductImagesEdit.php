@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -46,7 +47,7 @@ class ProductImagesEdit extends Component
         } else {
             $image->delete();
 
-            Storage::disk('local')->delete('public/img/products/' . $image->image);
+            Storage::disk('s3')->delete("img/products/" . $image->image);
 
             array_splice($this->productImages, $key, 1);
 
@@ -68,10 +69,16 @@ class ProductImagesEdit extends Component
         } else {
             $image = $this->image;
 
+            $filename = $image->getClientOriginalName();
+
             $imageName = md5($image->getClientOriginalName()
                     . strtotime("now")) . "." . $image->extension();
 
-            $image->storeAs('img/products', $imageName, 'public');
+            $image->storeAs('img/products/', $imageName, 's3');
+
+//            Storage::disk('s3')->put(
+//                "img/products/" . $imageName, file_get_contents($image),
+//                'public');
 
             ProductImage::create([
                 'image' => $imageName,
