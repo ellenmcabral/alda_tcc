@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'stock.required' => 'O campo estoque é obrigatório.',
             'deadline.required' => 'O campo prazo é obrigatório.',
             'sale_price.required' => 'O campo preço é obrigatório.',
-            'sale_price.between' => 'O campo preço ultrapassa o limite.',
+            'sale_price.between' => 'O campo preço ultrapassa o limite permitido.',
             'category_id.required' => 'O campo categoria é obrigatório.',
         ];
     }
