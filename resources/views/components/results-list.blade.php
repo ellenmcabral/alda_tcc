@@ -8,11 +8,10 @@
             @foreach($results as $result)
                 <x-card>
                     @if($searchType == 'Produtos')
-                        <a class="grid"
-                           href="{{ route('products.show', $result->id) }}">
+                        <a href="{{ route('products.show', $result->id) }}">
                             <x-image :src="$result->getDefaultImagePath()"
                                      alt="Imagem do produto {{ $result->name }}" />
-                            <span class="mt-2 line-clamp-2 h-16">
+                            <span class="mt-2 line-clamp-2 h-12">
                                 {{ $result->name }}
                             </span>
                             <span class="font-bold">

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Shop extends Model
 {
@@ -55,6 +56,9 @@ class Shop extends Model
 
     public function getImagePath(): string
     {
-        return $this->image ? '/img/shops/' . $this->image : '/img/assets/no-image.jpg';
+        return $this->image ?
+            Storage::disk('s3')->url('img/shops/' . $this->image)
+            :
+            '/img/assets/no-image.jpg';
     }
 }

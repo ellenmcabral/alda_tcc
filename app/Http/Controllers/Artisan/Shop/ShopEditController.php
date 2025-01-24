@@ -7,6 +7,7 @@ use App\Http\Requests\Shop\ShopUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ShopEditController extends Controller
@@ -50,12 +51,14 @@ class ShopEditController extends Controller
         $shop = $request->user()->shop;
 
         if($request->hasFile('image')) {
-            $requestImage = $request->image;
+            $image = $request->image;
 
-            $imageName = md5($requestImage->getClientOriginalName()
-                    . strtotime("now")) . "." . $request->image->extension();
+            $imageName = md5($image->getClientOriginalName()
+                    . strtotime("now")) . "." . $image->extension();
 
-            $requestImage->move(public_path('img/shops'), $imageName);
+            //$image->move(public_path('img/shops'), $imageName);
+            Storage::disk('s3')->put("img/shops/". $imageName, file_get_contents($image),
+                'public');
 
             $shop->image = $imageName;
         }

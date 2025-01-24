@@ -54,15 +54,13 @@ class ProductController extends Controller
             foreach ($request->images as $key => $image) {
                 $filename = $image->getClientOriginalName();
 
-                dd($image);
-
                 $imageName = md5($filename . strtotime("now")) . "." . $image->extension();
 
                 Storage::disk('s3')->put(
                     "img/products/" . $imageName, file_get_contents($image),
                     'public');
 
-                $file = Storage::disk('s3')->url('img/products/' . $imageName);
+                //$file = Storage::disk('s3')->url('img/products/' . $imageName);
 
                 if($request->is_default == $key) {
                     $is_default = true;

@@ -17,7 +17,6 @@ class ShopsSeeder extends Seeder
             'name' => 'Celita Artesanatos - Feitos com Muito Amor',
             'url' => 'celitaartesanatocomamor',
             'description' => fake()->text(),
-            'image' => 'shop-1.jpg',
             'user_id' => 3,
             'is_active' => true,
         ]);
@@ -25,7 +24,6 @@ class ShopsSeeder extends Seeder
         Shop::create([
             'name' => 'Jaci Costuras, Laços e outros Tecidos',
             'url' => 'jacicosturaselaços',
-            'image' => 'no-image.jpg',
             'user_id' => 4,
             'is_active' => true,
         ]);
