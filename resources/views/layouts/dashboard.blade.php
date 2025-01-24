@@ -31,6 +31,8 @@
                                 :type="'iconSecondary'"/>
 
             <div class="flex gap-6 items-center">
+                @include('layouts.navigation.links-dashboard')
+
                 <x-button-outlined aria-label="Sair do painel"
                                    :color="'secondary'"
                                    :href="route('home')">
@@ -39,8 +41,6 @@
                         </span>
                     <span class="hidden md:flex">Sair do Painel</span>
                 </x-button-outlined>
-
-                @include('layouts.navigation.links-dashboard')
 
                 <!-- Authentication -->
                 <form class="hidden md:flex items-center"

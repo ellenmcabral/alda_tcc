@@ -15,7 +15,7 @@
         <x-application-logo class="flex lg:hidden"
                             :type="'iconWhite'"/>
 
-        <div class="w-1/3 2xl:w-1/2 flex items-center justify-end 2xl:gap-6">
+        <div class="w-1/3 2xl:w-2/3 flex items-center justify-end 2xl:gap-6">
 
             <!-- Navigation Links -->
             @include('layouts.navigation.links-app')
@@ -64,7 +64,7 @@
 
             @auth
                 <!-- Authentication -->
-                <form class="hidden md:flex ml-4 items-center"
+                <form class="hidden md:flex ml-6 2xl:ml-0 items-center"
                       method="POST"
                       action="{{ route('logout') }}">
                     @csrf
