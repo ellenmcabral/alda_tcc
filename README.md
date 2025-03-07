@@ -1,7 +1,5 @@
 # ALDA
 
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
-___
 ## 📝 Descrição do projeto
 Projeto em desenvolvimento como Trabalho de Conclusão do Curso **Tecnologia em Sistemas para Internet**, do Instituto Federal Sul-rio-grandense - Câmpus Pelotas.
 
@@ -11,30 +9,55 @@ Alda é um sistema para exposição e venda de **artesanato**.
 
 🛍️ Aos **clientes** e amantes de artesanato, possibilita a visualização das lojas dos artesãos, e possibilita a compra desses produtos, que são feitos com muito amor.
 ___
-## 🔨 Funcionalidades
+## 🔨 Funcionalidades básicas
 
-✔️ `Funcionalidade 1`: O sistema mantém cadastro de usuários. 
+✔️ `Funcionalidade 1`: Criar conta
 
-✔️ `Funcionalidade 2`: O sistema permite aos usuários manter uma loja. 
+✔️ `Funcionalidade 2`: Fazer login 
 
-✔️️ `Funcionalidade 3`: O sistema permite manter produtos no perfil da loja.
+✔️️ `Funcionalidade 3`: Criar loja / ativar loja
 
-✔️ `Funcionalidade 4`: O sistema permite acessar um link de perfil das lojas.
+✔️ `Funcionalidade 4`: Editar ou excluir conta
 
-✔️`Funcionalidade 5`: O sistema permite manter as encomendas.
+✔️`Funcionalidade 5`: Adicionar, editar ou excluir endereços de entrega
 
-✔️ `Funcionalidade 6`: O sistema permite adicionar os produtos das lojas em uma sacola de compras.
+✔️ `Funcionalidade 6`: Buscar por produtos ou lojas
 
-✔️`Funcionalidade 7`: O sistema permite fazer encomendas personalizadas através do perfil da loja.
+✔️`Funcionalidade 7`: Contatar o dono da loja por WhatsApp
 
-✔️`Funcionalidade 8`: O sistema permite realizar o pagamento de encomendas.
+✔️`Funcionalidade 8`: Adicionar produtos na sacola de compras
+
+✔️`Funcionalidade 9`: Finalizar pedido de encomenda
+
+✔️`Funcionalidade 10`: Cancelar encomenda finalizada
+
+✔️`Funcionalidade 11`: Fazer o pagamento da encomenda
+
+## 🔨 Funcionalidades de artesão
+
+✔️`Funcionalidade 1`: Editar ou excluir a loja
+
+✔️`Funcionalidade 2`: Adicionar, editar ou excluir endereço da loja
+
+✔️`Funcionalidade 3`: Visualizar listagem de produtos
+
+✔️`Funcionalidade 4`: Criar, editar ou remover produtos
+
+✔️`Funcionalidade 5`: Visualizar listagem de produtos removidos
+
+✔️`Funcionalidade 6`: Reativar um produto removido
+
+✔️`Funcionalidade 7`: Visualizar listagem de encomendas
+
+✔️`Funcionalidade 8`: Alterar status das encomendas
 ___
 ## 🔧 Tecnologias Utilizadas
 - Laravel
-  - Breeze
-  - Tailwind
+  - TailwindCSS
+  - Alpine.js
+- MariaDB
 - PhpStorm
-- MySQL
+- Heroku
 ___
-## 🎉 Abrir e rodar o projeto
-> Em breve!
+> 🔗 [Abrir e rodar o projeto](https://alda-tcc-d1ff4d1fabe2.herokuapp.com/)
+> 🔗 [Ver estudo de caso](https://www.behance.net/gallery/220906517/Alda-(TCC)-Estudo-de-Caso)
